@@ -1,0 +1,14 @@
+theme
+"./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+
+r30 g35 b48
+240 243 217
+
+
+.card-img-thumbnail{padding:.25rem;
+background-color:#fff;
+border:1px solid var(--bs-border-color);
+border-radius:.375rem;
+max-width:%;
+height:auto
+}

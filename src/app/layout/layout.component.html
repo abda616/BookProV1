@@ -1,0 +1,111 @@
+<mat-drawer-container [hasBackdrop]="false" class="height-full ">
+
+  <mat-drawer #drawer class="height-full" mode="side" position="end">
+
+    <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
+
+      <mat-card-header class="card-title  just-flex flex-row justify-content-center">
+        <mat-card-title class="text-warp-title-box">{{titleOfTheBook}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="just-flex flex-column">
+
+        <div class="just-flex flex-row  justify-content-center">
+          <img alt="book"
+               class="card-img-thumbnail"
+               src="https://books.google.com/books/publisher/content/images/frontcover/zlNdEAAAQBAJ?fife=w480-h690">
+        </div>
+
+        <div class="just-flex flex-row  justify-content-center py-2 ">
+          <mat-card-subtitle class="sub-text-color">{{authorName}}</mat-card-subtitle>
+        </div>
+
+        <mat-card-footer class="just-flex justify-content-center">
+          <p class="text-warp-p-box text-center">a heartbreaking tale about domestic abuse and violence with a
+            heartbreakingly necessary ending.
+            interviews and the author's</p>
+        </mat-card-footer>
+
+        <div class="contant-row-for-book ">
+          <div class="content-row-for-book-v">
+            <span>Pages</span>
+            <span class="text-center sub-text-color">world</span>
+          </div>
+
+          <div class="ver-line mx-3"></div>
+
+          <div class="content-row-for-book-v">
+            <span>Category</span>
+            <span class="text-center sub-text-color">world</span>
+          </div>
+
+          <div class="ver-line mx-3"></div>
+
+          <div class="content-row-for-book-v">
+            <span>Ratngs</span>
+            <span class="text-center sub-text-color">world</span>
+          </div>
+
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="just-flex flex-row justify-content-center">
+          <button mat-raised-button>Read More</button>
+        </div>
+      </mat-card-actions>
+
+    </mat-card>
+  </mat-drawer>
+
+  <mat-drawer-content>
+
+    <mat-toolbar color="">
+      <span class="small-spacer"> </span>
+      <mat-icon class="main-icon">
+        <img alt="Jo-Book" src="/assets/icons/Jobook.svg">
+      </mat-icon>
+      <span class="small-spacer"> </span>
+
+      <div class="my-toolbar" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-button>
+          <span>Trade Now</span>
+        </button>
+
+        <button mat-button>
+          <span>My Library</span>
+        </button>
+
+        <mat-form-field appearance="legacy" class="search-width">
+          <input [(ngModel)]="value" matInput matNativeControl type="search">
+          <button (click)="value=''" mat-icon-button matSuffix>
+            <mat-icon *ngIf="!value" matSuffix>search</mat-icon>
+            <mat-icon *ngIf="value" matSuffix>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button [matMenuTriggerFor]="menu" mat-stroked-button>
+          <!-- <mat-icon>dashboard</mat-icon> -->
+          <mat-icon>person</mat-icon>
+
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <!-- <mat-icon>person</mat-icon> -->
+            <mat-icon matPrefix>dashboard</mat-icon>
+            Profile
+          </button>
+          <button mat-menu-item>
+            <mat-icon matPrefix>close</mat-icon>
+            Log Out
+          </button>
+        </mat-menu>
+      </div>
+
+    </mat-toolbar>
+
+    <button (click)="toggleDrawer(drawer)" class="btn btn-secondary test-width">click</button>
+    <router-outlet class="overflow-auto"></router-outlet>
+  </mat-drawer-content>
+
+</mat-drawer-container>
