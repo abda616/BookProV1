@@ -22,4 +22,12 @@ export class LayoutComponent implements OnInit {
     ref.toggle();
   }
 
+  // getWidth(ref: MatDrawer): number {
+  //   let width = window.innerWidth;
+  //   let isOpend= ref.opened;
+  //
+  //   isOpend ? console.log(isOpend+" width = "+(width-ref._getWidth())) :
+  //                 console.log(isOpend+" width = "+width) ;
+  //   return isOpend ? (width-ref._getWidth()) : window.innerWidth ;
+  // }
 }

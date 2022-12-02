@@ -1,13 +1,11 @@
-<mat-drawer-container [hasBackdrop]="false" class="height-full ">
+<mat-drawer-container [hasBackdrop]="false" class="height-full">
 
   <mat-drawer #drawer class="height-full" mode="side" position="end">
 
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
-
       <mat-card-header class="card-title  just-flex flex-row justify-content-center">
         <mat-card-title class="text-warp-title-box">{{titleOfTheBook}}</mat-card-title>
       </mat-card-header>
-
       <mat-card-content class="just-flex flex-column">
 
         <div class="just-flex flex-row  justify-content-center">
@@ -42,10 +40,9 @@
           <div class="ver-line mx-3"></div>
 
           <div class="content-row-for-book-v">
-            <span>Ratngs</span>
+            <span>Ratings</span>
             <span class="text-center sub-text-color">world</span>
           </div>
-
         </div>
 
       </mat-card-content>
@@ -54,29 +51,33 @@
           <button mat-raised-button>Read More</button>
         </div>
       </mat-card-actions>
-
     </mat-card>
   </mat-drawer>
 
   <mat-drawer-content>
+    <mat-toolbar class="sticky-top">
 
-    <mat-toolbar color="">
       <span class="small-spacer"> </span>
-      <mat-icon class="main-icon">
-        <img alt="Jo-Book" src="/assets/icons/Jobook.svg">
-      </mat-icon>
+      <a routerLink="">
+        <mat-icon class="main-icon">
+          <img alt="Jo-Book" src="/assets/icons/Jobook.svg">
+        </mat-icon>
+      </a>
       <span class="small-spacer"> </span>
 
-      <div class="my-toolbar" fxLayout="row" fxLayoutAlign="space-evenly center">
-        <button mat-button>
+      <div class="my-toolbar just-flex flex-row align-content-center align-items-center" >
+<!--           fxLayoutAlign="space-evenly center"-->
+
+        <button mat-button routerLink="/tradeNowPage">
           <span>Trade Now</span>
         </button>
 
-        <button mat-button>
+        <button mat-button routerLink="/myLibraryPage">
           <span>My Library</span>
         </button>
 
-        <mat-form-field appearance="legacy" class="search-width">
+<!--        appearance="legacy"-->
+        <mat-form-field  class="search-width">
           <input [(ngModel)]="value" matInput matNativeControl type="search">
           <button (click)="value=''" mat-icon-button matSuffix>
             <mat-icon *ngIf="!value" matSuffix>search</mat-icon>
@@ -87,7 +88,6 @@
         <button [matMenuTriggerFor]="menu" mat-stroked-button>
           <!-- <mat-icon>dashboard</mat-icon> -->
           <mat-icon>person</mat-icon>
-
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>
@@ -103,9 +103,9 @@
       </div>
 
     </mat-toolbar>
+    <router-outlet class=""></router-outlet>
+    <button (click)="toggleDrawer(drawer)" class="btn btn-secondary">click</button>
 
-    <button (click)="toggleDrawer(drawer)" class="btn btn-secondary test-width">click</button>
-    <router-outlet class="overflow-auto"></router-outlet>
   </mat-drawer-content>
 
 </mat-drawer-container>

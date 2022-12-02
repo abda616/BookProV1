@@ -3,28 +3,57 @@
   scroll-behavior: smooth;
 }
 
-
-.contant-row-for-book {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 33px;
-  background: #2a3248;
-  margin-top: 6%;
-  border: 3px solid papayawhip;
-
-}
-
-.content-row-for-book-v {
-  display: flex;
-  flex-direction: column;
-  margin: 3px 3px;
+.small-spacer {
+  flex: 0.05;
 }
 
 .just-flex {
   display: flex;
 }
 
+.height-full {
+  height: 100%;
+}
+
+
+/*for tool bar*/
+
+.fixed-at-top{
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+
+.my-toolbar {
+  width: 100%;
+}
+
+mat-drawer {
+  width: 25%;
+  background: #1e2330;
+  position: fixed;
+  z-index: 999;
+
+}
+
+.search-width {
+  font-size: medium;
+  width: calc(20%);
+}
+
+.main-icon {
+  width: 100px;
+  height: 40px;
+}
+
+/* End */
+
+
+/*
+      for Slide nav
+*/
+
+/*for text width  */
 .text-warp-title-box {
   inline-size: 150px;
   overflow-wrap: break-word;
@@ -36,38 +65,17 @@
   overflow-wrap: break-word;
 }
 
-.ver-line {
-  border-left: 3px solid;
-  height: 30px;
-}
-
-.height-full {
-  height: 100vh;
-}
-
-mat-drawer {
-  width: 30%;
+/*for text Color */
+.card-background {
   background: #1e2330;
+  color: white;
 }
 
 .sub-text-color {
   color: rgba(255, 255, 255, 0.65);
 }
 
-.card-background {
-  background: #1e2330;
-  color: white;
-}
-
-.my-toolbar {
-  width: 100%;
-}
-
-/*.test-width {*/
-/*  width: 100%;*/
-/*  !*justify-content: space-around;*!*/
-/*}*/
-
+/* for img */
 .card-img-thumbnail {
   padding: .25rem;
   background-color: #1e2330;
@@ -76,17 +84,24 @@ mat-drawer {
   max-width: 300px;
   height: auto;
 }
-
-.main-icon {
-  width: 100px;
-  height: 40px;
+/* for footer category,pages, */
+.contant-row-for-book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 33px;
+  background: #2a3248;
+  margin-top: 6%;
+  border: 3px solid papayawhip;
 }
 
-.small-spacer {
-  flex: 0.05;
+.content-row-for-book-v {
+  display: flex;
+  flex-direction: column;
+  margin: 3px 3px;
 }
 
-.search-width {
-  font-size: medium;
-  width: calc(20%);
+.ver-line {
+  border-left: 3px solid;
+  height: 30px;
 }

@@ -1,0 +1,29 @@
+/* global */
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.small-spacer {
+  flex: 0.05;
+}
+
+.just-flex {
+  display: flex;
+}
+
+.height-full {
+  height: 100vh;
+}
+
+/*
+  end global
+*/
+
+
+.cards-wrapper{
+  display: flex;
+}
+.card{
+  margin: 0 0.5em;
+}
