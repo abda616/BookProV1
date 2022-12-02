@@ -38,15 +38,16 @@ import {MatDividerModule} from "@angular/material/divider";
 import {CdkTreeModule} from "@angular/cdk/tree";
 import {OverlayModule} from "@angular/cdk/overlay";
 import {PortalModule} from "@angular/cdk/portal";
-
 import {FormsModule} from "@angular/forms";
 import {AppRoutingModule} from "../app-routing.module";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+
 
 
 @NgModule({
   declarations: [],
   imports: [
+    NgbCarouselModule,
     MatBadgeModule,
     MatGridListModule,
     MatRadioModule,
@@ -92,11 +93,9 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     CdkTreeModule,
     OverlayModule,
     PortalModule,
-
     FormsModule,
     AppRoutingModule,
     NgbModule,
-
   ],
   exports: [
     CommonModule,
@@ -139,13 +138,11 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     CdkTreeModule,
     OverlayModule,
     PortalModule,
-
-
     FormsModule,
     AppRoutingModule,
     NgbModule,
+    NgbCarouselModule,
   ],
-
 })
 export class SharedModule {
 }

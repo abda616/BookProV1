@@ -47,7 +47,7 @@
 
       </mat-card-content>
       <mat-card-actions>
-        <div class="just-flex flex-row justify-content-center">
+        <div class="just-flex flex-row w-100 justify-content-center">
           <button mat-raised-button>Read More</button>
         </div>
       </mat-card-actions>
@@ -65,8 +65,7 @@
       </a>
       <span class="small-spacer"> </span>
 
-      <div class="my-toolbar just-flex flex-row align-content-center align-items-center" >
-<!--           fxLayoutAlign="space-evenly center"-->
+      <div class="my-toolbar just-flex flex-row justify-content-evenly  align-items-center" >
 
         <button mat-button routerLink="/tradeNowPage">
           <span>Trade Now</span>
@@ -77,16 +76,15 @@
         </button>
 
 <!--        appearance="legacy"-->
-        <mat-form-field  class="search-width">
+        <mat-form-field   class="search-width">
           <input [(ngModel)]="value" matInput matNativeControl type="search">
           <button (click)="value=''" mat-icon-button matSuffix>
             <mat-icon *ngIf="!value" matSuffix>search</mat-icon>
             <mat-icon *ngIf="value" matSuffix>close</mat-icon>
           </button>
         </mat-form-field>
-
-        <button [matMenuTriggerFor]="menu" mat-stroked-button>
-          <!-- <mat-icon>dashboard</mat-icon> -->
+        <!-- <mat-icon>dashboard</mat-icon> -->
+        <button [matMenuTriggerFor]="menu" class="just-flex align-items-center" mat-stroked-button>
           <mat-icon>person</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
