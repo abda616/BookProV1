@@ -38,7 +38,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {CdkTreeModule} from "@angular/cdk/tree";
 import {OverlayModule} from "@angular/cdk/overlay";
 import {PortalModule} from "@angular/cdk/portal";
-import {FlexLayoutModule} from "@angular/flex-layout";
+
 import {FormsModule} from "@angular/forms";
 import {AppRoutingModule} from "../app-routing.module";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
@@ -92,7 +92,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     CdkTreeModule,
     OverlayModule,
     PortalModule,
-    FlexLayoutModule,
+
     FormsModule,
     AppRoutingModule,
     NgbModule,
@@ -140,7 +140,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     OverlayModule,
     PortalModule,
 
-    FlexLayoutModule,
+
     FormsModule,
     AppRoutingModule,
     NgbModule,

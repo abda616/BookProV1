@@ -9,7 +9,7 @@ import {LayoutComponent} from './layout/layout.component';
 import {SharedModule} from "./shared/shared.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
+
 import {FormsModule} from "@angular/forms";
 import {MainPageComponent} from './main-page/main-page.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
@@ -33,7 +33,7 @@ import {MyLibraryComponent} from './my-library/my-library.component';
     SharedModule,
     NgbModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
+
     FormsModule
   ],
   providers: [],
