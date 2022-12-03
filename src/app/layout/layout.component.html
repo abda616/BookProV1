@@ -75,7 +75,6 @@
           <span>My Library</span>
         </button>
 
-<!--        appearance="legacy"-->
         <mat-form-field   class="search-width">
           <input [(ngModel)]="value" matInput matNativeControl type="search">
           <button (click)="value=''" mat-icon-button matSuffix>
@@ -84,7 +83,7 @@
           </button>
         </mat-form-field>
         <!-- <mat-icon>dashboard</mat-icon> -->
-        <button [matMenuTriggerFor]="menu" class="just-flex align-items-center" mat-stroked-button>
+        <button [matMenuTriggerFor]="menu"  mat-stroked-button>
           <mat-icon>person</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
