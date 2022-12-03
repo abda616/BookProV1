@@ -40,14 +40,11 @@ import {OverlayModule} from "@angular/cdk/overlay";
 import {PortalModule} from "@angular/cdk/portal";
 import {FormsModule} from "@angular/forms";
 import {AppRoutingModule} from "../app-routing.module";
-import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-
 
 
 @NgModule({
   declarations: [],
   imports: [
-    NgbCarouselModule,
     MatBadgeModule,
     MatGridListModule,
     MatRadioModule,
@@ -95,7 +92,6 @@ import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
     PortalModule,
     FormsModule,
     AppRoutingModule,
-    NgbModule,
   ],
   exports: [
     CommonModule,
@@ -140,8 +136,6 @@ import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
     PortalModule,
     FormsModule,
     AppRoutingModule,
-    NgbModule,
-    NgbCarouselModule,
   ],
 })
 export class SharedModule {
