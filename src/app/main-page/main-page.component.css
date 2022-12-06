@@ -6,9 +6,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  /*justify-content: space-evenly;*/
-  justify-content: center;
-  margin: 2.5vh 8vh;
+  justify-content: space-evenly;
+  /*justify-content: center;*/
+  margin: 2.5vh 6vh;
 }
 
 .carousel-control-prev {
@@ -38,7 +38,6 @@
   background-color: #faf8f6;
   box-shadow: 6px 6px 15px 2px rgba(0, 0, 0, 0.25);
   z-index: 2;
-  margin: 1vh 2vh;
 }
 
 .main-card-design .card-img-on-left {
