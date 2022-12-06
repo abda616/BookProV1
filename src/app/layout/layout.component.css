@@ -1,24 +1,5 @@
-* {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
-.small-spacer {
-  flex: 0.05;
-}
-
-.just-flex {
-  display: flex;
-}
-
-.height-full {
-  height: 100%;
-}
-
-
 /*for tool bar*/
-
-.fixed-at-top{
+.fixed-at-top {
   position: sticky;
   z-index: 100;
   top: 0;
@@ -55,9 +36,10 @@ mat-drawer {
 
 /*for text width  */
 .text-warp-title-box {
-  inline-size: 150px;
+  inline-size: 165px;
   overflow-wrap: break-word;
   text-align: center;
+  line-height: normal;
 }
 
 .text-warp-p-box {
@@ -84,6 +66,7 @@ mat-drawer {
   max-width: 300px;
   height: auto;
 }
+
 /* for footer category,pages, */
 .contant-row-for-book {
   display: flex;
