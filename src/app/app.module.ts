@@ -7,7 +7,7 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {LayoutComponent} from './layout/layout.component';
 import {SharedModule} from "./shared/shared.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MainPageComponent} from './main-page/main-page.component';
 import {TradeNowComponent} from './trade-now/trade-now.component';
 import {MyLibraryComponent} from './my-library/my-library.component';
@@ -27,7 +27,8 @@ import {MyLibraryComponent} from './my-library/my-library.component';
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

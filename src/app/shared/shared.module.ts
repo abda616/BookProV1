@@ -38,7 +38,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {CdkTreeModule} from "@angular/cdk/tree";
 import {OverlayModule} from "@angular/cdk/overlay";
 import {PortalModule} from "@angular/cdk/portal";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppRoutingModule} from "../app-routing.module";
 
 
@@ -92,6 +92,7 @@ import {AppRoutingModule} from "../app-routing.module";
     PortalModule,
     FormsModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
@@ -136,6 +137,7 @@ import {AppRoutingModule} from "../app-routing.module";
     PortalModule,
     FormsModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
 })
 export class SharedModule {

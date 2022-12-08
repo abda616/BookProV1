@@ -5,10 +5,27 @@ import {LayoutComponent} from "./layout/layout.component";
 import {MainPageComponent} from "./main-page/main-page.component";
 import {TradeNowComponent} from "./trade-now/trade-now.component";
 import {MyLibraryComponent} from "./my-library/my-library.component";
+import {LoginComponent} from "./login/login.component";
+import {SignUpComponent} from "./sign-up/sign-up.component";
 
 const routes: Routes = [
   {
     path: '',
+    component: LoginComponent,
+    children: [
+      {
+        path: 'signup',
+        component: SignUpComponent
+      },
+      {
+        path: 'logs',
+        component: LayoutComponent,
+        pathMatch: "full"
+      },
+    ]
+  },
+  {
+    path: 'logs',
     component: LayoutComponent,
     children: [
       {
@@ -30,8 +47,7 @@ const routes: Routes = [
         component: MainPageComponent,
       },
     ]
-  },
-  {
+  },{
     path: '**',
     component: LayoutComponent
   }
