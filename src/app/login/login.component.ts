@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AsyncValidatorFn, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {delay, map, of} from "rxjs";
 
 
 @Component({
@@ -11,44 +12,55 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   private patternValidator: string = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>\"'\\;:{\\}\\[\\]\\|\\+\\-\\=\\_\\)\\(\\)\\`\\/\\\\\\]])[A-Za-z0-9d$@].{7,}";
-  protected submitted = false;hidePass = true;
-  signUpState:boolean=false;
-  constructor(private formBuilder: FormBuilder, private router: Router ,private _formBuilder: FormBuilder) {}
-  ngOnInit(): void {
-    this.mLoginForm(); this.mSignUpForm();
+  protected submitted = false;
+  hidePass = true;
+  signUpState: boolean = false;
+
+  constructor(private formBuilder: FormBuilder, private router: Router, private _formBuilder: FormBuilder) {
   }
 
-  firstFormGroup = this._formBuilder.group({
-    name: ['',Validators.required,],
-    email:['',Validators.email,Validators.required,],
-    Cemail:['',Validators.email,Validators.required,],
-    pass:['',Validators.pattern(this.patternValidator),Validators.required,],
-    Cpass:['',Validators.pattern(this.patternValidator),Validators.required,],
-  });
+  ngOnInit(): void {
+    this.mLoginForm();
+    this.mSignUpForm();
+  }
+
   protected loginForm: FormGroup<{
     loginEmail: FormControl<string | null>;
     loginPassword: FormControl<string | null>;
   }>;
   protected signUpForm: FormGroup<{
-    AsUEmail: FormControl<string | null>;
-    BsUEmail: FormControl<string | null>;
-    AsUPassword: FormControl<string | null>;
-    BsUPassword: FormControl<string | null>;
+    userName: FormControl<string | null>;
+    UEmail: FormGroup<{
+      a: FormControl<string | null>;
+      b: FormControl<string | null> }>;
+    UPassword: FormGroup<{
+      A: FormControl<string | null>;
+      B: FormControl<string | null>}>
   }>;
 
   mLoginForm() {
     this.loginForm = new FormGroup({
-      loginEmail: new FormControl("", [Validators.email, Validators.required]),
-      loginPassword: new FormControl("", [Validators.required, Validators.min(8), Validators.pattern(this.patternValidator)])
+      loginEmail: new FormControl("", [Validators.email, Validators.required,Validators.minLength(4)]),
+      loginPassword: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
     });
   }
-   mSignUpForm() {
-    this.signUpForm = new FormGroup({
-      AsUEmail: new FormControl("", [Validators.email, Validators.required]),
-      BsUEmail: new FormControl("", [Validators.email, Validators.required]),
 
-      AsUPassword: new FormControl("", [Validators.required, Validators.min(8), Validators.pattern(this.patternValidator)]),
-      BsUPassword: new FormControl("", [Validators.required,] )
+  mSignUpForm() {
+    this.signUpForm = new FormGroup({
+
+      userName: new FormControl("", [Validators.required, Validators.minLength(4)]),
+      UEmail: new FormGroup({
+        a: new FormControl('', [Validators.email, Validators.required]),
+        b: new FormControl('', [Validators.required]),
+      }, {asyncValidators: customAsyncValidator()}),
+      UPassword: new FormGroup({
+        A: new FormControl("", [Validators.required, Validators.min(8), Validators.pattern(this.patternValidator)]),
+        B: new FormControl("", [Validators.required,])
+      }, {asyncValidators: customAsyncValidator()}),
+
+      // Uinterist
+
+
     });
   }
 
@@ -63,8 +75,6 @@ export class LoginComponent implements OnInit {
 
   openSignup() {
     this.signUpState = !this.signUpState;
-
-
   }
 
   getErrorMessage() {/*
@@ -74,10 +84,21 @@ export class LoginComponent implements OnInit {
   }
 
 
-  P1():string {
+  P1(): string {
     return 'url("../../assets/picture/login-img-1.jpeg")';
   }
-  P2():string {
+
+  P2(): string {
     return 'url("../../assets/picture/login-img-2.jpeg")';
   }
+}
+
+function customAsyncValidator(): AsyncValidatorFn {
+  return (group: FormGroup) => {
+    const a = group.get('a').value;
+    const b = group.get('b').value;
+    return of('value').pipe(delay(500),
+      map((value) => (value === a || value === b ? null : {fields: true}))
+    );
+  };
 }

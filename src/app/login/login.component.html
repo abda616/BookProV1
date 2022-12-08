@@ -25,18 +25,19 @@
       </form>
       <hr class="py-3"/>
       <button mat-stroked-button color="warn" class="w-75" (click)="openSignup()">{{!signUpState?"SignUp":"signIn"}}</button>
-      <pre>{{loginForm.value|json}}</pre>
+<!--      <pre>{{loginForm.value|json}}</pre>-->
+      <pre>{{loginForm.valid|json}}</pre>
     </div>
 
     <!-- -->
-    <div *ngIf="signUpState" class="border-padding" style="height: 90vh;">
+   <div *ngIf="signUpState" class="border-padding" style="height: 90vh;">
       <h1>Welcome TO JO-BOOK</h1>
       <h2>Sign Up</h2>
       <p>Enter Your Details Below</p>
 
       <mat-stepper orientation="vertical" color="warn" linear="true" #stepper  animationDuration='700' >
-        <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
+        <mat-step [stepControl]="signUpForm">
+          <form [formGroup]="signUpForm">
             <ng-template matStepLabel >Fill out your name</ng-template>
             <mat-form-field>
               <input matInput placeholder="Last name, First name" formControlName="name" required>
@@ -46,8 +47,8 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="">
-          <form [formGroup]="">
+        <mat-step [stepControl]="signUpForm">
+          <form [formGroup]="signUpForm">
             <ng-template matStepLabel>Fill out your address</ng-template>
             <mat-form-field>
               <input matInput placeholder="Address" formControlName="secondCtrl" required>
@@ -66,7 +67,7 @@
             <button mat-button >Submit</button>
           </div>
         </mat-step>
-        <pre>{{firstFormGroup.value|json}}</pre>
+        <pre>{{signUpForm.value|json}}</pre>
       </mat-stepper>
 
       <hr class="py-3"/>
