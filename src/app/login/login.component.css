@@ -45,8 +45,7 @@ form button {
   border-radius: 50%;
   background: #C7AD8833;
   animation: ripple 15s infinite;
-  box-shadow:  1px 1px #508fb9;
-
+  box-shadow:  0 0 1px #508fb9;
 }
 
 .small {
