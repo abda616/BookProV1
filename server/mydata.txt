@@ -1,0 +1,41 @@
+{
+      "id": 1,
+      "email": "admin@jo",
+      "password": "@Aa12345",
+      "firstName": "admin@jo",
+      "lastName": "usa",
+      "city": "amman",
+      "interest": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ]
+    },
+    {
+      "id": 2,
+      "email": "moh@jo",
+      "password": "@Aa12345",
+      "firstName": "admin@jo",
+      "lastName": "usa",
+      "city": "amman",
+      "interest": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ]
+    },
+    {
+      "id": 3,
+      "email": "asd@asd",
+      "password": "@Aasd123",
+      "firstName": "asd",
+      "lastName": "asd",
+      "city": "amman",
+      "interest": [
+        "Nonfiction",
+        "Poetry",
+        "Thrillers"
+      ]
+    }

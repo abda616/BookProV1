@@ -6,41 +6,35 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {TradeNowComponent} from "./trade-now/trade-now.component";
 import {MyLibraryComponent} from "./my-library/my-library.component";
 import {LoginComponent} from "./login/login.component";
+import {AuthGuard} from "./shared/auth.guard";
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
+  { path: 'log-in', component: LoginComponent },
   {
-    path: '',
-    component: LoginComponent,
-  },
-  {
-    path: 'logs',
+    path: 'Page',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
-        path: 'm',
+        path: '',
         component: MainPageComponent,
-        pathMatch: 'full'
       },
       {
-        path: 'tradeNowPage',
+        path: 'trade',
         component: TradeNowComponent,
-        pathMatch: 'full'
+
       },
       {
-        path: 'myLibraryPage',
+        path: 'library',
         component: MyLibraryComponent,
-        pathMatch: 'full'
       },
     ]
+  },
+  {
+    path: '**', redirectTo: '/Page', pathMatch: 'full'
   }
-
-  /*
-  ,{
-    path: '**',
-    component: LayoutComponent
-  }
-  */
   // {path: '', component: },
   // {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
 ];

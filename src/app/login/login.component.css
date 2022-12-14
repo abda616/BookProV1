@@ -1,42 +1,59 @@
-.login-img-right {
-  background-image: url("../../assets/picture/login-img-1.jpeg");
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: 60% 100vh;
+.img-right{
   height: 100vh;
 }
 
-.left-container {
-  width: 50vh;
-  height: 100vh;
+.signup-form{
+  width: 70vh;
+  height: 80vh;
+  padding: 5px;
+  margin: auto;
 
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.3);
+
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 75px;
+  align-items: center;
 }
 
 .border-padding {
-  width: 100%;
-
+  width: 60vh;
+  height: 60vh;
   padding: 10px;
+  margin: auto;
 
-  border: 5px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  align-items: center;
+}
+.border-padding form div mat-form-field{
+  width: 50vh;
 }
 
-.left-container mat-form-field {
+/**/
 
+.signup-form mat-icon {
+  height: 20px;
+  width: 20px;
+  font-size: 20px;
+  margin-right: 5px;
 }
 
-form button {
-  width: 50%;
-}
+/**/
 
+
+/**/
+
+.interests-div mat-icon {
+  height: 20px;
+  width: 20px;
+  font-size: 20px;
+  margin-right: 5px;
+}
 
 /**/
 

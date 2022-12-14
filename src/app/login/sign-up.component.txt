@@ -2,20 +2,27 @@
 <div class="whole-signup">
   <div class="left-signup">
     <div class="heading">
-
       <h2>Welcome To Jo Book</h2>
       <p>Create Your Account</p>
     </div>
+
     <form action="">
       <label for="name">Name</label>
       <input id="name-input" type="text" placeholder="Enter Your Name">
+
       <label  for="email">E-mail</label>
       <input id="email" type="text "placeholder="Enter Your Email">
       <label for="password">Password</label>
-      <div> <input id="pass" type="password"placeholder="Enter Your Password  " > <i class="fa-solid fa-eye-slash hide-pass"></i> <span id="Weak-pass">Must Contain [a-z],[A-Z],[1-9]</span></div>
-
+      <div>
+      <input id="pass" type="password" placeholder="Enter Your Password">
+       <i class="fa-solid fa-eye-slash hide-pass"></i>
+        <span id="Weak-pass">Must Contain [a-z],[A-Z],[1-9]</span></div>
       <label for="password">Repeat Password</label>
-      <div><input id="pass-rep" type="password"placeholder="Confirm Your Password"><span id="no-match">Passwords Don't Match</span></div>
+
+      <div>
+      <input id="pass-rep" type="password"placeholder="Confirm Your Password">
+      <span id="no-match">Passwords Don't Match</span>
+      </div>
     </form>
     <h4>Please Tell Us What Type Of books Are You Into</h4>
     <div class="intrests">
@@ -31,11 +38,7 @@
       <p>Requird At Least Three</p>
     </div>
     <button class="sign-up-btn">Sign Up</button>
-
-
   </div>
-  <div class="right-signup">
-
-  </div>
+  <div class="right-signup"></div>
 </div>
 -->

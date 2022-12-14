@@ -7,9 +7,11 @@ import {MainPageService} from "../services/main-page.service";
   providers:[MainPageService]
 })
 export class MainPageComponent implements OnInit {
-  constructor(private mainPS:MainPageService ) {}
+  constructor(
+  //  private mainPS:MainPageService
+  ) {}
   ngOnInit(): void {
-    console.log(this.mainPS.getMostRated())
+    //console.log(this.mainPS.getMostRated())
   }
 
   imgPath= "https://books.google.com/books/publisher/content/images/frontcover/SSRGEAAAQBAJ?fife=w480-h690"

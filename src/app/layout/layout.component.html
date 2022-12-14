@@ -63,15 +63,16 @@
           <img alt="Jo-Book" src="/assets/icons/Jobook.svg">
         </mat-icon>
       </a>
+
       <span class="small-spacer"> </span>
 
       <div class="my-toolbar just-flex flex-row justify-content-evenly  align-items-center" >
 
-        <button mat-button routerLink="/tradeNowPage">
+        <button mat-button routerLink="/trade">
           <span>Trade Now</span>
         </button>
 
-        <button mat-button routerLink="/myLibraryPage">
+        <button mat-button routerLink="/library">
           <span>My Library</span>
         </button>
 
@@ -92,7 +93,7 @@
             <mat-icon matPrefix>dashboard</mat-icon>
             Profile
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="LogOut()">
             <mat-icon matPrefix>close</mat-icon>
             Log Out
           </button>

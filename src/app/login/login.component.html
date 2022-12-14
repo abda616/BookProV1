@@ -1,85 +1,117 @@
-<div class="login-img-right" [ngStyle]='{"background-image":!signUpState? P1():P2()  }' >
-  <div class="left-container">
+<div class="just-flex align-content-center w-100 h-100">
+  <div class="just-flex justify-content-center align-items-center w-50 h-100">
 
-    <div *ngIf="!signUpState" class="border-padding" style="height: 50vh;">
-      <h2>Welcome</h2>
-      <p>Enter Your Details Below</p>
-      <form novalidate [formGroup]="loginForm" (ngSubmit)="onLogin()" class="just-flex flex-column">
-        <mat-form-field appearance="legacy">
-          <mat-label>E-mail</mat-label>
-          <input matInput matNativeControl id="inputEmail" formControlName="loginEmail" type="email" required>
-          <button mat-icon-button matSuffix (click)="loginForm.reset()" class="">
-            <mat-icon>{{!loginForm.get('loginEmail').value ? 'mail' : 'close'}}</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-form-field appearance="legacy">
-          <mat-label>Password</mat-label>
-          <input matInput matNativeControl id="passwordEmail" formControlName="loginPassword"
-                 [type]="hidePass ? 'password' : 'text'" required>
-          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hidePass">
-            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
-        <button  mat-stroked-button type="submit" [disabled]="!loginForm.valid">Login</button>
+    <div *ngIf="!signUpState" class="border-padding">
+      <h2 class="text-center">Jo-Book</h2>
+      <h4 class="text-center">Welcome</h4>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="just-flex flex-column align-items-center">
+        <div class="justify-content-center">
+          <mat-form-field appearance="legacy">
+            <mat-label>E-mail</mat-label>
+            <input matInput matNativeControl id="inputEmail" formControlName="loginEmail" type="email" required>
+            <mat-error>Enter Valid Email Or SignUp.</mat-error>
+            <button mat-icon-button matSuffix (click)="loginForm.reset()">
+              <mat-icon matSuffix>{{!loginForm.get('loginEmail').value ? 'mail' : 'close'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class=" justify-content-center">
+          <mat-form-field appearance="legacy">
+            <mat-label>Password</mat-label>
+            <input matInput matNativeControl id="passwordEmail" formControlName="loginPassword"
+                   [type]="hidePass ? 'password' : 'text'" required>
+            <mat-error>Most Contain special charter, Number, Char And More Than 8 Character</mat-error>
+            <button mat-icon-button matSuffix (click)="hidePass = !hidePass">
+              <mat-icon matSuffix>{{!hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <mat-error>{{getErrorMessage()}}</mat-error>
+        <button class="w-50" mat-stroked-button type="submit" [disabled]="!loginForm.valid">Login</button>
       </form>
-      <hr class="py-3"/>
-      <button mat-stroked-button color="warn" class="w-75" (click)="openSignup()">{{!signUpState?"SignUp":"signIn"}}</button>
-<!--      <pre>{{loginForm.value|json}}</pre>-->
-      <pre>{{loginForm.valid|json}}</pre>
+      <mat-divider class="my-1"></mat-divider>
+      <button mat-stroked-button color="warn" class="w-50"
+              (click)="openSignup()">{{!signUpState ? "SignUp" : "signIn"}}</button>
     </div>
 
-    <!-- -->
-   <div *ngIf="signUpState" class="border-padding" style="height: 90vh;">
-      <h1>Welcome TO JO-BOOK</h1>
-      <h2>Sign Up</h2>
-      <p>Enter Your Details Below</p>
+    <div *ngIf="signUpState" class="signup-form">
+      <h2>Welcome To Jo Book</h2>
+      <p>Create Your Account</p>
+      <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" class="just-flex flex-column justify-content-center" >
+        <div class="name-div just-flex  justify-content-center" formGroupName="UName">
 
-      <mat-stepper orientation="vertical" color="warn" linear="true" #stepper  animationDuration='700' >
-        <mat-step [stepControl]="signUpForm">
-          <form [formGroup]="signUpForm">
-            <ng-template matStepLabel >Fill out your name</ng-template>
-            <mat-form-field>
-              <input matInput placeholder="Last name, First name" formControlName="name" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="signUpForm">
-          <form [formGroup]="signUpForm">
-            <ng-template matStepLabel>Fill out your address</ng-template>
-            <mat-form-field>
-              <input matInput placeholder="Address" formControlName="secondCtrl" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          You are now done.
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button >Submit</button>
-          </div>
-        </mat-step>
-        <pre>{{signUpForm.value|json}}</pre>
-      </mat-stepper>
+          <mat-form-field class="mx-2 my-1">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" formControlName="FirstName" required>
+            <mat-error>minimum length 3</mat-error>
+          </mat-form-field>
 
-      <hr class="py-3"/>
-      <button mat-stroked-button color="warn" class="w-100" (click)="openSignup()">{{!signUpState?"SignUp":"signIn"}}</button>
+          <mat-form-field class="mx-2 my-1">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="LastName" required>
+            <mat-error>minimum length 3</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="email-div just-flex  justify-content-center" formGroupName="UEmail">
+
+          <mat-form-field class="mx-2 my-1">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="name@domain" formControlName="A" required>
+            <mat-error>Enter Valid Email</mat-error>
+          </mat-form-field>
+          <mat-form-field class="mx-2 my-1">
+            <mat-label>Confirm Email</mat-label>
+            <input matInput placeholder='name@domain' formControlName="B" required>
+            <mat-error>Most Be The Same</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="pass-div just-flex  justify-content-center" formGroupName="UPassword">
+          <mat-form-field class="mx-2 my-1">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" formControlName="A" required>
+            <mat-error>Most Contain special charter, Number, Char And More Than 8 Character</mat-error>
+          </mat-form-field>
+          <mat-form-field class="mx-2 my-1">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput placeholder="Password" formControlName="B" required>
+            <mat-error >More Than 8 Character And The Same</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="city-div just-flex  justify-content-center">
+          <h3>You Live In</h3>
+          <div class="small-spacer"></div>
+          <mat-form-field appearance="legacy">
+            <mat-label>Live In</mat-label>
+            <mat-select formControlName="UAddress">
+              <mat-option *ngFor="let city of citys" [value]="city.value">
+                {{city.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <h3 class="text-center">Please Tell Us What Type Of books Are Your Interests In</h3>
+        <div class="interests-div just-flex justify-content-center px-3">
+          <app-chip-multi-select [options]="Interests" [formControl]="UInterests" formControlName="UInterests"></app-chip-multi-select>
+        </div>
+        <mat-divider class="my-2" ></mat-divider>
+        <button class="" mat-button type="submit" [disabled]="ValidateSignUp()">SignUP</button>
+      </form>
+      <mat-divider class="my-1"></mat-divider>
+      <button mat-stroked-button color="warn" class="w-50"
+              (click)="openSignup()">{{!signUpState ? "Sign Up" : "Sign In"}}</button>
     </div>
+    <!--<pre>{{this.signUpForm.get('UName').get('FirstName').value|json}}</pre>-->
   </div>
+  <img class="img-right w-50"
+       src='{{!signUpState?"../../assets/picture/login-img-1.jpeg":"../../assets/picture/login-img-2.jpeg"}}' alt="">
+</div>
 
-  <div class='ripple-background'>
-    <div class='circle xxlarge shade1'></div>
-    <div class='circle xlarge shade2'></div>
-    <div class='circle large shade3'></div>
-    <div class='circle medium shade4'></div>
-    <div class='circle small shade5'></div>
-  </div>
+<div class='ripple-background'>
+  <div class='circle xxlarge shade1'></div>
+  <div class='circle xlarge shade2'></div>
+  <div class='circle large shade3'></div>
+  <div class='circle medium shade4'></div>
+  <div class='circle small shade5'></div>
 </div>

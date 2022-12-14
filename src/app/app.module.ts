@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "./shared/shared.module";
@@ -11,6 +12,9 @@ import {LoginComponent} from './login/login.component';
 import {TradeNowComponent} from './trade-now/trade-now.component';
 import {MyLibraryComponent} from './my-library/my-library.component';
 import {MainPageService} from "./services/main-page.service";
+import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.component';
+import {SignUpService} from "./services/signUpServices/sign-up.service";
+import {AuthInterceptor} from "./shared/authconfig.interceptor";
 
 
 @NgModule({
@@ -21,16 +25,22 @@ import {MainPageService} from "./services/main-page.service";
     TradeNowComponent,
     MyLibraryComponent,
     LoginComponent,
+    ChipMultiSelectComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
     BrowserAnimationsModule,
+    SharedModule,
   ],
-  providers: [MainPageService,],
+  providers: [MainPageService,SignUpService , {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

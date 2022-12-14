@@ -73,7 +73,6 @@ newarr.push(ele);
  function addIntrestToArray(intrestBtn){
     if(intrestBtn.getAttribute("isClicked")){
         arrOfIntrests=removeIntrest(arrOfIntrests,intrestBtn.innerText)
-
                 intrestBtn.removeAttribute("isClicked");
                 intrestBtn.classList.remove("selected");
             }else {
