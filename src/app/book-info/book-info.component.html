@@ -37,28 +37,15 @@
         <div class="genres mb-3">
           <h6 class="fs-4 font-weight-bold">Genres</h6>
           <div class="row w-30 d-flex ms-4 justify-content-evenly fs-6">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <p><a href="">non-Fiction</a></p>
+            <div *ngFor="let genre of currentBookInfo.genres" class="col-lg-3 col-md-4 col-sm-6">
+              <p ><a href="">{{genre}}</a></p>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <p><a href="">Self-Help</a></p>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <p><a href="">Drama</a></p>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <p><a href="">Romance</a></p>
-            </div>
+         
           </div>
         </div>
 
         <p class="plot font-italic mb-3 col-lg-12 col-md-6 col-sm-3 col-xs-3">
-          No matter your goals, Atomic Habits offers a proven framework for
-          improving--every day. James Clear, one of the world's leading experts
-          on habit formation, reveals practical strategies that will teach you
-          exactly how to form good habits, break bad ones, and master the tiny
-          behaviors that lead to remarkable results. If you're having trouble
-          changing your habits, the problem isn't you.
+      {{currentBookInfo.plot}}
         </p>
 
         <div class="info-cont d-flex flex-column align-items-center just">
@@ -68,17 +55,17 @@
             <div class="col-lg-4 col-md-6 col-12 info-col">
               <h6>Number Of Pages</h6>
               <span><i class="fa-solid fa-book-open"></i></span>
-              <p>350 Pages</p>
+              <p>{{currentBookInfo.numberOfPages}}</p>
             </div>
             <div class="col-lg-4 col-md-6 col-12 info-col">
               <h6>Language</h6>
               <span><i class="fa-solid fa-globe"></i></span>
-              <p>350 Pages</p>
+              <p>{{currentBookInfo.language}}</p>
             </div>
             <div class="col-lg-4 col-md-6 col-12 info-col">
               <h6>Release Date</h6>
               <span><i class="fa-solid fa-calendar-days"></i></span>
-              <p>10-sep-2017</p>
+              <p>{{currentBookInfo.releaseDate}}</p>
             </div>
           </div>
           <div
@@ -88,7 +75,7 @@
               <button class="btn info-btn text-white">See Trade Options</button>
             </div>
             <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
-              <button class="btn info-btn text-white">Get Similar Books</button>
+              <button class="btn info-btn text-white" >Get Similar Books</button>
             </div>
             <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
               <button class="btn info-btn text-white">Add To My Library</button>
@@ -97,8 +84,14 @@
         </div>
       </div>
     </div>
+
+
+
+
+
+    <!-- start of the slider of the images -->
     <div *ngFor="let headsAre of headsInTop; let i = index" class="mt-5">
-      <h1 class="text-center">{{ headsAre }}</h1>
+      <h1 class="text-center">{{headsAre}}</h1>
       <hr />
       <div
         [attr.id]="'carouselControls' + i"
@@ -106,17 +99,17 @@
         data-ride="carousel"
       >
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <div class="carousel-item active" *ngIf="headsAre=='From The Same Author'">
             <div class="card-wrapper-row-card">
               <div
-                *ngFor="let img of images"
+              *ngFor="let book of similarAuthorBooks"
                 class="card-cont col-lg-3"
                 style="width: 18rem"
               >
-                <img class="card-img-top" [src]="img" alt="Card image cap" />
+                <img class="card-img-top" src={{book.coverImg}} alt="Card image cap" />
                 <div class="card-body">
                   <h5 class="card-title fs-4 mt-3 font-weight-bold">
-                    Card title
+                {{book.title}}
                   </h5>
                   <p class="card-text fs-6 font-italic">
                     Some quick example text to build on the card title and make
@@ -154,8 +147,10 @@
           type="button"
           [attr.data-bs-target]="'#carouselControls' + i"
           data-bs-slide="prev"
+          (click)="counterFun($event)"
+        
         >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="carousel-control-prev-icon"   id="prev-btn" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
         <button
@@ -164,7 +159,7 @@
           [attr.data-bs-target]="'#carouselControls' + i"
           data-bs-slide="next"
         >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="carousel-control-next-icon" id="next-btn" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BooInfoService } from '../services/boo-info.service';
 @Component({
   selector: 'app-my-book-info',
   templateUrl: './book-Info.component.html',
@@ -9,13 +9,28 @@ import { HttpClientModule } from '@angular/common/http';
 export class MyBookInfoComponent implements OnInit {
 currentBookInfo={
   title:"Atomic Habits" ,
-  author:"James Clear",
+  author:"Stephenie Meyer",
   ratings:"4.4",
-  imgSrc:"./assets/picture/atomic.jpg"
+  imgSrc:"./assets/picture/atomic.jpg",
+  genres:[
+    "Self-Help"
+    ,
+    "non-fiction"
+    ,
+    "Drama"
+    ,
+    "Romance"
+    ],
+    plot:"No matter your goals, Atomic Habits offers a proven framework for improving--every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results. If you're having trouble changing your habits, the problem isn't you.  ",
 
+language:"English",
+numberOfPages:350,
+releaseDate:"13-sep-2017"
 }
-similarAuthorArr=[]
-counter=1;
+
+similarAuthorBooks=[]
+
+counter=3;
  stars=[1,2,3,4,5]
  booksDemo=[{
   title:"Atomic Habits",
@@ -199,22 +214,16 @@ language:"English",
 dateOfPublish:"10-sep-2017"
  },
  ]
- 
- imgPath= "https://books.google.com/books/publisher/content/images/frontcover/SSRGEAAAQBAJ?fife=w480-h690"
  headsInTop: string[] = [ "Reader Also Liked", "From The Same Author", "Based On Similar User"];
- images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
- images2 = [123, 14, 38, 63].map((n) => `https://picsum.photos/id/${n}/900/500`);
- images3 = [15, 134, 4, 434].map((n) => `https://picsum.photos/id/${n}/900/500`);
- allimg = [this.images, this.images2, this.images3];
-
-
+images=[]
  
 
  
-  constructor() { }
+  constructor(private bookService:BooInfoService) { }
 
   ngOnInit(): void {
 
+    this.similarAuthorService();
   }
 
    onBtnDown(){
@@ -222,13 +231,30 @@ dateOfPublish:"10-sep-2017"
     if(this.counter>5)this.counter=0;
 this.counter++;
    }
-  //  getSimilarBooks(currentBookInfo.title:""){
-  //  this.bookInfo.getByAuthor()
-  //   .subscribe(res=>{
-  //  this.similarAuthorArr=res;   
-  //  console.log(this.similarAuthorArr)
-  //   })
-  //  }
 
+   similarAuthorService(){
+    this.bookService.getByAuthor(this.currentBookInfo.author+"/3")
+    .subscribe(res=>{
+  this.similarAuthorBooks=res;
+  console.log(this.similarAuthorBooks)
+    })
+  
+  }
+  counterFun(event){
+ console.log(this.counter)
+ if(this.counter>=4){
+  this.counter=1;
+ }
+ if(this.counter>0){
+  if(event.target.id==="prev-btn"){
+    this.counter--;
+   }
+   if(event.target.id==="next-btn"){
+    this.counter++;
+   }
+ }
+ 
+ 
+  }
 
 }
