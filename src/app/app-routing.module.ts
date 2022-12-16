@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LayoutComponent} from "./layout/layout.component";
-
+import { MyBookInfoComponent } from './book-info/book-info.component';
 import {MainPageComponent} from "./main-page/main-page.component";
 import {TradeNowComponent} from "./trade-now/trade-now.component";
 import {MyLibraryComponent} from "./my-library/my-library.component";
@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'Page',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -29,6 +29,10 @@ const routes: Routes = [
       {
         path: 'library',
         component: MyLibraryComponent,
+      },
+      {
+        path: 'book',
+        component: MyBookInfoComponent,
       },
     ]
   },

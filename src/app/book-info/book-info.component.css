@@ -1,0 +1,179 @@
+:host {
+  --main-color: #141e2d;
+  --off-white: #f3ebd9;
+}
+
+html,
+body {
+  min-width: 100%;
+  min-height: 100vh;
+  width: auto;
+  height: auto;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
+  background-color: #f7f3e3;
+}
+
+.container-fluid .left-cont {
+  position: relative;
+}
+.container-fluid .image-cont {
+  /* Safari */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+}
+.container-fluid .image-cont .img {
+  width: 250px;
+  height: 400px;
+  position: relative;
+  border-radius: 30px;
+}
+.container-fluid .image-cont .img img {
+  width: 100%;
+}
+.container-fluid .image-cont i {
+  font-size: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.container-fluid .image-cont a {
+  text-decoration: none;
+}
+.container-fluid .image-cont .buy-btn {
+  background-color: var(--main-color);
+  width: 100%;
+  border-radius: 20px;
+}
+.container-fluid .right-cont {
+  width: 70%;
+}
+.container-fluid .right-cont .book-desc .author a {
+  text-decoration: none;
+  color: var(--main-color);
+}
+.container-fluid .right-cont .book-desc .author a:hover {
+  border-bottom: 2px solid #2a324b;
+}
+.container-fluid .right-cont .book-desc .ratings p {
+  display: inline-block;
+  margin-left: 0;
+  padding-bottom: 20px;
+}
+.container-fluid .right-cont .book-desc .ratings .rating {
+  font-weight: 600;
+  font-size: 30px;
+}
+.container-fluid .right-cont .book-desc .ratings .reviews {
+  font-size: 10px;
+}
+.container-fluid .right-cont .book-desc .ratings .stars {
+  width: 200px;
+  margin-right: 0px;
+  color: #f4ac32;
+  font-size: 25px;
+  margin-left: 0;
+  text-align: left;
+}
+.container-fluid .right-cont .book-desc .ratings .stars i {
+  display: inline-block;
+  margin-right: 7px;
+}
+.container-fluid .right-cont .book-desc .genres {
+  display: flex;
+}
+.container-fluid .right-cont .book-desc .genres p {
+  min-width: 80px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  border-bottom: 2px solid #2a324b;
+  text-align: center;
+  font-weight: 400;
+  font-style: italic;
+}
+.container-fluid .right-cont .book-desc .genres p a {
+  text-decoration: none;
+  color: var(--main-color);
+}
+.container-fluid .right-cont .book-desc .plot {
+  color: var(--main-color);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+.container-fluid .right-cont .book-desc .info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.container-fluid .right-cont .book-desc .info .info-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container-fluid .right-cont .book-desc .info .info-col h6 {
+  font-size: 15px;
+  font-weight: 500;
+}
+.container-fluid .right-cont .book-desc .info .info-col p {
+  font-size: 15px;
+  font-weight: 400;
+}
+.container-fluid .right-cont .book-desc .info .info-col span {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.container-fluid .right-cont .book-desc .info .info-btn {
+  display: inline-block;
+  font-size: 15px;
+  width: 180px;
+  height: 50px;
+  border-radius: 30px;
+  font-weight: 500;
+  background-color: var(--main-color);
+}
+
+.card-wrapper-row-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  /*justify-content: center;*/
+  margin: 2.5vh 6vh;
+}
+.card-wrapper-row-card .card-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  height: 500px;
+  margin: 0 0.5em;
+}
+.card-wrapper-row-card .card-cont .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFFFF0;
+}
+.card-wrapper-row-card .card-cont img {
+  width: 100%;
+  height: 350px;
+}
+.card-wrapper-row-card .card-cont .more-btn {
+  width: 60%;
+  background-color: #141e2d;
+}
+
+.carousel-control-prev {
+  width: 5%;
+  z-index: 9;
+}
+
+.carousel-control-next {
+  width: 5%;
+  z-index: 9;
+}/*# sourceMappingURL=book-info.component.css.map */

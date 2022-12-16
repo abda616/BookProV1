@@ -1,0 +1,173 @@
+<div class="container-fluid mw-100 d-flex justify-content-around m-0">
+  <div
+    class="left-cont col-lg-3 pt-5 d-flex align-items-start justify-content-evenly"
+  >
+    <div
+      class="row image-cont d-flex justify-content-around align-items-center h-70"
+    >
+      <div class="col d-flex align-items-center d-flex flex-column">
+        <div class="img">
+          <img [src]="currentBookInfo.imgSrc" alt="" />
+        </div>
+        <button class="btn buy-btn mt-3 text-white">Show Buying Options</button>
+        <h5 class="fs-4 font-weight-bold text-dark mt-3">Rate This Book</h5>
+        <div class="stars">
+          <i
+            class="fa-regular fa-star fs-3 ps-3 d-inline mt-3"
+            ngFor="let star of stars"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-cont pt-5 pl-5 m-0 col-lg-9 col-md-12">
+    <div class="row book-desc d-flex justify-content-aroundh-70 flex-column">
+      <div class="col-lg-9 col-md-12">
+        <h1 class="fs-1 font-weight-bold text-dark pb-3">{{currentBookInfo.title}}</h1>
+        <h6 class="author fs-4 font-weight-bold">
+          By
+          <a href="" class="font-weight-light text-dark">{{currentBookInfo.author}}</a>
+        </h6>
+        <div class="ratings pt-3">
+          <p class="stars">
+            <i class="fa-solid fa-star" *ngFor="let star of stars"></i>
+          </p>
+          <p class="rating">4.1</p>
+        </div>
+        <div class="genres mb-3">
+          <h6 class="fs-4 font-weight-bold">Genres</h6>
+          <div class="row w-30 d-flex ms-4 justify-content-evenly fs-6">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <p><a href="">non-Fiction</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <p><a href="">Self-Help</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <p><a href="">Drama</a></p>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <p><a href="">Romance</a></p>
+            </div>
+          </div>
+        </div>
+
+        <p class="plot font-italic mb-3 col-lg-12 col-md-6 col-sm-3 col-xs-3">
+          No matter your goals, Atomic Habits offers a proven framework for
+          improving--every day. James Clear, one of the world's leading experts
+          on habit formation, reveals practical strategies that will teach you
+          exactly how to form good habits, break bad ones, and master the tiny
+          behaviors that lead to remarkable results. If you're having trouble
+          changing your habits, the problem isn't you.
+        </p>
+
+        <div class="info-cont d-flex flex-column align-items-center just">
+          <div
+            class="row info w-100 d-flex align-items-center mt-5 justify-content-around"
+          >
+            <div class="col-lg-4 col-md-6 col-12 info-col">
+              <h6>Number Of Pages</h6>
+              <span><i class="fa-solid fa-book-open"></i></span>
+              <p>350 Pages</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 info-col">
+              <h6>Language</h6>
+              <span><i class="fa-solid fa-globe"></i></span>
+              <p>350 Pages</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 info-col">
+              <h6>Release Date</h6>
+              <span><i class="fa-solid fa-calendar-days"></i></span>
+              <p>10-sep-2017</p>
+            </div>
+          </div>
+          <div
+            class="row info w-100 d-flex align-items-center mt-3 justify-content-around"
+          >
+            <div class="col-lg-4 col-md-6 col-12 info-col mt-2">
+              <button class="btn info-btn text-white">See Trade Options</button>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
+              <button class="btn info-btn text-white">Get Similar Books</button>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
+              <button class="btn info-btn text-white">Add To My Library</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let headsAre of headsInTop; let i = index" class="mt-5">
+      <h1 class="text-center">{{ headsAre }}</h1>
+      <hr />
+      <div
+        [attr.id]="'carouselControls' + i"
+        class="carousel carousel-dark carousel- w-100 my-5"
+        data-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card-wrapper-row-card">
+              <div
+                *ngFor="let img of images"
+                class="card-cont col-lg-3"
+                style="width: 18rem"
+              >
+                <img class="card-img-top" [src]="img" alt="Card image cap" />
+                <div class="card-body">
+                  <h5 class="card-title fs-4 mt-3 font-weight-bold">
+                    Card title
+                  </h5>
+                  <p class="card-text fs-6 font-italic">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn more-btn text-white">Read More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card-wrapper-row-card">
+              <div
+                *ngFor="let img of images"
+                class="card-cont col-lg-3"
+                style="width: 18rem"
+              >
+                <img class="card-img-top" [src]="img" alt="Card image cap" />
+                <div class="card-body">
+                  <h5 class="card-title fs-4 mt-3 font-weight-bold">
+                    Card title
+                  </h5>
+                  <p class="card-text fs-6 font-italic">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                  <a href="#" class="btn more-btn text-white">Read More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          [attr.data-bs-target]="'#carouselControls' + i"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          [attr.data-bs-target]="'#carouselControls' + i"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -15,8 +15,7 @@ import {MainPageService} from "./services/main-page.service";
 import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.component';
 import {SignUpService} from "./services/signUpServices/sign-up.service";
 import {AuthInterceptor} from "./shared/authconfig.interceptor";
-
-
+import { MyBookInfoComponent} from './book-info/book-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +25,10 @@ import {AuthInterceptor} from "./shared/authconfig.interceptor";
     MyLibraryComponent,
     LoginComponent,
     ChipMultiSelectComponent,
+    MyBookInfoComponent,
+  
+
+   
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import {AuthInterceptor} from "./shared/authconfig.interceptor";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
+    
   ],
   providers: [MainPageService,SignUpService , {
     provide: HTTP_INTERCEPTORS,
