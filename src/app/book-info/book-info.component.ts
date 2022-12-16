@@ -25,7 +25,8 @@ currentBookInfo={
 
 language:"English",
 numberOfPages:350,
-releaseDate:"13-sep-2017"
+releaseDate:"13-sep-2017",
+rating:3,
 }
 
 similarAuthorBooks=[]
@@ -241,20 +242,20 @@ this.counter++;
   
   }
   counterFun(event){
- console.log(this.counter)
- if(this.counter>=4){
-  this.counter=1;
- }
- if(this.counter>0){
+
   if(event.target.id==="prev-btn"){
-    this.counter--;
+    if(this.counter>1) this.counter--;
+    if(this.counter==1) this.counter=4;
+   
    }
    if(event.target.id==="next-btn"){
-    this.counter++;
+    if(this.counter<4) this.counter++
+  if(this.counter===4) this.counter=1;
+  
    }
- }
  
  
+ console.log(this.counter)
   }
 
 }
