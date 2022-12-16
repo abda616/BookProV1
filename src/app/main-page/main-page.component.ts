@@ -1,5 +1,8 @@
 import {Component, OnInit,} from '@angular/core';
 import {MainPageService} from "../services/main-page.service";
+import {Book} from "../services/Book/Book";
+import {environment} from "../../environments/environment.prod";
+import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -7,11 +10,26 @@ import {MainPageService} from "../services/main-page.service";
   providers:[MainPageService]
 })
 export class MainPageComponent implements OnInit {
+  MostRated=[];
   constructor(
-  //  private mainPS:MainPageService
+    private http:HttpClient,
+    private mainPS:MainPageService
   ) {}
   ngOnInit(): void {
-    //console.log(this.mainPS.getMostRated())
+    this.http.get<Book[]>(`${environment.apiUrl}mostRated/10`).subscribe((x)=>{
+       this.MostRated = x
+      console.log(this.MostRated);
+    });
+    /*const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(2));
+// expected output: Array ["camel", "duck", "elephant"]
+
+
+let animals5 = []
+for (i =0;i<5; i++ ) {animals5[i]=animals.slice(i,i+2)}
+console.log(animals5)
+    */
   }
 
   imgPath= "https://books.google.com/books/publisher/content/images/frontcover/SSRGEAAAQBAJ?fife=w480-h690"

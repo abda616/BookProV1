@@ -57,8 +57,7 @@
   <mat-drawer-content>
     <mat-toolbar class="sticky-top">
 
-      <span class="small-spacer"> </span>
-      <a routerLink="">
+      <a routerLink="app">
         <mat-icon class="main-icon">
           <img alt="Jo-Book" src="/assets/icons/Jobook.svg">
         </mat-icon>
@@ -66,17 +65,17 @@
 
       <span class="small-spacer"> </span>
 
-      <div class="my-toolbar just-flex flex-row justify-content-evenly  align-items-center" >
+      <div class="my-toolbar just-flex flex-row justify-content-evenly  align-items-center">
 
-        <button mat-button routerLink="/trade">
+        <button mat-button routerLink="trade">
           <span>Trade Now</span>
         </button>
 
-        <button mat-button routerLink="/library">
+        <button mat-button routerLink="library">
           <span>My Library</span>
         </button>
 
-        <mat-form-field   class="search-width">
+        <mat-form-field class="search-width">
           <input [(ngModel)]="value" matInput matNativeControl type="search">
           <button (click)="value=''" mat-icon-button matSuffix>
             <mat-icon *ngIf="!value" matSuffix>search</mat-icon>
@@ -84,7 +83,7 @@
           </button>
         </mat-form-field>
         <!-- <mat-icon>dashboard</mat-icon> -->
-        <button [matMenuTriggerFor]="menu"  mat-stroked-button>
+        <button [matMenuTriggerFor]="menu" mat-stroked-button>
           <mat-icon>person</mat-icon>
         </button>
         <mat-menu #menu="matMenu">

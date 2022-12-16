@@ -13,27 +13,32 @@ const routes: Routes = [
   { path: '', redirectTo: '/log-in', pathMatch: 'full' },
   { path: 'log-in', component: LoginComponent },
   {
-    path: 'Page',
+    path: 'app',
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: MainPageComponent,
+        canActivate: [AuthGuard],
+        pathMatch:"full"
       },
       {
         path: 'trade',
         component: TradeNowComponent,
-
+        canActivate: [AuthGuard],
+        pathMatch:"full"
       },
       {
         path: 'library',
         component: MyLibraryComponent,
+        canActivate: [AuthGuard],
+        pathMatch:"full"
       },
     ]
   },
   {
-    path: '**', redirectTo: '/Page', pathMatch: 'full'
+    path: '**', redirectTo: '/app'
   }
   // {path: '', component: },
   // {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},

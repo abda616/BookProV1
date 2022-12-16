@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
 
   /*----------------------------------------------------------*/
   constructor(private formBuilder: FormBuilder, private router: Router,
-              private signUp: SignUpService,
+              /*private signUp: SignUpService,*/
               private signIn: AuthService
   ) {
   }
@@ -133,7 +133,8 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
       city: this.signUpForm.get('UAddress').value,
       interest: this.signUpForm.get('UInterests').value,
     };
-    this.signUp.sendDataUser(adduser).subscribe();
+    console.log(adduser);
+    this.signIn.signUp(adduser).subscribe();
   }
 
   protected ValidateSignUp(): boolean {

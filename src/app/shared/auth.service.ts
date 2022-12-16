@@ -8,7 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {userSignIn} from "../services/signUpServices/userSignup";
+import {userSignIn, userSignup} from "../services/signUpServices/userSignup";
 @Injectable({
   providedIn: 'root',
 })
@@ -19,16 +19,16 @@ export class AuthService {
   constructor(private http: HttpClient, public router: Router) {}
 
   // Sign-up
-  /*signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/register-user`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
-
-    signUp(user: userSignup): Observable<userSignup> {
+  signUp(user: userSignup): Observable<any> {
+    let api = `${this.endpoint}/register`;
+    let e=  this.http.post(api, user).pipe(catchError(this.handleError));
+    console.log(e);
+    return e;
+    /*signUp(user: userSignup): Observable<userSignup> {
     return this.http.post<userSignup>( environment.registerUrl ,user).pipe(
       catchError(this.handleError)
-    );
+    );}*/
   }
-  }*/
 
   // Sign-in
   signIn(user: userSignIn) {
@@ -36,7 +36,7 @@ export class AuthService {
       .post<any>(`${this.endpoint}/signIn`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
-        this.router.navigate(['Page/']);
+        this.router.navigate(['app']);
         /*this.getUserProfile(res.id).subscribe((res) => {
           this.currentUser = res;
         });*/
