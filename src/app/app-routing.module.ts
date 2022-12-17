@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'app',
     component: LayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -38,6 +38,7 @@ const routes: Routes = [
       {
         path: 'book',
         component: MyBookInfoComponent,
+        pathMatch:"full"
       },
     ]
   },
