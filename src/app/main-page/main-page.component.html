@@ -13,7 +13,7 @@
             <!--               ngClass="{ active: }"-->
             <div class="card-wrapper-row-card">
 
-              <div class="main-card-design">
+              <div class="main-card-design" *ngFor="let arr of images">
 
                 <div class="card-img-on-left">
                   <img [src]="imgPath" alt=""/>
@@ -38,7 +38,7 @@
 
               </div>
 
-              <div class="main-card-design">
+              <!-- <div class="main-card-design">
                 <div class="card-img-on-left">
                   <img [src]="imgPath" alt=""/>
                   <div class="main-card-background-img"></div>
@@ -59,7 +59,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </div>
@@ -254,3 +254,5 @@
 
 
 </div>
+<input type="text" *ngModel="test"> 
+<p>{{test}}</p>

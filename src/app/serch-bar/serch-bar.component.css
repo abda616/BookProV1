@@ -1,0 +1,16 @@
+.search-bar {
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+.search-width {
+  font-size: medium;
+  width: 100%;
+}
+.search-input{
+  width: 100%;
+
+}
+.search-group{
+  display: flex;
+}
