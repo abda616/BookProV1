@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-serch-bar',
-  templateUrl: './serch-bar.component.html',
-  styleUrls: ['./serch-bar.component.css']
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.css']
 })
-export class SerchBarComponent implements OnInit {
+export class SearchBarComponent implements OnInit {
 
   constructor() { }
 

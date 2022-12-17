@@ -16,7 +16,7 @@ import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.co
 import {SignUpService} from "./services/signUpServices/sign-up.service";
 import {AuthInterceptor} from "./shared/authconfig.interceptor";
 import { MyBookInfoComponent} from './book-info/book-info.component';
-import { SerchBarComponent } from './serch-bar/serch-bar.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,7 @@ import { SerchBarComponent } from './serch-bar/serch-bar.component';
     MyLibraryComponent,
     LoginComponent,
     MyBookInfoComponent,
-    SerchBarComponent,
+    SearchBarComponent,
     ChipMultiSelectComponent,
   ],
   imports: [
