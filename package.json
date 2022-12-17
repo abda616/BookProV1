@@ -8,9 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
 
-    "full": "ts-node ./server/server.ts",
-    "toPost": "json-server --watch server/user.json --port 3004",
-    "nodemon": "nodemon"
+    "mock:server": " nodemon --watch app --watch libs server/server.ts --ext js,ts,json,html"
+
   },
   "private": true,
   "dependencies": {

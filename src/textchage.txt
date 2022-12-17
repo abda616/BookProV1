@@ -12,3 +12,10 @@ border-radius:.375rem;
 max-width:%;
 height:auto
 }
+
+
+
+"toPost": "json-server --watch server/user.json --port 3000",
+"full": "ts-node ./server/server.ts",
+"toPost": "json-server ./server/server.ts --port 3000",
+"nodemon": "nodemon"
