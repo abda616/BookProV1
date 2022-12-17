@@ -7,6 +7,7 @@ import {MainPageService} from "../services/main-page.service";
   providers:[MainPageService]
 })
 export class MainPageComponent implements OnInit {
+  test=""
   constructor(
   //  private mainPS:MainPageService
   ) {}
