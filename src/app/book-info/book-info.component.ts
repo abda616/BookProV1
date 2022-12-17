@@ -215,9 +215,9 @@ language:"English",
 dateOfPublish:"10-sep-2017"
  },
  ]
- headsInTop: string[] = [ "Reader Also Liked", "From The Same Author", "Based On Similar User"];
-images=[]
- 
+ headsInTop: string[] = [ "Reader Also Liked", "From The Same Author", "Based On Similar Users"];
+images=[1,2,3]
+ right=true
 
  
   constructor(private bookService:BooInfoService) { }
@@ -234,7 +234,7 @@ this.counter++;
    }
 
    similarAuthorService(){
-    this.bookService.getByAuthor(this.currentBookInfo.author+"/3")
+    this.bookService.getByAuthor(this.currentBookInfo.author+"/10")
     .subscribe(res=>{
   this.similarAuthorBooks=res;
   console.log(this.similarAuthorBooks)
