@@ -144,31 +144,26 @@ body {
   /*justify-content: center;*/
   margin: 2.5vh 6vh;
 }
-<<<<<<< HEAD
-.card-wrapper-row-card .card-cont {
-=======
 .card-wrapper-row-card .card {
->>>>>>> e3c173e2fcb70c01e3d62e585ab7e9ed4ee862c5
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width: 300px;
-<<<<<<< HEAD
   height: 500px;
   margin: 0 0.5em;
 }
-.card-wrapper-row-card .card-cont .card-body {
+.card-wrapper-row-card .card .card-body {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #FFFFF0;
 }
-.card-wrapper-row-card .card-cont img {
+.card-wrapper-row-card .card img {
   width: 100%;
   height: 350px;
 }
-.card-wrapper-row-card .card-cont .more-btn {
+.card-wrapper-row-card .card .more-btn {
   width: 60%;
   background-color: #141e2d;
 }
@@ -214,31 +209,6 @@ body {
 .card-wrapper-row-card .card-cont .more-btn {
   width: 60%;
   background-color: #141e2d;
-=======
-  height: 550px;
-  margin: 0 0.5em;
-}
-.card-wrapper-row-card .card .card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #FFFFF0;
-}
-.card-wrapper-row-card .card .card-body .plot {
-  max-height: 80px;
-  overflow: hidden;
-}
-.card-wrapper-row-card .card img {
-  width: 100%;
-  height: 380px;
-}
-.card-wrapper-row-card .card .more-btn {
-  width: 60%;
-  background-color: #141e2d;
-  color: #f6f6f6;
-  border-radius: 15px;
->>>>>>> e3c173e2fcb70c01e3d62e585ab7e9ed4ee862c5
 }
 
 .carousel-control-prev {
@@ -271,11 +241,7 @@ body {
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
-<<<<<<< HEAD
   width: 300px;
-=======
-  width: 250px;
->>>>>>> e3c173e2fcb70c01e3d62e585ab7e9ed4ee862c5
   height: 600px;
   padding: 0;
   border: none;
