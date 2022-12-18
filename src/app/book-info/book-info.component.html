@@ -110,11 +110,11 @@
           </div>
            
               
-          <div class="carousel-item " *ngIf="similarAuthorBooks.length>6;then slider">
+          <div class="carousel-item ">
           
             <div class="card-wrapper-row-card ">
               <div *ngFor="let book of similarAuthorBooks|slice:3:6" class="card" style="width: 18rem;">
-                <img class="card-img-top" src={{book.imgCover}} alt="Card image cap">
+                <img class="card-img-top" src={{book.imgCover}} alt="card image cap">
                 <div class="card-body">
                   <h5 class="title fs-3">{{book.title}}</h5>
                   <p class="plot">{{book.description}}</p>
@@ -127,13 +127,11 @@
           <div class="carousel-item">
         
             <div class="card-wrapper-row-card">
-              <div *ngFor="let img of images3" class="card" style="width: 18rem;">
-                <img class="card-img-top" [src]="img" alt="Card image cap">
+              <div *ngFor="let book of similarAuthorBooks|slice:6:9" class="card" style="width: 18rem;">
+                <img class="card-img-top" [src]="img" alt="card image cap">
                 <div class="card-body">
                   <h5 class="title fs-3">Card title</h5>
-                  <p class="plot">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+                  <p class="plot">{{book.description}}.</p>
                   <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
                 </div>
               </div>

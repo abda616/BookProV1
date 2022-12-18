@@ -225,6 +225,7 @@ images=[1,2,3]
   ngOnInit(): void {
 
     this.similarAuthorService();
+  
   }
 
    onBtnDown(){

@@ -204,7 +204,7 @@ background-color: #FFFFF0;
   justify-content: space-evenly;
 justify-content: center;
   margin: 2.5vh 6vh;
-  .card-cont{
+  .card{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -218,15 +218,19 @@ display: flex;
 flex-direction: column;
 align-items: center;
 background-color: #FFFFF0;
-
+.plot{
+  max-height: 80px;
+  overflow: hidden;
+}
     }
     img{
      width: 100%;
-      height: 350px;
+      max-height: 350px;
     }
     .more-btn{
    width: 60%;
    background-color: #141e2d;
+   color: #f6f6f6;
    
     }
   }
