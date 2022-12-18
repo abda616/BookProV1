@@ -16,6 +16,7 @@ import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.co
 import {SignUpService} from "./services/signUpServices/sign-up.service";
 import {AuthInterceptor} from "./shared/authconfig.interceptor";
 import { MyBookInfoComponent} from './book-info/book-info.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,11 +25,9 @@ import { MyBookInfoComponent} from './book-info/book-info.component';
     TradeNowComponent,
     MyLibraryComponent,
     LoginComponent,
-    ChipMultiSelectComponent,
     MyBookInfoComponent,
-  
-
-   
+    SearchBarComponent,
+    ChipMultiSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +37,7 @@ import { MyBookInfoComponent} from './book-info/book-info.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
-    
+
   ],
   providers: [MainPageService,SignUpService , {
     provide: HTTP_INTERCEPTORS,

@@ -12,7 +12,7 @@ export class SignUpService implements SignUpSendData{
   constructor(private http: HttpClient) { }
 
   sendDataUser(user: userSignup): Observable<userSignup> {
-    return this.http.post<userSignup>( environment.registerUrl ,user).pipe(
+    return this.http.post<userSignup>( environment.endPointUrl ,user).pipe(
       catchError(this.handleError)
     );
   }
