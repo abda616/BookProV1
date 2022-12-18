@@ -10,11 +10,7 @@ import {HttpClient} from "@angular/common/http";
   providers:[MainPageService]
 })
 export class MainPageComponent implements OnInit {
-<<<<<<< HEAD
   MostRated=[];
-=======
-  test=""
->>>>>>> e3c173e2fcb70c01e3d62e585ab7e9ed4ee862c5
   constructor(
     private http:HttpClient,
     private mainPS:MainPageService

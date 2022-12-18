@@ -7,7 +7,6 @@ import {TradeNowComponent} from "./trade-now/trade-now.component";
 import {MyLibraryComponent} from "./my-library/my-library.component";
 import {LoginComponent} from "./login/login.component";
 import {AuthGuard} from "./shared/auth.guard";
-import { MyBookInfoComponent } from './book-info/book-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/log-in', pathMatch: 'full' },
