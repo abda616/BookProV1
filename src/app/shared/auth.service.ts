@@ -13,7 +13,7 @@ import {userSignIn, userSignup} from "../services/signUpServices/userSignup";
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'http://localhost:3000';
+  endpoint: string = 'http://localhost:3004';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   constructor(private http: HttpClient, public router: Router) {}

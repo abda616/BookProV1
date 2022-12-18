@@ -21,7 +21,7 @@ const routes: Routes = [
         path: '',
         component: MainPageComponent,
         // canActivate: [AuthGuard],
-        pathMatch:"full"
+        pathMatch:"full"  
       },
       {
         path: 'trade',
@@ -33,19 +33,14 @@ const routes: Routes = [
         path: 'library',
         component: MyLibraryComponent,
         // canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         pathMatch:"full"
       },
       {
-<<<<<<< HEAD
         path:"book",
         component:MyBookInfoComponent,
         pathMatch:"full",
       }
-=======
-        path: 'book',
-        component: MyBookInfoComponent,
-      },
->>>>>>> e3c173e2fcb70c01e3d62e585ab7e9ed4ee862c5
     ]
   },
   {
