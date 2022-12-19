@@ -2,10 +2,10 @@ import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {AsyncValidatorFn, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {delay, map, of} from "rxjs";
-import {SignUpService} from "../services/signUpServices/sign-up.service";
-import {userSignIn, userSignup} from "../services/signUpServices/userSignup";
-import {AuthService} from "../shared/auth.service";
-
+import {SignUpService} from "../services/sign-up.service";
+import {City, userSignIn, userSignup} from "../shared/Interfaces/userSignup";
+import {AuthService} from "../shared/Auth/auth.service";
+import {SharedDataModule} from "../shared/shared-data.module";
 
 
 @Component({
@@ -16,6 +16,10 @@ import {AuthService} from "../shared/auth.service";
 
 })
 export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
+  constructor(private formBuilder: FormBuilder, private router: Router,
+              private signIn: AuthService, private sharedData: SharedDataModule
+  ) {
+  }
 
   private patternValidator: string = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>\"'\\;:{\\}\\[\\]\\|\\+\\-\\=\\_\\)\\(\\)\\`\\/\\\\\\]])[A-Za-z0-9d$@].{7,}";
   submitted = false;
@@ -26,12 +30,8 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
     this.signUpState = !this.signUpState;
   }
 
-  citys: City[] = [
-    {value: 'amman', viewValue: 'Amman'},
-    {value: 'zarqa', viewValue: 'Zarqa'},
-    {value: 'balqaa', viewValue: 'Balqa\'a'},
-  ];
-  Interests: string[] = ['Drama', 'Fiction', 'Nonfiction', 'Poetry', 'Psychology', 'Religion', 'Fantasy', 'Self Help', 'Thrillers', 'Sci-fi', 'Romance'];
+  citys: City[] = [];
+  Interests: string[] = [];
 
   UInterests = new FormControl();
 
@@ -56,20 +56,21 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
   disabledControl = new FormControl(false);
 
   /*----------------------------------------------------------*/
-  constructor(private formBuilder: FormBuilder, private router: Router,
-              /*private signUp: SignUpService,*/
-              private signIn: AuthService
-  ) {
-  }
+
 
   ngOnInit(): void {
+    this.sharedData.Citys.subscribe(data =>
+      this.citys = data);
+    this.sharedData.Interests.subscribe(data =>
+      this.Interests = data);
     this.mLoginForm();
     this.mSignUpForm();
-    this.disabledControl.valueChanges.pipe()
-      .subscribe((val) => {
-        if (val) this.UInterests.disable();
-        else this.UInterests.enable();
-      });
+    this.disabledControl.valueChanges.pipe().subscribe((val) => {
+      if (val) this.UInterests.disable();
+      else this.UInterests.enable();
+    });
+
+
   }
 
   ngAfterViewChecked(): void {
@@ -115,9 +116,9 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
     this.submitted = true;
     if (this.loginForm.valid) {
 
-      let intoUser:userSignIn={
-        email :this.loginForm.get('loginEmail').value,
-        password:this.loginForm.get('loginPassword').value
+      let intoUser: userSignIn = {
+        email: this.loginForm.get('loginEmail').value,
+        password: this.loginForm.get('loginPassword').value
       };
       console.log(intoUser);
       this.signIn.signIn(intoUser);
@@ -166,9 +167,4 @@ function customAsyncValidator(): AsyncValidatorFn {
     const B = group.get('B').value;
     return of('value').pipe(delay(500), map(() => (A === B ? null : {fields: true})));
   };
-}
-
-interface City {
-  value: string;
-  viewValue: string;
 }

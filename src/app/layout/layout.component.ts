@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
-import {AuthService} from "../shared/auth.service";
+import {AuthService} from "../shared/Auth/auth.service";
 
 @Component({
   selector: 'app-layout',
@@ -8,11 +8,11 @@ import {AuthService} from "../shared/auth.service";
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit {
-  value = '';
+  searchValue: string = '';
   titleOfTheBook: any | string = "book name".toUpperCase();
   authorName: any | string = "book author name".toUpperCase();
 
-  constructor(private authService:AuthService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -30,6 +30,7 @@ export class LayoutComponent implements OnInit {
   //                 console.log(isOpend+" width = "+width) ;
   //   return isOpend ? (width-ref._getWidth()) : window.innerWidth ;
   // }
+
   LogOut() {
     this.authService.doLogout()
   }
