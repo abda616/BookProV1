@@ -78,9 +78,9 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
 
   mLoginForm() {
     this.loginForm = new FormGroup({
-      loginEmail: new FormControl('admin@jo', [Validators.email, Validators.required, Validators.minLength(4)]),
-      loginPassword: new FormControl('@Aa12345', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
-    });
+        loginEmail: new FormControl('admin@jo', [Validators.email, Validators.required, Validators.minLength(4)]),
+        loginPassword: new FormControl('@Aa12345', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
+      });
   }
 
   signUpForm: FormGroup;
@@ -158,7 +158,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
   interest: string[];
   lastName: string;
   password: string;
-
 }
 
 function customAsyncValidator(): AsyncValidatorFn {
