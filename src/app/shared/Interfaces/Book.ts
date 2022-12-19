@@ -1,28 +1,28 @@
-export class Book{
-  bookId : string
-  title :string
-  series :string
-  author :string
-  rating : number
-  description :string
-  language :string
-  isbn :string
-  genres :string
-  characters :string
-  bookFormat :string
-  edition :string
-  pages:string
-  firstPublishDate :string
-  publisher :string
-  publishDate :string
-  awards :string
-  numRatings :number
-  ratingsByStars :string
-  likedPercent :number
-  setting :string
-  coverImg :string
-  bbeScore :number
-  bbeVotes :number
+export class Book {
+  bookId: string
+  title: string
+  series: string
+  author: string
+  rating: number
+  description: string
+  language: string
+  isbn: string
+  genres: string
+  characters: string
+  bookFormat: string
+  edition: string
+  pages: string
+  firstPublishDate: string
+  publisher: string
+  publishDate: string
+  awards: string
+  numRatings: number
+  ratingsByStars: string
+  likedPercent: number
+  setting: string
+  coverImg: string
+  bbeScore: number
+  bbeVotes: number
   price ?: string
 
 

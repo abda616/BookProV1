@@ -75,7 +75,15 @@
           <span>My Library</span>
         </button>
 
-        <app-search-bar></app-search-bar>
+        <mat-form-field class="search-width">
+          <div class="">
+            <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input">
+            <button (click)="searchValue=''" mat-icon-button matSuffix>
+              <mat-icon *ngIf="!searchValue" matSuffix>search</mat-icon>
+              <mat-icon *ngIf="searchValue" matSuffix>close</mat-icon>
+            </button>
+          </div>
+        </mat-form-field>
         <!-- <mat-icon>dashboard</mat-icon> -->
         <button [matMenuTriggerFor]="menu" mat-stroked-button>
           <mat-icon>person</mat-icon>

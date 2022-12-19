@@ -7,8 +7,8 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import {Router} from '@angular/router';
-import {userSignIn, userSignup} from "../services/signUpServices/userSignup";
-import {environment} from "../../environments/environment.prod";
+import {userSignIn, userSignup} from "../Interfaces/userSignup";
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root',

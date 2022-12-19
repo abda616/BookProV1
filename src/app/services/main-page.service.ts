@@ -2,17 +2,21 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment.prod";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {IGenure} from "./Book/IGenure";
-import {Book} from "./Book/Book";
+import {IGenure} from "../shared/Interfaces/IGenure";
+import {Book} from "../shared/Interfaces/Book";
 
 @Injectable({providedIn: 'root'})
 
-export class MainPageService implements IGenure{
-  constructor(private http: HttpClient) {}
+export class MainPageService implements IGenure {
+  constructor(private http: HttpClient) {
+  }
+
   response: any[];
+
   getMostRated(): Observable<Book[]> {
     return this.http.get<Book[]>(`${environment.apiUrl}mostRated/10`);
   }
+
   /*getSimilar(targetBook: string): Observable<IGenure[]> {
     let _url = `${environment.apiUrl}recommendBySimilarBooks/${targetBook}/60?fbclid=IwAR26u86sL-C5d4AZMijiJQTzWQ4ab1ez_0Q1Wlzo7sM_HFjZ8XZEL-qfUYs`
     return this.http.get<IGenure[]>(_url)

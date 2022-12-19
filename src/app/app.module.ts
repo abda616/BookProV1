@@ -13,10 +13,12 @@ import {TradeNowComponent} from './trade-now/trade-now.component';
 import {MyLibraryComponent} from './my-library/my-library.component';
 import {MainPageService} from "./services/main-page.service";
 import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.component';
-import {SignUpService} from "./services/signUpServices/sign-up.service";
-import {AuthInterceptor} from "./shared/authconfig.interceptor";
-import { MyBookInfoComponent} from './book-info/book-info.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
+import {SignUpService} from "./services/sign-up.service";
+import {AuthInterceptor} from "./shared/Auth/authconfig.interceptor";
+import {MyBookInfoComponent} from './book-info/book-info.component';
+import {SearchBarComponent} from './search-bar/search-bar.component';
+import {SharedDataModule} from "./shared/shared-data.module";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,13 +39,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
-
   ],
-  providers: [MainPageService,SignUpService , {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  providers: [SharedDataModule, MainPageService, SignUpService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
