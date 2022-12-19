@@ -235,28 +235,12 @@ this.counter++;
    }
 
    similarAuthorService(){
-    this.bookService.getByAuthor(this.currentBookInfo.author+"/10")
+    this.bookService.getByAuthor(this.currentBookInfo.author)
     .subscribe(res=>{
   this.similarAuthorBooks=res;
-  console.log(this.similarAuthorBooks)
+
     })
   
-  }
-  counterFun(event){
-
-  if(event.target.id==="prev-btn"){
-    if(this.counter>1) this.counter--;
-    if(this.counter==1) this.counter=4;
-   
-   }
-   if(event.target.id==="next-btn"){
-    if(this.counter<4) this.counter++
-  if(this.counter===4) this.counter=1;
-  
-   }
- 
- 
- console.log(this.counter)
   }
 
 }

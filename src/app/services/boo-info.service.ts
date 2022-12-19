@@ -7,7 +7,7 @@ import {IGenure} from "./Book/IGenure";
   providedIn: 'root'
 })
 export class BooInfoService {
-authorUrl=environment.apiUrl+"recommendByAuthor/";
+authorUrl=environment.apiUrl+"search/all/";
 
   constructor(private http:HttpClient) { }
   getByAuthor(targetAuthor:string):Observable<any[]>{

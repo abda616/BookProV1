@@ -7,9 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-
     "mock:server": " nodemon --watch app --watch libs server/server.ts --ext js,ts,json,html"
-
   },
   "private": true,
   "dependencies": {
@@ -24,7 +22,9 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@popperjs/core": "^2.11.6",
+    "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
+    "cheerio": "^1.0.0-rc.12",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

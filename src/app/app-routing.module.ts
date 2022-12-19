@@ -6,6 +6,7 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {TradeNowComponent} from "./trade-now/trade-now.component";
 import {MyLibraryComponent} from "./my-library/my-library.component";
 import {LoginComponent} from "./login/login.component";
+import { SearchPageComponent } from './search-page/search-page.component';
 import {AuthGuard} from "./shared/auth.guard";
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
   {
     path: 'app',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -38,6 +39,11 @@ const routes: Routes = [
       {
         path: 'book',
         component: MyBookInfoComponent,
+        pathMatch:"full"
+      },
+      {
+        path: 'search',
+        component:SearchPageComponent,
         pathMatch:"full"
       },
     ]

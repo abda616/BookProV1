@@ -17,6 +17,7 @@ import {SignUpService} from "./services/signUpServices/sign-up.service";
 import {AuthInterceptor} from "./shared/authconfig.interceptor";
 import { MyBookInfoComponent} from './book-info/book-info.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     MyBookInfoComponent,
     SearchBarComponent,
     ChipMultiSelectComponent,
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
