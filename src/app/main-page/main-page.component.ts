@@ -11,7 +11,7 @@ import {HttpClient} from "@angular/common/http";
   providers: [MainPageService]
 })
 export class MainPageComponent implements OnInit {
-  test = ""
+
   MostRated = [];
 
   constructor(

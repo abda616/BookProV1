@@ -40,8 +40,9 @@ import {SharedDataModule} from "./shared/shared-data.module";
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [SharedDataModule, MainPageService, SignUpService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [SharedDataModule, MainPageService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

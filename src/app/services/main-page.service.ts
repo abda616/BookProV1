@@ -14,7 +14,7 @@ export class MainPageService implements IGenure {
   response: any[];
 
   getMostRated(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${environment.apiUrl}mostRated/10`);
+    return this.http.get<Book[]>(`${environment.apiUrl}/topn`);
   }
 
   /*getSimilar(targetBook: string): Observable<IGenure[]> {
