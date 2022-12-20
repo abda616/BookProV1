@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
+import {SearchServiceService} from "../shared/search-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-layout',
@@ -12,10 +14,11 @@ export class LayoutComponent implements OnInit {
   titleOfTheBook: any | string = "book name".toUpperCase();
   authorName: any | string = "book author name".toUpperCase();
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService , private search:SearchServiceService, private router:Router ) {
   }
 
   ngOnInit(): void {
+
   }
 
   toggleDrawer(ref: MatDrawer) {
@@ -33,5 +36,10 @@ export class LayoutComponent implements OnInit {
 
   LogOut() {
     this.authService.doLogout()
+  }
+
+  onEnter() {
+    this.router.navigate(['app/search']);
+    this.search.updateData(this.searchValue);
   }
 }
