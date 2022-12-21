@@ -221,7 +221,7 @@ export class MyBookInfoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.similarAuthorService();
+    // this.similarAuthorService();
   
   }
 
@@ -231,13 +231,13 @@ export class MyBookInfoComponent implements OnInit {
 this.counter++;
    }
 
-   similarAuthorService(){
-    this.bookService.getByAuthor(this.currentBookInfo.author)
-    .subscribe(res=>{
-  this.similarAuthorBooks=res;
+  //  similarAuthorService(){
+  //   this.bookService.getByAuthor(this.currentBookInfo.author)
+  //   .subscribe(res=>{
+  // this.similarAuthorBooks=res;
 
-    })
+  //   })
   
-  }
+  // }
 
 }
