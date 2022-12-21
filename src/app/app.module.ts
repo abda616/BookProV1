@@ -13,7 +13,6 @@ import {TradeNowComponent} from './trade-now/trade-now.component';
 import {MyLibraryComponent} from './my-library/my-library.component';
 import {MainPageService} from "./services/main-page.service";
 import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.component';
-import {SignUpService} from "./services/sign-up.service";
 import {AuthInterceptor} from "./shared/Auth/authconfig.interceptor";
 import {MyBookInfoComponent} from './book-info/book-info.component';
 import {SearchBarComponent} from './search-bar/search-bar.component';
@@ -42,8 +41,9 @@ import { SearchPageComponent } from './search-page/search-page.component';
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [SharedDataModule, MainPageService, SignUpService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [SharedDataModule, MainPageService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

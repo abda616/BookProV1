@@ -9,20 +9,22 @@ import {City} from "./Interfaces/userSignup";
 })
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule]
 })
 export class SharedDataModule {
   constructor() {
   }
 
+  private patternValidator = new BehaviorSubject<string>("(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>\"'\\;:{\\}\\[\\]\\|\\+\\-\\=\\_\\)\\(\\)\\`\\/\\\\\\]])[A-Za-z0-9d$@].{7,}");
   private cityArray = new BehaviorSubject<City[]>([
     {value: 'amman', viewValue: 'Amman'},
     {value: 'zarqa', viewValue: 'Zarqa'},
     {value: 'balqaa', viewValue: 'Balqa\'a'},
   ]);
+  private InterestArray = new BehaviorSubject<string[]>(
+    ['Drama', 'Fiction', 'Nonfiction', 'Poetry', 'Psychology', 'Religion',
+      'Fantasy', 'Self Help', 'Thrillers', 'Sci-fi', 'Romance']);
   Citys = this.cityArray.asObservable();
-  private InterestArray = new BehaviorSubject<string[]>(['Drama', 'Fiction', 'Nonfiction', 'Poetry', 'Psychology', 'Religion', 'Fantasy', 'Self Help', 'Thrillers', 'Sci-fi', 'Romance']);
   Interests = this.InterestArray.asObservable();
+  Pattern = this.patternValidator.asObservable();
 }

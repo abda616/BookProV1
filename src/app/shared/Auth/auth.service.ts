@@ -1,11 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {userSignIn, userSignup} from "../Interfaces/userSignup";
 import {environment} from "../../../environments/environment.prod";
@@ -24,23 +20,12 @@ export class AuthService {
 
   // Sign-up
   signUp(user: userSignup): Observable<any> {
-    let e = this.http.post(`${this.endpoint}/register`, user).pipe(catchError(this.handleError));
-    console.log(e);
-    return e;
+    return this.http.post(`${this.endpoint}/register`, user).pipe(catchError(this.handleError));
   }
 
   // Sign-in
   signIn(user: userSignIn) {
-    return this.http.post<any>(`${this.endpoint}/signIn`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        localStorage.setItem('userEmail', res.email);
-        localStorage.setItem('userId', res.id);
-        this.router.navigate(['app']);
-        /*this.getUserProfile(res.id).subscribe((res) => {
-          this.currentUser = res;
-        });*/
-      });
+    return this.http.post<any>(`${this.endpoint}/signIn`, user).pipe(catchError(this.handleError));
   }
 
   getToken() {
@@ -53,12 +38,10 @@ export class AuthService {
   }
 
   doLogout() {
-    let removeToken = localStorage.removeItem('access_token');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userId');
-    if (removeToken == null) {
-      this.router.navigate(['log-in']);
-    }
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_Email');
+    localStorage.removeItem('user_Id');
+    this.router.navigate(['log-in']);
   }
 
   // User profile
@@ -74,7 +57,7 @@ export class AuthService {
 
   // Error
   handleError(error: HttpErrorResponse) {
-    let msg = '';
+    let msg:string;
     if (error.error instanceof ErrorEvent) {
       // client-side error
       msg = error.error.message;

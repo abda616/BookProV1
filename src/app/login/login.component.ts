@@ -2,7 +2,6 @@ import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {AsyncValidatorFn, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {delay, map, of} from "rxjs";
-import {SignUpService} from "../services/sign-up.service";
 import {City, userSignIn, userSignup} from "../shared/Interfaces/userSignup";
 import {AuthService} from "../shared/Auth/auth.service";
 import {SharedDataModule} from "../shared/shared-data.module";
@@ -12,16 +11,32 @@ import {SharedDataModule} from "../shared/shared-data.module";
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [SignUpService, AuthService]
-
+  providers: [AuthService, SharedDataModule]
 })
 export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
   constructor(private formBuilder: FormBuilder, private router: Router,
-              private signIn: AuthService, private sharedData: SharedDataModule
+              private myAuth: AuthService, private sharedData: SharedDataModule
   ) {
   }
 
-  private patternValidator: string = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>\"'\\;:{\\}\\[\\]\\|\\+\\-\\=\\_\\)\\(\\)\\`\\/\\\\\\]])[A-Za-z0-9d$@].{7,}";
+  ngOnInit(): void {
+    this.sharedData.Citys.subscribe(data =>
+      this.citys = data);
+    this.sharedData.Interests.subscribe(data =>
+      this.Interests = data);
+    this.sharedData.Pattern.subscribe(data => this.patternValidator = data);
+    this.mLoginForm();
+    this.mSignUpForm();
+    this.disabledControl.valueChanges.pipe().subscribe((val) => {
+      if (val) this.UInterests.disable();
+      else this.UInterests.enable();
+    });
+  }
+
+  /*----------------------------------------------------------*/
+  private patternValidator: string = '';
+  citys: City[] = [];
+  Interests: string[] = [];
   submitted = false;
   signUpState = false;
   hidePass = true;
@@ -30,10 +45,9 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
     this.signUpState = !this.signUpState;
   }
 
-  citys: City[] = [];
-  Interests: string[] = [];
 
   UInterests = new FormControl();
+  disabledControl = new FormControl(false);
 
   getLength() {
     let x: string[] = [];
@@ -53,26 +67,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
     return null;
   }
 
-  disabledControl = new FormControl(false);
-
-  /*----------------------------------------------------------*/
-
-
-  ngOnInit(): void {
-    this.sharedData.Citys.subscribe(data =>
-      this.citys = data);
-    this.sharedData.Interests.subscribe(data =>
-      this.Interests = data);
-    this.mLoginForm();
-    this.mSignUpForm();
-    this.disabledControl.valueChanges.pipe().subscribe((val) => {
-      if (val) this.UInterests.disable();
-      else this.UInterests.enable();
-    });
-
-
-  }
-
   ngAfterViewChecked(): void {
     setTimeout(() => {
       this.signUpForm.get('UInterests').setValue(this.getValueInterests())
@@ -84,9 +78,9 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
 
   mLoginForm() {
     this.loginForm = new FormGroup({
-      loginEmail: new FormControl('admin@jo', [Validators.email, Validators.required, Validators.minLength(4)]),
-      loginPassword: new FormControl('@Aa12345', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
-    });
+        loginEmail: new FormControl('admin@jo', [Validators.email, Validators.required, Validators.minLength(4)]),
+        loginPassword: new FormControl('@Aa12345', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
+      });
   }
 
   signUpForm: FormGroup;
@@ -121,7 +115,12 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
         password: this.loginForm.get('loginPassword').value
       };
       console.log(intoUser);
-      this.signIn.signIn(intoUser);
+      this.myAuth.signIn(intoUser).subscribe((next) => {
+        localStorage.setItem('access_token', next.token);
+        localStorage.setItem('user_Email', next.email);
+        localStorage.setItem('user_Id', next.id);
+        this.router.navigate(['app']).then()
+      });
     }
   }
 
@@ -135,7 +134,8 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
       interest: this.signUpForm.get('UInterests').value,
     };
     console.log(adduser);
-    this.signIn.signUp(adduser).subscribe();
+    this.myAuth.signUp(adduser).subscribe();
+    this.openSignup()
   }
 
   protected ValidateSignUp(): boolean {
@@ -158,7 +158,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
   interest: string[];
   lastName: string;
   password: string;
-
 }
 
 function customAsyncValidator(): AsyncValidatorFn {
