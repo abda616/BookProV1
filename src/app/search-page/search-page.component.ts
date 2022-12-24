@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter,Output } from '@angular/core';
 import { SearchPageService } from '../services/search.service';
-
+import { SharedServiceService } from '../services/shared-service.service';
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -11,25 +11,35 @@ numOfColumns=[1,2,3,4,5]
 searchResult=[]
 images=""
 targetBook="romance";
-  constructor(private searchService:SearchPageService) { }
+searchInput:string=""
+@Output()
+changedSearchText:EventEmitter<string> =new EventEmitter<string>();
+  constructor(
+    private searchService:SearchPageService
+    ,
+    private sharedService:SharedServiceService
+    ,
+
+    ) { }
 
   ngOnInit(): void {
-  this.onClick()
+ this.onSearchAll()
 
 }
- getPosition(string, target, index) {
-  return string.split(target, index).join(target).length;
-}
-onClick(){
+
+onSearchAll(){
   this.searchService.searchByAll(this.targetBook)
- .subscribe(res=>{
-  this.searchResult=res;  
+  .subscribe(res=>{
+  this.searchResult=res;
+  //calling the shared service to change the url to get the large img 
   this.searchResult.forEach(e=>{
-  let index=  this.getPosition(e.cover_page,"m/",2) 
-e.cover_page=e.cover_page.slice(0,index-1)+e.cover_page.slice(index-1,index+1).replace("m",'l')+e.cover_page.slice(index+1,59);
-console.log(e.cover_page  )
+    e.cover_page=this.sharedService.getLargeImg(e.cover_page,this.sharedService.getPosition(e.cover_page,"m/",2))
   })
+  })
+}
+onSearchChange(){
+  this.changedSearchText.emit(this.searchInput)
+}
 
- })
 }
-}
+

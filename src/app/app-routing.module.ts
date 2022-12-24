@@ -20,19 +20,19 @@ const routes: Routes = [
       {
         path: '',
         component: MainPageComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: 'trade',
         component: TradeNowComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: 'library',
         component: MyLibraryComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {

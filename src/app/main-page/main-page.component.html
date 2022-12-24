@@ -1,7 +1,7 @@
 <div class="just-flex w-100 flex-column">
 
   <div>
-    <h1 class="text-center">Top 10 Books</h1>
+    <h1 class="text-center mt-3">Reccommended For you</h1>
     <div class="other-card">
       <div id="carouselControlsOther" class="carousel carousel-dark w-100 " data-ride="carousel">
 
@@ -11,7 +11,7 @@
             <!--               ngClass="{ active: }"-->
             <div class="card-wrapper-row-card">
 
-              <div class="main-card-design" *ngFor="let arr of images">
+              <div class="main-card-design mt-md-4" *ngFor="let arr of images">
 
                 <div class="card-img-on-left">
                   <img [src]="imgPath" alt=""/>
@@ -36,31 +36,9 @@
 
               </div>
 
-              <!-- <div class="main-card-design">
-                <div class="card-img-on-left">
-                  <img [src]="imgPath" alt=""/>
-                  <div class="main-card-background-img"></div>
-                </div>
-                <div class="main-card-descrption">
-                  <h5 class="title">Atomic Habits</h5>
-                  <p class="author">James Clear</p>
-                  <div>
-                    <div class="desc">
-                      <p>Pages</p>
-                      <p>Catagory</p>
-                      <p>Rating</p>
-                    </div>
-                    <div class="desc-data">
-                      <p>350.</p>
-                      <p>Self-help.</p>
-                      <p>7.7</p>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-
             </div>
           </div>
+          
           <div class="carousel-item ">
             <div class="card-wrapper-row-card">
 
@@ -182,60 +160,185 @@
     </div>
   </div>
   <div *ngFor="let headsAre of headsInTop ; let i = index">
-    <h1 class="text-center">{{headsAre}}</h1>
+    <h1 class="text-center mt-5">{{headsAre}}</h1>
     <hr/>
     <div [attr.id]=" 'carouselControls'+i " class="carousel carousel-dark carousel- w-100 my-5" data-ride="carousel">
-      <div class="carousel-inner">
+      <div class="carousel-inner" *ngIf="headsAre==='Top 10 Books';">
 
         <div class="carousel-item active">
-          <div class="card-wrapper-row-card">
-            <div *ngFor="let img of images" class="card" style="width: 18rem;">
-              <img class="card-img-top" [src]="img" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's
-                  content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="card-wrapper-row-card ">
+            <div class="card-wrapper-row-card row flip-card"  *ngFor="let book of topNArr|slice:0:3">
+              <div class="flip-card-inner card-cont">
+                <div class="flip-card-front">
+                  <img src={{book.cover_page}} alt="Avatar"  class="card-img-top">
+
+                </div>
+                <div class="flip-card-back">
+                  <div class="card-body mt-4 p-2">
+                    <h5 class="title fs-3">{{book.title_without_series }}</h5>
+                    <p class="plot">{{book.correct_book_description}}</p>
+                    <a href="#" class="btn-more btn " >Read More</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
+      
         </div>
+         
+            
         <div class="carousel-item ">
+        
+          <div class="card-wrapper-row-card ">
+            <div class="card-wrapper-row-card row flip-card"  *ngFor="let book of topNArr|slice:3:6">
+              <div class="flip-card-inner card-cont">
+                <div class="flip-card-front">
+                  <img src={{book.cover_page}} alt="Avatar"  class="card-img-top">
 
-          <div class="card-wrapper-row-card">
-            <div *ngFor="let img of images2" class="card" style="width: 18rem;">
-              <img class="card-img-top" [src]="img" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's
-                  content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="flip-card-back">
+                  <div class="card-body mt-4 p-2">
+                    <h5 class="title fs-3">{{book.title_without_series }}</h5>
+                    <p class="plot">{{book.correct_book_description}}</p>
+                    <a href="#" class="btn-more btn " >Read More</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
+      
         </div>
         <div class="carousel-item">
-
+      
           <div class="card-wrapper-row-card">
-            <div *ngFor="let img of images3" class="card" style="width: 18rem;">
-              <img class="card-img-top" [src]="img" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's
-                  content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="card-wrapper-row-card row flip-card"  *ngFor="let book of topNArr|slice:6:9">
+              <div class="flip-card-inner card-cont">
+                <div class="flip-card-front">
+                  <img src={{book.cover_page}} alt="Avatar"  class="card-img-top">
+
+                </div>
+                <div class="flip-card-back">
+                  <div class="card-body mt-4 p-2">
+                    <h5 class="title fs-3">{{book.title_without_series }}</h5>
+                    <p class="plot">{{book.correct_book_description}}</p>
+                    <a href="#" class="btn-more btn " >Read More</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
+      
         </div>
+      
+      
+      
+        
+              </div>
+              <!-- <div class="carousel-inner" *ngIf="headsAre==='From The Same Author';">
 
-      </div>
+                <div class="carousel-item active">
+                  <div class="card-wrapper-row-card">
+                    <div *ngFor="let book of similarAuthorBooks|slice:0:3" class="card" style="width: 18rem;">
+                      <img class="card-img-top" src={{book.coverImg}} alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="title fs-3">{{book.title}}</h5>
+                        <p class="plot">{{book.description}}</p>
+                        <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+              
+                </div>
+                 
+                    
+                <div class="carousel-item " *ngFor="let book of similarAuthorBooks|slice:3:6">
+                
+                  <div class="card-wrapper-row-card ">
+                    <div *ngFor="let book of similarAuthorBooks|slice:3:6" class="card" style="width: 18rem;">
+                      <img class="card-img-top" src={{book.imgCover}} alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="title fs-3">{{book.title}}</h5>
+                        <p class="plot font-italic">{{book.description}}</p>
+                        <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+              
+                </div>
+                <div class="carousel-item">
+              
+                  <div class="card-wrapper-row-card">
+                    <div *ngFor="let book of similarAuthorBooks" style="width: 18rem;">
+                      <img class="card-img-top" src={{book.coverImg}} alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="title fs-3">Card title</h5>
+                        <p class="plot font-italic">Some quick example text to build on the card title and make up the bulk of the
+                          card's
+                          content.</p>
+                        <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+              
+                </div>
+              
+              
+              
+                
+                      </div>
+                      <div class="carousel-inner" *ngIf="headsAre==='Based On Similar Users';">
+
+                        <div class="carousel-item active">
+                          <div class="card-wrapper-row-card">
+                            <div *ngFor="let book of similarAuthorBooks|slice:0:3" class="card" style="width: 18rem;">
+                              <img class="card-img-top" src={{book.coverImg}} alt="Card image cap">
+                              <div class="card-body">
+                                <h5 class="title">{{book.title}}</h5>
+                                <p class="plot font-italic">{{book.description}}</p>
+                                <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
+                              </div>
+                            </div>
+                          </div>
+                      
+                        </div>
+                         
+                            
+                        <div class="carousel-item " *ngIf="similarAuthorBooks.length>6;then slider">
+                        
+                          <div class="card-wrapper-row-card " *ngIf="si">
+                            <div *ngFor="let book of similarAuthorBooks|slice:3:6" class="card" style="width: 18rem;">
+                              <img class="card-img-top" src={{book.imgCover}} alt="Card image cap">
+                              <div class="card-body">
+                                <h5 class="title fs-3">{{book.title}}</h5>
+                                <p class="plot font-italic">{{book.description}}</p>
+                                <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
+                              </div>
+                            </div>
+                          </div>
+                      
+                        </div>
+                        <div class="carousel-item">
+                      
+                          <div class="card-wrapper-row-card">
+                            <div *ngFor="let img of images3" class="card" style="width: 18rem;">
+                              <img class="card-img-top" [src]="img" alt="Card image cap">
+                              <div class="card-body">
+                                <h5 class="title fs-3">Card title</h5>
+                                <p class="plot">{{book.description}}</p>
+                                <a href="#" class="btn Read More">Read More</a>
+                              </div>
+                            </div>
+                          </div>
+                      
+                        </div>
+                      
+                      
+                      
+                        
+                              </div> -->
+      
+                              
+
       <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'+i"
               data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

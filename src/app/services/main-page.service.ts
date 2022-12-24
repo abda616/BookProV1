@@ -8,13 +8,17 @@ import {Book} from "../shared/Interfaces/Book";
 @Injectable({providedIn: 'root'})
 
 export class MainPageService implements IGenure {
+  topN="topn"
   constructor(private http: HttpClient) {
   }
 
   response: any[];
 
   getMostRated(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${environment.apiUrl}/topn`);
+    return this.http.get<Book[]>(`${environment.apiUrl}`);
+  }
+  getTopTen(){
+    return this.http.get<Book[]>(environment.apiUrl+this.topN)
   }
 
   /*getSimilar(targetBook: string): Observable<IGenure[]> {

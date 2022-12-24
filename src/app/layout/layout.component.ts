@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
+import { val } from 'cheerio/lib/api/attributes';
 import {AuthService} from "../shared/Auth/auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -12,7 +14,12 @@ export class LayoutComponent implements OnInit {
   titleOfTheBook: any | string = "book name".toUpperCase();
   authorName: any | string = "book author name".toUpperCase();
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService
+    ,
+    private route:Router
+    ,
+    ) {
   }
 
   ngOnInit(): void {
@@ -34,4 +41,9 @@ export class LayoutComponent implements OnInit {
   LogOut() {
     this.authService.doLogout()
   }
+onSearchChange(val:string){
+  this.searchValue=val;
+  console.log(val)
+  
+}
 }

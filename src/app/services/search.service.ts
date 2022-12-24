@@ -3,6 +3,7 @@ import {environment} from "../../environments/environment.prod";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { IGenure } from './IGenure';
+import { SharedServiceService } from './shared-service.service';
 import { Axios } from 'axios';
 import { Cheerio } from 'cheerio';
 @Injectable({
@@ -14,7 +15,10 @@ axios=require("axios")
 cheerio=require("cheerio")
 html=""
   targetedUrl="https://www.goodreads.com/book/show/11358368-pop-star"
-    constructor(private http:HttpClient) { }
+    constructor(
+      private http:HttpClient,
+      private sharedService:SharedServiceService,
+      ) { }
 
 
  
