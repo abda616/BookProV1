@@ -38,11 +38,13 @@ const routes: Routes = [
       {
         path: 'book',
         component: MyBookInfoComponent,
+        // canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: 'search',
         component:SearchPageComponent,
+        // canActivate: [AuthGuard],
         pathMatch:"full"
       },
     ]
