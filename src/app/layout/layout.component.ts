@@ -44,6 +44,5 @@ export class LayoutComponent implements OnInit {
   onSearchChange(val:string){
   this.searchValue=val;
   console.log(val)
-
 }
 }

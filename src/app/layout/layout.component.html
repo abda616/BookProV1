@@ -77,10 +77,10 @@
 
         <mat-form-field class="search-width">
           <div class="search-bar">
-            <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input" #searchBar>
-            <button (click)="onSearchChange(searchBar.value)" mat-icon-button matSuffix>
+            <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input"  #searchBar (keyup.enter)="onEnter()">
+            <button (click)="onEnter()" mat-icon-button matSuffix>
               <mat-icon *ngIf="searchValue" matSuffix>search</mat-icon>
-              <!-- <mat-icon *ngIf="searchValue" matSuffix>close</mat-icon> -->
+              <!--<mat-icon *ngIf="searchValue" matSuffix>close</mat-icon>-->
             </button>
           </div>
         </mat-form-field>

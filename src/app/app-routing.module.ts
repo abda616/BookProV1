@@ -8,7 +8,6 @@ import {MyLibraryComponent} from "./my-library/my-library.component";
 import {LoginComponent} from "./login/login.component";
 import { SearchPageComponent } from './search-page/search-page.component';
 import {AuthGuard} from "./shared/Auth/auth.guard";
-import {SearchBarComponent} from "./search-bar/search-bar.component";
 
 
 const routes: Routes = [
@@ -43,6 +42,7 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         pathMatch: "full"
       },
+<<<<<<< HEAD
       // {
       //   path: 'search',
       //   component: SearchBarComponent,
@@ -55,6 +55,14 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         pathMatch:"full"
       },  
+=======
+      {
+        path: 'search',
+        component: SearchPageComponent,
+        // canActivate: [AuthGuard],
+        pathMatch: "full"
+      },
+>>>>>>> 058f8309118a08aa610c16c9c3ecf5fc0feb5065
     ]
   },
   {

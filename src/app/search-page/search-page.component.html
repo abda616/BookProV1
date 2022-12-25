@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex flex-column">
   <div class="row search-cont mt-3">
     <div class="top"></div>
-    
+
     <div class="search-bar">
       <input [(ngModel)]="searchInput"  type="text" class="search-input" #searchBar placeholder="Search Here">
       <div class="dropdown">
@@ -15,11 +15,11 @@
         </div>
       </div>
       <button (click)="onSearchChange(searchBar.value)"  class="search-btn">
-       
+
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </button>
     </div>
-   
+
     <h3 class="text-center mt-5 fs-2">Showing Result For <span class="font-bold">{{searchInput}}</span></h3>
   </div>
 <div class="container mw-70 mt-5">
@@ -47,7 +47,7 @@
           <div class="col-lg-4 col-md-6 col-sm-12 card ">
             <div class="image">
               <img src={{book.cover_page}} alt="">
-            </div>
+    </div>
             <div class="card-body">
               <h4>title</h4>
             <p>author</p>
