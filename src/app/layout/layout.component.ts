@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
+import {Router} from "@angular/router";
+import {SearchServiceService} from "../shared/search-service.service";
 
 @Component({
   selector: 'app-layout',
