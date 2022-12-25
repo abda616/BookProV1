@@ -23,22 +23,29 @@ changedSearchText:EventEmitter<string> =new EventEmitter<string>();
     ) { }
 
   ngOnInit(): void {
- this.onSearchAll()
+ 
 
 }
 
 onSearchAll(){
-  this.searchService.searchByAll(this.targetBook)
+  this.searchService.searchByAll(this.searchInput)
   .subscribe(res=>{
   this.searchResult=res;
+  this.searchResult=this.sharedService.removeNoImage(this.searchResult)
   //calling the shared service to change the url to get the large img 
   this.searchResult.forEach(e=>{
+  
     e.cover_page=this.sharedService.getLargeImg(e.cover_page,this.sharedService.getPosition(e.cover_page,"m/",2))
   })
   })
 }
-onSearchChange(){
-  this.changedSearchText.emit(this.searchInput)
+onSearchChange(val){
+  this.onSearchAll()
+  this.changedSearchText.emit(val)
+}
+getUrl(e){
+  console.log(e.cover_page)
+  return e.cover_page;
 }
 
 }
