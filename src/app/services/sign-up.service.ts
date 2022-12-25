@@ -9,7 +9,6 @@ import {catchError, Observable, throwError} from "rxjs";
   providedIn: 'root'
 })
 export class SignUpService implements SignUpSendData {
-
   constructor(private http: HttpClient) {
   }
 

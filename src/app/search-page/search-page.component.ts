@@ -1,6 +1,7 @@
 import { Component, OnInit,EventEmitter,Output } from '@angular/core';
 import { SearchPageService } from '../services/search.service';
 import { SharedServiceService } from '../services/shared-service.service';
+import {SearchServiceService} from "../shared/search-service.service";
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -14,17 +15,15 @@ targetBook="romance";
 searchInput:string=""
 @Output()
 changedSearchText:EventEmitter<string> =new EventEmitter<string>();
-  constructor(
-    private searchService:SearchPageService
-    ,
-    private sharedService:SharedServiceService
-    ,
-
-    ) { }
+  constructor(private searchService:SearchPageService, private search: SearchServiceService,
+              private sharedService:SharedServiceService) { }
+  searchOption=['all','title','author','genre','description']
 
   ngOnInit(): void {
- 
-
+    this.search.currentData.subscribe(data =>{
+      this.searchInput=data;
+    })
+    this.onSearchAll()
 }
 
 onSearchAll(){
@@ -40,6 +39,7 @@ onSearchAll(){
   })
 }
 onSearchChange(val){
+  this.search.updateData(this.searchInput);
   this.onSearchAll()
   this.changedSearchText.emit(val)
 }
