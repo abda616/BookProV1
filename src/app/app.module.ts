@@ -17,6 +17,7 @@ import {AuthInterceptor} from "./shared/Auth/authconfig.interceptor";
 import {MyBookInfoComponent} from './book-info/book-info.component';
 import {SearchBarComponent} from './search-bar/search-bar.component';
 import {SharedDataModule} from "./shared/shared-data.module";
+import {SearchServiceService} from "./shared/search-service.service";
 import { SearchPageComponent } from './search-page/search-page.component';
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [SharedDataModule, MainPageService,
+  providers: [SharedDataModule, MainPageService,SearchServiceService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
