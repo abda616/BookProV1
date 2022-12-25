@@ -6,7 +6,7 @@ import {MainPageComponent} from "./main-page/main-page.component";
 import {TradeNowComponent} from "./trade-now/trade-now.component";
 import {MyLibraryComponent} from "./my-library/my-library.component";
 import {LoginComponent} from "./login/login.component";
-
+import {AuthGuard} from "./shared/Auth/auth.guard";
 import {SearchBarComponent} from "./search-bar/search-bar.component";
 
 
