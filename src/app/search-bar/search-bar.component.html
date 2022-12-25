@@ -1,15 +1,17 @@
-<mat-form-field class="search-bar">
-  <div class="search-width">
-    <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input">
-    <button (click)="searchValue=''" mat-icon-button matSuffix>
-      <mat-icon *ngIf="!searchValue" matSuffix>search</mat-icon>
-      <mat-icon *ngIf="searchValue" matSuffix>close</mat-icon>
-    </button>
-  </div>
-  <div class="search-group">
-    <mat-radio-group aria-label="select an option" [(ngModel)]="searchFor">
-      <mat-radio-button value="all" checked>All</mat-radio-button>
-      <mat-radio-button *ngFor="let option of searchOption" [value]="option">{{option}}</mat-radio-button>
-    </mat-radio-group>
-  </div>
-</mat-form-field>
+<div class="just-flex flex-row w-100 justify-content-center">
+  <mat-form-field class="search-bar">
+    <div class="search-width">
+      <input [(ngModel)]="searchValue" matInput matNativeControl type="text">
+      <button (click)="searchValue=''" mat-icon-button matSuffix>
+        <mat-icon *ngIf="!searchValue" matSuffix>search</mat-icon>
+        <mat-icon *ngIf="searchValue" matSuffix>close</mat-icon>
+      </button>
+    </div>
+  </mat-form-field>
+  <button class="mx-1 m-auto" mat-button [disabled]="!searchValue" (click)="onSearch()">Search</button>
+</div>
+<div class="my-radio-group">
+  <mat-radio-group aria-label="Select an option" >
+    <mat-radio-button *ngFor="let option of searchOption ; let i = index"  [checked]="i==0" value="{{option}}">{{option}}</mat-radio-button>
+  </mat-radio-group>
+</div>

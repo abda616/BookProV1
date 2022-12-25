@@ -8,6 +8,8 @@ import {MyLibraryComponent} from "./my-library/my-library.component";
 import {LoginComponent} from "./login/login.component";
 import { SearchPageComponent } from './search-page/search-page.component';
 import {AuthGuard} from "./shared/Auth/auth.guard";
+import {SearchBarComponent} from "./search-bar/search-bar.component";
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/log-in', pathMatch: 'full'},
@@ -43,6 +45,12 @@ const routes: Routes = [
       },
       {
         path: 'search',
+        component: SearchBarComponent,
+        /*canActivate: [AuthGuard],*/
+        pathMatch: "full"
+      },
+      {
+        path: 'search',
         component:SearchPageComponent,
         // canActivate: [AuthGuard],
         pathMatch:"full"
@@ -50,7 +58,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: '**', redirectTo: '/app'
+    path: '**',
+    redirectTo: '/app'
   }
   // {path: '', component: },
   // {path: '', redirectTo: '/heroes-list', pathMatch: 'full'},
