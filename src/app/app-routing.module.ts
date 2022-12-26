@@ -42,7 +42,6 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         pathMatch: "full"
       },
-<<<<<<< HEAD
       // {
       //   path: 'search',
       //   component: SearchBarComponent,
@@ -55,14 +54,6 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         pathMatch:"full"
       },  
-=======
-      {
-        path: 'search',
-        component: SearchPageComponent,
-        // canActivate: [AuthGuard],
-        pathMatch: "full"
-      },
->>>>>>> 058f8309118a08aa610c16c9c3ecf5fc0feb5065
     ]
   },
   {
