@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
 import {Router} from "@angular/router";
-import {SearchServiceService} from "../shared/search-service.service";
+import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 
 @Component({
   selector: 'app-layout',
@@ -11,38 +11,29 @@ import {SearchServiceService} from "../shared/search-service.service";
 })
 export class LayoutComponent implements OnInit {
   searchValue: string = '';
+  position = true;
   titleOfTheBook: any | string = "book name".toUpperCase();
   authorName: any | string = "book author name".toUpperCase();
 
-  constructor(private authService: AuthService , private search:SearchServiceService, private router:Router) {
+  constructor(private authService: AuthService, private search: searchDataTransferService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.search.updatePosition(true);
+    this.search.currentPosition.subscribe(x => this.position = x);
   }
-
   toggleDrawer(ref: MatDrawer) {
     ref.toggle();
   }
-
-  // getWidth(ref: MatDrawer): number {
-  //   let width = window.innerWidth;
-  //   let isOpend= ref.opened;
-  //
-  //   isOpend ? console.log(isOpend+" width = "+(width-ref._getWidth())) :
-  //                 console.log(isOpend+" width = "+width) ;
-  //   return isOpend ? (width-ref._getWidth()) : window.innerWidth ;
-  // }
 
   LogOut() {
     this.authService.doLogout()
   }
 
   onEnter() {
-    this.router.navigate(['app/search']);
     this.search.updateData(this.searchValue);
+    this.searchValue='';
+    this.search.updatePosition(!this.position);
+    this.router.navigate(['app/search']);
   }
-  onSearchChange(val:string){
-  this.searchValue=val;
-  console.log(val)
-}
 }

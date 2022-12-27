@@ -1,69 +1,68 @@
 <div class="container-fluid d-flex flex-column">
   <div class="row search-cont mt-3">
     <div class="top"></div>
-
     <div class="search-bar">
-      <input [(ngModel)]="searchInput"  type="text" class="search-input" #searchBar placeholder="Search Here">
+      <input [(ngModel)]="searchInput" type="text" class="search-input"  placeholder="Search Here" (keyup.enter)="onSearchChange(searchInput)">
       <div class="dropdown">
-        <button class="filters-drop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        All
+        <button class="filters-drop"
+                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          All
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#">Author</a>
-          <a class="dropdown-item" href="#">Descreption</a>
+          <a class="dropdown-item" href="#">Description</a>
           <a class="dropdown-item" href="#">Title</a>
         </div>
       </div>
-      <button (click)="onSearchChange(searchBar.value)"  class="search-btn">
+      <button (click)="onSearchChange(searchInput)" class="search-btn">
 
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </button>
     </div>
-
-    <h3 class="text-center mt-5 fs-2">Showing Result For:<span class="font-bold">{{searchInput}}</span></h3>
+    <h4 class="text-center mt-5 fs-2">Showing Result For:<span class="font-bold">{{searchInput}}</span></h4>
   </div>
-<div class="container mw-70 mt-5">
-  <div class="row cards-cont">
-    <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2" *ngFor="let book of searchResult|slice:0:40" >
-<div class="image">
-    <img src={{book.cover_page}} alt="">
-</div>
-<div class="card-body">
-  <h4>{{book.title_without_series}}</h4>
-<p>{{book.name}}</p>
-<button class="more-btn btn"><a href="">Read More</a> </button>
-</div>
-    </div>
-    <!-- <div class="col-lg-4 col-md-6 col-sm-12 card ">
-      <div class="image">
-        <img src={{book.cover_page}} alt="">
+  <div class="container mw-70 mt-5">
+    <div class="row cards-cont">
+      <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2" *ngFor="let book of searchResult|slice:0:40">
+        <div class="image">
+          <img src={{book.cover_page}} alt="">
+        </div>
+        <div class="card-body">
+          <h4>{{book.title_without_series}}</h4>
+          <p>{{book.name}}</p>
+          <button class="more-btn btn"><a href="">Read More</a></button>
+        </div>
       </div>
-      <div class="card-body">
-        <h4>title</h4>
-      <p>author</p>
-      <button>Read More</button>
-      </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-12 card ">
-            <div class="image">
-              <img src={{book.cover_page}} alt="">
-    </div>
-            <div class="card-body">
-              <h4>title</h4>
-            <p>author</p>
-            <button>Read More</button>
+      <!-- <div class="col-lg-4 col-md-6 col-sm-12 card ">
+        <div class="image">
+          <img src={{book.cover_page}} alt="">
+        </div>
+        <div class="card-body">
+          <h4>title</h4>
+        <p>author</p>
+        <button>Read More</button>
+        </div>
             </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 card ">
-                  <div class="image">
-                    <img src={{book.cover_page}} alt="">
+            <div class="col-lg-4 col-md-6 col-sm-12 card ">
+              <div class="image">
+                <img src={{book.cover_page}} alt="">
+      </div>
+              <div class="card-body">
+                <h4>title</h4>
+              <p>author</p>
+              <button>Read More</button>
+              </div>
                   </div>
-                  <div class="card-body">
-                    <h4>title</h4>
-                  <p>author</p>
-                  <button>Read More</button>
-                  </div>
-                      </div> -->
+                  <div class="col-lg-4 col-md-6 col-sm-12 card ">
+                    <div class="image">
+                      <img src={{book.cover_page}} alt="">
+                    </div>
+                    <div class="card-body">
+                      <h4>title</h4>
+                    <p>author</p>
+                    <button>Read More</button>
+                    </div>
+                        </div> -->
+    </div>
   </div>
-</div>
 </div>
