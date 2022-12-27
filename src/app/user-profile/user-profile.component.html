@@ -1,0 +1,70 @@
+
+<section style="background-color: #eee; height:100vh" class="overflow-hidden">
+  <div class="container py-5">
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="assets/Avatars/men_av_1.png" alt="avatar"
+                 class="rounded-circle img-fluid" style="width: 150px;">
+            <h4 class="my-3">{{userName}}</h4>
+            <p class="text-muted mb-4">{{userCity}}</p>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0 mx-0 px-3">
+            <app-chip-multi-select [options]="Interests" [formControl]="UInterests"
+                                   formControlName="UInterests"></app-chip-multi-select>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Full Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">Johnatan Smith</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userEmail}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Address</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userCity}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Interest</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userInterests.toString().replace(","," ")}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

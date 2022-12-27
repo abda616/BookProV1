@@ -16,8 +16,9 @@ import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.co
 import {AuthInterceptor} from "./shared/Auth/authconfig.interceptor";
 import {MyBookInfoComponent} from './book-info/book-info.component';
 import {SharedDataModule} from "./shared/shared-data.module";
-import {SearchServiceService} from "./shared/search-service.service";
+import {searchDataTransferService} from "./services/Transfer/search-data-transfer.service";
 import {SearchPageComponent} from './search-page/search-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import {SearchPageComponent} from './search-page/search-page.component';
     MyBookInfoComponent,
     ChipMultiSelectComponent,
     SearchPageComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import {SearchPageComponent} from './search-page/search-page.component';
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [SharedDataModule, MainPageService,SearchServiceService,
+  providers: [SharedDataModule, MainPageService,searchDataTransferService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
