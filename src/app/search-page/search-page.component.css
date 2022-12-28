@@ -17,8 +17,7 @@
   height: 50px;
   align-items: center;
   justify-content: center;
-  margin: auto;
-  margin-top: 0;
+  margin-right: none;
 }
 .container-fluid .search-cont input {
   position: relative;
@@ -58,6 +57,9 @@
   font-size: 25px;
   color: #F3EBD9;
   display: inline-block;
+}
+.container-fluid .search-cont .filter-btn {
+  width: 200px;
 }
 .container-fluid h3 span {
   color: #141e2d;
