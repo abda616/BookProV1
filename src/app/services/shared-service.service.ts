@@ -18,9 +18,7 @@ export class SharedServiceService {
     let newarr = []
     element.forEach((e, i) => {
       if (e.cover_page == "https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png") {
-        console.log(e.cover_page)
-        console.log(i)
-        element.slice(i, 1)
+      
       } else {
         newarr.push(e)
       }

@@ -10,6 +10,7 @@ import {SearchServiceService} from "../shared/search-service.service";
 export class SearchPageComponent implements OnInit {
 numOfColumns=[1,2,3,4,5]
 searchResult=[]
+searchResultLen:number
 images=""
 targetBook="romance";
 searchInput:string=""
@@ -33,10 +34,15 @@ onSearchAll(){
   this.searchResult=this.sharedService.removeNoImage(this.searchResult)
   //calling the shared service to change the url to get the large img 
   this.searchResult.forEach(e=>{
-  
     e.cover_page=this.sharedService.getLargeImg(e.cover_page,this.sharedService.getPosition(e.cover_page,"m/",2))
   })
+  this.searchResultLen=this.searchResult.length;
+ 
   })
+}
+getLen(res){
+  console.log(res.length)
+  return res.length>0?true:false;
 }
 onSearchChange(val){
   this.search.updateData(this.searchInput);
