@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignup {
       this.citys = data);
     this.sharedData.Interests.subscribe(data =>
       this.Interests = data);
+
     this.sharedData.Pattern.subscribe(data => this.patternValidator = data);
+
     this.mLoginForm();
     this.mSignUpForm();
     this.disabledControl.valueChanges.pipe().subscribe((val) => {

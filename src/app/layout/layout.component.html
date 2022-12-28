@@ -75,23 +75,24 @@
           <span>My Library</span>
         </button>
 
-        <mat-form-field class="search-width">
+        <mat-form-field class="search-width" *ngIf="position">
           <div class="search-bar">
-            <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input"  #searchBar (keyup.enter)="onEnter()">
-            <button (click)="onEnter()" mat-icon-button matSuffix>
-              <mat-icon *ngIf="searchValue" matSuffix>search</mat-icon>
-              <!--<mat-icon *ngIf="searchValue" matSuffix>close</mat-icon>-->
+            <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input" (keyup.enter)="onEnter()">
+            <button *ngIf="searchValue" (click)="onEnter()" mat-icon-button matSuffix>
+              <mat-icon  matSuffix>search</mat-icon>
+            </button>
+            <button (click)="searchValue=''" mat-icon-button matSuffix>
+              <mat-icon  matSuffix>{{searchValue ? 'close' : 'search'}}</mat-icon>
             </button>
           </div>
         </mat-form-field>
         <!-- <mat-icon>dashboard</mat-icon> -->
         <button [matMenuTriggerFor]="menu" mat-stroked-button>
-          <mat-icon>person</mat-icon>
+          <mat-icon>dashboard</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <!-- <mat-icon>person</mat-icon> -->
-            <mat-icon matPrefix>dashboard</mat-icon>
+          <button mat-menu-item routerLink="profile" >
+            <mat-icon matPrefix>person</mat-icon>
             Profile
           </button>
           <button mat-menu-item (click)="LogOut()">
