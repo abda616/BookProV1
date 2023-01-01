@@ -1,43 +1,82 @@
 <div class="container-fluid d-flex flex-column">
-  <div class="row  mt-3">
-  <div class="col-12">
-    <div class="top">
-            <button class="btn  bg-dark text-light filter-btn">Filters</button>
+  <div class="row w-100  mt-3">
+  <div class="col-12 ">
+    <div class="top" #filtersDrop >
+      <div class="container filters-cont d-flex  flex-column justify-content-between " >
+        
+        <div class="search-by mb-3">
+          <h2>Search By</h2>
+          <div class="d-flex search-by-options" >
+            <!-- <p *ngFor="let option of searchOptions">{{option}}</p> -->
+           <div *ngFor="let option of searchOptions" class="d-flex">
+            <input type="radio"  name="options " [value]="option">
+            <label class=" ml-2" for="{{option}}">{{option}} </label>
+
+           </div>
       
-    </div>
-  </div>
-   
-<div class="col-12">
-  
-</div>
-    <div class="search-cont mb-5 p-1">
-      <input   type="text" #searchBar placeholder="Search Here" class="search-input">
-      <!-- <div class="dropdown filters-drop">
-        <button class="filter-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        All
-        </button>
-        <div class="dropdown-menu inner-filters" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Author</a>
-          <a class="dropdown-item" href="#">Description</a>
-          <a class="dropdown-item" href="#">Title</a>
+          </div>  
         </div>
-      </div> -->
+       
+        <h4>By Genre</h4>
+<div class="filters-genres d-flex justify-content-between mb-3 ">
+ 
+<button #genreButton class="genres-btn fs-5" *ngFor="let genre of genresFilter"(click)="filterGenres(genreButton.text)" #genResBtn>{{genre}}</button>
+</div>
+
+ <h4>By Rating</h4>
+<div class="filters-stars d-flex justify-content-between mb-3 col-lg-8">
+  <div class="stars" >
+    <button   *ngFor="let star of stars" (click)="fillStars(starsCont)" >
+      <i
+     
+      class="fa-regular fa-star fs-3 ps-3 d-inline mt-3"
+      #starsCont
+      [id]="star"
       
-        <button (click)="onSearchChange(searchBar.value)" class="search-btn" (click)="searchInput=searchBar.value">
-
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        </button>
-  
+    ></i>
+    </button>
    
-    
-    </div>
-
-    <h3 class="text-center fs-2"><span class="font-bold">{{searchInput}}</span></h3>
   </div>
 
-    <div class="container mw-70 mt-5" >
+</div>
+      </div>
+    </div>
+  </div>
+
+<div class="col-12">
+  <button class="filter-btn" (click)="filtersDrop.style.maxHeight=showFilters(filtersDrop)">
+    Filters
+    <i class="fa-solid fa-arrow-down " *ngIf="!isFiltersClicked"></i>
+    <i class="fa-solid fa-arrow-up" *ngIf="isFiltersClicked"></i>
+  </button>
+
+  <div class="search-cont mb-5 p-1">
+    <input   type="text" #searchBar placeholder="Search Here" class="search-input">
+    <!-- <div class="dropdown filters-drop">
+      <button class="filter-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      All
+      </button>
+      <div class="dropdown-menu inner-filters" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Author</a>
+        <a class="dropdown-item" href="#">Description</a>
+        <a class="dropdown-item" href="#">Title</a>
+      </div>
+    </div> -->
+    
+      <button (click)="onSearchChange(searchBar.value)" class="search-btn" (click)="searchInput=searchBar.value">
+
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </button>
+
+ 
+  
+  </div>
+</div>
+      </div>
+
+    <div class="container mw-70 mt-1" >
       <div class="row cards-cont">
-        <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2" *ngFor="let book of searchResult|slice:0:42" >
+        <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"  *ngFor="let book of onGetData()|slice:0:42" >
     <div class="image">
         <img src={{book.cover_page}} alt="">
     </div>
