@@ -92,25 +92,14 @@
 }
 
 .main-card-design .main-card-description .desc p {
-  font-weight: 600;
+  font-weight: 300;
 }
 
 .main-card-design .main-card-description .desc-data {
   display: flex;
   width: 165px;
   justify-content: space-around;
-  font-weight: 500;
-}
-.main-card-design .main-card-description .desc-data p {
-  inline-size: 140px;
-  overflow-wrap: break-word;
-  text-align: center;
-  line-height: normal;
-
-  display: flex;
-  width: 140px;
-  justify-content: space-around;
-  font-weight: 500;
+  font-weight: lighter;
 }
 
 .card-wrapper-row-card {
