@@ -1,15 +1,17 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {Book} from "../../shared/Interfaces/Book";
+import {BookDemo} from "../../shared/Interfaces/BookDemo";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookDataService {
 
-  private book = new BehaviorSubject<number>(0);
+  private book = new BehaviorSubject<BookDemo>( new BookDemo(0, "", "", "", 0, "", 0, 0, "", "", "", "", "", "", "", "", ""));
   bookData = this.book.asObservable();
 
-  transBook(data: number) {
+  transBook(data: any) {
     this.book.next(data);
   }
 

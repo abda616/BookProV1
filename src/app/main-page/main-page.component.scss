@@ -68,40 +68,41 @@
 .main-card-design .main-card-description {
   display: flex;
   flex-direction: column;
+  /* align-items: flex-start; */
+  margin-left: 5px;
   justify-content: space-evenly;
   padding: 5px;
+  width: 48%;
 }
 
 .main-card-design .main-card-description .title {
   padding-top: 20px;
   font-size: 26px;
-  height: 77px;
-  inline-size: 165px;
-  overflow-wrap: break-word;
+  inline-size: 250px;
   line-height: normal;
   text-align: center;
 }
 .main-card-design .main-card-description .author {
   font-size: 25px;
   opacity: 53%;
+  inline-size: 250px;
+  text-align: center;
 }
 
 .main-card-design .main-card-description .desc {
   display: flex;
-  width: 165px;
   justify-content: space-between;
 }
 .main-card-design .main-card-description .desc p {
-  font-weight: 300;
-
 }
 .main-card-design .main-card-description .desc-data {
   display: flex;
-  width: 165px;
-  justify-content: space-around;
-  font-weight: lighter;
+  justify-content: space-between;
 }
 
+.main-card-design .main-card-description .desc-data p {
+  opacity: 53%;
+}
 //start of the second type of the slider
 .card-wrapper-row-card {
   .flip-card {
