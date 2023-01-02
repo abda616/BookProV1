@@ -3,7 +3,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {userSignIn, userSignup} from "../Interfaces/userSignup";
+import {userSignIn, userSignUp} from "../Interfaces/userSignup";
 import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
@@ -11,37 +11,41 @@ import {environment} from "../../../environments/environment.prod";
 })
 export class AuthService {
   endpoint: string = environment.endPointUrl;
-
   constructor(private http: HttpClient, public router: Router) {
   }
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
+  //currentUser = {};
 
   // Sign-up
-  signUp(user: userSignup): Observable<any> {
-    return this.http.post(`${this.endpoint}/register`, user).pipe(catchError(this.handleError));
+  signUp(user: userSignUp): Observable<any> {
+    return this.http.post<any>(`${this.endpoint}register`, JSON.stringify(user), {headers: this.headers})
+      .pipe(catchError (this.handleError));
   }
 
   // Sign-in
   signIn(user: userSignIn) {
-    return this.http.post<any>(`${this.endpoint}/signIn`, user).pipe(catchError(this.handleError));
+    return this.http.post<any>(`${this.endpoint}api/v1/auth`, JSON.stringify(user), {headers: this.headers})
+      .pipe(catchError(this.handleError)
+      );
   }
 
   getToken() {
     return localStorage.getItem('access_token');
   }
 
+  getRefreshToken() {
+    return localStorage.getItem('refresh_token');
+  }
+
   get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
-    return authToken !== null;
+    return localStorage.getItem('access_token') !== null;
   }
 
   doLogout() {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('user_Email');
-    localStorage.removeItem('user_Id');
-    this.router.navigate(['log-in']);
+    localStorage.removeItem('refresh_token');
+    this.router.navigate(['log-in']).then(()=> {});
   }
 
   // User profile
@@ -57,14 +61,22 @@ export class AuthService {
 
   // Error
   handleError(error: HttpErrorResponse) {
-    let msg:string;
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    let msg: string;
+    if (error.status!=200) {
+      if (error.error instanceof ErrorEvent) {
+        // client-side error
+        msg = error.error.message;
+      } else {
+        // server-side error
+        msg = `Code: ${error.status}\tMessage type: ${error.message}`;
+        let errorMsg = `${error.error.message}`
+        let ch = (errorMsg != undefined||errorMsg != null);
+        if (ch) {
+          alert(errorMsg)
+        }
+      }
+      return throwError(msg);
     }
-    return throwError(msg);
+    return throwError(error.message);
   }
 }

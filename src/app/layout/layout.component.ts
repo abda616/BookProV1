@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
 import {Router} from "@angular/router";
@@ -22,6 +22,7 @@ export class LayoutComponent implements OnInit {
     this.search.updatePosition(true);
     this.search.currentPosition.subscribe(x => this.position = x);
   }
+
   toggleDrawer(ref: MatDrawer) {
     ref.toggle();
   }
@@ -32,8 +33,7 @@ export class LayoutComponent implements OnInit {
 
   onEnter() {
     this.search.updateData(this.searchValue);
-    this.searchValue='';
-    this.search.updatePosition(!this.position);
+    this.searchValue = '';
     this.router.navigate(['app/search']);
   }
 }

@@ -1,10 +1,9 @@
 <div class="just-flex align-content-center w-100 h-100">
-  <div class="just-flex justify-content-center align-items-center w-50 h-100">
 
+  <div class="just-flex flex-column justify-content-center w-50 h-100">
     <div *ngIf="!signUpState" class="border-padding">
       <h2 class="text-center">Jo-Book</h2>
       <h4 class="text-center">Welcome</h4>
-
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="just-flex flex-column align-items-center">
         <div class="justify-content-center">
           <mat-form-field appearance="legacy">
@@ -34,13 +33,23 @@
       <button mat-stroked-button color="warn" class="w-50"
               (click)="openSignup()">{{!signUpState ? "SignUp" : "signIn"}}</button>
     </div>
-
     <div *ngIf="signUpState" class="signup-form">
-      <h2>Welcome To Jo Book</h2>
-      <p>Create Your Account</p>
-      <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" class="just-flex flex-column justify-content-center ">
-        <div class="name-div just-flex  justify-content-center" formGroupName="UName">
 
+      <h2 class="text-center" style="margin-top:40% !important;">Welcome To Jo Book</h2>
+      <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" class="just-flex flex-column justify-content-center ">
+
+        <div class="just-flex justify-content-center  align-items-center mx-auto my-1">
+          <img src="{{this.signUpForm.get('UAvatar').value}}" class="w-25" alt="avatar">
+          <mat-form-field appearance="legacy">
+            <mat-select formControlName="UAvatar">
+              <mat-option *ngFor="let pic of avatars" [value]="pic.picValue">
+                {{pic.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="name-div just-flex  justify-content-center" formGroupName="UName">
           <mat-form-field class="mx-2 my-1">
             <mat-label>First Name</mat-label>
             <input matInput placeholder="First Name" formControlName="FirstName" required>
@@ -53,19 +62,22 @@
             <mat-error>minimum length 3</mat-error>
           </mat-form-field>
         </div>
-        <div class="email-div just-flex  justify-content-center" formGroupName="UEmail">
-
+        <!---->
+        <!---->
+        <!---->
+        <div class="email-div just-flex  justify-content-center" >
           <mat-form-field class="mx-2 my-1">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="name@domain" formControlName="A" required>
+            <input matInput placeholder="name@domain" formControlName="UEmail" required>
             <mat-error>Enter Valid Email</mat-error>
           </mat-form-field>
           <mat-form-field class="mx-2 my-1">
-            <mat-label>Confirm Email</mat-label>
-            <input matInput placeholder='name@domain' formControlName="B" required>
+            <mat-label>User Name</mat-label>
+            <input matInput placeholder='hello234' formControlName="userName" required>
             <mat-error>Most Be The Same</mat-error>
           </mat-form-field>
         </div>
+
         <div class="pass-div just-flex  justify-content-center" formGroupName="UPassword">
           <mat-form-field class="mx-2 my-1">
             <mat-label>Password</mat-label>
@@ -78,31 +90,41 @@
             <mat-error>More Than 8 Character And The Same</mat-error>
           </mat-form-field>
         </div>
-        <div class="city-div just-flex  justify-content-center">
+        <div class="text-center" *ngIf="this.signUpForm.get('UPassword').get('A').value!='' || this.signUpForm.get('UPassword').get('B').value!=''">
+          <span class="text-center text-capitalize" style="color: red" *ngIf="this.signUpForm.get('UPassword').get('A').value!==this.signUpForm.get('UPassword').get('B').value">Password Not Much</span>
+        </div>
+
+
+        <div class="city-div just-flex  justify-content-center align-content-center">
           <h3>You Live In</h3>
           <div class="small-spacer"></div>
           <mat-form-field appearance="legacy">
             <mat-label>Live In</mat-label>
+
             <mat-select formControlName="UAddress">
               <mat-option *ngFor="let city of citys" [value]="city.value">
                 {{city.viewValue}}
               </mat-option>
             </mat-select>
+
           </mat-form-field>
 
         </div>
+
         <h3 class="text-center">Please Tell Us What Type Of books Are Your Interests In</h3>
         <div class="interests-div just-flex justify-content-center px-3">
           <app-chip-multi-select [options]="Interests" [formControl]="UInterests"
                                  formControlName="UInterests"></app-chip-multi-select>
         </div>
         <mat-divider class="my-2"></mat-divider>
-        <button class="" mat-button type="submit" [disabled]="ValidateSignUp()">SignUP</button>
+
+        <button class="" mat-button type="submit" [disabled]="validateSignUp()">SignUP</button>
       </form>
       <mat-divider class="my-1"></mat-divider>
-      <button mat-stroked-button color="warn" class="w-50"
+      <button mat-stroked-button color="warn" class="w-50" style="margin-bottom:5% !important;"
               (click)="openSignup()">{{!signUpState ? "Sign Up" : "Sign In"}}</button>
     </div>
+
     <!--<pre>{{this.signUpForm.get('UName').get('FirstName').value|json}}</pre>-->
   </div>
   <img class="img-right w-50"
