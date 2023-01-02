@@ -8,29 +8,41 @@ import { searchDataTransferService } from '../services/Transfer/search-data-tran
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.css'],
 })
+
 export class SearchPageComponent implements OnInit {
   numOfColumns = [1, 2, 3, 4, 5];
   searchResult = [];
   filteredSearchResult=[]
   isFiltered=false;
-  isGenre:boolean=false;
- filterGenresArr=[];
   searchInput: string = '';
-  didRate: boolean = false;
+
+  filterationData={
+   desiredGenres:[]
+    ,
+    didGenre:false
+    ,
+    genresFilter : ['Drama', 'Fiction', 'Nonfiction', 'Poetry', 'Psychology', 'Religion',
+    'Fantasy', 'Self Help', 'Thrillers', 'Sci-fi', 'Romance']
+    ,
+    desiredRating:0
+    ,
+    stars :
+     [1, 2, 3, 4, 5]
+     ,
+     isFiltersClicked: false
+     ,
+     didRate:false
+     ,
+    
+   
+    
+
+  }
   searchOptions = ['All', 'Title', 'Author', 'Genre', 'Description'];
-  genresFilter = [
-    'Romance',
-    'Relgion',
-    'Poetry',
-    'Novel',
-    'Drama',
-    'Self-Help',
-    'Sci-fi',
-    'Fantasy',
-  ];
-  stars = [1, 2, 3, 4, 5];
-  desiredRating:number=0;
-  isFiltersClicked: boolean = false;
+  
+  
+ 
+  
   @Output() changedSearchText: EventEmitter<string> =
     new EventEmitter<string>();
 
@@ -67,13 +79,16 @@ export class SearchPageComponent implements OnInit {
     return this.searchResult
   }
   onGetData(){
-    if(this.didRate){
-      return  this.filterRatings();
-    }
-    else if(this.isGenre){
-      return this.filterGenre(this.filterGenresArr)
-    }
-    else return this.searchResult
+if(this.isFiltered){
+  if(this.filterationData.didRate){
+    return this.filterRatings();
+  }
+  else if(this.filterationData.didGenre){
+    return this.filterGenre(this.filterationData.desiredGenres);
+  }
+ 
+}   
+else return this.searchResult
   }
 
   onSearchChange(val) {
@@ -82,12 +97,12 @@ export class SearchPageComponent implements OnInit {
   }
   showFilters(element) {
     let maxHeight;
-    if (this.isFiltersClicked) {
-      this.isFiltersClicked = false;
+    if (this.filterationData.isFiltersClicked) {
+      this.filterationData.isFiltersClicked = false;
       maxHeight = '0px';
       return maxHeight;
     } else {
-      this.isFiltersClicked = true;
+      this.filterationData.isFiltersClicked = true;
       maxHeight = '280px';
       return maxHeight;
     }
@@ -102,16 +117,15 @@ export class SearchPageComponent implements OnInit {
   ///fill the stars on click
   fillStars(targetRating) {
     let starsElemnts = document.querySelectorAll('.fa-regular');
-
     starsElemnts.forEach((e) => {
-  if(this.didRate){
+  if(this.filterationData.didRate){
     e.classList.remove("fa-solid")
     console.log("clicked before")
   }
   if(e.id<=targetRating.id){
     e.classList.add("fa-solid")
-    this.didRate=true
-    this.desiredRating=targetRating.id
+    this.filterationData.didRate=true
+    this.filterationData.desiredRating=targetRating.id
   }
     });
    
@@ -122,20 +136,19 @@ export class SearchPageComponent implements OnInit {
 
   ////filter ratings
   filterRatings(){ 
- return this.searchResult.map(e=>{
-  return Math.floor(e.book_average_rating)>=this.desiredRating?e:""
-
- })
+   let temp=[]
+   this.searchResult.map(e=>{
+  if(Math.floor(e.book_average_rating)>=this.filterationData.desiredRating) {
+    temp.push(e)
   }
-  filterGenre(targetGenre){
-    this.filterGenresArr.push(targetGenre)
-    console.log(targetGenre)
-return this.searchResult.map(e=>{
-  return e.genres.forEach(e=>{
-    if(e==targetGenre) return e
-  })
-
-})
-this.isGenre=true;
+ })
+ return temp
+  }
+  filterGenre(targetGenres){
+    this.filterationData.desiredGenres.push(targetGenres);
+    this.filterationData.desiredGenres.forEach(e=>{
+      
+    })
+    targetGenres.classList.toggle("active-genre")
   }
 }
