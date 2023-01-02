@@ -2,6 +2,7 @@ import {Component, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/c
 import {SearchPageService} from '../services/search.service';
 import {SharedServiceService} from '../services/shared-service.service';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {SharedDataModule} from "../shared/shared-data.module";
 
 @Component({
   selector: 'app-search-page',
@@ -21,16 +22,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   searchInput: string = '';
   didRate: boolean = false;
   searchOptions = ['All', 'Title', 'Author', 'Genre', 'Description'];
-  genresFilter = [
-    'Romance',
-    'Religion',
-    'Poetry',
-    'Novel',
-    'Drama',
-    'Self-Help',
-    'Sci-fi',
-    'Fantasy',
-  ];
+  genresFilter = [];
   stars = [1, 2, 3, 4, 5];
 
   desiredRating: number = 0;
@@ -39,7 +31,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
     new EventEmitter<string>();
 
   constructor(private searchService: SearchPageService, private search: searchDataTransferService,
-              private sharedService: SharedServiceService) {
+              private sharedService: SharedServiceService,private sharedData: SharedDataModule) {
   }
 
   ngAfterViewInit(): void {
@@ -53,12 +45,17 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
       this.searchInput = data;
       this.onSearchAll();
     });
+    this.sharedData.Interests.subscribe(data=>{
+      this.genresFilter =data;
+    })
   }
 
   onSearchAll() {
     if (this.searchInput != '') {
+      console.log("on start "+new Date().getSeconds())
       this.searchService.searchByAll(this.searchInput).subscribe((res) => {
         this.searchResult = res;
+        console.log("set and remove"+new Date().getSeconds())
         this.searchResult = this.sharedService.removeNoImage(this.searchResult);
         //calling the shared service to change the url to get the large img
         this.searchResult.forEach((e) => {
@@ -67,8 +64,10 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
             this.sharedService.getPosition(e.cover_page, 'm/', 2)
           );
         });
+        console.log("end"+new Date().getSeconds())
       });
     } else console.log('empty search');
+
     return this.searchResult
   }
 
@@ -81,6 +80,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearchChange(val) {
+    console.log("1"+new Date().getSeconds())
     this.search.updateData(val);
     this.onSearchAll();
   }

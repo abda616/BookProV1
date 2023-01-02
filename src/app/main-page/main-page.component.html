@@ -2,18 +2,21 @@
 
   <div *ngFor="let headsAre of headsInTop ; let i = index">
     <h1 class="text-center mt-5">{{headsAre}}</h1>
+
     <div class="first-card" *ngIf="i==0">
       <div id="carouselControlsRFU" class="carousel carousel-dark w-100" data-ride="carousel">
         <div class="carousel-inner" *ngFor="let _2dArr of MostRated; let i = index;">
+
           <div class="carousel-item {{i==0?'active':''}} ">
             <div class="card-wrapper-row-card">
-              <div class="main-card-design mt-md-4" *ngFor="let book of _2dArr; let i = index;">
+
+              <div class="main-card-design mt-md-4" (click)="goToBookPage(book)" *ngFor="let book of _2dArr;let i = index;">
                 <div class="card-img-on-left">
                   <img [src]="book.cover_page" alt=""/>
                   <div class="main-card-background-img"></div>
                 </div>
                 <div class="main-card-description">
-                  <h5 class="title">{{book.title_without_series}}</h5>
+                  <h5 class="title">{{getBookTitle(book.title_without_series)}}</h5>
                   <p class="author">{{book.name}}</p>
                   <div>
                     <div class="desc">
@@ -23,8 +26,9 @@
                     </div>
                     <div class="desc-data">
                       <p>{{book.num_pages}}.</p>
-                      <p>{{book.genres.split(',').slice(0, 4).toString()
-                        }}</p>
+                      <div class="just-flex flex-column">
+                        <span class="m-auto" *ngFor="let genre of getGenres(book.genres)">{{genre.toString()}}</span>
+                      </div>
                       <p>{{book.book_average_rating}}.</p>
                     </div>
                   </div>
@@ -45,6 +49,7 @@
         </button>
       </div>
     </div>
+
     <div class="other-two-cards" *ngIf="i!=0">
       <div [attr.id]="'carouselControls'+i" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
         <div class="carousel-inner" *ngFor="let _3dArr of (i%2==1?topNArr:BoSU) ; let i = index;">
