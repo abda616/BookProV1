@@ -17,8 +17,10 @@ import {AuthInterceptor} from "./shared/Auth/authconfig.interceptor";
 import {MyBookInfoComponent} from './book-info/book-info.component';
 import {SharedDataModule} from "./shared/shared-data.module";
 import {searchDataTransferService} from "./services/Transfer/search-data-transfer.service";
+import {BookDataService} from "./services/Transfer/book-data.service";
 import {SearchPageComponent} from './search-page/search-page.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,10 +43,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [SharedDataModule, MainPageService,searchDataTransferService,
+  providers: [SharedDataModule, MainPageService, searchDataTransferService, BookDataService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
+  ], bootstrap: [AppComponent]
 })
 export class AppModule {
 }

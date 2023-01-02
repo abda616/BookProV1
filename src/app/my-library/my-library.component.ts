@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {MainPageService} from "../services/main-page.service";
+import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 
 @Component({
   selector: 'app-my-library',
@@ -7,8 +8,16 @@ import {MainPageService} from "../services/main-page.service";
   styleUrls: ['./my-library.component.css'],
   providers:[MainPageService]
 })
-export class MyLibraryComponent implements OnInit {
+export class MyLibraryComponent implements OnInit,AfterViewInit {
+  constructor(private search:searchDataTransferService) {
+  }
+  ngAfterViewInit(): void {
+    setTimeout(()=>{
+      this.search.updatePosition(true);
+    },0)
+  }
   ngOnInit(): void {
+
   }
   /*public arr:any[]=[]
   public firstIteration:any=[];

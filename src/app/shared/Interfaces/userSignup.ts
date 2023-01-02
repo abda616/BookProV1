@@ -1,10 +1,18 @@
-export interface userSignup {
-  firstName: string,
-  lastName: string,
+export interface userSignUp {
+  userName: string,
   email: string,
   password: string,
+  matchingPassword: string,
+  firstName: string,
+  lastName: string,
+  image: string,
   city: string,
-  interest: string[];
+  interest: string;
+}
+
+export interface userSignIn {
+  email: string,
+  password: string,
 }
 
 export interface City {
@@ -12,7 +20,7 @@ export interface City {
   viewValue: string;
 }
 
-export interface userSignIn {
-  email: string,
-  password: string,
+export interface avatarPicture {
+  picValue: string;
+  viewValue: string;
 }
