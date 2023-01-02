@@ -12,47 +12,47 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/log-in', pathMatch: 'full'},
+  {path: '', redirectTo: '/app', pathMatch: 'full'},
   {path: 'log-in', component: LoginComponent},
   {
     path: 'app',
     component: LayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: MainPageComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: 'trade',
         component: TradeNowComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: 'library',
         component: MyLibraryComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: 'book',
         component: MyBookInfoComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: 'search',
         component:SearchPageComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         pathMatch:"full"
       },
       {
         path: 'profile',
         component: UserProfileComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         pathMatch: "full"
       },
     ]

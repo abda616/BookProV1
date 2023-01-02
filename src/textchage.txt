@@ -19,3 +19,8 @@ height:auto
 "full": "ts-node ./server/server.ts",
 "toPost": "json-server ./server/server.ts --port 3000",
 "nodemon": "nodemon"
+
+ "options": {
+            "browserTarget": "bookProV1:build",
+            "proxyConfig": "proxy.conf.json"
+          },

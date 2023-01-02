@@ -63,14 +63,14 @@
   border-radius: 10px;
 }
 
-.main-card-design .main-card-descrption {
+.main-card-design .main-card-description {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 5px;
 }
 
-.main-card-design .main-card-descrption .title {
+.main-card-design .main-card-description .title {
   padding-top: 20px;
   font-size: 26px;
   height: 77px;
@@ -80,24 +80,35 @@
   text-align: center;
 }
 
-.main-card-design .main-card-descrption .author {
+.main-card-design .main-card-description .author {
   font-size: 25px;
   opacity: 53%;
 }
 
-.main-card-design .main-card-descrption .desc {
+.main-card-design .main-card-description .desc {
   display: flex;
   width: 165px;
   justify-content: space-between;
 }
 
-.main-card-design .main-card-descrption .desc p {
+.main-card-design .main-card-description .desc p {
   font-weight: 600;
 }
 
-.main-card-design .main-card-descrption .desc-data {
+.main-card-design .main-card-description .desc-data {
   display: flex;
   width: 165px;
+  justify-content: space-around;
+  font-weight: 500;
+}
+.main-card-design .main-card-description .desc-data p {
+  inline-size: 140px;
+  overflow-wrap: break-word;
+  text-align: center;
+  line-height: normal;
+
+  display: flex;
+  width: 140px;
   justify-content: space-around;
   font-weight: 500;
 }
@@ -203,7 +214,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0%;
+  width: 0;
   height: 100%;
   background-color: #e1cc9f;
   transition: all 0.3s;

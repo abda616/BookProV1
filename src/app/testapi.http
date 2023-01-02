@@ -1,0 +1,26 @@
+### A basic request
+GET http://176.29.11.21/api/v1/auth
+
+### Send POST request with json body 0
+POST http://176.29.11.21/api/v1/auth
+Content-Type: application/json
+
+{
+  "email": "asdw",
+  "password": "1asd@asd123"
+}
+
+### Send POST request with json body 1
+POST http://176.29.11.21/register
+Content-Type: application/json
+
+{
+  "email":"asd1@asd",
+  "userName":"asdw",
+  "password":"1asd@asd123",
+  "matchingPassword":"1asd@asd123",
+  "firstName":"1asd",
+  "lastName":"1asd",
+  "city":"amman",
+  "image":"assets/Avatars/men_av_1.png"
+}
