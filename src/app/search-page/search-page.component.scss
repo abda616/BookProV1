@@ -2,92 +2,56 @@
     --main-color: #141e2d;
     --off-white: #f3ebd9;
   }
-  
 
-  .active-genre{
-    background-color: #141e2d!important;
-    color: #F3EBD9 !important;
-}
-    .top{
-        width: 100%;
-        background-color:transparent;
-        margin: 0;
-        transition: all 1s ease;
-        max-height: 0;
-        overflow: hidden;
-       .filter-conts{
-transition: all 8s ease; 
-// max-height: 0;
-overflow: hidden;
-       }
-        .search-by{
-            .search-by-options{
-                display: flex;
-                justify-content: space-around;
-                width: 100%;
-                label{
-                    display: inline-block;
-                    text-align: center;
-                    font-size: 20px;
-                }
-                input{
-                    display: inline-block;
-                    width: 40px;
-                    margin-right: 20px;
-                }
-              
-            }
-        }
-        .filters-genres{
-            width: 100%;
-            justify-content: flex-start;
-            align-items: ce;
-            .genres-btn{
-                width: 120px;
-                background-color: #F3EBD9;
-                border: 1px solid #141e2d;
-                font-size: 15px;
-            color: #141e2d;
-            margin-right: 10px;
-            text-align: center;
-            padding: 5px;
-            border-radius: 5px;
-           
-
-            }
-        }
-        .filters-stars{
-.stars{
-    button{
-        background-color: transparent;
-        border: none;
-    }
-    i{
-      color: #f8d74d;
-
-    }
-#star1:hover{
-   
-}
-}
-        }
-    }
 .container-fluid{
-    .filter-btn{
-        background-color: #141e2d;
-        color: #F3EBD9;
-        width: 150px;
-        border-radius: 20px;
-        float: right;
-        i{
-            display: inline-block;
-            margin-left: 20px;
-        }
-       
+    .filter-cont{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 80%;
+      .radio-cont{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+        width: 180px;
+       margin: auto;
+       position: relative;
+       input{
+       opacity: 0;
+       position: absolute;
+       }
+       label{
+        text-align: left;
+        font-size: 20px;
+       }
+  .custom-radio{
+    width: 25px;
+    height: 25px;
+    border: 2px solid #444;
+    border-radius: 50%;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input:checked +.checkMark{
+        display: inline-block;
+        opacity: 1;
     }
-   
-   
- 
+    .checkMark{
+        display: none;
+        width: calc(100% - 6px);
+        height: calc(100% - 6px);
+        border-radius: 50%;
+        background-color: #141e2d;
+        transition: opacity 0.9s ease;
+opacity: 0;
+
+
+    }
+  }
+      }
+    }
+
     .search-cont{
 position: relative;
 display: flex;
@@ -117,6 +81,7 @@ input{
   
     &:focus{
         outline: none;
+
     }
     }
     .search-btn{

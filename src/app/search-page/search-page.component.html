@@ -1,70 +1,33 @@
 <div class="container-fluid d-flex flex-column">
   <div class="row w-100  mt-3">
   <div class="col-12 ">
-    <div class="top" #filtersDrop >
-      <div class="container filters-cont d-flex  flex-column justify-content-between " >
-        
-        <div class="search-by mb-3">
-          <h2>Search By</h2>
-          <div class="d-flex search-by-options" >
-            <!-- <p *ngFor="let option of searchOptions">{{option}}</p> -->
-           <div *ngFor="let option of searchOptions" class="d-flex">
-            <input type="radio"  name="options " [value]="option">
-            <label class=" ml-2" for="{{option}}">{{option}} </label>
-
-           </div>
-      
-          </div>  
-        </div>
-       
-        <h4>By Genre</h4>
-<div class="filters-genres d-flex justify-content-between mb-3 ">
- 
-<button #genreButton class="genres-btn fs-5" *ngFor="let genre of filterationData.genresFilter"(click)="filterGenre(genreButton)" >{{genre}}</button>
-</div>
-
- <h4>By Rating</h4>
-<div class="filters-stars d-flex justify-content-between mb-3 col-lg-8">
-  <div class="stars" >
-    <button   *ngFor="let star of filterationData.stars" (click)="fillStars(starsCont)" >
-      <i
-    
-      class="fa-regular fa-star fs-3 ps-3 d-inline mt-3"
-      #starsCont
-      [id]="star"
-      
-    ></i>
-    </button>
-   
-  </div>
-
-</div>
-      </div>
-    </div>
-  </div>
-
-<div class="col-12">
-  <button class="filter-btn" (click)="filtersDrop.style.maxHeight=showFilters(filtersDrop)">
-    Filters
-    <i class="fa-solid fa-arrow-down " *ngIf="!filterationData.isFiltersClicked"></i>
-    <i class="fa-solid fa-arrow-up" *ngIf="filterationData.isFiltersClicked"></i>
-  </button>
-
-  <div class="search-cont mb-5 p-1">
+  <div class="search-cont mb-3 p-1 mt-4">
     <input   type="text" #searchBar placeholder="Search Here" class="search-input">
 
       <button (click)="onSearchChange(searchBar.value)" class="search-btn" (click)="searchInput=searchBar.value">
 
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </button>
+  </div>
+  <div class="filter-cont container">
+    <div class="row  filter-cont">
+      <div class="col-lg-3 radio-cont" for="" *ngFor="let options of searchOptions;let i=index">
+        <label for="">{{options}}</label>
+      <label  class="custom-radio" >
+        <input type="radio" name="options" value={{options}} *ngIf="i==0" checked #radioFilter1 (change)="onSearchBy($event)" >
+        <input type="radio"  name="options" value= {{options}} *ngIf="i>0" #radioFilter2 (change)="onSearchBy($event)">
+        <span class="checkMark"></span>
+      </label>
+   
+      </div>
 
- 
-  
+    </div>
   </div>
 </div>
       </div>
 
     <div class="container mw-70 mt-1" >
+    
       <div class="row cards-cont">
         <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"  *ngFor="let book of onGetData()|slice:0:42" >
     <div class="image">
@@ -114,3 +77,4 @@
  
 
 </div>
+<app-spinner></app-spinner>

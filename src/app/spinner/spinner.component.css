@@ -1,3 +1,7 @@
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+    stroke: #FFD700;
+}
+
 mat-progress-spinner{
     position: absolute;
     top: 50%;

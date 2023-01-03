@@ -3,71 +3,50 @@
   --off-white: #f3ebd9;
 }
 
-.active-genre {
-  background-color: #141e2d !important;
-  color: #F3EBD9 !important;
-}
-
-.top {
-  width: 100%;
-  background-color: transparent;
-  margin: 0;
-  transition: all 1s ease;
-  max-height: 0;
-  overflow: hidden;
-}
-.top .filter-conts {
-  transition: all 8s ease;
-  overflow: hidden;
-}
-.top .search-by .search-by-options {
+.container-fluid .filter-cont {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  width: 80%;
 }
-.top .search-by .search-by-options label {
-  display: inline-block;
-  text-align: center;
+.container-fluid .filter-cont .radio-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 180px;
+  margin: auto;
+  position: relative;
+}
+.container-fluid .filter-cont .radio-cont input {
+  opacity: 0;
+  position: absolute;
+}
+.container-fluid .filter-cont .radio-cont label {
+  text-align: left;
   font-size: 20px;
 }
-.top .search-by .search-by-options input {
-  display: inline-block;
-  width: 40px;
-  margin-right: 20px;
-}
-.top .filters-genres {
-  width: 100%;
-  justify-content: flex-start;
-  align-items: ce;
-}
-.top .filters-genres .genres-btn {
-  width: 120px;
-  background-color: #F3EBD9;
-  border: 1px solid #141e2d;
-  font-size: 15px;
-  color: #141e2d;
-  margin-right: 10px;
-  text-align: center;
-  padding: 5px;
-  border-radius: 5px;
-}
-.top .filters-stars .stars button {
-  background-color: transparent;
-  border: none;
-}
-.top .filters-stars .stars i {
-  color: #f8d74d;
-}
-.container-fluid .filter-btn {
-  background-color: #141e2d;
-  color: #F3EBD9;
-  width: 150px;
-  border-radius: 20px;
-  float: right;
-}
-.container-fluid .filter-btn i {
-  display: inline-block;
+.container-fluid .filter-cont .radio-cont .custom-radio {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #444;
+  border-radius: 50%;
   margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-fluid .filter-cont .radio-cont .custom-radio input:checked + .checkMark {
+  display: inline-block;
+  opacity: 1;
+}
+.container-fluid .filter-cont .radio-cont .custom-radio .checkMark {
+  display: none;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  border-radius: 50%;
+  background-color: #141e2d;
+  transition: opacity 0.9s ease;
+  opacity: 0;
 }
 .container-fluid .search-cont {
   position: relative;

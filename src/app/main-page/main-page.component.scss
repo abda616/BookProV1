@@ -70,6 +70,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   padding: 5px;
+  width: 80%;
 }
 
 .main-card-design .main-card-description .title {
@@ -77,9 +78,12 @@
   font-size: 26px;
   height: 77px;
   inline-size: 165px;
+  width: 80%;
+max-height: 80px;
+overflow: hidden;
   overflow-wrap: break-word;
   line-height: normal;
-  text-align: center;
+  
 }
 .main-card-design .main-card-description .author {
   font-size: 25px;

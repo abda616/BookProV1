@@ -4,6 +4,9 @@ import {
   EventEmitter,
   Output,
   AfterViewInit,
+  ViewChild,
+  ViewChildren,
+  ElementRef,
 } from '@angular/core';
 import { SearchPageService } from '../services/search.service';
 import { SharedServiceService } from '../services/shared-service.service';
@@ -17,37 +20,15 @@ import { searchDataTransferService } from '../services/Transfer/search-data-tran
 export class SearchPageComponent implements OnInit, AfterViewInit {
   numOfColumns = [1, 2, 3, 4, 5];
   filteredSearchResult = [];
-  images = '';
-  targetBook = 'romance';
-  searchOption = ['all', 'title', 'author', 'genre', 'description'];
-  searchResult = [];
-  isFiltered = false;
-  isGenre: boolean = false;
-  filterGenresArr = [];
-  searchInput: string = '';
-
-  filterationData = {
-    desiredGenres: [],
-    didGenre: false,
-    genresFilter: [
-      'Drama',
-      'Fiction',
-      'Nonfiction',
-      'Poetry',
-      'Psychology',
-      'Religion',
-      'Fantasy',
-      'Self Help',
-      'Thrillers',
-      'Sci-fi',
-      'Romance',
-    ],
-    desiredRating: 0,
-    stars: [1, 2, 3, 4, 5],
-    isFiltersClicked: false,
-    didRate: false,
-  };
   searchOptions = ['All', 'Title', 'Author', 'Genre', 'Description'];
+  searchResult = [];
+  filterGenresArr = [];
+  isFiltered = false;
+  searchInput: string = '';
+  didRate:boolean
+  searchType:string="all";
+@ViewChild('searchBar') inputElementRef:ElementRef;
+
 
   @Output() changedSearchText: EventEmitter<string> =
     new EventEmitter<string>();
@@ -62,21 +43,25 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.search.updatePosition(false);
     }, 0);
+    this.inputElementRef.nativeElement.focus();
   }
 
   ngOnInit(): void {
     this.search.searchData.subscribe((data) => {
       this.searchInput = data;
-      this.onSearchAll();
+      this.onSearch(this.searchType);
     });
   }
 
-  onSearchAll() {
+  onSearch(searchType) {
+
     if (this.searchInput != '') {
-      this.searchService.searchByAll(this.searchInput).subscribe((res) => {
+     
+      this.searchService.searchByAll(this.searchInput,this.searchType).subscribe((res) => {
         this.searchResult = res;
         this.searchResult = this.sharedService.removeNoImage(this.searchResult);
-        //calling the shared service to change the url to get the large img
+        
+        // calling the shared service to change the url to get the large img
         this.searchResult.forEach((e) => {
           e.cover_page = this.sharedService.getLargeImg(
             e.cover_page,
@@ -89,72 +74,59 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onGetData() {
+
     if (this.isFiltered) {
-      if (this.filterationData.didRate) {
-        return this.filterRatings();
-      } else if (this.filterationData.didGenre) {
-        return this.filterGenre(this.filterationData.desiredGenres);
-      }
+    return this.filteredSearchResult
     } else return this.searchResult;
   }
 
   onSearchChange(val) {
     this.search.updateData(val);
-    this.onSearchAll();
+    this.onSearch(this.searchType);
   }
 
-  showFilters(element) {
-    let maxHeight;
-    if (this.filterationData.isFiltersClicked) {
-      this.filterationData.isFiltersClicked = false;
-      maxHeight = '0px';
-      return maxHeight;
-    } else {
-      this.filterationData.isFiltersClicked = true;
-      maxHeight = '280px';
-      return maxHeight;
-    }
-  }
+
 
   getUrl(e) {
     console.log(e.cover_page);
     return e.cover_page;
   }
+  onSearchBy(event){
+    console.log(this.searchResult)
+    this.searchType=event.target.value.toLowerCase()
+  this.onSearch(this.searchType)
+  }
 
   ///fill the stars on click
-  fillStars(targetRating) {
-    let starsElemnts = document.querySelectorAll('.fa-regular');
-    starsElemnts.forEach((e) => {
-      if (this.filterationData.didRate) {
-        e.classList.remove('fa-solid');
-        console.log('clicked before');
-      }
-      if (e.id <= targetRating.id) {
-        e.classList.add('fa-solid');
-        this.filterationData.didRate = true;
-        this.filterationData.desiredRating = targetRating.id;
-      }
-    });
-    this.isFiltered = true;
-  }
+  // fillStars(targetRating) {
+  //   let starsElemnts = document.querySelectorAll('.fa-regular');
+  //   starsElemnts.forEach((e) => {
+  //     if (this.filterationData.didRate) {
+  //       e.classList.remove('fa-solid');
+  //       console.log('clicked before');
+  //     }
+  //     if (e.id <= targetRating.id) {
+  //       e.classList.add('fa-solid');
+  //       this.filterationData.didRate = true;
+  //       this.filterationData.desiredRating = targetRating.id;
+  //     }
+  //   });
+  //   this.isFiltered = true;
+  // }
 
   ////filter ratings
 
-  filterRatings() {
-    let temp = [];
-    this.searchResult.map((e) => {
-      if (
-        Math.floor(e.book_average_rating) >= this.filterationData.desiredRating
-      ) {
-        temp.push(e);
-      }
-    });
-    return temp;
-  }
+  // filterRatings() {
+  //   let temp = [];
+  //   this.searchResult.map((e) => {
+  //     if (
+  //       Math.floor(e.book_average_rating) >= this.filterationData.desiredRating
+  //     ) {
+  //       temp.push(e);
+  //     }
+  //   });
+  //   return temp;
+  // }
 
-  filterGenre(targetGenres) {
-    this.filterationData.desiredGenres.push(targetGenres);
-    this.filterationData.desiredGenres.forEach((e) => {});
-    targetGenres.classList.toggle('active-genre');
-  }
+
 }

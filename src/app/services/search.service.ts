@@ -7,11 +7,11 @@ import {SharedServiceService} from './shared-service.service';
 
 @Injectable({providedIn: 'root'})
 export class SearchPageService {
-  baseSearchUrl = environment.apiUrl + "search/all"
+  baseSearchUrl = environment.apiUrl + "search/"
   html = ""
   targetedUrl = "https://www.goodreads.com/book/show/11358368-pop-star"
   constructor(private http: HttpClient, private sharedService: SharedServiceService) {}
-  searchByAll(targetSearch: string) {
-    return this.http.get<IGenure[]>(this.baseSearchUrl + "/" + targetSearch)
+  searchByAll(targetSearch: string,targetType:string) {
+    return this.http.get<IGenure[]>(this.baseSearchUrl+targetType+"/"+ targetSearch)
   }
 }
