@@ -16,32 +16,38 @@
   max-height: 0;
   overflow: hidden;
 }
+
 .top .filter-conts {
   transition: all 8s ease;
   overflow: hidden;
 }
+
 .top .search-by .search-by-options {
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
+
 .top .search-by .search-by-options label {
   display: inline-block;
   text-align: center;
   font-size: 20px;
 }
+
 .top .search-by .search-by-options input {
   display: inline-block;
   width: 40px;
   margin-right: 20px;
 }
+
 .top .filters-genres {
   width: 100%;
   justify-content: flex-start;
-  align-items: ce;
+  align-items: center;
 }
+
 .top .filters-genres .genres-btn {
-  width: 100px;
+  width: 120px;
   background-color: #F3EBD9;
   border: 1px solid #141e2d;
   font-size: 15px;
@@ -51,13 +57,16 @@
   padding: 5px;
   border-radius: 5px;
 }
+
 .top .filters-stars .stars button {
   background-color: transparent;
   border: none;
 }
+
 .top .filters-stars .stars i {
   color: #f8d74d;
 }
+
 .container-fluid .filter-btn {
   background-color: #141e2d;
   color: #F3EBD9;
@@ -65,10 +74,12 @@
   border-radius: 20px;
   float: right;
 }
+
 .container-fluid .filter-btn i {
   display: inline-block;
   margin-left: 20px;
 }
+
 .container-fluid .search-cont {
   position: relative;
   display: flex;
@@ -77,8 +88,9 @@
   height: 50px;
   align-items: center;
   justify-content: center;
-  margin-right: none;
+  margin-right: unset;
 }
+
 .container-fluid .search-cont input {
   position: relative;
   display: inline-block;
@@ -96,16 +108,17 @@
   border-bottom-left-radius: 10px;
   transform: translateY(-10px);
 }
+
 .container-fluid .search-cont input:focus {
   outline: none;
 }
+
 .container-fluid .search-cont .search-btn {
   position: relative;
   display: inline-block;
   margin: 0;
   width: 100px;
   height: 100%;
-  border: none;
   background-color: #f6f6f6;
   border: 2px solid #141e2d;
   border-left: none;
@@ -113,20 +126,25 @@
   border-bottom-right-radius: 10px;
   transform: translateY(-10px);
 }
+
 .container-fluid .search-cont .search-btn i {
   font-size: 25px;
   color: #141e2d;
   display: inline-block;
 }
+
 .container-fluid .search-cont .filter-btn {
   width: 200px;
 }
+
 .container-fluid .search-cont .filter-btn i {
   transition-delay: 2s;
 }
+
 .container-fluid h3 span {
   color: #141e2d;
 }
+
 .container-fluid input {
   width: 30%;
 }
@@ -136,21 +154,24 @@
   flex-direction: row;
   justify-content: space-around;
 }
+
 .container .cards-cont .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 180px;
-  height: 450x;
+  height: 450px;
   background-color: transparent;
   border: none;
 }
+
 .container .cards-cont .card .image {
   width: 100%;
   height: 55%;
   position: relative;
 }
+
 .container .cards-cont .card .image img {
   width: 150px;
   height: 100%;
@@ -160,6 +181,7 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
+
 .container .cards-cont .card .card-body {
   display: flex;
   flex-direction: column;
@@ -169,10 +191,12 @@
   background-color: #f3ebd9;
   text-align: center;
 }
+
 .container .cards-cont .card .card-body .title {
   max-height: 50px;
   overflow: hidden;
 }
+
 .container .cards-cont .card .card-body .btn-more {
   display: inline-block;
   border-radius: 10rem;
@@ -185,6 +209,7 @@
   height: 40px;
   z-index: 1;
 }
+
 .container .cards-cont .card .card-body .btn-more:after {
   content: "";
   position: absolute;
@@ -196,21 +221,26 @@
   border-radius: 10rem;
   z-index: -2;
 }
+
 .container .cards-cont .card .card-body .btn-more:before {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0%;
+  width: 0;
   height: 100%;
   background-color: #e1cc9f;
   transition: all 0.3s;
   border-radius: 10rem;
   z-index: -1;
 }
+
 .container .cards-cont .card .card-body .btn-more:hover {
   color: #141e2d;
 }
+
 .container .cards-cont .card .card-body .btn-more:hover:before {
   width: 100%;
-}/*# sourceMappingURL=search-page.component.css.map */
+}
+
+/*# sourceMappingURL=search-page.component.css.map */

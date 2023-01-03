@@ -39,7 +39,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getMostRated() {
-    this.http.get<BookDemo[]>(`${environment.apiUrl}topn`).subscribe((res) => {
+    this.http.get<BookDemo[]>(`${environment.apiUrl}home/basedOnYourInterests`).subscribe((res) => {
       this.MostRated = res;
       this.MostRated = this.sharedService.removeNoImage(this.MostRated);
       this.MostRated.forEach(e => {
@@ -54,7 +54,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getTopN() {
-    this.http.get<Book[]>(`${environment.apiUrl}topn`).subscribe(res => {
+    this.http.get<Book[]>(`${environment.apiUrl}home/top10`).subscribe(res => {
       this.topNArr = res;
       this.topNArr = this.sharedService.removeNoImage(this.topNArr);
       this.topNArr.forEach(e => {
@@ -70,7 +70,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getBoSU() {
-    this.http.get<Book[]>(`${environment.apiUrl}topn`).subscribe(res => {
+    this.http.get<Book[]>(`${environment.apiUrl}home/recommendBySimilarUsers`).subscribe(res => {
       this.BoSU = res;
       this.BoSU = this.sharedService.removeNoImage(this.BoSU);
       this.BoSU.forEach(e => {

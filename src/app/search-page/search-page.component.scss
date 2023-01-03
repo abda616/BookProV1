@@ -52,7 +52,7 @@
   .filters-genres {
     width: 100%;
     justify-content: flex-start;
-    align-items: ce;
+    align-items: center;
 
     .genres-btn {
       width: 100px;
@@ -64,8 +64,6 @@
       text-align: center;
       padding: 5px;
       border-radius: 5px;
-
-
     }
   }
 
@@ -81,7 +79,6 @@
       }
 
       #star1:hover {
-
       }
     }
   }
@@ -99,7 +96,6 @@
       display: inline-block;
       margin-left: 20px;
     }
-
   }
 
 
@@ -111,7 +107,7 @@
     height: 50px;
     align-items: center;
     justify-content: center;
-    margin-right: none;
+    margin-right: unset;
 
     input {
       position: relative;
@@ -141,7 +137,6 @@
       margin: 0;
       width: 100px;
       height: 100%;
-      border: none;
       background-color: #f6f6f6;
       border: 2px solid #141e2d;
       border-left: none;
@@ -154,8 +149,6 @@
         color: #141e2d;
         display: inline-block;
       }
-
-
     }
 
     .filter-btn {
@@ -164,7 +157,6 @@
       i {
         transition-delay: 2s;
       }
-
     }
   }
 
@@ -232,17 +224,12 @@
   h3 {
     span {
       color: #141e2d;
-
     }
   }
 
   input {
     width: 30%;
-
-
   }
-
-
 }
 
 .container {
@@ -257,7 +244,7 @@
       justify-content: space-between;
       align-items: center;
       width: 180px;
-      height: 450x;
+      height: 450px;
       background-color: transparent;
       border: none;
 
@@ -321,7 +308,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 0%;
+            width: 0;
             height: 100%;
             background-color: darken(#F3EBD9, 15%);
             transition: all .3s;

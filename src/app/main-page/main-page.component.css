@@ -112,6 +112,17 @@
   justify-content: space-around;
   font-weight: 500;
 }
+.main-card-design .main-card-description .desc-data p {
+  inline-size: 140px;
+  overflow-wrap: break-word;
+  text-align: center;
+  line-height: normal;
+
+  display: flex;
+  width: 140px;
+  justify-content: space-around;
+  font-weight: 500;
+}
 
 .card-wrapper-row-card {
   /* This container is needed to position the front and back side */
