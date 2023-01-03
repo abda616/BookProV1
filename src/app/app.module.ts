@@ -20,7 +20,11 @@ import {searchDataTransferService} from "./services/Transfer/search-data-transfe
 import {BookDataService} from "./services/Transfer/book-data.service";
 import {SearchPageComponent} from './search-page/search-page.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
-
+import { SpinnerComponent } from './spinner/spinner.component';
+import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import {MatButtonModule} from '@angular/material/button'
+import { NetworkInterceptor } from './network.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +37,7 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
     ChipMultiSelectComponent,
     SearchPageComponent,
     UserProfileComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +47,18 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+
   ],
   providers: [SharedDataModule, MainPageService, searchDataTransferService, BookDataService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ,[{
+    provide:HTTP_INTERCEPTORS,
+    useClass:NetworkInterceptor,
+    multi:true,
+  }]
   ], bootstrap: [AppComponent]
 })
 export class AppModule {

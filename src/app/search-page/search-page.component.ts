@@ -1,71 +1,71 @@
-import {Component, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
-import {SearchPageService} from '../services/search.service';
-import {SharedServiceService} from '../services/shared-service.service';
-import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  AfterViewInit,
+} from '@angular/core';
+import { SearchPageService } from '../services/search.service';
+import { SharedServiceService } from '../services/shared-service.service';
+import { searchDataTransferService } from '../services/Transfer/search-data-transfer.service';
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.css']
+  styleUrls: ['./search-page.component.css'],
 })
 export class SearchPageComponent implements OnInit, AfterViewInit {
-
-export class SearchPageComponent implements OnInit {
   numOfColumns = [1, 2, 3, 4, 5];
   filteredSearchResult = [];
-  images = "";
-  targetBook = "romance";
-  searchOption = ['all', 'title', 'author', 'genre', 'description']
+  images = '';
+  targetBook = 'romance';
+  searchOption = ['all', 'title', 'author', 'genre', 'description'];
   searchResult = [];
   isFiltered = false;
   isGenre: boolean = false;
   filterGenresArr = [];
-  filteredSearchResult=[]
-  isFiltered=false;
   searchInput: string = '';
 
-  filterationData={
-   desiredGenres:[]
-    ,
-    didGenre:false
-    ,
-    genresFilter : ['Drama', 'Fiction', 'Nonfiction', 'Poetry', 'Psychology', 'Religion',
-    'Fantasy', 'Self Help', 'Thrillers', 'Sci-fi', 'Romance']
-    ,
-    desiredRating:0
-    ,
-    stars :
-     [1, 2, 3, 4, 5]
-     ,
-     isFiltersClicked: false
-     ,
-     didRate:false
-     ,
-    
-   
-    
-
-  }
+  filterationData = {
+    desiredGenres: [],
+    didGenre: false,
+    genresFilter: [
+      'Drama',
+      'Fiction',
+      'Nonfiction',
+      'Poetry',
+      'Psychology',
+      'Religion',
+      'Fantasy',
+      'Self Help',
+      'Thrillers',
+      'Sci-fi',
+      'Romance',
+    ],
+    desiredRating: 0,
+    stars: [1, 2, 3, 4, 5],
+    isFiltersClicked: false,
+    didRate: false,
+  };
   searchOptions = ['All', 'Title', 'Author', 'Genre', 'Description'];
-  
-  
- 
-  
+
   @Output() changedSearchText: EventEmitter<string> =
     new EventEmitter<string>();
 
-  constructor(private searchService: SearchPageService, private search: searchDataTransferService,
-              private sharedService: SharedServiceService) {
-  }
+  constructor(
+    private searchService: SearchPageService,
+    private search: searchDataTransferService,
+    private sharedService: SharedServiceService
+  ) {}
 
   ngAfterViewInit(): void {
-    setTimeout(() => {this.search.updatePosition(false);}, 0);
+    setTimeout(() => {
+      this.search.updatePosition(false);
+    }, 0);
   }
 
-
-
   ngOnInit(): void {
-    this.search.searchData.subscribe(data => {
+    this.search.searchData.subscribe((data) => {
       this.searchInput = data;
       this.onSearchAll();
     });
@@ -85,26 +85,17 @@ export class SearchPageComponent implements OnInit {
         });
       });
     } else console.log('empty search');
-    return this.searchResult
+    return this.searchResult;
   }
 
   onGetData() {
-    if (this.didRate) {
-      return this.filterRatings();
-    } else if (this.isGenre) {
-      return this.filterGenre(this.filterGenresArr)
-    } else return this.searchResult
-  onGetData(){
-if(this.isFiltered){
-  if(this.filterationData.didRate){
-    return this.filterRatings();
-  }
-  else if(this.filterationData.didGenre){
-    return this.filterGenre(this.filterationData.desiredGenres);
-  }
- 
-}   
-else return this.searchResult
+    if (this.isFiltered) {
+      if (this.filterationData.didRate) {
+        return this.filterRatings();
+      } else if (this.filterationData.didGenre) {
+        return this.filterGenre(this.filterationData.desiredGenres);
+      }
+    } else return this.searchResult;
   }
 
   onSearchChange(val) {
@@ -130,65 +121,40 @@ else return this.searchResult
     return e.cover_page;
   }
 
-
   ///fill the stars on click
   fillStars(targetRating) {
-    let starsElements = document.querySelectorAll('.fa-regular');
-
-    starsElements.forEach((e) => {
-      if (this.didRate) {
-        e.classList.remove("fa-solid")
-        console.log("clicked before")
-      }
-      if (e.id <= targetRating.id) {
-        e.classList.add("fa-solid")
-        this.didRate = true
-        this.desiredRating = targetRating.id
-      }
     let starsElemnts = document.querySelectorAll('.fa-regular');
     starsElemnts.forEach((e) => {
-  if(this.filterationData.didRate){
-    e.classList.remove("fa-solid")
-    console.log("clicked before")
-  }
-  if(e.id<=targetRating.id){
-    e.classList.add("fa-solid")
-    this.filterationData.didRate=true
-    this.filterationData.desiredRating=targetRating.id
-  }
+      if (this.filterationData.didRate) {
+        e.classList.remove('fa-solid');
+        console.log('clicked before');
+      }
+      if (e.id <= targetRating.id) {
+        e.classList.add('fa-solid');
+        this.filterationData.didRate = true;
+        this.filterationData.desiredRating = targetRating.id;
+      }
     });
     this.isFiltered = true;
   }
 
   ////filter ratings
+
   filterRatings() {
-    return this.searchResult.map(e => {
-      return Math.floor(e.book_average_rating) >= this.desiredRating ? e : "";
-    })
-  filterRatings(){ 
-   let temp=[]
-   this.searchResult.map(e=>{
-  if(Math.floor(e.book_average_rating)>=this.filterationData.desiredRating) {
-    temp.push(e)
-  }
- })
- return temp
+    let temp = [];
+    this.searchResult.map((e) => {
+      if (
+        Math.floor(e.book_average_rating) >= this.filterationData.desiredRating
+      ) {
+        temp.push(e);
+      }
+    });
+    return temp;
   }
 
-  filterGenre(targetGenre) {
-    this.filterGenresArr.push(targetGenre);
-    console.log(targetGenre);
-    this.isGenre = true;
-    return this.searchResult.map(e => {
-      return e.genres.forEach(e => {
-        if (e == targetGenre) return e
-      })
-    })
-  filterGenre(targetGenres){
+  filterGenre(targetGenres) {
     this.filterationData.desiredGenres.push(targetGenres);
-    this.filterationData.desiredGenres.forEach(e=>{
-      
-    })
-    targetGenres.classList.toggle("active-genre")
+    this.filterationData.desiredGenres.forEach((e) => {});
+    targetGenres.classList.toggle('active-genre');
   }
 }
