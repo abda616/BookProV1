@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   mLoginForm() {
     this.loginForm = new FormGroup({
       loginEmail: new FormControl('asdw', [Validators.required, Validators.minLength(4)]),
-      loginPassword: new FormControl('1asd@asd123', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
+      loginPassword: new FormControl('1asd@asd123', [Validators.required, Validators.minLength(8)])
     });
   }
 

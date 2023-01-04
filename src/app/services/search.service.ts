@@ -7,7 +7,7 @@ import {SharedServiceService} from './shared-service.service';
 
 @Injectable({providedIn: 'root'})
 export class SearchPageService {
-  baseSearchUrl = environment.apiUrl + "search/"
+  baseSearchUrl = environment.apiUrl + "python/search/"
   html = ""
   targetedUrl = "https://www.goodreads.com/book/show/11358368-pop-star"
   constructor(private http: HttpClient, private sharedService: SharedServiceService) {}

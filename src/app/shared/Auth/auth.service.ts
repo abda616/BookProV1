@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment.prod";
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = environment.endPointUrl;
+  endpoint: string = environment.apiUrl;
   constructor(private http: HttpClient, public router: Router) {
   }
 
