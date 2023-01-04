@@ -11,7 +11,7 @@
   </div>
   <div class="filter-cont container">
     <div class="row  filter-cont">
-      <div class="col-lg-3 radio-cont" for="" *ngFor="let options of searchOptions;let i=index">
+      <div class="col-lg-3 radio-cont col-md-12 col-sm-12 mb-md-4 mb-sm-4 mb-xs-4" for="" *ngFor="let options of searchOptions;let i=index">
         <label for="">{{options}}</label>
       <label  class="custom-radio" >
         <input type="radio" name="options" value={{options}} *ngIf="i==0" checked #radioFilter1 (change)="onSearchBy($event)" >
