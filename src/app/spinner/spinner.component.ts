@@ -9,8 +9,6 @@ import { LoadingService } from '../services/loading.service';
 export class SpinnerComponent implements OnInit {
 loading$=this.loader.loading$;
   constructor(public loader:LoadingService) { }
-
   ngOnInit(): void {
   }
-
 }
