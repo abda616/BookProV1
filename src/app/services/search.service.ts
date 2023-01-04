@@ -11,7 +11,7 @@ export class SearchPageService {
   html = ""
   targetedUrl = "https://www.goodreads.com/book/show/11358368-pop-star"
   constructor(private http: HttpClient, private sharedService: SharedServiceService) {}
-  searchByAll(targetSearch: string,targetType:string) {
+  searchBy(targetSearch: string,targetType:string) {
     return this.http.get<IGenure[]>(this.baseSearchUrl+targetType+"/"+ targetSearch)
   }
 }
