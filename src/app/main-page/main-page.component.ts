@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit,} from '@angular/core';
-import {MainPageService} from "../services/main-page.service";
 import {Book} from "../shared/Interfaces/Book";
 import {environment} from "../../environments/environment.prod";
 import {HttpClient} from "@angular/common/http";
@@ -13,64 +12,67 @@ import {Router} from "@angular/router";
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
-  providers: [MainPageService]
+
 })
 export class MainPageComponent implements OnInit, AfterViewInit {
-  constructor(private http: HttpClient, private mainPS: MainPageService,
+  constructor(private http: HttpClient, private router: Router,
               private sharedService: SharedServiceService, private search: searchDataTransferService,
-              private moveBook: BookDataService, private router: Router) {
-  }
+              private moveBook: BookDataService) {}
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit()
+    :
+    void {
     setTimeout(() => {
-      this.search.updatePosition(true);
-    }, 0)
+        this.search.updatePosition(true);
+      }, 0)
   }
 
-  headsInTop: string[] = ["Recommended For you", "Top 10 Books", "Based On Similar Users"];
-  topNArr = [];
-  MostRated = [];
+  headsInTop: string[] = ["Top Rated Book", "Based On Your Interests", "Based On Similar Users"];
+  topArr = [];
+  YInterests = [];
   BoSU = [];
 
-  ngOnInit(): void {
-    this.getMostRated();
+  ngOnInit()
+    :
+    void {
+    this.getBoUI();
     this.getTopN();
     this.getBoSU();
   }
 
-  getMostRated() {
-    this.http.get<BookDemo[]>(`${environment.apiUrl}python/topn`).subscribe((res) => {
-      this.MostRated = res;
-      this.MostRated = this.sharedService.removeNoImage(this.MostRated);
-      this.MostRated.forEach(e => {
+  getBoUI() {
+    this.http.get<BookDemo[]>(`${environment.apiUrl}home/basedOnYourInterests`).subscribe((res) => {
+      this.YInterests = res;
+      this.YInterests = this.sharedService.removeNoImage(this.YInterests);
+      this.YInterests.forEach(e => {
         e.cover_page = this.sharedService.getLargeImg(e.cover_page, this.sharedService.getPosition(e.cover_page, "m/", 2))
       });
       let MostRatedC = [];
-      for (let i = 0; i < 10; i++) {
-        MostRatedC[i] = this.MostRated.slice(i * 2, i * 2 + 2)
+      for (let i = 0; i < this.YInterests.length/3; i++) {
+        MostRatedC[i] = this.YInterests.slice(i * 3, i * 3 + 3)
       }
-      this.MostRated = MostRatedC;
+      this.YInterests = MostRatedC;
     });
   }
 
   getTopN() {
-    this.http.get<Book[]>(`${environment.apiUrl}python/topn`).subscribe(res => {
-      this.topNArr = res;
-      this.topNArr = this.sharedService.removeNoImage(this.topNArr);
-      this.topNArr.forEach(e => {
+    this.http.get<Book[]>(`${environment.apiUrl}home/top10`).subscribe(res => {
+      this.topArr = res;
+      this.topArr = this.sharedService.removeNoImage(this.topArr);
+      this.topArr.forEach(e => {
         e.cover_page = this.sharedService.getLargeImg(e.cover_page, this.sharedService.getPosition(e.cover_page, "m/", 2))
       });
 
       let topNArrC = [];
-      for (let i = 0; i < 7; i++) {
-        topNArrC[i] = this.topNArr.slice(i * 3, i * 3 + 3)
+      for (let i = 0; i < this.topArr.length/2; i++) {
+        topNArrC[i] = this.topArr.slice(i * 2, i * 2 + 2)
       }
-      this.topNArr = topNArrC;
+      this.topArr = topNArrC;
     })
   }
 
   getBoSU() {
-    this.http.get<Book[]>(`${environment.apiUrl}python/topn`).subscribe(res => {
+    this.http.get<Book[]>(`${environment.apiUrl}home/recommendBySimilarUsers`).subscribe(res => {
       this.BoSU = res;
       this.BoSU = this.sharedService.removeNoImage(this.BoSU);
       this.BoSU.forEach(e => {
@@ -78,25 +80,32 @@ export class MainPageComponent implements OnInit, AfterViewInit {
       });
 
       let BoSUC = [];
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < this.BoSU.length/3; i++) {
         BoSUC[i] = this.BoSU.slice(i * 3, i * 3 + 3)
       }
       this.BoSU = BoSUC;
     })
   }
 
-  getGenres(s: string) {
+  getGenres(s
+              :
+              string
+  ) {
     let arr = s.replace(/[{}']/gi, "").split(',')
     return arr.slice(0, 3)
   }
 
-  getBookTitle(s: any) {
+  getBookTitle(s
+                 :
+                 any
+  ) {
     let arr = s.split(/[{,:(]/gi)
     return arr[0];
   }
 
-  goToBookPage(book: any) {
+  goToBookPage(book: any
+  ) {
     this.moveBook.transBook(book);
-    this.router.navigate(['app/book']);
+    this.router.navigate(['app/book']).then();
   }
 }

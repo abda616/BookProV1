@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
 import {BooInfoService} from '../services/boo-info.service';
 import {BookDataService} from "../services/Transfer/book-data.service";
 

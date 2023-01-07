@@ -12,8 +12,7 @@ import {avatarPicture, City} from "./Interfaces/userSignup";
   imports: [CommonModule]
 })
 export class SharedDataModule {
-  constructor() {
-  }
+  constructor() {}
 
   private patternValidator = new BehaviorSubject<string>("(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>\"'\\;:{\\}\\[\\]\\|\\+\\-\\=\\_\\)\\(\\)\\`\\/\\\\\\]])[A-Za-z0-9d$@].{7,}");
   Pattern = this.patternValidator.asObservable();
@@ -32,11 +31,13 @@ export class SharedDataModule {
     {value: 'aqaba', viewValue: 'Aqaba'},
   ]);
   Citys = this.cityArray.asObservable();
+
   private InterestArray = new BehaviorSubject<string[]>(
     ['Fiction', 'Non-fiction', 'Poetry', 'Romance', 'Fantasy','paranormal',
       'history','comics','historical-fiction','children', 'Mystery', 'Thriller', 'Crime','graphic', 'Biography']);
 
   Interests = this.InterestArray.asObservable();
+
 
   private avatars = new BehaviorSubject<avatarPicture[]>(
     [

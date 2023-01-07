@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Book} from "../../shared/Interfaces/Book";
 import {BookDemo} from "../../shared/Interfaces/BookDemo";
 
 @Injectable({

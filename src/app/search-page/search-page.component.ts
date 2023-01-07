@@ -55,13 +55,13 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearch(event) {
-    
+
 if(event.target!==undefined){
   this.searchType=event.target.value
   console.log(this.searchType)
 }
     if (this.searchInput != '') {
-     
+
       this.searchService.searchBy(this.searchInput,this.searchType).subscribe((res) => {
         this.searchResult = res;
         this.searchResult = this.sharedService.removeNoImage(this.searchResult);

@@ -11,29 +11,32 @@ import {searchDataTransferService} from "../services/Transfer/search-data-transf
 })
 export class LayoutComponent implements OnInit {
   searchValue: string = '';
-  position = true;
+  positionInSearch = true;
   titleOfTheBook: any | string = "book name".toUpperCase();
   authorName: any | string = "book author name".toUpperCase();
+  profilePic=""
 
-  constructor(private authService: AuthService, private search: searchDataTransferService, private router: Router) {
-  }
+  constructor(private auth: AuthService, private search: searchDataTransferService, private router: Router) {}
 
   ngOnInit(): void {
+    this.auth.getUserProfile().subscribe(data=>{
+      this.profilePic = data['profileImageUrl'] ? data['profileImageUrl']:"assets/Avatars/men_av_2.png"
+    })
     this.search.updatePosition(true);
-    this.search.currentPosition.subscribe(x => this.position = x);
+    this.search.currentPosition.subscribe(x => this.positionInSearch = x);
   }
 
   toggleDrawer(ref: MatDrawer) {
-    ref.toggle();
+    ref.toggle().then();
   }
 
   LogOut() {
-    this.authService.doLogout()
+    this.auth.doLogout()
   }
 
   onEnter() {
     this.search.updateData(this.searchValue);
     this.searchValue = '';
-    this.router.navigate(['app/search']);
+    this.router.navigate(['app/search']).then();
   }
 }

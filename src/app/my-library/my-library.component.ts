@@ -1,6 +1,5 @@
 import { HttpClientModule,HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MainPageService} from "../services/main-page.service";
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 import {Book} from "../shared/Interfaces/Book";
 import { environment } from 'src/environments/environment.prod';
@@ -8,7 +7,7 @@ import { environment } from 'src/environments/environment.prod';
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
   styleUrls: ['./my-library.component.css'],
-  providers:[MainPageService]
+
 })
 export class MyLibraryComponent implements OnInit,AfterViewInit {
   data:object;

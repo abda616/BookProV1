@@ -1,6 +1,6 @@
 <mat-drawer-container [hasBackdrop]="false" class="height-full">
 
-  <mat-drawer #drawer class="height-full" mode="side" position="end">
+  <mat-drawer #drawer class="height-full" mode="side" position="start">
 
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
       <mat-card-header class="card-title  just-flex flex-row justify-content-center">
@@ -56,7 +56,7 @@
 
   <mat-drawer-content>
     <mat-toolbar class="sticky-top">
-
+      <span class="small-spacer"></span>
       <a routerLink="app">
         <mat-icon class="main-icon">
           <img alt="Jo-Book" src="/assets/icons/Jobook.svg">
@@ -75,23 +75,24 @@
           <span>My Library</span>
         </button>
 
-        <mat-form-field class="search-width" *ngIf="position">
+        <mat-form-field class="search-width" *ngIf="positionInSearch">
           <div class="search-bar">
-            <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input" (keyup.enter)="onEnter()">
+            <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input"
+                   (keyup.enter)="onEnter()">
             <button *ngIf="searchValue" (click)="onEnter()" mat-icon-button matSuffix>
-              <mat-icon  matSuffix>search</mat-icon>
+              <mat-icon matSuffix>search</mat-icon>
             </button>
             <button (click)="searchValue=''" mat-icon-button matSuffix>
-              <mat-icon  matSuffix>{{searchValue ? 'close' : 'search'}}</mat-icon>
+              <mat-icon matSuffix>{{searchValue ? 'close' : 'search'}}</mat-icon>
             </button>
           </div>
         </mat-form-field>
         <!-- <mat-icon>dashboard</mat-icon> -->
         <button [matMenuTriggerFor]="menu" mat-stroked-button>
-          <mat-icon>dashboard</mat-icon>
+          <img class="prof-icon" src="{{profilePic}}" alt="">
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item routerLink="profile" >
+          <button mat-menu-item routerLink="profile">
             <mat-icon matPrefix>person</mat-icon>
             Profile
           </button>
