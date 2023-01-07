@@ -84,7 +84,7 @@ body {
 }
 .container-fluid .right-cont .book-desc .genres p {
   min-width: 80px;
-  width: -webkit-max-cont;
+  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   border-bottom: 2px solid #2a324b;
@@ -183,7 +183,8 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-evenly;
+  /*justify-content: space-evenly;*/
+  justify-content: center;
   margin: 2.5vh 6vh;
 }
 .card-wrapper-row-card .card {

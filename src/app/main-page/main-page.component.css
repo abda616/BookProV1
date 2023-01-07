@@ -66,7 +66,6 @@
 .main-card-design .main-card-description {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
   margin-left: 5px;
   justify-content: space-evenly;
   padding: 5px;
@@ -76,30 +75,28 @@
 .main-card-design .main-card-description .title {
   padding-top: 20px;
   font-size: 26px;
-  height: 77px;
-  width: 80%;
   max-height: 80px;
-  overflow: hidden;
+  width: 100%;
+  text-align: center;
   overflow-wrap: break-word;
-  inline-size: 250px;
   line-height: normal;
 }
 
 .main-card-design .main-card-description .author {
-  font-size: 25px;
+  font-size: 24px;
   opacity: 53%;
-  inline-size: 250px;
+  overflow-wrap: break-word;
   text-align: center;
 }
 
 .main-card-design .main-card-description .desc {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .main-card-design .main-card-description .desc-data {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .main-card-design .main-card-description .desc-data p {
