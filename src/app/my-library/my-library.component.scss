@@ -1,0 +1,34 @@
+.container-fluid{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    .dashboard,.left-sticky{
+        width: 20%;
+        height: 100vh;
+        float: left;
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center ;
+        .image{
+            width: 100%;
+            height: 30%;
+            img{
+                width: 150px;
+                height: 150px;
+            }
+        }
+        .left-body{
+            width:70%;
+        }
+    }
+    .right-cont{
+        width: 80%;
+        float: right;
+background-color: #fefefe;
+    }
+}
+
+
