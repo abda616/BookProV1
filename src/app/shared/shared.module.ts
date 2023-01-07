@@ -39,9 +39,6 @@ import {CdkTreeModule} from "@angular/cdk/tree";
 import {OverlayModule} from "@angular/cdk/overlay";
 import {PortalModule} from "@angular/cdk/portal";
 import {AppRoutingModule} from "../app-routing.module";
-
-
-
 @NgModule({
   declarations: [],
   imports: [

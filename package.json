@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
+    "startC": "ng serve -o",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "mock:server": " nodemon --watch app --watch libs server/server.ts --ext js,ts,json,html"
+    "test": "ng test"
+
   },
   "private": true,
   "dependencies": {

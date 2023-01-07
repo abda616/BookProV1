@@ -4,7 +4,7 @@
       <div class="search-cont mb-3 p-1 mt-4">
         <input   type="text" #searchBar placeholder="Search Here" class="search-input">
 
-        <button (click)="onSearchChange(searchBar.value)" class="search-btn" (click)="searchInput=searchBar.value">
+        <button (click)="onSearchChange(searchBar.value)" class="search-btn">
 
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
         </button>
@@ -12,7 +12,7 @@
       <div class="filter-cont container">
         <div class="row  filter-cont">
           <div class="col-lg-3 radio-cont col-md-12 col-sm-12 mb-md-4 mb-sm-4 mb-xs-4" for="" *ngFor="let options of searchOptions;let i=index">
-            <label for="">{{options}}</label>
+            <label>{{options}}</label>
             <label  class="custom-radio" >
               <input type="radio" name="options" value={{options}} *ngIf="i==0" checked #radioFilter1 (change)="onSearchBy($event)" >
               <input type="radio"  name="options" value= {{options}} *ngIf="i>0" #radioFilter2 (change)="onSearchBy($event)">
@@ -27,11 +27,11 @@
       </div>
 
     <div class="container mw-70 mt-1" >
-    
+
       <div class="row cards-cont">
         <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"  *ngFor="let book of onGetData()|slice:0:28" >
     <div class="image">
-        <img src={{book.cover_page}} alt="">
+        <img src="{{book.cover_page}}" alt="">
     </div>
     <div class="card-body">
       <h4 class="title fw-bold">{{book.title_without_series}}</h4>
@@ -48,7 +48,7 @@
     <div class="row cards-cont">
       <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"  *ngFor="let book of onGetData()|slice:0:42" >
         <div class="image">
-          <img src={{book.cover_page}} alt="">
+          <img src="{{book.cover_page}}" alt="">
         </div>
         <div class="card-body">
           <h4 class="title fw-bold">{{book.title_without_series}}</h4>
@@ -91,7 +91,4 @@
   <ng-template #notFound>
     <h2>sorry we Cant find what u looked for</h2>
   </ng-template>
-
-
-</div>
 <app-spinner></app-spinner>

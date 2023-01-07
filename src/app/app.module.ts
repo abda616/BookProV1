@@ -11,7 +11,6 @@ import {MainPageComponent} from './main-page/main-page.component';
 import {LoginComponent} from './login/login.component';
 import {TradeNowComponent} from './trade-now/trade-now.component';
 import {MyLibraryComponent} from './my-library/my-library.component';
-import {MainPageService} from "./services/main-page.service";
 import {ChipMultiSelectComponent} from './chip-multi-select/chip-multi-select.component';
 import {AuthInterceptor} from "./shared/Auth/authconfig.interceptor";
 import {MyBookInfoComponent} from './book-info/book-info.component';
@@ -20,10 +19,11 @@ import {searchDataTransferService} from "./services/Transfer/search-data-transfe
 import {BookDataService} from "./services/Transfer/book-data.service";
 import {SearchPageComponent} from './search-page/search-page.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
-import { SpinnerComponent } from './spinner/spinner.component';
+import {SpinnerComponent} from './spinner/spinner.component';
 import {MatToolbarModule} from '@angular/material/toolbar'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatButtonModule} from '@angular/material/button'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,11 +49,9 @@ import {MatButtonModule} from '@angular/material/button'
     MatButtonModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-
   ],
   providers: [
     SharedDataModule,
-    MainPageService,
     searchDataTransferService,
     BookDataService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

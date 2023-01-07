@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
 
   mLoginForm() {
     this.loginForm = new FormGroup({
-      loginEmail: new FormControl('asdw', [Validators.required, Validators.minLength(4)]),
-      loginPassword: new FormControl('1asd@asd123', [Validators.required, Validators.minLength(8)])
+      loginEmail: new FormControl('movsarshishani', [Validators.required, Validators.minLength(4)]),
+      loginPassword: new FormControl('raw12345', [Validators.required, Validators.minLength(8)])
     });
   }
 
@@ -115,7 +115,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       console.log("my res" + responseBodyText)
       this.openSignup();
     });
-
   }
 
   protected validateSignUp(): boolean {
