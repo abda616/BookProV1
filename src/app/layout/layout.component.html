@@ -1,10 +1,12 @@
 <mat-drawer-container [hasBackdrop]="false" class="height-full">
 
-  <mat-drawer #drawer class="height-full" mode="side" position="start">
+  <mat-drawer #drawer class="height-full" mode="over" position="start">
 
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
-      <mat-card-header class="card-title  just-flex flex-row justify-content-center">
-        <mat-card-title class="text-warp-title-box">{{titleOfTheBook}}</mat-card-title>
+      <mat-card-header class="card-title just-flex flex-row justify-content-end">
+        <button (click)="toggleDrawer(drawer)" mat-icon-button>
+          <mat-icon matPrefix>arrow_back_ios</mat-icon>
+        </button>
       </mat-card-header>
       <mat-card-content class="just-flex flex-column">
 
@@ -96,6 +98,10 @@
             <mat-icon matPrefix>person</mat-icon>
             Profile
           </button>
+          <button (click)="toggleDrawer(drawer)" mat-menu-item>
+            <mat-icon matPrefix>message</mat-icon>
+            messaging
+          </button>
           <button mat-menu-item (click)="LogOut()">
             <mat-icon matPrefix>close</mat-icon>
             Log Out
@@ -105,7 +111,7 @@
 
     </mat-toolbar>
     <router-outlet class=""></router-outlet>
-    <button (click)="toggleDrawer(drawer)" class="btn btn-secondary">click</button>
+
 
   </mat-drawer-content>
 
