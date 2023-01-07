@@ -1,8 +1,32 @@
-.card-cont{
-    display: flex;
-    justify-content: space-around;
-
+.container-fluid {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
 }
-.card-cont .card{
-    
+.container-fluid .dashboard, .container-fluid .left-sticky {
+  width: 20%;
+  height: 100vh;
+  float: left;
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
+.container-fluid .dashboard .image, .container-fluid .left-sticky .image {
+  width: 100%;
+  height: 30%;
+}
+.container-fluid .dashboard .image img, .container-fluid .left-sticky .image img {
+  width: 150px;
+  height: 150px;
+}
+.container-fluid .dashboard .left-body, .container-fluid .left-sticky .left-body {
+  width: 70%;
+}
+.container-fluid .right-cont {
+  width: 80%;
+  float: right;
+  background-color: #fefefe;
+}/*# sourceMappingURL=my-library.component.css.map */
