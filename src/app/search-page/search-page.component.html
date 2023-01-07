@@ -25,73 +25,51 @@
   </div>
 </div>
       </div>
-
+ 
     <div class="container mw-70 mt-1" >
     
-      <div class="row cards-cont">
-        <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"  *ngFor="let book of onGetData()|slice:0:28" >
-    <div class="image">
-        <img src={{book.cover_page}} alt="">
-    </div>
-    <div class="card-body">
-      <h4 class="title fw-bold">{{book.title_without_series}}</h4>
-    <p class="author">{{book.name}}</p>
-    <button class="btn-more btn">Read More </button>
-    </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container mw-70 mt-1" >
-
-    <div class="row cards-cont">
-      <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"  *ngFor="let book of onGetData()|slice:0:42" >
-        <div class="image">
-          <img src={{book.cover_page}} alt="">
-        </div>
-        <div class="card-body">
-          <h4 class="title fw-bold">{{book.title_without_series}}</h4>
+      <div class="row cards-cont"  >
+        
+        <ng-container *ngIf="loadCount==0 ;">
+          <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"*ngFor="let book of onGetData()|slice:0:25;let i =index"   >
+          
+            <div class="image">
+              <img src={{book.cover_page}} alt="">
+          </div>
+          <div class="card-body">
+            <h4 class="title fw-bold">{{book.title_without_series}}</h4>
           <p class="author">{{book.name}}</p>
           <button class="btn-more btn">Read More </button>
+          </div>
+        
+  
         </div>
+        </ng-container>
+        <ng-container #elseBlock *ngIf="loadCount==1&&dataNum>1" >
+          <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"*ngFor="let book of searchResult|slice:0:50;let i =index"   >
+          
+            <div class="image">
+              <img src={{book.cover_page}} alt="">
+          </div>
+          <div class="card-body">
+            <h4 class="title fw-bold">{{book.title_without_series}}</h4>
+          <p class="author">{{book.name}}</p>
+          <button class="btn-more btn">Read More </button>
+          </div>
+        </div>
+        </ng-container>
+   
+
+
       </div>
-      <!-- <div class="col-lg-4 col-md-6 col-sm-12 card ">
-        <div class="image">
-          <img src={{book.cover_page}} alt="">
-        </div>
-        <div class="card-body">
-          <h4>title</h4>
-        <p>author</p>
-        <button>Read More</button>
-        </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 card ">
-              <div class="image">
-                <img src={{book.cover_page}} alt="">
-      </div>
-              <div class="card-body">
-                <h4>title</h4>
-              <p>author</p>
-              <button>Read More</button>
-              </div>
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12 card ">
-                    <div class="image">
-                      <img src={{book.cover_page}} alt="">
-                    </div>
-                    <div class="card-body">
-                      <h4>title</h4>
-                    <p>author</p>
-                    <button>Read More</button>
-                    </div>
-                        </div> -->
     </div>
   </div>
+
+  
   <ng-template #notFound>
     <h2>sorry we Cant find what u looked for</h2>
   </ng-template>
 
 
-</div>
+
 <app-spinner></app-spinner>
