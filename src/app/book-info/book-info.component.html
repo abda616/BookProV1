@@ -94,7 +94,7 @@
           <div class="carousel-item active">
             <div class="card-wrapper-row-card">
               <div *ngFor="let book of similarAuthorBooks|slice:0:3" class="card" style="width: 18rem;">
-                <img class="card-img-top" src={{book.coverImg}} alt="Card image cap">
+                <img class="card-img-top" src="{{book.coverImg}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="title fs-3">{{book.title}}</h5>
                   <p class="plot">{{book.description}}</p>
@@ -110,7 +110,7 @@
 
             <div class="card-wrapper-row-card ">
               <div *ngFor="let book of similarAuthorBooks|slice:3:6" class="card" style="width: 18rem;">
-                <img class="card-img-top" src={{book.imgCover}} alt="card image cap">
+                <img class="card-img-top" src="{{book.imgCover}}" alt="card image cap">
                 <div class="card-body">
                   <h5 class="title fs-3">{{book.title}}</h5>
                   <p class="plot">{{book.description}}</p>

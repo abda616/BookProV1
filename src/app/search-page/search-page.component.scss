@@ -66,7 +66,6 @@
     height: 50px;
     align-items: center;
     justify-content: center;
-    margin-right: none;
 
     input {
       position: relative;
@@ -97,7 +96,7 @@
       margin: 0;
       width: 100px;
       height: 100%;
-      border: none;
+      /*border: none;*/
       background-color: #f6f6f6;
       border: 2px solid #141e2d;
       border-left: none;
@@ -213,7 +212,7 @@
       justify-content: space-between;
       align-items: center;
       width: 180px;
-      height: 450x;
+      height: 450px;
       background-color: transparent;
       border: none;
 
@@ -277,7 +276,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 0%;
+            width: 0;
             height: 100%;
             background-color: darken(#F3EBD9, 15%);
             transition: all .3s;

@@ -65,7 +65,7 @@
         <!---->
         <!---->
         <!---->
-        <div class="email-div just-flex  justify-content-center" >
+        <div class="email-div just-flex  justify-content-center">
           <mat-form-field class="mx-2 my-1">
             <mat-label>Email</mat-label>
             <input matInput placeholder="name@domain" formControlName="UEmail" required>
@@ -90,8 +90,10 @@
             <mat-error>More Than 8 Character And The Same</mat-error>
           </mat-form-field>
         </div>
-        <div class="text-center" *ngIf="this.signUpForm.get('UPassword').get('A').value!='' || this.signUpForm.get('UPassword').get('B').value!=''">
-          <span class="text-center text-capitalize" style="color: red" *ngIf="this.signUpForm.get('UPassword').get('A').value!==this.signUpForm.get('UPassword').get('B').value">Password Not Much</span>
+        <div class="text-center"
+             *ngIf="this.signUpForm.get('UPassword').get('A').value!='' || this.signUpForm.get('UPassword').get('B').value!=''">
+          <span class="text-center text-capitalize" style="color: red"
+                *ngIf="this.signUpForm.get('UPassword').get('A').value!==this.signUpForm.get('UPassword').get('B').value">Password Not Much</span>
         </div>
 
 

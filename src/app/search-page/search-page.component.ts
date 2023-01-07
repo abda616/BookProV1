@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output, AfterViewInit, ViewChild, ViewChildren, ElementRef,} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, AfterViewInit, ViewChild, ElementRef,} from '@angular/core';
 import {SearchPageService} from '../services/search.service';
 import {SharedServiceService} from '../services/shared-service.service';
 import {searchDataTransferService} from '../services/Transfer/search-data-transfer.service';
@@ -46,13 +46,13 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearch(event) {
-    
+
 if(event.target!==undefined){
   this.searchType=event.target.value
   console.log(this.searchType)
 }
     if (this.searchInput != '') {
-     
+
       this.searchService.searchBy(this.searchInput,this.searchType).subscribe((res) => {
         this.searchResult = res;
         this.searchResult = this.sharedService.removeNoImage(this.searchResult);

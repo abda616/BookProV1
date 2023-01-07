@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
   width: auto;
   height: auto;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
   font-family: "Roboto", sans-serif;
   background-color: #f7f3e3;
 }
@@ -69,7 +69,7 @@ body {
 }
 .container-fluid .right-cont .book-desc .ratings .stars {
   width: 200px;
-  margin-right: 0px;
+  margin-right: 0;
   color: #f4ac32;
   font-size: 25px;
   margin-left: 0;
@@ -84,7 +84,7 @@ body {
 }
 .container-fluid .right-cont .book-desc .genres p {
   min-width: 80px;
-  width: -webkit-max-content;
+  width: -webkit-max-cont;
   width: -moz-max-content;
   width: max-content;
   border-bottom: 2px solid #2a324b;
@@ -184,7 +184,6 @@ body {
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-evenly;
-  justify-content: center;
   margin: 2.5vh 6vh;
 }
 .card-wrapper-row-card .card {
