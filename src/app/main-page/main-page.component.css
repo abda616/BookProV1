@@ -66,6 +66,8 @@
 .main-card-design .main-card-description {
   display: flex;
   flex-direction: column;
+  /* align-items: flex-start; */
+  margin-left: 5px;
   justify-content: space-evenly;
   padding: 5px;
   width: 80%;
@@ -75,130 +77,106 @@
   padding-top: 20px;
   font-size: 26px;
   height: 77px;
-  inline-size: 165px;
   width: 80%;
   max-height: 80px;
   overflow: hidden;
   overflow-wrap: break-word;
+  inline-size: 250px;
   line-height: normal;
 }
 
 .main-card-design .main-card-description .author {
   font-size: 25px;
   opacity: 53%;
+  inline-size: 250px;
+  text-align: center;
 }
 
 .main-card-design .main-card-description .desc {
   display: flex;
-  width: 165px;
   justify-content: space-between;
-}
-
-.main-card-design .main-card-description .desc p {
-  font-weight: 600;
 }
 
 .main-card-design .main-card-description .desc-data {
   display: flex;
-  width: 165px;
-  justify-content: space-around;
-  font-weight: 500;
+  justify-content: space-between;
 }
-.main-card-design .main-card-description .desc-data p {
-  inline-size: 140px;
-  overflow-wrap: break-word;
-  text-align: center;
-  line-height: normal;
 
-  display: flex;
-  width: 140px;
-  justify-content: space-around;
-  font-weight: 500;
-}
 .main-card-design .main-card-description .desc-data p {
-  inline-size: 140px;
-  overflow-wrap: break-word;
-  text-align: center;
-  line-height: normal;
-
-  display: flex;
-  width: 140px;
-  justify-content: space-around;
-  font-weight: 500;
+  opacity: 53%;
 }
 
 .card-wrapper-row-card {
-  /* This container is needed to position the front and back side */
-  /* Do an horizontal flip when you move the mouse over the flip box container */
-  /* Position the front and back side */
-  /* Style the front side (fallback if image is missing) */
-  /* Style the back side */
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  /*justify-content: center;*/
-  margin: 2.5vh 6vh;
+  width: 100%;
+  height: 400px;
+  max-height: 400px;
 }
 .card-wrapper-row-card .flip-card {
-  width: 300px;
-  height: 400px;
+  width: 20%;
+  height: 100%;
   border: 1px solid transparent;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
-.card-wrapper-row-card .flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
+  /* This container is needed to position the front and back side */
 }
 .card-wrapper-row-card .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
-.card-wrapper-row-card .flip-card-front, .card-wrapper-row-card .flip-card-back {
+.card-wrapper-row-card .flip-card .card-cont, .card-wrapper-row-card .flip-card .flip-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin: 0 0.5em;
+  position: relative;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  box-shadow: 18px 6px 20px -14px rgb(20, 30, 45);
+  border-radius: 20px;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-front, .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
-}
-.card-wrapper-row-card .flip-card-front {
   border: none;
   background-color: transparent;
+  border-radius: 20px;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .card-wrapper-row-card .flip-card .card-cont .flip-card-back img, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back img {
   width: 100%;
   height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 20px;
 }
-.card-wrapper-row-card .flip-card-front img {
-  min-width: 100%;
-  min-height: 100%;
-}
-.card-wrapper-row-card .flip-card-back {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
   background-color: #F3EBD9;
   transform: rotateY(180deg);
   height: 100%;
   width: 100%;
 }
-.card-wrapper-row-card .flip-card-back .card-body {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 80%;
+  height: 90%;
   color: #141e2d;
 }
-.card-wrapper-row-card .flip-card-back .card-body .title {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .title, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .title {
   line-height: 1.5em;
 }
-.card-wrapper-row-card .flip-card-back .card-body .plot {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot {
   max-height: 100px;
   overflow: hidden;
   z-index: 2;
 }
-.card-wrapper-row-card .flip-card-back .card-body .btn-more {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more {
   display: inline-block;
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
@@ -212,7 +190,7 @@
   width: 60%;
   z-index: 1;
 }
-.card-wrapper-row-card .flip-card-back .card-body .btn-more:after {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -223,7 +201,7 @@
   border-radius: 10rem;
   z-index: -2;
 }
-.card-wrapper-row-card .flip-card-back .card-body .btn-more:before {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:before, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -235,23 +213,9 @@
   border-radius: 10rem;
   z-index: -1;
 }
-.card-wrapper-row-card .flip-card-back .card-body .btn-more:hover {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover {
   color: #141e2d;
 }
-.card-wrapper-row-card .flip-card-back .card-body .btn-more:hover:before {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before {
   width: 100%;
-}
-.card-wrapper-row-card .card-cont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 300px;
-  height: 500px;
-  margin: 0 0.5em;
-}
-.card-wrapper-row-card .card-cont .card-img-top {
-  width: 100%;
-  height: 350px;
-  max-width: 100%;
 }/*# sourceMappingURL=main-page.component.css.map */
