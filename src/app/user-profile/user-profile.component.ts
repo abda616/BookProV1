@@ -12,29 +12,35 @@ import {AuthService} from "../shared/Auth/auth.service";
 export class UserProfileComponent implements OnInit {
   private patternValidator: string = '';
   citys: City[] = [];
-  Interests: string[] = JSON.parse(localStorage.getItem('interests'));
-  UInterests = new FormControl(this.Interests);
+  Interests: string[] = [];
+  userInterests= localStorage.getItem('interests').toString().replace(/[{}']/gi, "").split(/,/gi);
+  UInterests = new FormControl(localStorage.getItem('interests').toString().replace(/[{}]/gi, "").toString());
+
   userName: string = "Name";
   userCity: string = "Amman";
   userEmail: string="example@example.com";
-  userInterests= this.Interests;
-  profilePic="";
+  profilePic="assets/Avatars/men_av_2.png";
 
   constructor(private sharedData: SharedDataModule, private auth:AuthService) {
   }
 
+  ngAfterViewChecked(): void {
+    setTimeout(() => {
+      console.log()
+      //console.log(this.UInterests.value)
+    }, 0);
+  }
+
   ngOnInit(): void {
     this.sharedData.Pattern.subscribe(data=>{this.patternValidator=data});
-    this.auth.getUserProfile().subscribe(data=>{
-      this.userName=data['firstName']+" "+data["lastName"]
-      this.profilePic = data['profileImageUrl']?data['profileImageUrl']:"assets/Avatars/men_av_2.png"
-      this.userCity=data['city']
-      this.userInterests=data['interest']
-      this.userEmail=data['email']
-    })
 
-    const myBlogs = ['Drama', 'Fiction', 'Nonfiction'];
-    localStorage.setItem('interests', JSON.stringify(myBlogs));
+    this.auth.getUserProfile().subscribe(data=>{
+      this.userName=data['firstName']+" "+data["lastName"];
+      this.profilePic = data['profileImageUrl']?data['profileImageUrl']:"assets/Avatars/men_av_2.png";
+      this.userCity=data['city'];
+      this.userEmail=data['email'];
+      localStorage.setItem("interests",data['interest']?data['interest']:JSON.stringify(`{'Fiction', 'Non-fiction', 'Poetry','Children', 'Mystery', 'Thriller'}`));
+    })
 
     this.sharedData.Citys.subscribe(data =>
       this.citys = data);

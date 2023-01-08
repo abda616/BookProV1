@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.auth.getUserProfile().subscribe(data=>{
       this.profilePic = data['profileImageUrl'] ? data['profileImageUrl']:"assets/Avatars/men_av_2.png"
+      localStorage.setItem("interests", data['interest']?data['interest'].toLowerCase():"{'fiction','children','thriller'}");
     })
     this.search.updatePosition(true);
     this.search.currentPosition.subscribe(x => this.positionInSearch = x);
@@ -31,7 +32,7 @@ export class LayoutComponent implements OnInit {
   }
 
   LogOut() {
-    this.auth.doLogout()
+    this.auth.doLogout();
   }
 
   onEnter() {
