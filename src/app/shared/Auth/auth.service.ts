@@ -46,6 +46,7 @@ export class AuthService {
   doLogout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('interests');
     this.router.navigate(['log-in']).then(() => {
     });
   }

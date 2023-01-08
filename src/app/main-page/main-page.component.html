@@ -1,5 +1,4 @@
 <div class="just-flex w-100 flex-column">
-
   <div *ngFor="let headsAre of headsInTop ; let i = index">
     <h1 class="text-center mt-5">{{headsAre}}</h1>
 
@@ -65,7 +64,7 @@
                     <div class="card-body mt-4 p-2">
                       <h5 class="title fs-3">{{book.title_without_series}}</h5>
                       <p class="plot">{{book.correct_book_description}}</p>
-                      <a href="#" class="btn-more btn ">Read More</a>
+                      <a (click)="goToBookPage(book)" class="btn-more btn ">Read More</a>
                     </div>
                   </div>
                 </div>
@@ -85,8 +84,41 @@
         </button>
       </div>
     </div>
-
-    <div class="all-interest" ></div>
+  </div>
+  <div class="all-interest" *ngFor="let x of allGenreName;let y = index">
+    <h1 class="text-center mt-5">{{x}}</h1>
+    <div [attr.id]="'carouselControls'+y" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
+      <div class="carousel-inner" *ngFor="let _3dArr of allGenreArr[y]; let i = index;">
+        <div class="carousel-item {{i==0?'active':''}} ">
+          <div class="card-wrapper-row-card">
+            <div class="card-wrapper-row-card row flip-card" *ngFor="let book of _3dArr">
+              <div class="flip-card-inner card-cont">
+                <div class="flip-card-front">
+                  <img src='{{book.cover_page}}' alt="Avatar" class="card-img-top">
+                </div>
+                <div class="flip-card-back">
+                  <div class="card-body mt-4 p-2">
+                    <h5 class="title fs-3">{{book.title_without_series}}</h5>
+                    <p class="plot">{{book.correct_book_description}}</p>
+                    <a (click)="goToBookPage(book)" class="btn-more btn ">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'+y"
+              data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselControls'+y"
+              data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
 
   </div>
 </div>

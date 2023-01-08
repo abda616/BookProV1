@@ -18,24 +18,16 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   searchInput: string = '';
   didRate: boolean
   searchType: string = "all";
-  @ViewChild('searchBar') inputElementRef: ElementRef;
+  @Output() changedSearchText: EventEmitter<string> = new EventEmitter<string>();
 
-
-  @Output() changedSearchText: EventEmitter<string> =
-    new EventEmitter<string>();
-
-  constructor(
-    private searchService: SearchPageService,
-    private search: searchDataTransferService,
-    private sharedService: SharedServiceService
-  ) {
+  constructor(private searchService: SearchPageService, private search: searchDataTransferService,
+              private sharedService: SharedServiceService) {
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.search.updatePosition(false);
     }, 0);
-    this.inputElementRef.nativeElement.focus();
   }
 
   ngOnInit(): void {
@@ -46,31 +38,26 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearch(event) {
-
-if(event.target!==undefined){
-  this.searchType=event.target.value
-  console.log(this.searchType)
-}
+    if (event.target !== undefined) {
+      this.searchType = event.target.value
+      console.log(this.searchType)
+    }
     if (this.searchInput != '') {
-
-      this.searchService.searchBy(this.searchInput,this.searchType).subscribe((res) => {
-        this.searchResult = res;
-        this.searchResult = this.sharedService.removeNoImage(this.searchResult);
-
-        // calling the shared service to change the url to get the large img
-        this.searchResult.forEach((e) => {
-          e.cover_page = this.sharedService.getLargeImg(
-            e.cover_page,
-            this.sharedService.getPosition(e.cover_page, 'm/', 2)
-          );
+      this.searchService.searchBy(this.searchInput, this.searchType).subscribe(
+        (res) => {
+          this.searchResult = res;
+          this.searchResult = this.sharedService.removeNoImage(this.searchResult);
+          // calling the shared service to change the url to get the large img
+          this.searchResult.forEach((e) => {
+            e.cover_page = this.sharedService.getLargeImg(e.cover_page,
+              this.sharedService.getPosition(e.cover_page, 'm/', 2));
+          });
         });
-      });
-    } else console.log('empty search');
+    }
     return this.searchResult;
   }
 
   onGetData() {
-
     if (this.isFiltered) {
       return this.filteredSearchResult
     } else return this.searchResult;
@@ -81,7 +68,6 @@ if(event.target!==undefined){
     this.onSearch(this.searchType);
   }
 
-
   getUrl(e) {
     console.log(e.cover_page);
     return e.cover_page;
@@ -89,40 +75,8 @@ if(event.target!==undefined){
 
   onSearchBy(event) {
     console.log(this.searchResult)
-    this.searchType=event.target.value.toLowerCase()
-  this.onSearch(this.searchInput)
+    this.searchType = event.target.value.toLowerCase()
+    this.onSearch(this.searchInput)
   }
-
-  ///fill the stars on click
-  // fillStars(targetRating) {
-  //   let starsElemnts = document.querySelectorAll('.fa-regular');
-  //   starsElemnts.forEach((e) => {
-  //     if (this.filterationData.didRate) {
-  //       e.classList.remove('fa-solid');
-  //       console.log('clicked before');
-  //     }
-  //     if (e.id <= targetRating.id) {
-  //       e.classList.add('fa-solid');
-  //       this.filterationData.didRate = true;
-  //       this.filterationData.desiredRating = targetRating.id;
-  //     }
-  //   });
-  //   this.isFiltered = true;
-  // }
-
-  ////filter ratings
-
-  // filterRatings() {
-  //   let temp = [];
-  //   this.searchResult.map((e) => {
-  //     if (
-  //       Math.floor(e.book_average_rating) >= this.filterationData.desiredRating
-  //     ) {
-  //       temp.push(e);
-  //     }
-  //   });
-  //   return temp;
-  // }
-
 
 }

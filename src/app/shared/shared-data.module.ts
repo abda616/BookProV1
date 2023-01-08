@@ -33,8 +33,8 @@ export class SharedDataModule {
   Citys = this.cityArray.asObservable();
 
   private InterestArray = new BehaviorSubject<string[]>(
-    ['Fiction', 'Non-fiction', 'Poetry', 'Romance', 'Fantasy','paranormal',
-      'history','comics','historical-fiction','children', 'Mystery', 'Thriller', 'Crime','graphic', 'Biography']);
+    ['fiction', 'non-fiction', 'poetry', 'romance', 'fantasy','paranormal',
+      'history','comics','historical-fiction','children', 'mystery', 'thriller', 'crime','graphic', 'biography']);
 
   Interests = this.InterestArray.asObservable();
 

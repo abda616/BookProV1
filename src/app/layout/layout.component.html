@@ -4,9 +4,7 @@
 
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
       <mat-card-header class="card-title just-flex flex-row justify-content-end">
-        <button (click)="toggleDrawer(drawer)" mat-icon-button>
-          <mat-icon matPrefix>arrow_back_ios</mat-icon>
-        </button>
+
       </mat-card-header>
       <mat-card-content class="just-flex flex-column">
 
@@ -76,7 +74,6 @@
         <button mat-button routerLink="library">
           <span>My Library</span>
         </button>
-
         <mat-form-field class="search-width" *ngIf="positionInSearch">
           <div class="search-bar">
             <input [(ngModel)]="searchValue" matInput matNativeControl type="text" class="search-input"
@@ -98,10 +95,7 @@
             <mat-icon matPrefix>person</mat-icon>
             Profile
           </button>
-          <button (click)="toggleDrawer(drawer)" mat-menu-item>
-            <mat-icon matPrefix>message</mat-icon>
-            messaging
-          </button>
+
           <button mat-menu-item (click)="LogOut()">
             <mat-icon matPrefix>close</mat-icon>
             Log Out
@@ -110,8 +104,10 @@
       </div>
 
     </mat-toolbar>
+    <a (click)="toggleDrawer(drawer)" class="float" style="{{drawer.opened?'left:27%;':'left:35px;'}}">
+        <mat-icon class="my-float">message</mat-icon>
+    </a>
     <router-outlet class=""></router-outlet>
-
 
   </mat-drawer-content>
 
