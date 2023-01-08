@@ -5,11 +5,9 @@ import {IGenure} from '../shared/Interfaces/IGenure';
 
 @Injectable({providedIn: 'root'})
 export class SearchPageService {
-  baseSearchUrl = environment.apiUrl + "python/search/"
-  html = ""
-  targetedUrl = "https://www.goodreads.com/book/show/11358368-pop-star"
+  baseSearchUrl = environment.apiUrl + "search"
   constructor(private http: HttpClient) {}
   searchBy(targetSearch: string,targetType:string) {
-    return this.http.get<IGenure[]>(this.baseSearchUrl+targetType+"/"+ targetSearch)
+    return this.http.get<IGenure[]>(`${this.baseSearchUrl}`+`?domain=${targetType}&query=${targetSearch}`)
   }
 }
