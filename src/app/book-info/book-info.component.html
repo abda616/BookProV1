@@ -37,7 +37,7 @@
         <div class="genres mb-3">
           <h6 class="fs-4 font-weight-bold">Genres</h6>
           <div class="row w-30 d-flex ms-4 justify-content-evenly fs-6">
-            <div *ngFor="let genre of getGenres(currentBookInfo.genres)" class="col-lg-3 col-md-4 col-sm-6">
+            <div *ngFor="let genre of getGenres(currentBookInfo.genres)|slice:0:4" class="col-lg-3 col-md-4 col-sm-6">
               <p><a href="">{{genre}}</a></p>
             </div>
           </div>
