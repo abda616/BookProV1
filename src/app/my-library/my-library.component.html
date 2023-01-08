@@ -1,9 +1,11 @@
 <div class="container-fluid">
-        <div class="dashboard left-sticky">
+        <div class="dashboard left-sticky container">
             <div class="image">
                 <img src=" ./assets/Avatars/men_av_1.png" alt="">
+                <h2>Mohamad Abdeen</h2>
             </div>
             <div class="left-body">
+             
                 <h5>My Books</h5>
                 <h5>Favorite Book</h5>
                 <h5>Trade List</h5>
@@ -12,33 +14,36 @@
                 </div>
    
   
-        <div class="right-cont">
+        <div class="right-cont container">
             
-            <div class="other-two-cards" >
-                <div   [attr.id]="'carouselControls'" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
-                  <div class="carousel-inner"*ngFor="let pic of damn;let i=index"  >
-                    <div class="carousel-item {{i==0?'active':''}} "*ngFor="let book of data">
-                      <div class="card-wrapper-row-card">
-                        <div class="row " >
-                          <div class=" card-cont">
-                              <img src='{{book.cover_page}}' alt="Avatar" class="card-img-top">
-                          </div>
+          <div class="other-two-cards" >
+            <div [attr.id]="'carouselControls'" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
+              <div class="carousel-inner"*ngFor="let _3dArr of YInterests ; let i = index;"  >
+                <div  class="carousel-item {{i==0?'active':''}} " >
+                  <div class="card-wrapper-row-card" >
+                    <div class="row flip-card" *ngFor="let book of _3dArr"  >
+                      <div class="flip-card-inner card-cont">
+                        <div class="flip-card-front">
+                          <img src='{{book.cover_page}}' alt="Avatar" class="card-img-top">
                         </div>
+                        
                       </div>
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'"
-                          data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselControls'"
-                          data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
                 </div>
               </div>
+              <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'"
+                      data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselControls'"
+                      data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
         </div>
     
 

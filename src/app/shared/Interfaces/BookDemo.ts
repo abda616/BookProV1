@@ -36,3 +36,7 @@ export class BookDemo {
   name?: string
   name2?: string
 }
+export class ownedBooks{
+id:number;
+book:BookDemo;
+}
