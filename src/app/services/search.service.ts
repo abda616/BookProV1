@@ -3,6 +3,8 @@ import {environment} from "../../environments/environment.prod";
 import {HttpClient} from "@angular/common/http";
 import {IGenure} from '../shared/Interfaces/IGenure';
 
+
+
 @Injectable({providedIn: 'root'})
 export class SearchPageService {
   baseSearchUrl = environment.apiUrl + "search"

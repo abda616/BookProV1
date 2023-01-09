@@ -1,45 +1,39 @@
 <div class="container-fluid mw-100 d-flex justify-content-around m-0">
-
   <div class="left-cont col-lg-3 pt-5 d-flex align-items-start justify-content-evenly">
-
     <div class="row image-cont d-flex justify-content-around align-items-center h-70">
-
       <div class="col d-flex align-items-center d-flex flex-column">
-
-        <div class="img"><img [src]="currentBookInfo.coverPage" alt=""/></div>
-
-        <button class="btn buy-btn mt-3 text-white"><a class="text-white" href="{{currentBookInfo.bookUrl}}"
+        <div class="img"><img [src]="currentBookInfo['coverPage']" alt=""/></div>
+        <button class="btn buy-btn mt-3 text-white"><a class="text-white" href="{{currentBookInfo['bookUrl']}}"
                                                        target="_blank">Show Buying Options</a></button>
         <h5 class="fs-4 font-weight-bold text-dark mt-3">Rate This Book</h5>
         <div class="stars">
           <i style="color: gold;" class="fa-regular fa-star fs-3 ps-3 d-inline mt-3 {{i<getRate()?'fa-solid':''}} "
-             *ngFor="let star of [0,1,2,3,4];let i = index;" (click)="setRate(i+1,currentBookInfo.id)"></i>
+             *ngFor="let starta of [0,1,2,3,4];let i = index;" (click)="setRate(i+1,currentBookInfo['id'])"></i>
         </div>
-
       </div>
     </div>
   </div>
   <div class="right-cont pt-5 pl-5 m-0 col-lg-9 col-md-12">
     <div class="row book-desc d-flex justify-content-aroundh-70 flex-column">
       <div class="col-lg-9 col-md-12">
-        <h1 class="fs-1 font-weight-bold text-dark pb-3" #start>{{currentBookInfo.title}}</h1>
-        <h6 class="author fs-4 font-weight-bold">By <a
-          href="" class="font-weight-light text-dark">{{currentBookInfo.author}}</a>
+        <h1 class="fs-1 font-weight-bold text-dark pb-3">{{currentBookInfo['title']}}</h1>
+        <h6 class="author fs-4 font-weight-bold">By
+          <a (click)="scrollToAuth()" class="font-weight-light text-dark">{{currentBookInfo['author']}}</a>
         </h6>
         <div class="ratings pt-3">
           <p class="stars">
             <span>
               <i style="color:gold;"
-                 class="fa-regular fa-star {{i<currentBookInfo['rating']['average_rating']-1?'fa-solid':''}}"
-                 *ngFor="let star of [0,1,2,3,4];let i = index;"></i>
+                 class="fa-regular fa-star {{i<generalBookRate.toFixed(0)?'fa-solid':''}}"
+                 *ngFor="let starta of [0,1,2,3,4];let i = index;"></i>
             </span>
           </p>
-          <p class="rating">{{currentBookInfo['rating']['average_rating'].toFixed(2)}}</p>
+          <p class="rating">{{generalBookRate.toFixed(2)}}</p>
         </div>
         <div class="genres mb-3">
           <h6 class="fs-4 font-weight-bold">Genres</h6>
           <div class="row w-30 d-flex ms-4 justify-content-evenly fs-6">
-            <div *ngFor="let genre of getGenres(currentBookInfo.genres)|slice:0:4" class="col-lg-3 col-md-4 col-sm-6">
+            <div *ngFor="let genre of getGenres(GenraBook)|slice:0:4" class="col-lg-3 col-md-4 col-sm-6">
               <p><a href="">{{genre}}</a></p>
             </div>
           </div>
@@ -75,7 +69,8 @@
               <button class="btn info-btn text-white">Get Similar Books</button>
             </div>
             <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
-              <button class="btn info-btn text-white" (click)="addBookToOwened(currentBookInfo.id)">Add To My Library</button>
+              <button class="btn info-btn text-white" (click)="addBookToOwened(currentBookInfo.id)">Add To My Library
+              </button>
             </div>
           </div>
         </div>
@@ -83,57 +78,30 @@
     </div>
 
 
-    <div *ngFor="let headsAre of headsInTop ; let i = index">
+    <div *ngFor="let headsAre of strings ; let i = index">
       <h1 class="text-center mt-5">{{headsAre}}</h1>
       <hr/>
-      <div [attr.id]=" 'carouselControls'+i " class="carousel carousel-dark carousel- w-100 my-5" data-ride="carousel">
-        <div class="carousel-inner" *ngIf="headsAre==='Reader Also Liked';">
+      <div [attr.id]="'carouselControls'+i" class="carousel carousel-dark carousel- w-100 my-5" data-ride="carousel">
 
-          <div class="carousel-item active">
+        <div class="carousel-inner" *ngFor="let _3dArr of similarAuthorBooks ; let i = index;">
+          <div class="carousel-item {{i==0?'active':''}} ">
             <div class="card-wrapper-row-card">
-              <div *ngFor="let book of similarAuthorBooks|slice:0:3" class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{book.coverImg}}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="title fs-3">{{book.title}}</h5>
-                  <p class="plot">{{book.description}}</p>
-                  <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
+              <div class="card-wrapper-row-card row flip-card" *ngFor="let book of _3dArr">
+                <div class="flip-card-inner card-cont">
+                  <div class="flip-card-front">
+                    <img src="{{book['coverPage']}}" alt="Avatar" class="card-img-top">
+                  </div>
+                  <div class="flip-card-back">
+                    <div class="card-body mt-4 p-2">
+                      <h5 class="title fs-3">{{book['title']}}</h5>
+                      <p class="plot">{{book['description']}}</p>
+                      <a (click)="goToBookPage(book['id'])" class="btn-more btn ">Read More</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
-
-
-          <div class="carousel-item ">
-
-            <div class="card-wrapper-row-card ">
-              <div *ngFor="let book of similarAuthorBooks|slice:3:6" class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{book.imgCover}}" alt="card image cap">
-                <div class="card-body">
-                  <h5 class="title fs-3">{{book.title}}</h5>
-                  <p class="plot">{{book.description}}</p>
-                  <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="carousel-item">
-
-            <div class="card-wrapper-row-card">
-              <div *ngFor="let book of similarAuthorBooks|slice:6:9" class="card" style="width: 18rem;">
-                <img class="card-img-top" [src]="img" alt="card image cap">
-                <div class="card-body">
-                  <h5 class="title fs-3">Card title</h5>
-                  <p class="plot">{{book.description}}.</p>
-                  <a href="#" class="btn more-btn mt-2 mb-2 mt-2 mb-2 mt-2 mb-2">Read More</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
         </div>
         <!-- <div class="carousel-inner" *ngIf="headsAre==='From The Same Author';">
 
