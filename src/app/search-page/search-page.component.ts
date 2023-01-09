@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output, AfterViewInit, ViewChild, ElementRef,} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
 import {SearchPageService} from '../services/search.service';
 import {SharedServiceService} from '../services/shared-service.service';
 import {searchDataTransferService} from '../services/Transfer/search-data-transfer.service';
@@ -18,7 +18,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   filterGenresArr = [];
   isFiltered = false;
   searchInput: string = '';
-  didRate: boolean
+  didRate: boolean;
   searchType: string = "all";
   @Output() changedSearchText: EventEmitter<string> = new EventEmitter<string>();
 

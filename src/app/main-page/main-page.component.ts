@@ -5,7 +5,6 @@ import {HttpClient} from "@angular/common/http";
 import {SharedServiceService} from '../services/shared-service.service';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
-import {BookDemo} from "../shared/Interfaces/BookDemo";
 import {Router} from "@angular/router";
 
 @Component({
@@ -23,7 +22,15 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.search.updatePosition(true);
-    }, 0)
+    }, 0);
+
+    if (localStorage.getItem('interests')) {
+      this.getGenreArr()
+    } else {
+      setTimeout(() => {
+        this.getGenreArr()
+      }, 4000)
+    }
   }
 
   headsInTop: string[] = ["Top Rated Book", "Based On Your Interests", "Based On Similar Users"];
@@ -31,23 +38,16 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   YInterests = [];
   BoSU = [];
   allGenreName = [];
-  allGenreArr = []
+  allGenreArr = [];
 
   ngOnInit(): void {
     this.getBoUI();
     this.getTopN();
     this.getBoSU();
-    if (localStorage.getItem('interests')) {
-      this.getGenreArr()
-    } else {
-      setTimeout(() => {
-        this.getGenreArr()
-      }, 3000)
-    }
   }
 
   getBoUI() {
-    this.http.get<BookDemo[]>(`${environment.apiUrl}home/basedOnYourInterests`).subscribe((res) => {
+    this.http.get<Book[]>(`${environment.apiUrl}home/basedOnYourInterests`).subscribe((res) => {
       this.YInterests = res;
       this.YInterests = this.sharedService.removeNoImage(this.YInterests);
       let MostRatedC = [];
@@ -59,7 +59,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getTopN() {
-    this.http.get<Book[]>(`${environment.apiUrl}home/top10`).subscribe(res => {
+    this.http.get<Book[]>(`${environment.apiUrl}home/top10`).subscribe((res) => {
       this.topArr = res;
       this.topArr = this.sharedService.removeNoImage(this.topArr);
       let topNArrC = [];
@@ -71,7 +71,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getBoSU() {
-    this.http.get<Book[]>(`${environment.apiUrl}home/recommendBySimilarUsers`).subscribe(res => {
+    this.http.get<Book[]>(`${environment.apiUrl}home/recommendBySimilarUsers`).subscribe((res) => {
       this.BoSU = res;
       this.BoSU = this.sharedService.removeNoImage(this.BoSU);
       let BoSUC = [];
@@ -103,7 +103,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     let arrOfGen = [];
     allInt.forEach(i => {
       let arr = [];
-      this.http.get<BookDemo[]>(`${environment.apiUrl}search?domain=genre&query=${i}`).subscribe((res) => {
+      this.http.get<Book[]>(`${environment.apiUrl}search?domain=genre&query=${i}`).subscribe((res) => {
         arr = res;
         arr = this.sharedService.removeNoImage(arr);
         let C = [];

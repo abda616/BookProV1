@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {BookDemo} from "../../shared/Interfaces/BookDemo";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment.prod";
 
@@ -34,9 +33,14 @@ export class BookDataService {
 
   setRate(rate: number, id: number) {
     this.http.post(`${environment.apiUrl}profile/rateBook?rating=${rate}&book_id=${id}`,null)
+      .subscribe(value => {
+      console.log(value);
+    })
   }
   addBookToOwn(id: number) {
-    this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`,null)
+    this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`,null).subscribe(value => {
+      console.log(value);
+    })
   }
   tradeThisBook(id: number){
     this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`,null)
