@@ -8,6 +8,7 @@
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
         </button>
       </div>
+
       <div class="filter-cont container">
         <div class="row  filter-cont">
           <div class="col-lg-3 radio-cont col-md-12 col-sm-12 mb-md-4 mb-sm-4 mb-xs-4" for=""
@@ -32,14 +33,14 @@
 
     <div class="row cards-cont">
       <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10"
-           *ngFor="let book of onGetData()|slice:0:28">
+           *ngFor="let book of onGetData()|slice:0:45">
         <div class="image">
           <img src="{{book.cover_page}}" alt="">
         </div>
         <div class="card-body">
           <h4 class="title fw-bold">{{book.title_without_series}}</h4>
           <p class="author">{{book.name}}</p>
-          <button class="btn-more btn">Read More</button>
+          <button class="btn-more btn" (click)="goToBookPage(book)">Read More</button>
         </div>
       </div>
     </div>
@@ -49,14 +50,14 @@
 <div class="container mw-70 mt-1">
 
   <div class="row cards-cont">
-    <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10" *ngFor="let book of onGetData()|slice:0:42">
+    <div class="col-lg-4 col-md-6 col-sm-12 card mb-5 mt-5 ml-2 mr-2 h-10" *ngFor="let book of onGetData()|slice:0:45">
       <div class="image">
         <img src="{{book.cover_page}}" alt="">
       </div>
       <div class="card-body">
         <h4 class="title fw-bold">{{book.title_without_series}}</h4>
         <p class="author">{{book.name}}</p>
-        <button class="btn-more btn">Read More</button>
+        <button class="btn-more btn" (click)="goToBookPage(book)">Read More</button>
       </div>
     </div>
     <!-- <div class="col-lg-4 col-md-6 col-sm-12 card ">

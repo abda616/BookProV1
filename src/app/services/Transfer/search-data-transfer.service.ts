@@ -5,6 +5,7 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class searchDataTransferService {
+
   private searchVal = new BehaviorSubject<string>('');
   private position = new BehaviorSubject<boolean>(true);
 
@@ -19,6 +20,5 @@ export class searchDataTransferService {
     this.searchVal.next(data);
   }
 
-  constructor() {
-  }
+  constructor() {}
 }

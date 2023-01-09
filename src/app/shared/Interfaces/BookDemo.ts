@@ -36,7 +36,9 @@ export class BookDemo {
   name?: string
   name2?: string
 }
-export class ownedBooks{
-id:number;
-book:BookDemo;
+
+export class ownedBooks {
+  id: number;
+  avaliable: boolean;
+  book: BookDemo;
 }
