@@ -2,94 +2,85 @@
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
-.container-fluid .dashboard, .container-fluid .left-sticky {
+.container-fluid .dashboard {
+  position: relative;
   width: 20%;
-  height: calc(100vh - 66px);
+  height: 100vh;
   background-color: #FEFCFD;
+}
+.container-fluid .dashboard .left-sticky {
+  position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  align-items: flex-start;
+  justify-content: flex-start;
+  top: 100px;
+  height: 100%;
+  width: 20%;
 }
-.container-fluid .dashboard .image, .container-fluid .left-sticky .image {
+.container-fluid .dashboard .left-sticky .image {
+  position: relative;
   width: 100%;
-  height: 35%;
+  height: 30%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
 }
-.container-fluid .dashboard .image img, .container-fluid .left-sticky .image img {
+.container-fluid .dashboard .left-sticky .image .name {
+  margin-top: 10px;
+}
+.container-fluid .dashboard .left-sticky .image img {
   width: 150px;
   height: 150px;
 }
-.container-fluid .dashboard .left-body, .container-fluid .left-sticky .left-body {
+.container-fluid .dashboard .left-sticky .left-body {
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
   height: 60%;
 }
-.container-fluid .dashboard .left-body h5, .container-fluid .left-sticky .left-body h5 {
+.container-fluid .dashboard .left-sticky .left-body button {
+  border: none;
+  cursor: pointer;
+}
+.container-fluid .dashboard .left-sticky .left-body h5 {
   font-size: 20px;
 }
 .container-fluid .right-cont {
-  width: 80%;
-  height: calc(100vh - 66px);
-  background-color: #000;
-}
-.container-fluid .right-cont img {
-  width: 200px;
-  height: 300px;
-}
-.container-fluid .right-cont .card-wrapper-row-card {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  /*justify-content: center;*/
-  margin: 2.5vh 6vh;
+  justify-content: flex-start;
   width: 100%;
+  height: calc(100vh - 66px);
+  margin-left: 50px;
+}
+.container-fluid .right-cont h2 {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+.container-fluid .right-cont .cards-cont {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.container-fluid .right-cont .cards-cont .card {
+  width: 25%;
   height: 400px;
   max-height: 400px;
-}
-.container-fluid .right-cont .card-wrapper-row-card .flip-card {
-  width: 20%;
-  height: 100%;
-  border: 1px solid transparent;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
-  /* This container is needed to position the front and back side */
-}
-.container-fluid .right-cont .card-wrapper-row-card .flip-card .card-cont, .container-fluid .right-cont .card-wrapper-row-card .flip-card .flip-card-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  margin: 0 0.5em;
-  position: relative;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  box-shadow: 18px 6px 20px -14px rgb(20, 30, 45);
-  border-radius: 20px;
-}
-.container-fluid .right-cont .card-wrapper-row-card .flip-card .card-cont .flip-card-front, .container-fluid .right-cont .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
-  backface-visibility: hidden;
   border: none;
-  background-color: transparent;
-  border-radius: 20px;
+  margin-bottom: 20px;
 }
-.container-fluid .right-cont .card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .container-fluid .right-cont .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img {
+.container-fluid .right-cont .cards-cont .card img {
   width: 100%;
   height: 100%;
   max-height: 100%;

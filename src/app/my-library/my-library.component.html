@@ -1,50 +1,34 @@
 <div class="container-fluid">
-        <div class="dashboard left-sticky container">
+        <div class="dashboard  container">
+          <div class="left-sticky">
             <div class="image">
-                <img src=" ./assets/Avatars/men_av_1.png" alt="">
-                <h2>Mohamad Abdeen</h2>
-            </div>
-            <div class="left-body">
-             
-                <h5>My Books</h5>
-                <h5>Favorite Book</h5>
-                <h5>Trade List</h5>
-            </div>
-           
-                </div>
-   
-  
-        <div class="right-cont container">
-            
-          <div class="other-two-cards" >
-            <div [attr.id]="'carouselControls'" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
-              <div class="carousel-inner"*ngFor="let _3dArr of YInterests ; let i = index;"  >
-                <div  class="carousel-item {{i==0?'active':''}} " >
-                  <div class="card-wrapper-row-card" >
-                    <div class="row flip-card" *ngFor="let book of _3dArr"  >
-                      <div class="flip-card-inner card-cont">
-                        <div class="flip-card-front">
-                          <img src='{{book.cover_page}}' alt="Avatar" class="card-img-top">
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'"
-                      data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselControls'"
-                      data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
+              <img src=" ./assets/Avatars/men_av_1.png" alt="">
+              <h2 class="name">Mohamad Abdeen</h2>
           </div>
-        </div>
-    
-
+          <div class="left-body">
+            <Button class="btn "*ngFor="let section of sectionsArr"(click)="getData()" #sectionBtn>
+              <h5  >{{section}}</h5>
+            </Button>
+  
+          </div>
+         
+              </div>
+ 
+          </div>
+           
+  
+        <div class="right-cont container ">
+          <h2>{{desiredLibrary}}</h2>
+          <div class="cards-cont row "  >
+            <div class="col-lg-3 col-md-6 card mt-lg-2 mt-md-4"  >
+                <img  alt="">
+            
+            </div>
+            <div class="col-lg-3 col-md-6 card mt-lg-2 mt-md-4" *ngFor="let data of getData() " >
+              <img alt="">
+          
+          </div>
+          
+          </div>
 </div>
+<app-spinner></app-spinner>

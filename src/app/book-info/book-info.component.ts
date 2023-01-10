@@ -1,13 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import { catchError } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import {BooInfoService} from '../services/boo-info.service';
 import {BookDataService} from "../services/Transfer/book-data.service";
+import { BookDemo } from '../shared/Interfaces/BookDemo';
 
 @Component({
   selector: 'app-my-book-info',
   templateUrl: './book-Info.component.html',
   styleUrls: ['./book-info.component.css']
 })
-export class MyBookInfoComponent implements OnInit {
+export class MyBookInfoComponent implements OnInit,AfterViewInit {
   currentBookInfo: any = '';
   similarAuthorBooks = []
   counter = 3;
@@ -17,14 +21,22 @@ export class MyBookInfoComponent implements OnInit {
   right = true
 
 
-  constructor(private bookService: BooInfoService, private movedBook: BookDataService) {
+  constructor(private bookService: BooInfoService,
+     private movedBook: BookDataService,
+     private http:HttpClient,
+
+    ) {
   }
 
   ngOnInit(): void {
     this.movedBook.bookData.subscribe(data => {
       this.currentBookInfo = data
+      console.log(data)
     })
     // this.similarAuthorService();
+  }
+  ngAfterViewInit(): void {
+   
   }
 
   onBtnDown() {
