@@ -4,6 +4,8 @@ import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
 import {SearchPageService} from "../services/search.service";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment.prod";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-my-book-info',
@@ -13,7 +15,7 @@ import {Router} from "@angular/router";
 })
 export class MyBookInfoComponent implements OnInit, AfterViewInit {
   constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
-              private ref: ChangeDetectorRef, private http: HttpClient, private moveBook: BookDataService,
+              private ref: ChangeDetectorRef, private http: HttpClient , private moveBook: BookDataService,
               private search: SearchPageService ,private  rout:Router) {}
 
   hasChecked = false;

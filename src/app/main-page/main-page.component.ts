@@ -44,6 +44,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     this.getBoUI();
     this.getTopN();
     this.getBoSU();
+    this.getGenreArr();
   }
 
   getBoUI() {
@@ -61,7 +62,9 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   getTopN() {
     this.http.get<Book[]>(`${environment.apiUrl}home/top10`).subscribe((res) => {
       this.topArr = res;
+      console.log(res)
       this.topArr = this.sharedService.removeNoImage(this.topArr);
+      console.log(this.topArr)
       let topNArrC = [];
       for (let i = 0; i < this.topArr.length / 2; i++) {
         topNArrC[i] = this.topArr.slice(i * 2, i * 2 + 2)

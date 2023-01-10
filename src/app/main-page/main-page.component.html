@@ -3,13 +3,13 @@
     <h1 class="text-center mt-5">{{headsAre}}</h1>
     <div class="first-card" *ngIf="i==0&&topArr">
       <div id="carouselControlsRFU" class="carousel carousel-dark w-100" data-ride="carousel">
-        <div class="carousel-inner" *ngFor="let _2dArr of topArr; let i = index;">
+        <div class="carousel-inner" *ngFor="let _2DTopArr of topArr; let i = index;">
 
           <div class="carousel-item {{i==0?'active':''}} ">
             <div class="card-wrapper-row-card">
 
               <div class="main-card-design mt-md-4" (click)="goToBookPage(book['id'])"
-                   *ngFor="let book of _2dArr;let i = index;">
+                   *ngFor="let book of _2DTopArr;">
                 <div class="card-img-on-left">
                   <img [src]="book['coverPage']" alt="Avatar f1"/>
                   <div class="main-card-background-img"></div>
@@ -25,11 +25,11 @@
                       <p>Rating</p>
                     </div>
                     <div class="desc-data">
-                      <p>{{book['numOfPages']}}.</p>
+                      <p>{{book['numOfPages']}}</p>
                       <div class="just-flex flex-column">
                         <span class="m-auto" *ngFor="let genre of getGenres(book['genres'])">{{genre.toString()}}</span>
                       </div>
-                      <p>{{book['rating']['average_rating'].toFixed(2)}}.</p>
+                      <p>{{book['rating']['average_rating'].toFixed(2)}}</p>
                     </div>
                   </div>
                 </div>
