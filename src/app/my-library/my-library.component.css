@@ -5,12 +5,14 @@
   flex-direction: row;
   justify-content: flex-start;
 }
+
 .container-fluid .dashboard {
   position: relative;
   width: 20%;
   height: 100vh;
   background-color: #FEFCFD;
 }
+
 .container-fluid .dashboard .left-sticky {
   position: fixed;
   display: flex;
@@ -21,6 +23,7 @@
   height: 100%;
   width: 20%;
 }
+
 .container-fluid .dashboard .left-sticky .image {
   position: relative;
   width: 100%;
@@ -29,13 +32,16 @@
   align-items: center;
   flex-direction: column;
 }
+
 .container-fluid .dashboard .left-sticky .image .name {
   margin-top: 10px;
 }
+
 .container-fluid .dashboard .left-sticky .image img {
   width: 150px;
   height: 150px;
 }
+
 .container-fluid .dashboard .left-sticky .left-body {
   position: relative;
   display: flex;
@@ -46,13 +52,16 @@
   width: 100%;
   height: 60%;
 }
+
 .container-fluid .dashboard .left-sticky .left-body button {
   border: none;
   cursor: pointer;
 }
+
 .container-fluid .dashboard .left-sticky .left-body h5 {
   font-size: 20px;
 }
+
 .container-fluid .right-cont {
   display: flex;
   flex-wrap: wrap;
@@ -61,11 +70,13 @@
   height: calc(100vh - 66px);
   margin-left: 50px;
 }
+
 .container-fluid .right-cont h2 {
   width: 100%;
   text-align: center;
   margin-top: 30px;
 }
+
 .container-fluid .right-cont .cards-cont {
   width: 100%;
   height: 100%;
@@ -73,6 +84,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+
 .container-fluid .right-cont .cards-cont .card {
   width: 25%;
   height: 400px;
@@ -80,10 +92,13 @@
   border: none;
   margin-bottom: 20px;
 }
+
 .container-fluid .right-cont .cards-cont .card img {
   width: 100%;
   height: 100%;
   max-height: 100%;
   max-width: 100%;
   border-radius: 20px;
-}/*# sourceMappingURL=my-library.component.css.map */
+}
+
+/*# sourceMappingURL=my-library.component.css.map */

@@ -15,6 +15,7 @@
   .flip-card .carousel-inner {
     overflow: scroll !important;
   }
+
   .first-card .card-wrapper-row-card {
     display: flex;
     flex-direction: column;
@@ -24,6 +25,7 @@
     margin: 2.5vh 6vh;
   }
 }
+
 .carousel-control-prev {
   width: 5%;
   z-index: 9;
@@ -120,6 +122,7 @@
   height: 400px;
   max-height: 400px;
 }
+
 .card-wrapper-row-card .flip-card {
   width: 20%;
   height: 100%;
@@ -127,9 +130,11 @@
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   /* This container is needed to position the front and back side */
 }
+
 .card-wrapper-row-card .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
+
 .card-wrapper-row-card .flip-card .card-cont, .card-wrapper-row-card .flip-card .flip-card-inner {
   display: flex;
   flex-direction: column;
@@ -145,6 +150,7 @@
   box-shadow: 18px 6px 20px -14px rgb(20, 30, 45);
   border-radius: 20px;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-front, .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
   position: absolute;
   width: 100%;
@@ -155,6 +161,7 @@
   background-color: transparent;
   border-radius: 20px;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .card-wrapper-row-card .flip-card .card-cont .flip-card-back img, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back img {
   width: 100%;
   height: 100%;
@@ -162,12 +169,14 @@
   max-width: 100%;
   border-radius: 20px;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
   background-color: #F3EBD9;
   transform: rotateY(180deg);
   height: 100%;
   width: 100%;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body {
   display: flex;
   flex-direction: column;
@@ -177,14 +186,17 @@
   height: 90%;
   color: #141e2d;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .title, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .title {
   line-height: 1.5em;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot {
   max-height: 100px;
   overflow: hidden;
   z-index: 2;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more {
   display: inline-block;
   padding: 0.75rem 1.25rem;
@@ -199,6 +211,7 @@
   width: 60%;
   z-index: 1;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
   content: "";
   position: absolute;
@@ -210,6 +223,7 @@
   border-radius: 10rem;
   z-index: -2;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:before, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:before {
   content: "";
   position: absolute;
@@ -222,9 +236,13 @@
   border-radius: 10rem;
   z-index: -1;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover {
   color: #141e2d;
 }
+
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before {
   width: 100%;
-}/*# sourceMappingURL=main-page.component.css.map */
+}
+
+/*# sourceMappingURL=main-page.component.css.map */
