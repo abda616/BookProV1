@@ -1,7 +1,7 @@
-import {HttpClientModule,HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import { environment } from 'src/environments/environment.prod';
+import {environment} from 'src/environments/environment.prod';
 import {SharedServiceService} from '../services/shared-service.service';
 import {Book, ownedBooks} from '../shared/Interfaces/Book';
 
@@ -9,12 +9,15 @@ import {Book, ownedBooks} from '../shared/Interfaces/Book';
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
   styleUrls: ['./my-library.component.css'],
-
 })
+
 export class MyLibraryComponent implements OnInit, AfterViewInit {
-  data: object;
-  damn = [0, 1, 2, 3, 4, 5];
-  YInterests: ownedBooks
+  sectionsArr = ["My Books", "Favorite Books", "Trade List"]
+  desiredLibrary: string = this.sectionsArr[0];
+  ownedBooks: ownedBooks[];
+  favoriteBooks: ownedBooks[];
+  uiData: ownedBooks[];
+  getTarget: string = this.sectionsArr[0];
 
   constructor(private search: searchDataTransferService,
               private http: HttpClient,
@@ -23,29 +26,51 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
+    console.log(this.ownedBooks)
     setTimeout(() => {
       this.search.updatePosition(true);
     }, 0)
   }
 
   ngOnInit(): void {
-// this.getBoUI()
   }
 
-  // getBoUI() {
-  //   this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/owned`).subscribe((res) => {
-  //     this.YInterests = res;
-  //     console.log(this.YInterests)
-  //     this.YInterests = this.sharedService.removeNoImage(this.YInterests);
-  //     this.YInterests.forEach(e => {
-  //       e.cover_page = this.sharedService.getLargeImg(e.cover_page, this.sharedService.getPosition(e.cover_page, "m/", 2))
-  //     });
-  //     let MostRatedC = [];
-  //     for (let i = 0; i < this.YInterests.length/8; i++) {
-  //       MostRatedC[i] = this.YInterests.slice(i * 8, i * 8 + 8)
-  //     }
-  //     this.YInterests = MostRatedC;
-  //   });
-  // }
+  getOwnedBooks(type) {
+    this.getTarget = type;
+    this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/owned`).subscribe((res) => {
+      this.ownedBooks = res
+      this.ownedBooks = this.sharedService.removeNoImage(this.ownedBooks)
+
+      this.ownedBooks.forEach(e => {
+        e.book.coverPage = this.sharedService.getLargeImg(e.book.coverPage, this.sharedService.getPosition(e.book.coverPage, "m/", 2))
+      });
+    });
+    return this.ownedBooks;
+  }
+
+  getFavoriteBooks(type) {
+    this.getTarget = type;
+    this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/favorites`).subscribe(res => {
+      this.favoriteBooks = res;
+    })
+    return this.favoriteBooks;
+  }
+
+  getData() {
+
+    if (this.getTarget == this.sectionsArr[0]) {
+      this.desiredLibrary = this.getTarget;
+      this.uiData = this.getOwnedBooks(this.desiredLibrary)
+      return this.ownedBooks;
+
+    } else if (this.getTarget == this.sectionsArr[1]) {
+      this.desiredLibrary = this.getTarget;
+      this.uiData = this.getFavoriteBooks(this.desiredLibrary)
+
+    } else if (this.getTarget == this.sectionsArr[2]) {
+      this.desiredLibrary = this.getTarget;
+      this.uiData = this.getFavoriteBooks(this.desiredLibrary)
+    }
+    return ''
+  }
 }

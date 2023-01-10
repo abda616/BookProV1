@@ -57,9 +57,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onGetData() {
-    if (this.isFiltered) {
-      return this.filteredSearchResult
-    } else return this.searchResult;
+     return this.searchResult;
   }
 
   onSearchChange(val) {
