@@ -1,14 +1,15 @@
-.container-fluid{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    .dashboard{
-     position: relative;
-        width: 20%;
-        height: 100vh;
-        background-color: #FEFCFD;
+.container-fluid {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  .dashboard {
+    position: relative;
+    width: 20%;
+    height: 100vh;
+    background-color: #FEFCFD;
 
         .left-sticky{
           position: fixed;
@@ -92,10 +93,10 @@
                max-width: 100%;
               border-radius: 20px;
 
-          }
         }
       }
     }
   }
+}
 
 

@@ -9,21 +9,20 @@ import { BookDemo, ownedBooks } from '../shared/Interfaces/BookDemo';
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
   styleUrls: ['./my-library.component.css'],
-
 })
-export class MyLibraryComponent implements OnInit,AfterViewInit {
-sectionsArr=["My Books","Favorite Books","Trade List"]
-desiredLibrary:string=this.sectionsArr[0];
- ownedBooks:ownedBooks[];
- favoriteBooks:ownedBooks[];
- uiData:ownedBooks[];
- getTarget:string=this.sectionsArr[0];
-  constructor(private search:searchDataTransferService,
-    private http:HttpClient,
-    private sharedService:SharedServiceService,
-   
 
-    ) {
+export class MyLibraryComponent implements OnInit, AfterViewInit {
+  sectionsArr = ["My Books", "Favorite Books", "Trade List"]
+  desiredLibrary: string = this.sectionsArr[0];
+  ownedBooks: ownedBooks[];
+  favoriteBooks: ownedBooks[];
+  uiData: ownedBooks[];
+  getTarget: string = this.sectionsArr[0];
+
+  constructor(private search: searchDataTransferService,
+              private http: HttpClient,
+              private sharedService: SharedServiceService,
+  ) {
   }
   ngAfterViewInit(): void {
     setTimeout(()=>{
