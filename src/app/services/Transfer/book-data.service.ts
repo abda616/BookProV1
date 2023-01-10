@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, share, shareReplay} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment.prod";
 
@@ -7,6 +7,8 @@ import {environment} from "../../../environments/environment.prod";
   providedIn: 'root'
 })
 export class BookDataService {
+  private myData$ = null;
+  constructor(private http:HttpClient) {}
 
   private book = new BehaviorSubject<number>(null);
   bookData = this.book.asObservable();
@@ -16,15 +18,13 @@ export class BookDataService {
       localStorage.setItem('Book',String(data));
     }
   }
-  private position = new BehaviorSubject<boolean>(true);
-  slidePosition = this.position.asObservable();
-  updatePosition(data: boolean) {
-    this.position.next(data);
-  }
   getBook(id:number){
-    return this.http.get(`${environment.apiUrl}book/getBook?book_id=${id}`)
-  }
-  constructor(private http:HttpClient) {
+    if (!this.myData$) {
+      this.myData$ = this.http.get(`${environment.apiUrl}book/getBook?book_id=${id}`).pipe(
+        shareReplay(1)
+      );
+    }
+    return this.myData$;
   }
 
   getRate(id: number) {

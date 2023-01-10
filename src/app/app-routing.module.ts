@@ -9,6 +9,7 @@ import {LoginComponent} from "./login/login.component";
 import {SearchPageComponent} from './search-page/search-page.component';
 import {AuthGuard} from "./shared/Auth/auth.guard";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
+import {ConversationComponent} from "./conversation/conversation.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/app', pathMatch: 'full'},
@@ -51,6 +52,12 @@ const routes: Routes = [
       {
         path: 'profile',
         component: UserProfileComponent,
+        canActivate: [AuthGuard],
+        pathMatch: "full"
+      },
+      {
+        path: 'message',
+        component: ConversationComponent,
         canActivate: [AuthGuard],
         pathMatch: "full"
       },

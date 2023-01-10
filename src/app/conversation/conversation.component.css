@@ -1,0 +1,12 @@
+
+
+.convirsation-hight {
+  height: -webkit-fill-available;
+}
+
+.type-message-area {
+  position: fixed!important;
+  width:97%;
+  display: flex;
+  justify-content: space-between;
+}

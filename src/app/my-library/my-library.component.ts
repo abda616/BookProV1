@@ -1,9 +1,10 @@
-import { HttpClientModule,HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import { environment } from 'src/environments/environment.prod';
-import { SharedServiceService } from '../services/shared-service.service';
-import { Book, ownedBooks } from '../shared/Interfaces/Book';
+import {environment} from 'src/environments/environment.prod';
+import {SharedServiceService} from '../services/shared-service.service';
+import {ownedBooks} from '../shared/Interfaces/Book';
+
 @Component({
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
@@ -23,46 +24,50 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
               private sharedService: SharedServiceService,
   ) {
   }
+
   ngAfterViewInit(): void {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.search.updatePosition(true);
-    },0)
+    }, 0)
   }
-  ngOnInit(): void {  
-this.getOwnedBooks()
+
+  ngOnInit(): void {
+    this.getOwnedBooks()
   }
 
   getOwnedBooks() {
-    this.getTarget=this.sectionsArr[0]
+    this.getTarget = this.sectionsArr[0]
     this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/owned`).subscribe((res) => {
-     this.ownedBooks=res
-   this.ownedBooks=this.sharedService.removeNoImage(this.ownedBooks)
-    
-      this.ownedBooks.forEach(e => { 
+      this.ownedBooks = res
+      this.ownedBooks = this.sharedService.removeNoImage(this.ownedBooks)
+
+      this.ownedBooks.forEach(e => {
         e.book.coverPage = this.sharedService.getLargeImg(e.book.coverPage, this.sharedService.getPosition(e.book.coverPage, "m/", 2))
       });
     });
     return this.ownedBooks;
   }
-  getFavoriteBooks(){
-    this.getTarget=this.sectionsArr[1]
-    this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/favorites`).subscribe(res=>{
-      this.favoriteBooks=res;
-      
+
+  getFavoriteBooks() {
+    this.getTarget = this.sectionsArr[1]
+    this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/favorites`).subscribe(res => {
+      this.favoriteBooks = res;
+
     })
     return this.favoriteBooks;
   }
-  changeTarget(type){
-    this.desiredLibrary=type;
+
+  changeTarget(type) {
+    this.desiredLibrary = type;
     this.getData(type);
   }
-  getData(type=this.sectionsArr[0]){
-    
-    if(type==this.sectionsArr[0]){
+
+  getData(type = this.sectionsArr[0]) {
+
+    if (type == this.sectionsArr[0]) {
       console.log(this.ownedBooks)
       return this.ownedBooks;
-    }
-    else if(type==this.sectionsArr[1]){
+    } else if (type == this.sectionsArr[1]) {
       console.log(this.favoriteBooks)
       return this.favoriteBooks;
     }
