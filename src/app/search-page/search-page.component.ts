@@ -1,7 +1,9 @@
-import {Component, OnInit, EventEmitter, Output, AfterViewInit, ViewChild, ElementRef,} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
 import {SearchPageService} from '../services/search.service';
 import {SharedServiceService} from '../services/shared-service.service';
 import {searchDataTransferService} from '../services/Transfer/search-data-transfer.service';
+import {BookDataService} from "../services/Transfer/book-data.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search-page',
@@ -16,12 +18,13 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   filterGenresArr = [];
   isFiltered = false;
   searchInput: string = '';
-  didRate: boolean
+  didRate: boolean;
   searchType: string = "all";
   @Output() changedSearchText: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private searchService: SearchPageService, private search: searchDataTransferService,
-              private sharedService: SharedServiceService) {
+              private sharedService: SharedServiceService,
+              private moveBook: BookDataService, private router: Router) {
   }
 
   ngAfterViewInit(): void {
@@ -48,10 +51,6 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
           this.searchResult = res;
           this.searchResult = this.sharedService.removeNoImage(this.searchResult);
           // calling the shared service to change the url to get the large img
-          this.searchResult.forEach((e) => {
-            e.cover_page = this.sharedService.getLargeImg(e.cover_page,
-              this.sharedService.getPosition(e.cover_page, 'm/', 2));
-          });
         });
     }
     return this.searchResult;
@@ -69,6 +68,11 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   getUrl(e) {
     console.log(e.cover_page);
     return e.cover_page;
+  }
+
+  goToBookPage(book: any) {
+    this.moveBook.transBook(book);
+    this.router.navigate(['app/book']).then();
   }
 
   onSearchBy(event) {

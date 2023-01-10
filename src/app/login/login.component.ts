@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   }
 
   ngOnInit(): void {
+    if(this.myAuth.isLoggedIn){
+      this.router.navigate(["app"]).then();
+    }
+
     this.sharedData.Citys.subscribe(data => this.citys = data);
     this.sharedData.Avatars.subscribe(data => this.avatars = data);
     this.sharedData.Interests.subscribe(data => this.Interests = data);
@@ -37,7 +41,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   citys: City[] = [];
   avatars: avatarPicture[] = [];
   Interests: string[] = [];
-  submitted = false;
   signUpState = false;
   hidePass = true;
   UInterests = new FormControl();
@@ -59,7 +62,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       loginPassword: new FormControl('raw12345', [Validators.required, Validators.minLength(8)])
     });
   }
-
   mSignUpForm() {
     this.signUpForm = new FormGroup(
       {
@@ -81,14 +83,11 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
 
   /*------------------------------------------*/
   protected onLogin(): void {
-    this.submitted = true;
     if (this.loginForm.valid) {
       let intoUser: userSignIn = {
         email: this.loginForm.get('loginEmail').value,
         password: this.loginForm.get('loginPassword').value
       };
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
       this.myAuth.signIn(intoUser).subscribe((next) => {
         localStorage.setItem('access_token', next['access_token']);
         localStorage.setItem('refresh_token', next['refresh_token']);

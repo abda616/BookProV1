@@ -1,10 +1,10 @@
-import { HttpClientModule,HttpClient} from '@angular/common/http';
+import {HttpClientModule,HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import {Book} from "../shared/Interfaces/Book";
 import { environment } from 'src/environments/environment.prod';
-import { SharedServiceService } from '../services/shared-service.service';
-import { BookDemo, ownedBooks } from '../shared/Interfaces/BookDemo';
+import {SharedServiceService} from '../services/shared-service.service';
+import {Book, ownedBooks} from '../shared/Interfaces/Book';
+
 @Component({
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
@@ -25,11 +25,12 @@ desiredLibrary:string=this.sectionsArr[0];
 
     ) {
   }
+
   ngAfterViewInit(): void {
  console.log(this.ownedBooks)
     setTimeout(()=>{
       this.search.updatePosition(true);
-    },0)
+    }, 0)
   }
   ngOnInit(): void {  
   }

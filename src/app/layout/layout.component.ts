@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
-import {Router} from "@angular/router";
+import {Router, NavigationEnd} from '@angular/router';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {filter} from "rxjs";
+
 
 @Component({
   selector: 'app-layout',
@@ -10,21 +12,29 @@ import {searchDataTransferService} from "../services/Transfer/search-data-transf
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit {
+
   searchValue: string = '';
   positionInSearch = true;
-  titleOfTheBook: any | string = "book name".toUpperCase();
   authorName: any | string = "book author name".toUpperCase();
-  profilePic=""
+  profilePic = ""
 
-  constructor(private auth: AuthService, private search: searchDataTransferService, private router: Router) {}
+  constructor(private auth: AuthService, private search: searchDataTransferService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.auth.getUserProfile().subscribe(data=>{
-      this.profilePic = data['profileImageUrl'] ? data['profileImageUrl']:"assets/Avatars/men_av_2.png"
-      localStorage.setItem("interests", data['interest']?data['interest'].toLowerCase():"{'fiction','children','thriller'}");
+    this.auth.getUserProfile().subscribe(data => {
+      this.profilePic = data['profileImageUrl'] ? data['profileImageUrl'] : "assets/Avatars/men_av_2.png"
+      localStorage.setItem("profileImageUrl", this.profilePic);
+      localStorage.setItem("interests", data['interest'] ? data['interest'].toLowerCase() : "{'fiction','children','thriller'}");
     })
+
     this.search.updatePosition(true);
     this.search.currentPosition.subscribe(x => this.positionInSearch = x);
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
+      (event: NavigationEnd) => {
+        document.querySelector("#mat-drawer-content").scroll({top: 0, left: 0})
+      });
   }
 
   toggleDrawer(ref: MatDrawer) {
