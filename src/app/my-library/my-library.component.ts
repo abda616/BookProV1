@@ -1,10 +1,10 @@
-import {HttpClientModule,HttpClient} from '@angular/common/http';
+import { HttpClientModule,HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {Book} from "../shared/Interfaces/Book";
 import { environment } from 'src/environments/environment.prod';
-import {SharedServiceService} from '../services/shared-service.service';
-import {Book, ownedBooks} from '../shared/Interfaces/Book';
-
+import { SharedServiceService } from '../services/shared-service.service';
+import { BookDemo, ownedBooks } from '../shared/Interfaces/BookDemo';
 @Component({
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
@@ -25,51 +25,53 @@ desiredLibrary:string=this.sectionsArr[0];
 
     ) {
   }
-
   ngAfterViewInit(): void {
- console.log(this.ownedBooks)
     setTimeout(()=>{
       this.search.updatePosition(true);
-    }, 0)
+    },0)
   }
   ngOnInit(): void {  
+this.getOwnedBooks()
   }
 
-  getOwnedBooks(type) {
-    this.getTarget=type;
+  getOwnedBooks() {
+    this.getTarget=this.sectionsArr[0]
     this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/owned`).subscribe((res) => {
      this.ownedBooks=res
    this.ownedBooks=this.sharedService.removeNoImage(this.ownedBooks)
-     
+    
       this.ownedBooks.forEach(e => { 
         e.book.coverPage = this.sharedService.getLargeImg(e.book.coverPage, this.sharedService.getPosition(e.book.coverPage, "m/", 2))
       });
     });
     return this.ownedBooks;
   }
-  getFavoriteBooks(type){
-    this.getTarget=type;
+  getFavoriteBooks(){
+    this.getTarget=this.sectionsArr[1]
     this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/favorites`).subscribe(res=>{
       this.favoriteBooks=res;
       
     })
     return this.favoriteBooks;
   }
-  getData(){
+  changeTarget(type){
+    this.desiredLibrary=type;
+    this.getData(type);
+  }
+  getData(type=this.sectionsArr[0]){
     
-    if(this.getTarget==this.sectionsArr[0]){
-      this.desiredLibrary=this.getTarget;
-      this.uiData=this.getOwnedBooks(this.desiredLibrary)
+    if(type==this.sectionsArr[0]){
+      console.log(this.ownedBooks)
       return this.ownedBooks;
     }
-    else if(this.getTarget==this.sectionsArr[1]){
-      this.desiredLibrary=this.getTarget;
-      this.uiData=this.getFavoriteBooks(this.desiredLibrary)
+    else if(type==this.sectionsArr[1]){
+      console.log(this.favoriteBooks)
+      return this.favoriteBooks;
     }
-    else if(this.getTarget==this.sectionsArr[2]){
-      this.desiredLibrary=this.getTarget;
-      this.uiData=this.getFavoriteBooks(this.desiredLibrary)
-    }
+    // else if(this.getTarget==this.sectionsArr[2]){
+    //   this.desiredLibrary=this.getTarget;
+    //   this.uiData=this.getFavoriteBooks()
+    // }
     return ''
   }
 }

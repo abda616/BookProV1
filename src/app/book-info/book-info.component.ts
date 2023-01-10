@@ -1,16 +1,10 @@
 import {ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit, AfterViewInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import { catchError } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
-import {BooInfoService} from '../services/boo-info.service';
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
 import {environment} from "../../environments/environment.prod";
 import {HttpClient} from "@angular/common/http";
 import {SearchPageService} from "../services/search.service";
-import { BookDemo } from '../shared/Interfaces/BookDemo';
 
 @Component({
   selector: 'app-my-book-info',
@@ -35,7 +29,6 @@ export class MyBookInfoComponent implements OnInit,AfterViewInit {
     }, 1000);
   }
 
-export class MyBookInfoComponent implements OnInit,AfterViewInit {
   currentBookInfo: any = '';
   generalBookRate = 5;
   myBookRate = 0;
@@ -46,21 +39,6 @@ export class MyBookInfoComponent implements OnInit,AfterViewInit {
   right = true;
   allGenreName: string[] = [];
   allGenreArr = [];
-
-  similarAuthorBooks = []
-  counter = 3;
-  stars = [1, 2, 3, 4, 5]
-  headsInTop: string[] = ["Reader Also Liked", "From The Same Author", "Based On Similar Users"];
- 
-  right = true
-
-
-  constructor(private bookService: BooInfoService,
-     private movedBook: BookDataService,
-     private http:HttpClient,
-
-    ) {
-  }
 
   ngOnInit(): void {
     this.bookDataService.bookData.subscribe((id: number) => {
@@ -82,12 +60,8 @@ export class MyBookInfoComponent implements OnInit,AfterViewInit {
       });
     });
 
-    this.movedBook.bookData.subscribe(data => {
-      this.currentBookInfo = data
-      console.log(data)
-    })
-    // this.similarAuthorService();
   }
+
 
   addBookToOwened(id: number) {
     this.bookDataService.addBookToOwn(id);
