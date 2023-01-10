@@ -23,8 +23,8 @@ export class SharedServiceService {
 
     arr.forEach((e) => {
       let garbageImg = "https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png"
-      if (e.coverPage != garbageImg) {
-        e.coverPage = this.getLargeImg(e.coverPage, this.getPosition(e.coverPage, "m/", 2))
+      if (e.book.coverPage != garbageImg) {
+        e.book.coverPage = this.getLargeImg(e.book.coverPage, this.getPosition(e.book.coverPage, "m/", 2))
         newArr.push(e);
       }
     })

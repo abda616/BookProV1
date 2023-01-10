@@ -1,6 +1,4 @@
 import {ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit, AfterViewInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from 'src/environments/environment.prod';
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
@@ -59,12 +57,8 @@ export class MyBookInfoComponent implements OnInit, AfterViewInit {
       });
     });
 
-    this.moveBook.bookData.subscribe(data => {
-      this.currentBookInfo = data
-      console.log(data)
-    })
-    // this.similarAuthorService();
   }
+
 
   addBookToOwened(id: number) {
     this.bookDataService.addBookToOwn(id);
