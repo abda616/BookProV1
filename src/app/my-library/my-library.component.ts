@@ -1,10 +1,9 @@
 import { HttpClientModule,HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import {Book} from "../shared/Interfaces/Book";
 import { environment } from 'src/environments/environment.prod';
 import { SharedServiceService } from '../services/shared-service.service';
-import { BookDemo, ownedBooks } from '../shared/Interfaces/BookDemo';
+import { Book, ownedBooks } from '../shared/Interfaces/Book';
 @Component({
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
