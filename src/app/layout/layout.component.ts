@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
 import {Router, NavigationEnd} from '@angular/router';
@@ -22,12 +22,23 @@ export class LayoutComponent implements OnInit {
               private router: Router) {
   }
 
+
   ngOnInit(): void {
     this.auth.getUserProfile().subscribe(data => {
-      this.profilePic = data['profileImageUrl'] ? data['profileImageUrl'] : "assets/Avatars/men_av_2.png"
-      localStorage.setItem("profileImageUrl", this.profilePic);
-      localStorage.setItem("interests", data['interest'] ? data['interest'].toLowerCase() : "{'fiction','children','thriller'}");
-    })
+      if (!localStorage.getItem('userData') || !localStorage.getItem("interests")) {
+        localStorage.setItem("userData", JSON.stringify(data));
+
+        let myObj = JSON.parse(localStorage.getItem("userData"));
+        myObj.profileImageUrl = myObj.profileImageUrl ? myObj.profileImageUrl : "assets/Avatars/men_av_2.png";
+        myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : "{'fiction','children','thriller'}";
+        localStorage.setItem("userData", JSON.stringify(myObj));
+
+        localStorage.setItem("interests", (myObj.interest) );
+
+        this.profilePic = JSON.parse(localStorage.getItem("userData")).profileImageUrl;
+      }
+      this.profilePic = JSON.parse(localStorage.getItem("userData")).profileImageUrl
+    });
 
     this.search.updatePosition(true);
     this.search.currentPosition.subscribe(x => this.positionInSearch = x);
