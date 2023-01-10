@@ -9,8 +9,8 @@ import {Book, ownedBooks} from '../shared/Interfaces/Book';
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
   styleUrls: ['./my-library.component.css'],
-
 })
+
 export class MyLibraryComponent implements OnInit, AfterViewInit {
   sectionsArr = ["My Books", "Favorite Books", "Trade List"]
   desiredLibrary: string = this.sectionsArr[0];
@@ -19,8 +19,10 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   uiData: ownedBooks[];
   getTarget: string = this.sectionsArr[0];
 
-  constructor(private search: searchDataTransferService, private http: HttpClient,
-              private sharedService: SharedServiceService,) {
+  constructor(private search: searchDataTransferService,
+              private http: HttpClient,
+              private sharedService: SharedServiceService,
+  ) {
   }
 
   ngAfterViewInit(): void {
