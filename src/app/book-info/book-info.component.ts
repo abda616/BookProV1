@@ -1,16 +1,10 @@
 import {ChangeDetectorRef, ChangeDetectionStrategy, Component, OnInit, AfterViewInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import { catchError } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
-import {BooInfoService} from '../services/boo-info.service';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/environments/environment.prod';
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
-import {environment} from "../../environments/environment.prod";
-import {HttpClient} from "@angular/common/http";
 import {SearchPageService} from "../services/search.service";
-import { BookDemo } from '../shared/Interfaces/BookDemo';
 
 @Component({
   selector: 'app-my-book-info',
@@ -18,11 +12,10 @@ import { BookDemo } from '../shared/Interfaces/BookDemo';
   styleUrls: ['./book-info.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyBookInfoComponent implements OnInit,AfterViewInit {
+export class MyBookInfoComponent implements OnInit, AfterViewInit {
   constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
-              private ref: ChangeDetectorRef, private http: HttpClient, private moveBook:BookDataService,
-              private search: SearchPageService) {
-  }
+              private ref: ChangeDetectorRef, private http: HttpClient, private moveBook: BookDataService,
+              private search: SearchPageService) {}
 
   hasChecked = false;
   ngAfterViewChecked() {
@@ -35,32 +28,16 @@ export class MyBookInfoComponent implements OnInit,AfterViewInit {
     }, 1000);
   }
 
-export class MyBookInfoComponent implements OnInit,AfterViewInit {
   currentBookInfo: any = '';
   generalBookRate = 5;
   myBookRate = 0;
   GenraBook = '';
-  currentAuthor='';
+  currentAuthor = '';
   similarAuthorBooks = [];
   strings: string[] = ["From The Same Author"]
   right = true;
   allGenreName: string[] = [];
   allGenreArr = [];
-
-  similarAuthorBooks = []
-  counter = 3;
-  stars = [1, 2, 3, 4, 5]
-  headsInTop: string[] = ["Reader Also Liked", "From The Same Author", "Based On Similar Users"];
- 
-  right = true
-
-
-  constructor(private bookService: BooInfoService,
-     private movedBook: BookDataService,
-     private http:HttpClient,
-
-    ) {
-  }
 
   ngOnInit(): void {
     this.bookDataService.bookData.subscribe((id: number) => {
@@ -82,7 +59,7 @@ export class MyBookInfoComponent implements OnInit,AfterViewInit {
       });
     });
 
-    this.movedBook.bookData.subscribe(data => {
+    this.moveBook.bookData.subscribe(data => {
       this.currentBookInfo = data
       console.log(data)
     })
@@ -109,7 +86,7 @@ export class MyBookInfoComponent implements OnInit,AfterViewInit {
     return arr.sort()
   }
 
-  similarAuthorService(s:string) {
+  similarAuthorService(s: string) {
     this.search.searchBy(s, 'author').subscribe(data => {
       data = this.sharedService.removeNoImage(data);
       let C = [];
@@ -149,14 +126,13 @@ export class MyBookInfoComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.similarAuthorService(this.currentAuthor);
       this.getGenreArr();
-      setTimeout(()=>{
+      setTimeout(() => {
         this.strings.concat(this.allGenreName);
-      },2000);
-    },2000)
-
+      }, 2000);
+    }, 2000)
   }
 
   goToBookPage(book: number) {
