@@ -4,31 +4,31 @@
 
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
       <mat-card-header>
-        <div class="px-4 py-2 ">
-          <p class="h5 mb-0 py-1">Recent</p>
+        <div class="py-2 ">
+          <p class="h5 mb-0 py-1">Recent :</p>
         </div>
       </mat-card-header>
+
       <div class="px-0">
-        <div>
-          <div class="messages-box">
-            <div class="list-group rounded-0">
-              <!---->
-              <a class="list-group-item list-group-item-action rounded-0 mb-2" (click)="goToC(my.exchange_id)"
-                 *ngFor="let my of conver;let i = index;">
-                <div class="media just-flex flex-row justify-content-between">
-                  <img src="{{my.image?my.image:'assets/Avatars/men_av_2.png'}}" alt="user"
-                       width="50" class="rounded-circle">
-                  <div class="media-body ml-4">
-                    <div class="align-items-center justify-content-between mt-3">
-                      <h6 class="mb-0">{{my.username}}</h6>
-                    </div>
+        <div class="messages-box">
+          <div class="list-group rounded-0">
+            <!---->
+            <a class="list-group-item list-group-item-action rounded-0 mb-2"
+               (click)="goToC(my)"
+               *ngFor="let my of conver;let i = index;">
+              <div class="media just-flex flex-row justify-content-between">
+                <img src="{{my.image}}" alt="user"
+                     width="50" class="rounded-circle">
+                <div class="media-body ml-4">
+                  <div class="align-items-center justify-content-between mt-3">
+                    <h6 class="mb-0">{{my.username}}</h6>
                   </div>
-                  <img [src]="my.imgUrl" alt="user"
-                       width="50" class="">
                 </div>
-              </a>
-              <!---->
-            </div>
+                <img [src]="my.imgUrl" alt="user"
+                     width="50" class="">
+              </div>
+            </a>
+            <!---->
           </div>
         </div>
       </div>

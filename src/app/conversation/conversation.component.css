@@ -1,12 +1,12 @@
 
 
 .convirsation-hight {
-  height: -webkit-fill-available;
+  height: 92%;
 }
 
 .type-message-area {
-  position: fixed!important;
-  width:97%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  width:70%;
+  margin-left: 15%;
 }
