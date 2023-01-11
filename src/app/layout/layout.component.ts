@@ -3,7 +3,7 @@ import {MatDrawer, MatDrawerMode} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
 import {Router, NavigationEnd} from '@angular/router';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import {filter} from "rxjs";
+import {filter, Observable} from "rxjs";
 import {MessagesService} from "../services/message/messages.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
@@ -54,7 +54,8 @@ export class LayoutComponent implements OnInit {
         document.querySelector("#mat-drawer-content").scroll({top: 0, left: 0})
       });
   }
-  myDrawer:MatDrawer;
+
+  myDrawer: MatDrawer;
 
   toggleDrawer(ref: MatDrawer) {
     this.myDrawer = ref;
@@ -62,11 +63,19 @@ export class LayoutComponent implements OnInit {
     if (ref.opened)
       this.message.getAllConversation().subscribe(data => {
         this.conver = data;
+        this.conver.forEach(x => {
+            this.dataService.getBook(+x['his_book_id']).subscribe((book) => {
+              book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
+              x.imgUrl = book["coverPage"]
+              console.log(x);
+            });
+          }
+        )
       });
   }
 
-  getBookImg(id: string): string {
-    let url = '';
+  getBookImg(id: string): Observable<any> {
+    let url: any;
     this.dataService.getBook(+id).subscribe((book) => {
       book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
       url = book['coverPage']
