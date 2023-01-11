@@ -3,7 +3,8 @@ import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
 import {SearchPageService} from "../services/search.service";
-
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-my-book-info',
   templateUrl: './book-Info.component.html',
