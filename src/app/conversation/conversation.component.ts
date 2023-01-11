@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MessagesService} from "../services/message/messages.service";
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
+import {filter, map} from "rxjs";
 
 @Component({
   selector: 'app-conversation',
@@ -33,12 +34,18 @@ export class ConversationComponent implements OnInit {
   getMessages(messageData) {
     this.message.getConversation(messageData.exchange_id).subscribe(value => {
       this.conver = value
-      console.log(this.conversationSation)
     });
 
   }
 
-  sendMessage(id:number) {
-    this.message.sendMessage(id, this.newMessageText).subscribe()
+  sendMessage(id: number) {
+    if (this.newMessageText.length > 1)
+      this.message.sendMessage(id, this.newMessageText).subscribe(() => {
+        document.querySelector("#span-messaging").scrollIntoView();
+        setInterval(() => {
+          this.getMessages(JSON.parse(localStorage.getItem('conversation_ex_id')))
+        }, 500)
+        this.newMessageText = '';
+      });
   }
 }

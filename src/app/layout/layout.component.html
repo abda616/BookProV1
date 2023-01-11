@@ -88,7 +88,6 @@
     <a (click)="toggleDrawer(drawer)" class="float" style="{{drawer.opened?'left:27%;':'left:35px;'}}" [hidden]="false">
       <mat-icon class="my-float">{{drawer.opened ? 'close' : 'message'}} </mat-icon>
     </a>
-    <app-spinner></app-spinner>
     <router-outlet class=""></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

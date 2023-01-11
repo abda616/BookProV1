@@ -34,6 +34,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   headsInTop: string[] = ["Top Rated Book", "Based On Your Interests", "Based On Similar Users"];
+
   topArr = [];
   YInterests = [];
   BoSU = [];

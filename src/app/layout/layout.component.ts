@@ -62,7 +62,6 @@ export class LayoutComponent implements OnInit {
     ref.toggle().then();
     if (ref.opened)
       this.message.getAllConversation().subscribe(data => {
-
         data.forEach(x => {
             /*get img for the book*/
             x.image = x.image ? x.image : 'assets/Avatars/men_av_2.png';
