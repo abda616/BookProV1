@@ -22,7 +22,9 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import {SpinnerComponent} from './spinner/spinner.component';
 import {MatToolbarModule} from '@angular/material/toolbar'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
-import {MatButtonModule} from '@angular/material/button'
+import {MatButtonModule} from '@angular/material/button';
+import {ConversationComponent} from './conversation/conversation.component'
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import {MatButtonModule} from '@angular/material/button'
     SearchPageComponent,
     UserProfileComponent,
     SpinnerComponent,
+    ConversationComponent,
   ],
   imports: [
     BrowserModule,

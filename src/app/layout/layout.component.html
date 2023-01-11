@@ -1,56 +1,37 @@
 <mat-drawer-container [hasBackdrop]="false" class="height-full">
 
-  <mat-drawer #drawer class="height-full" mode="over" position="start">
+  <mat-drawer #drawer class="height-full" [mode]="mode" position="start">
 
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
-      <mat-card-header class="card-title just-flex flex-row justify-content-end">
-
+      <mat-card-header>
+        <div class="px-4 py-2 ">
+          <p class="h5 mb-0 py-1">Recent</p>
+        </div>
       </mat-card-header>
-      <mat-card-content class="just-flex flex-column">
-
-        <div class="just-flex flex-row  justify-content-center">
-          <img alt="book"
-               class="card-img-thumbnail"
-               src="https://images.gr-assets.com/books/1314602075i/11221285.jpg">
-        </div>
-
-        <div class="just-flex flex-row  justify-content-center py-2 ">
-          <mat-card-subtitle class="sub-text-color">{{authorName}}</mat-card-subtitle>
-        </div>
-
-        <mat-card-footer class="just-flex justify-content-center">
-          <p class="text-warp-p-box text-center">a heartbreaking tale about domestic abuse and violence with a
-            heartbreakingly necessary ending.
-            interviews and the author's</p>
-        </mat-card-footer>
-
-        <div class="contant-row-for-book ">
-          <div class="content-row-for-book-v">
-            <span>Pages</span>
-            <span class="text-center sub-text-color">world</span>
-          </div>
-
-          <div class="ver-line mx-3"></div>
-
-          <div class="content-row-for-book-v">
-            <span>Category</span>
-            <span class="text-center sub-text-color">world</span>
-          </div>
-
-          <div class="ver-line mx-3"></div>
-
-          <div class="content-row-for-book-v">
-            <span>Ratings</span>
-            <span class="text-center sub-text-color">world</span>
+      <div class="px-0">
+        <div>
+          <div class="messages-box">
+            <div class="list-group rounded-0">
+              <!---->
+              <a class="list-group-item list-group-item-action rounded-0 mb-2" (click)="goToC(my.exchange_id)"
+                 *ngFor="let my of conver;let i = index;">
+                <div class="media just-flex flex-row justify-content-between">
+                  <img src="{{my.image?my.image:'assets/Avatars/men_av_2.png'}}" alt="user"
+                       width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="align-items-center justify-content-between mt-3">
+                      <h6 class="mb-0">{{my.username}}</h6>
+                    </div>
+                  </div>
+                  <img src="{{getBookImg(my.his_book_id)}}" alt="user"
+                       width="50" class="">
+                </div>
+              </a>
+              <!---->
+            </div>
           </div>
         </div>
-
-      </mat-card-content>
-      <mat-card-actions>
-        <div class="just-flex flex-row w-100 justify-content-center">
-          <button mat-raised-button>Read More</button>
-        </div>
-      </mat-card-actions>
+      </div>
     </mat-card>
   </mat-drawer>
 
@@ -104,8 +85,8 @@
       </div>
 
     </mat-toolbar>
-    <a (click)="toggleDrawer(drawer)" class="float" style="{{drawer.opened?'left:27%;':'left:35px;'}}">
-        <mat-icon class="my-float">{{drawer.opened?'close':'message'}}</mat-icon>
+    <a (click)="toggleDrawer(drawer)" class="float" style="{{drawer.opened?'left:27%;':'left:35px;'}}" [hidden]="false">
+      <mat-icon class="my-float">{{drawer.opened ? 'close' : 'message'}} </mat-icon>
     </a>
     <app-spinner></app-spinner>
     <router-outlet class=""></router-outlet>

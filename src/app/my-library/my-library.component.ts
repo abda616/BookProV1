@@ -1,4 +1,4 @@
-import { HttpClientModule,HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 import { environment } from 'src/environments/environment.prod';
@@ -26,10 +26,11 @@ firstAndLastName:string;
               private sharedService: SharedServiceService,
   ) {
   }
+
   ngAfterViewInit(): void {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.search.updatePosition(true);
-    },0)
+    }, 0)
   }
   ngOnInit(): void {  
 this.getOwnedBooks()
@@ -37,7 +38,7 @@ this.getOwnedBooks()
   }
 
   getOwnedBooks() {
-    this.getTarget=this.sectionsArr[0]
+    this.getTarget = this.sectionsArr[0]
     this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/owned`).subscribe((res) => {
      this.ownedBooks=res
    this.ownedBooks=this.sharedService.removeNoImage(this.ownedBooks)

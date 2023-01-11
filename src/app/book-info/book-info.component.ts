@@ -3,6 +3,10 @@ import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
 import {SearchPageService} from "../services/search.service";
+import {Router} from "@angular/router";
+import {environment} from "../../environments/environment.prod";
+import {HttpClient} from "@angular/common/http";
+
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 @Component({
@@ -13,8 +17,8 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class MyBookInfoComponent implements OnInit, AfterViewInit {
   constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
-              private ref: ChangeDetectorRef, private http: HttpClient, private moveBook: BookDataService,
-              private search: SearchPageService) {}
+              private ref: ChangeDetectorRef, private http: HttpClient , private moveBook: BookDataService,
+              private search: SearchPageService ,private  rout:Router) {}
 
   hasChecked = false;
   ngAfterViewChecked() {
@@ -43,8 +47,12 @@ export class MyBookInfoComponent implements OnInit, AfterViewInit {
       if (id) {
         this.currentBookInfo = id
       } else {
-        id = +(localStorage.getItem('Book'))
-        this.currentBookInfo = id
+        let x = localStorage.getItem('Book')
+        if(x) {
+          id = +(x);
+          this.currentBookInfo = id
+        } else this.rout.navigate(['']).then()
+
       }
       this.bookDataService.getBook(id).subscribe((bookdata) => {
         bookdata["coverPage"] = this.sharedService.getLargeImg(bookdata["coverPage"], this.sharedService.getPosition(bookdata["coverPage"], "m/", 2))
