@@ -19,12 +19,7 @@ export class BookDataService {
     }
   }
   getBook(id:number){
-    if (!this.myData$) {
-      this.myData$ = this.http.get(`${environment.apiUrl}book/getBook?book_id=${id}`).pipe(
-        shareReplay(1)
-      );
-    }
-    return this.myData$;
+      return this.http.get(`${environment.apiUrl}book/getBook?book_id=${id}`)
   }
 
   getRate(id: number) {

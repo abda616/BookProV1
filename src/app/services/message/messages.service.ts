@@ -7,16 +7,17 @@ import {BehaviorSubject, Observable, Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class MessagesService {
-  constructor(private http: HttpClient) {}
 
-  private messageId = new BehaviorSubject<number>(0);
-  private position = new BehaviorSubject<boolean>(true);
+  constructor(private http: HttpClient) {
+  }
+
+  private messageId = new BehaviorSubject<any>(null);
+
   dataID = this.messageId.asObservable();
-  setMessageID(id:number){
-    this.messageId.next(id);
-    if (id !== 0) {
-      localStorage.setItem('conversation',String(id));
-    }
+
+  setMessageID(x) {
+    this.messageId.next(x);
+    localStorage.setItem('conversation_ex_id', JSON.stringify(x));
   }
 
   getAllConversation(): Observable<any> {
@@ -29,7 +30,7 @@ export class MessagesService {
 
   sendMessage(id: number, message: string) {
     return this.http.post<any>(`${environment.apiUrl}message/send`,
-      JSON.parse(`{"message":${message},"bookExchange_id":${id}}`))
+      {bookExchange_id: id, message: message})
   }
 
 }

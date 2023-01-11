@@ -3,7 +3,7 @@ import {MatDrawer, MatDrawerMode} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
 import {Router, NavigationEnd} from '@angular/router';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import {filter} from "rxjs";
+import {filter, Observable} from "rxjs";
 import {MessagesService} from "../services/message/messages.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
@@ -20,9 +20,9 @@ export class LayoutComponent implements OnInit {
   positionInSearch = true;
   authorName: any | string = "book author name".toUpperCase();
   profilePic = "";
-  conver;
+  conver = [];
   messegePic: any[];
-  mode = "over"
+  mode
 
   constructor(private auth: AuthService, private search: searchDataTransferService,
               private router: Router, private message: MessagesService,
@@ -31,6 +31,7 @@ export class LayoutComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.mode = 'over'
     this.auth.getUserProfile().subscribe(data => {
       if (!localStorage.getItem('userData') || !localStorage.getItem("interests")) {
         localStorage.setItem("userData", JSON.stringify(data));
@@ -39,7 +40,6 @@ export class LayoutComponent implements OnInit {
         myObj.profileImageUrl = myObj.profileImageUrl ? myObj.profileImageUrl : "assets/Avatars/men_av_2.png";
         myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : "{'fiction','children','thriller'}";
         localStorage.setItem("userData", JSON.stringify(myObj));
-
         localStorage.setItem("interests", (myObj.interest));
 
         this.profilePic = JSON.parse(localStorage.getItem("userData")).profileImageUrl;
@@ -54,26 +54,28 @@ export class LayoutComponent implements OnInit {
         document.querySelector("#mat-drawer-content").scroll({top: 0, left: 0})
       });
   }
-  myDrawer:MatDrawer;
+
+  myDrawer: MatDrawer;
 
   toggleDrawer(ref: MatDrawer) {
     this.myDrawer = ref;
     ref.toggle().then();
     if (ref.opened)
       this.message.getAllConversation().subscribe(data => {
-        this.conver = data;
-      });
-  }
 
-  getBookImg(id: string): string {
-    let url = '';
-    this.dataService.getBook(+id).subscribe((book) => {
-      book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
-      url = book['coverPage']
-      console.log(url)
-      return url;
-    });
-    return url;
+        data.forEach(x => {
+            /*get img for the book*/
+            x.image = x.image ? x.image : 'assets/Avatars/men_av_2.png';
+            this.dataService.getBook(+x['his_book_id']).subscribe((book) => {
+              book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
+              x.imgUrl = book["coverPage"]
+            });
+          }
+        );
+        if (data != []) {
+          this.conver = data;
+        }
+      });
   }
 
   LogOut() {
@@ -86,8 +88,9 @@ export class LayoutComponent implements OnInit {
     this.router.navigate(['app/search']).then();
   }
 
-  goToC(exchange_id: any) {
-    this.message.setMessageID(exchange_id);
+  goToC(x) {
+    console.log(x['exchange_id'])
+    this.message.setMessageID(x);
     this.myDrawer.toggle().then();
     //this.mode = "side"
     this.router.navigate(['app/message']).then()
