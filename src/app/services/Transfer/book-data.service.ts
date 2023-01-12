@@ -31,23 +31,22 @@ export class BookDataService {
   }
 
   setRate(rate: number, id: number) {
-    this.http.post(`${environment.apiUrl}profile/rateBook?rating=${rate}&book_id=${id}`, null)
-      .subscribe(value => {
-        console.log(value);
-      })
+    return this.http.post(`${environment.apiUrl}profile/rateBook?rating=${rate}&book_id=${id}`, null)
   }
 
   addBookToOwn(id: number) {
-    this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`, null).subscribe(value => {
-      console.log(value);
-    })
+    return this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`, null)
   }
 
-  tradeThisBook(id: number) {
-    this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`, null)
+  removeBookFromOwn(id: number) {
+    return this.http.post(`${environment.apiUrl}profile/removeBookFromOwned?book_id=${id}`, null)
   }
 
-  isOwenedBook(id: number){
+  tradeThisBook(id: number, isAvalable) {
+    return this.http.post(`${environment.apiUrl}profile/makeBookAvailable?book_id=${id}&available=${!isAvalable}`, null)
+  }
+
+  isOwenedBook(id: number) {
     return this.http.get(`${environment.apiUrl}profile/owned`)
   }
 }

@@ -13,6 +13,7 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./book-info.component.css'],
 })
 export class MyBookInfoComponent implements OnInit {
+  avaliable: any;
   constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
               private ref: ChangeDetectorRef, private http: HttpClient, private moveBook: BookDataService,
               private search: SearchPageService, private rout: Router) {
@@ -53,9 +54,11 @@ export class MyBookInfoComponent implements OnInit {
       this.bookDataService.isOwenedBook(id).subscribe((resp) => {
         let data: any;
         data=resp;
-
         for (let dataKey of data) {
-          if (id == dataKey['book']['id']) this.isOwened = true;
+          if (id == dataKey['book']['id']) {
+            this.isOwened = true;
+            this.avaliable = dataKey['avaliable']
+          }
         }
       });
       this.bookDataService.getRate(id).subscribe(rate => {
@@ -64,23 +67,9 @@ export class MyBookInfoComponent implements OnInit {
     });
   }
 
-  isTheBookOwend(id: number): boolean {
-    let data: any;
-    this.bookDataService.isOwenedBook(id).subscribe((resp) => {
-      if (typeof resp === "string") {
-        data = JSON.parse(resp);
-        console.log(resp)
-      }
-    })
-    console.log(data);
-    for (const dataKey in data) {
-      if (id == data['book']['id']) return true;
-    }
-    return false;
-  }
 
-  addBookToOwened(id: number) {
-    this.bookDataService.addBookToOwn(id);
+  tradeBookUOwened(id,av){
+    this.bookDataService.tradeThisBook(id,av)
   }
 
   setRate(rate: number, id: number) {
@@ -98,7 +87,6 @@ export class MyBookInfoComponent implements OnInit {
     let arr = s.replace(/[{}']/gi, "").split(',')
     return arr.sort()
   }
-
   similarAuthorService(s: string) {
     this.search.searchBy(s, 'author').subscribe(data => {
       data = this.sharedService.removeNoImage(data);
@@ -131,12 +119,9 @@ export class MyBookInfoComponent implements OnInit {
       });
     })
   }
-
   scrollToAuth() {
     document.querySelector('#sameAuth').scrollIntoView({behavior: "smooth"})
   }
-
-
   goToBookPage(book: number) {
     this.moveBook.transBook(book);
     this.rout.navigate(['app/book']).then();
@@ -145,12 +130,16 @@ export class MyBookInfoComponent implements OnInit {
   goToTrade() {
     this.rout.navigate(['app/trade']).then()
   }
-
   private clear() {
     this.currentAuthor = ''
     this.similarAuthorBooks = []
     this.allGenreName = [];
     this.allGenreArr = [];
-
+  }
+  addBookToOwened(id: number) {
+    this.bookDataService.addBookToOwn(id);
+  }
+  removeFromOwened(id) {
+    this.bookDataService.removeBookFromOwn(id);
   }
 }

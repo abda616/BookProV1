@@ -71,14 +71,20 @@
             <div class="col-lg-4 col-md-6 col-12 info-col mt-2">
               <button class="btn info-btn text-white" (click)="goToTrade()">See Trade Options</button>
             </div>
-            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
-              <!--<button class="btn info-btn text-white">Get Similar Books</button>-->
-            </div>
-            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
 
-              <button class="btn info-btn text-white" (click)="addBookToOwened(currentBookInfo.id)">
-                {{isOwened?"You Owened This Book":"Add To My Library"}}
+            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2" [hidden]="!isOwened">
+              <button class="btn info-btn text-white" (click)="tradeBookUOwened(currentBookInfo.id , avaliable)">
+                {{avaliable?"remove From Trade":"Trade This Book"}}</button>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
+              <button class="btn info-btn text-white" *ngIf="!isOwened"
+                      (click)="addBookToOwened(currentBookInfo.id)">Add To My Library
               </button>
+              <button class="btn info-btn text-white" *ngIf="isOwened"
+                      (click)="removeFromOwened(currentBookInfo.id)">You Owened This Book
+              </button>
+
             </div>
           </div>
         </div>
