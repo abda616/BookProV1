@@ -16,8 +16,8 @@ export class BookDataService {
   bookData = this.book.asObservable();
 
   transBook(data: number) {
-    this.book.next(data);
     if (data !== null) {
+      this.book.next(data);
       localStorage.setItem('Book', String(data));
     }
   }
