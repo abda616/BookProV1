@@ -50,7 +50,6 @@ export class MyBookInfoComponent implements OnInit, AfterViewInit {
           id = +(x);
           this.currentBookInfo = id
         } else this.rout.navigate(['']).then()
-
       }
       this.bookDataService.getBook(id).subscribe((bookdata) => {
         bookdata["coverPage"] = this.sharedService.getLargeImg(bookdata["coverPage"], this.sharedService.getPosition(bookdata["coverPage"], "m/", 2))
