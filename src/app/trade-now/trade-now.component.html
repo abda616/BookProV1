@@ -1,3 +1,43 @@
-<p>trade-now works!</p>
-
+<div class="container-fluid">
+    <div class="container">
+        <div *ngFor="let headsAre of headsInTop ; let i = index;">
+            <h1 class="text-center mt-5">{{headsAre}}</h1>
+            <div class="other-two-cards" *ngIf="i==0&&yourTradeList2D">
+              <div [attr.id]="'carouselControls'+i" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
+        
+                <div class="carousel-inner" *ngFor="let _2dArr of yourTradeList2D ; let i = index;">
+                  <div class="carousel-item {{i==0?'active':''}} ">
+                    <div class="card-wrapper-row-card">
+                      <div class="card-wrapper-row-card row flip-card" *ngFor="let data of _2dArr">
+                        <div class="flip-card-inner card-cont">
+                          <div class="flip-card-front">
+                            <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
+                          </div>
+                          <div class="flip-card-back">
+                            <div class="card-body mt-4 p-2">
+                              <h5 class="title fs-3">{{data.book['title']}}</h5>
+                              <p class="plot">{{data.book['description']}}</p>
+                              <a (click)="goTodataPage(data.book['id'])" class="btn-more btn ">Read More</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'+i"
+                        data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselControls'+i"
+                        data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
 <app-spinner></app-spinner>
