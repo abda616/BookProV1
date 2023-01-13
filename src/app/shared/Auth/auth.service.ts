@@ -21,14 +21,11 @@ export class AuthService {
   // Sign-up
   signUp(user: userSignUp): Observable<any> {
     return this.http.post<any>(`${this.endpoint}register`, JSON.stringify(user), {headers: this.headers})
-      .pipe(catchError(this.handleError));
   }
 
   // Sign-in
   signIn(user: userSignIn) {
     return this.http.post<any>(`${this.endpoint}api/v1/auth`, JSON.stringify(user), {headers: this.headers})
-      .pipe(catchError(this.handleError)
-      );
   }
 
   getToken() {

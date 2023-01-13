@@ -5,6 +5,7 @@ import {delay, map, of} from "rxjs";
 import {avatarPicture, City, userSignIn, userSignUp} from "../shared/Interfaces/userSignup";
 import {AuthService} from "../shared/Auth/auth.service";
 import {SharedDataModule} from "../shared/shared-data.module";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -16,6 +17,7 @@ import {SharedDataModule} from "../shared/shared-data.module";
 export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   constructor(private formBuilder: FormBuilder, private router: Router,
               private myAuth: AuthService, private sharedData: SharedDataModule,
+              private toast:ToastrService
   ) {
   }
 
@@ -23,7 +25,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
     if(this.myAuth.isLoggedIn){
       this.router.navigate(["app"]).then();
     }
-
     this.sharedData.Citys.subscribe(data => this.citys = data);
     this.sharedData.Avatars.subscribe(data => this.avatars = data);
     this.sharedData.Interests.subscribe(data => this.Interests = data);
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       loginPassword: new FormControl('raw12345', [Validators.required, Validators.minLength(8)])
     });
   }
+
   mSignUpForm() {
     this.signUpForm = new FormGroup(
       {
@@ -91,7 +93,10 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       this.myAuth.signIn(intoUser).subscribe((next) => {
         localStorage.setItem('access_token', next['access_token']);
         localStorage.setItem('refresh_token', next['refresh_token']);
+        this.toast.success("Logged in Successfully","Welcome")
         this.router.navigate(['app']).then()
+      },error=>{
+          this.toast.error(error.error.message,"Error")
       });
     }
   }
@@ -111,8 +116,10 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
     };
     this.myAuth.signUp(adduser).subscribe((next) => {
       let responseBodyText = next['message'];
-      console.log("my res" + responseBodyText)
+      this.toast.success(next.message,"Welcome");
       this.openSignup();
+    },error=>{
+      this.toast.error(error.error.message,"Error");
     });
   }
 

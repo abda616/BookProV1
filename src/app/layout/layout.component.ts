@@ -8,7 +8,6 @@ import {MessagesService} from "../services/message/messages.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
 
-
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -18,11 +17,9 @@ export class LayoutComponent implements OnInit {
 
   searchValue: string = '';
   positionInSearch = true;
-  authorName: any | string = "book author name".toUpperCase();
   profilePic = "";
   conver = [];
-  messegePic: any[];
-  mode
+  mode;
 
   constructor(private auth: AuthService, private search: searchDataTransferService,
               private router: Router, private message: MessagesService,

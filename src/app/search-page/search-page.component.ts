@@ -1,9 +1,9 @@
 import {Component, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
-import {SearchPageService} from '../services/search.service';
 import {SharedServiceService} from '../services/shared-service.service';
 import {searchDataTransferService} from '../services/Transfer/search-data-transfer.service';
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {Router} from "@angular/router";
+import {MainService} from "../services/Main/main.service";
 
 @Component({
   selector: 'app-search-page',
@@ -11,18 +11,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./search-page.component.css'],
 })
 export class SearchPageComponent implements OnInit, AfterViewInit {
-  numOfColumns = [1, 2, 3, 4, 5];
-  filteredSearchResult = [];
   searchOptions = ['All', 'Title', 'Author', 'Genre', 'Description'];
   searchResult = [];
-  filterGenresArr = [];
-  isFiltered = false;
   searchInput: string = '';
-  didRate: boolean;
   searchType: string = "all";
   @Output() changedSearchText: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private searchService: SearchPageService, private search: searchDataTransferService,
+  constructor(private searchService: MainService, private search: searchDataTransferService,
               private sharedService: SharedServiceService,
               private moveBook: BookDataService, private router: Router) {
   }

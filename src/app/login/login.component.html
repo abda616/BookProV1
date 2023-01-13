@@ -7,9 +7,9 @@
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="just-flex flex-column align-items-center">
         <div class="justify-content-center">
           <mat-form-field appearance="legacy">
-            <mat-label>E-mail</mat-label>
+            <mat-label>User Name</mat-label>
             <input matInput matNativeControl id="inputEmail" formControlName="loginEmail" type="email" required>
-            <mat-error>Enter Valid Email Or SignUp.</mat-error>
+            <mat-error>Enter Valid UserName Or SignUp.</mat-error>
             <button mat-icon-button matSuffix (click)="loginForm.reset()">
               <mat-icon matSuffix>{{!loginForm.get('loginEmail').value ? 'mail' : 'close'}}</mat-icon>
             </button>

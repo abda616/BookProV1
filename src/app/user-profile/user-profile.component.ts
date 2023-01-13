@@ -26,8 +26,7 @@ export class UserProfileComponent implements OnInit {
 
   ngAfterViewChecked(): void {
     setTimeout(() => {
-      console.log()
-      //console.log(this.UInterests.value)
+      this.UInterests.value
     }, 0);
   }
 
