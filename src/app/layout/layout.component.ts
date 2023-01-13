@@ -1,13 +1,12 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MatDrawer, MatDrawerMode} from "@angular/material/sidenav";
+import {Component, OnInit} from '@angular/core';
+import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
 import {Router, NavigationEnd} from '@angular/router';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import {filter, Observable} from "rxjs";
+import {filter} from "rxjs";
 import {MessagesService} from "../services/message/messages.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
-
 
 @Component({
   selector: 'app-layout',
@@ -18,11 +17,9 @@ export class LayoutComponent implements OnInit {
 
   searchValue: string = '';
   positionInSearch = true;
-  authorName: any | string = "book author name".toUpperCase();
   profilePic = "";
   conver = [];
-  messegePic: any[];
-  mode
+  mode;
 
   constructor(private auth: AuthService, private search: searchDataTransferService,
               private router: Router, private message: MessagesService,

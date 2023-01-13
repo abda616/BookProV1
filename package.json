@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.2.0",
+    "@angular/animations": "^14.2.12",
     "@angular/cdk": "^14.2.7",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
@@ -25,6 +25,7 @@
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "cheerio": "^1.0.0-rc.12",
+    "ngx-toastr": "15.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -1,12 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit, Input, AfterViewChecked, AfterViewInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
-import {SearchPageService} from "../services/search.service";
 import {Router} from "@angular/router";
-import {environment} from "../../environments/environment.prod";
-import {HttpClient} from "@angular/common/http";
-import {TimeInterval} from "rxjs/internal/operators/timeInterval";
+import {MainService} from "../services/Main/main.service";
 
 @Component({
   selector: 'app-my-book-info',
@@ -17,8 +14,8 @@ export class MyBookInfoComponent implements OnInit {
   avaliable: any;
 
   constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
-              private ref: ChangeDetectorRef, private http: HttpClient, private moveBook: BookDataService,
-              private search: SearchPageService, private rout: Router) {
+              private ref: ChangeDetectorRef,  private moveBook: BookDataService,
+              private search: MainService, private rout: Router) {
   }
 
   currentBookInfo: any = '';
@@ -113,19 +110,20 @@ export class MyBookInfoComponent implements OnInit {
     let allInt = this.getGenres(this.GenraBook);
     allInt.forEach(i => {
       let arr = [];
-      this.http.get<Book[]>(`${environment.apiUrl}search?domain=genre&query=${i}`).subscribe((res) => {
-        arr = res;
-        arr = this.sharedService.removeNoImage(arr);
-        let C = [];
-        let x = 2
-        for (let i = 0; i < 5 * x / x; i++) {
-          C[i] = arr.slice(i * x, i * x + x)
-        }
-        arr = C;
+      this.search.searchBy(i, 'genre')
+        .subscribe((res) => {
+          arr = res;
+          arr = this.sharedService.removeNoImage(arr);
+          let C = [];
+          let x = 2
+          for (let i = 0; i < 5 * x / x; i++) {
+            C[i] = arr.slice(i * x, i * x + x)
+          }
+          arr = C;
 
-        this.allGenreName.push(i);
-        this.allGenreArr.push(arr);
-      });
+          this.allGenreName.push(i);
+          this.allGenreArr.push(arr);
+        });
     })
   }
 

@@ -24,7 +24,8 @@ import {MatToolbarModule} from '@angular/material/toolbar'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatButtonModule} from '@angular/material/button';
 import {ConversationComponent} from './conversation/conversation.component'
-
+import {ToastrModule} from 'ngx-toastr';
+import {MainService} from "./services/Main/main.service";
 
 @NgModule({
   declarations: [
@@ -52,11 +53,22 @@ import {ConversationComponent} from './conversation/conversation.component'
     MatButtonModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      progressBar: true,
+      progressAnimation: 'decreasing',
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      autoDismiss: true,
+      easeTime: 3,
+      closeButton: true,
+    })
   ],
   providers: [
     SharedDataModule,
     searchDataTransferService,
     BookDataService,
+    MainService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
 
   ], bootstrap: [AppComponent]

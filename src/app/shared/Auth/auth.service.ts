@@ -21,14 +21,11 @@ export class AuthService {
   // Sign-up
   signUp(user: userSignUp): Observable<any> {
     return this.http.post<any>(`${this.endpoint}register`, JSON.stringify(user), {headers: this.headers})
-      .pipe(catchError(this.handleError));
   }
 
   // Sign-in
   signIn(user: userSignIn) {
     return this.http.post<any>(`${this.endpoint}api/v1/auth`, JSON.stringify(user), {headers: this.headers})
-      .pipe(catchError(this.handleError)
-      );
   }
 
   getToken() {
@@ -49,13 +46,13 @@ export class AuthService {
     });
   }
 
-  refreshToken() {
+  /*refreshToken() {
     return this.http.get(`${this.endpoint}api/v1/refreshToken`, {
       headers: new HttpHeaders()
         .append('Authorization', `Bearer ${this.getRefreshToken()}`)
         .append('Content-Type', 'application/json')
     })
-  }
+  }*/
 
   //User profile
   getUserProfile(): Observable<any> {

@@ -8,7 +8,7 @@
         <h5 class="fs-4 font-weight-bold text-dark mt-3">Rate This Book</h5>
         <div class="stars">
           <i style="color: gold;" class="fa-regular fa-star fs-3 ps-3 d-inline mt-3 {{i<getRate()?'fa-solid':''}} "
-             *ngFor="let starta of [0,1,2,3,4];let i = index;" (click)="setRate(i+1,currentBookInfo['id'])"></i>
+             *ngFor="let x of [0,1,2,3,4];let i = index;" (click)="setRate(i+1,currentBookInfo['id'])"></i>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
             <span>
               <i style="color:gold;"
                  class="fa-regular fa-star {{i<generalBookRate.toFixed(0)?'fa-solid':''}}"
-                 *ngFor="let starta of [0,1,2,3,4];let i = index;"></i>
+                 *ngFor="let x of [0,1,2,3,4];let i = index;"></i>
             </span>
           </p>
           <p class="rating">{{generalBookRate.toFixed(2)}}</p>
@@ -72,9 +72,9 @@
               <button class="btn info-btn text-white" (click)="goToTrade()">See Trade Options</button>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2"  [hidden]="!isOwened">
+            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2" [hidden]="!isOwened">
               <button class="btn info-btn text-white" (click)="tradeBookUOwened(currentBookInfo.id , avaliable)">
-                {{avaliable?"remove From Trade":"Trade This Book"}}</button>
+                {{avaliable ? "remove From Trade" : "Trade This Book"}}</button>
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
@@ -136,7 +136,7 @@
           <div class="carousel-item {{i==0?'active':''}} ">
             <div class="card-wrapper-row-card">
               <div class="card-wrapper-row-card row flip-card" *ngFor="let book of _2dArr">
-                <div class="flip-card-inner card-cont" (click)="goToBookPage(book['id'])" >
+                <div class="flip-card-inner card-cont" (click)="goToBookPage(book['id'])">
                   <div class="flip-card-front">
                     <img src="{{book['coverPage']}}" alt="Avatar" class="card-img-top">
                   </div>
@@ -169,7 +169,6 @@
 </div>
 
 <app-spinner></app-spinner>
-
 
 
 <!-- <div class="carousel-inner" *ngIf="headsAre==='From The Same Author';">
