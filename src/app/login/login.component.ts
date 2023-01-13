@@ -17,12 +17,12 @@ import {ToastrService} from "ngx-toastr";
 export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   constructor(private formBuilder: FormBuilder, private router: Router,
               private myAuth: AuthService, private sharedData: SharedDataModule,
-              private toast:ToastrService
+              private toast: ToastrService
   ) {
   }
 
   ngOnInit(): void {
-    if(this.myAuth.isLoggedIn){
+    if (this.myAuth.isLoggedIn) {
       this.router.navigate(["app"]).then();
     }
     this.sharedData.Citys.subscribe(data => this.citys = data);
@@ -93,10 +93,10 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       this.myAuth.signIn(intoUser).subscribe((next) => {
         localStorage.setItem('access_token', next['access_token']);
         localStorage.setItem('refresh_token', next['refresh_token']);
-        this.toast.success("Logged in Successfully","Welcome")
+        this.toast.success("Logged in Successfully", "Welcome")
         this.router.navigate(['app']).then()
-      },error=>{
-          this.toast.error(error.error.message,"Error")
+      }, error => {
+        this.toast.error(error.error.message, "Error")
       });
     }
   }
@@ -115,10 +115,10 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       interest: `{${this.signUpForm.get('UInterests').value.toString()}}`
     };
     this.myAuth.signUp(adduser).subscribe((next) => {
-      this.toast.success(next.message,"Welcome");
+      this.toast.success(next.message, "Welcome");
       this.openSignup();
-    },error=>{
-      this.toast.error(error.error.message,"Error");
+    }, error => {
+      this.toast.error(error.error.message, "Error");
     });
   }
 

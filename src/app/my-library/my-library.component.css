@@ -101,7 +101,7 @@
   height: 40px;
   display: flex;
   justify-content: space-around;
-  font-size: bold;
+  font-weight: bold;
   background-image: url("src/assets/picture/wooden.jpg");
   border-radius: 20px;
   margin-bottom: 0;

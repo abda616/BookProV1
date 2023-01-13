@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment.prod";
+import {ownedBooks} from 'src/app/shared/Interfaces/Book';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,14 @@ export class BookDataService {
 
   isOwenedBook(id: number) {
     return this.http.get(`${environment.apiUrl}profile/owned`)
+  }
+
+  allOwenedBook() {
+    return this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/owned`)
+  }
+
+  favorites() {
+    return this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/favorites`)
   }
 }
 

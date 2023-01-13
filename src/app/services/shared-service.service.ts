@@ -5,8 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class SharedServiceService {
 
-  constructor() {
-  }
+  constructor() {}
 
   //get the postion of the m letter
   getPosition(string, target, index) {
@@ -22,20 +21,17 @@ export class SharedServiceService {
     let newArr = []
     let garbageImg = "https://s.gr-assets.com/assets/nophoto/book/111x148-bcc042a9c91a29c1d680899eff700a03.png"
     arr.forEach((e) => {
-           if(e.coverPage){
-            if (e.coverPage != garbageImg) {
-              e.coverPage = this.getLargeImg(e.coverPage, this.getPosition(e.coverPage, "m/", 2))
-              newArr.push(e);
-            }
-           }else if(e.book.coverPage){
-            if(e.book.coverPage!=garbageImg){
-              e.book.coverPage = this.getLargeImg(e.book.coverPage, this.getPosition(e.book.coverPage, "m/", 2))  
-              newArr.push(e);
-
-            }
-           }
-
-    
+      if (e.coverPage) {
+        if (e.coverPage != garbageImg) {
+          e.coverPage = this.getLargeImg(e.coverPage, this.getPosition(e.coverPage, "m/", 2))
+          newArr.push(e);
+        }
+      } else if (e.book.coverPage) {
+        if (e.book.coverPage != garbageImg) {
+          e.book.coverPage = this.getLargeImg(e.book.coverPage, this.getPosition(e.book.coverPage, "m/", 2))
+          newArr.push(e);
+        }
+      }
     })
     return newArr;
   }
