@@ -24,13 +24,6 @@ export class UserProfileComponent implements OnInit {
   constructor(private sharedData: SharedDataModule, private auth:AuthService) {
   }
 
-  ngAfterViewChecked(): void {
-    setTimeout(() => {
-      console.log()
-      //console.log(this.UInterests.value)
-    }, 0);
-  }
-
   ngOnInit(): void {
     this.sharedData.Pattern.subscribe(data=>{this.patternValidator=data});
 

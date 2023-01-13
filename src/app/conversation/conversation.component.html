@@ -2,6 +2,28 @@
 
   <div class="px-4 py-5 chat-box bg-white w-100 h-100 overflow-scroll">
 
+    <div class="bg-light mx-auto top-card-ex just-flex flex-column mb-5 ">
+      <h3 class="mx-auto">Accept This ExChange</h3>
+
+      <div class="just-flex flex-row justify-content-between mb-3 mx-5">
+        <img [src]="myBookPic" alt="book1">
+        <img [src]="hisBookPic" alt="book2">
+      </div>
+
+      <div class="just-flex flex-row justify-content-evenly ">
+        <span (click)="accept(sationID,false)" style="font-size: 24px; color: Tomato;">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </span>
+
+        <i class="fa-solid fa-right-left">
+
+        </i>
+
+        <span (click)="accept(sationID,true)" style="font-size: 24px; color: Dodgerblue;">
+          <i class="fa-solid fa-check"></i>
+        </span>
+      </div>
+    </div>
     <div class="media w-50 mb-3 " *ngFor="let ms of conver" [ngClass]="ms.userName!=this.firstUser?'ms-auto':''">
       <div class="media-body" [ngClass]="ms.userName!=this.firstUser?'':'ml-3'">
         <div class="rounded py-2 px-3 mb-2" [ngClass]="ms.userName!=this.firstUser?'bg-primary':'bg-light'">
@@ -11,7 +33,6 @@
         <p class="small text-muted">{{ms.time | date:'short'}}</p>
       </div>
     </div>
-
     <!-- Typing area -->
     <div class="bg-light sticky-bottom type-message-area ">
       <div class="input-group sticky-bottom">
@@ -28,3 +49,4 @@
     <span id="span-messaging"></span>
   </div>
 </div>
+

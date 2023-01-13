@@ -5,6 +5,7 @@ import {delay, map, of} from "rxjs";
 import {avatarPicture, City, userSignIn, userSignUp} from "../shared/Interfaces/userSignup";
 import {AuthService} from "../shared/Auth/auth.service";
 import {SharedDataModule} from "../shared/shared-data.module";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -16,6 +17,7 @@ import {SharedDataModule} from "../shared/shared-data.module";
 export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   constructor(private formBuilder: FormBuilder, private router: Router,
               private myAuth: AuthService, private sharedData: SharedDataModule,
+              private toast:ToastrService
   ) {
   }
 
@@ -23,7 +25,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
     if(this.myAuth.isLoggedIn){
       this.router.navigate(["app"]).then();
     }
-
     this.sharedData.Citys.subscribe(data => this.citys = data);
     this.sharedData.Avatars.subscribe(data => this.avatars = data);
     this.sharedData.Interests.subscribe(data => this.Interests = data);
@@ -58,23 +59,24 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
 
   mLoginForm() {
     this.loginForm = new FormGroup({
-      loginEmail: new FormControl('adilakanaan', [Validators.required, Validators.minLength(4)]),
-      loginPassword: new FormControl('raw12345', [Validators.required, Validators.minLength(8)])
+      loginEmail: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      loginPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
+
   mSignUpForm() {
     this.signUpForm = new FormGroup(
       {
         UAvatar: new FormControl('assets/Avatars/men_av_1.png', Validators.required),
         UName: new FormGroup({
-          FirstName: new FormControl('1asd', [Validators.required, Validators.minLength(3)]),
-          LastName: new FormControl('1asd', [Validators.required, Validators.minLength(3)]),
+          FirstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+          LastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
         }),
-        UEmail: new FormControl('asd1@asd.com', [Validators.email, Validators.required]),
-        userName: new FormControl('asdw', [Validators.required, Validators.minLength(4)]),
+        UEmail: new FormControl('', [Validators.email, Validators.required]),
+        userName: new FormControl('', [Validators.required, Validators.minLength(4)]),
         UPassword: new FormGroup({
-          A: new FormControl('1asd@asd123', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)]),
-          B: new FormControl('1asd@asd123', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
+          A: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)]),
+          B: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(this.patternValidator)])
         }, {asyncValidators: customAsyncValidator()}),
         UAddress: new FormControl('amman', Validators.required),
         UInterests: new FormControl()
@@ -91,7 +93,10 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       this.myAuth.signIn(intoUser).subscribe((next) => {
         localStorage.setItem('access_token', next['access_token']);
         localStorage.setItem('refresh_token', next['refresh_token']);
+        this.toast.success("Logged in Successfully","Welcome")
         this.router.navigate(['app']).then()
+      },error=>{
+          this.toast.error(error.error.message,"Error")
       });
     }
   }
@@ -110,9 +115,10 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
       interest: `{${this.signUpForm.get('UInterests').value.toString()}}`
     };
     this.myAuth.signUp(adduser).subscribe((next) => {
-      let responseBodyText = next['message'];
-      console.log("my res" + responseBodyText)
+      this.toast.success(next.message,"Welcome");
       this.openSignup();
+    },error=>{
+      this.toast.error(error.error.message,"Error");
     });
   }
 

@@ -1,11 +1,9 @@
 import {AfterViewInit, Component, OnInit,} from '@angular/core';
-import {Book} from "../shared/Interfaces/Book";
-import {environment} from "../../environments/environment.prod";
-import {HttpClient} from "@angular/common/http";
 import {SharedServiceService} from '../services/shared-service.service';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {Router} from "@angular/router";
+import {MainService} from "../services/Main/main.service";
 
 @Component({
   selector: 'app-main-page',
@@ -14,7 +12,7 @@ import {Router} from "@angular/router";
 
 })
 export class MainPageComponent implements OnInit, AfterViewInit {
-  constructor(private http: HttpClient, private sharedService: SharedServiceService,
+  constructor(private service: MainService, private sharedService: SharedServiceService,
               private search: searchDataTransferService,
               private moveBook: BookDataService, private router: Router) {
   }
@@ -49,7 +47,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getBoUI() {
-    this.http.get<Book[]>(`${environment.apiUrl}home/basedOnYourInterests`).subscribe((res) => {
+    this.service.basedInYourInterst().subscribe((res) => {
       this.YInterests = res;
       this.YInterests = this.sharedService.removeNoImage(this.YInterests);
       let MostRatedC = [];
@@ -61,7 +59,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getTopN() {
-    this.http.get<Book[]>(`${environment.apiUrl}home/top10`).subscribe((res) => {
+    this.service.topBook().subscribe((res) => {
       this.topArr = res;
       this.topArr = this.sharedService.removeNoImage(this.topArr);
       let topNArrC = [];
@@ -73,7 +71,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getBoSU() {
-    this.http.get<Book[]>(`${environment.apiUrl}home/recommendBySimilarUsers`).subscribe((res) => {
+    this.service.basedOnSimUser().subscribe((res) => {
       this.BoSU = res;
       this.BoSU = this.sharedService.removeNoImage(this.BoSU);
       let BoSUC = [];
@@ -105,9 +103,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     let arrOfGen = [];
     allInt.forEach(i => {
       let arr = [];
-      this.http.get<Book[]>(`${environment.apiUrl}search?domain=genre&query=${i}`).subscribe((res) => {
-        arr = res;
-        arr = this.sharedService.removeNoImage(arr);
+      this.service.searchBy(i,'genre').subscribe((res) => {
+        arr = this.sharedService.removeNoImage(res);
         let C = [];
         let x = 3
         for (let i = 0; i < 5 * x / x; i++) {

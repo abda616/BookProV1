@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, share, shareReplay} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment.prod";
 
@@ -8,18 +8,22 @@ import {environment} from "../../../environments/environment.prod";
 })
 export class BookDataService {
   private myData$ = null;
-  constructor(private http:HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
 
   private book = new BehaviorSubject<number>(null);
   bookData = this.book.asObservable();
+
   transBook(data: number) {
-    this.book.next(data);
     if (data !== null) {
-      localStorage.setItem('Book',String(data));
+      this.book.next(data);
+      localStorage.setItem('Book', String(data));
     }
   }
-  getBook(id:number){
-      return this.http.get(`${environment.apiUrl}book/getBook?book_id=${id}`)
+
+  getBook(id: number) {
+    return this.http.get(`${environment.apiUrl}book/getBook?book_id=${id}`)
   }
 
   getRate(id: number) {
@@ -27,18 +31,23 @@ export class BookDataService {
   }
 
   setRate(rate: number, id: number) {
-    this.http.post(`${environment.apiUrl}profile/rateBook?rating=${rate}&book_id=${id}`,null)
-      .subscribe(value => {
-      console.log(value);
-    })
+    return this.http.post(`${environment.apiUrl}profile/rateBook?rating=${rate}&book_id=${id}`, null)
   }
+
   addBookToOwn(id: number) {
-    this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`,null).subscribe(value => {
-      console.log(value);
-    })
+    return this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`, null)
   }
-  tradeThisBook(id: number){
-    this.http.post(`${environment.apiUrl}profile/addBookToOwned?book_id=${id}`,null)
+
+  removeBookFromOwn(id: number) {
+    return this.http.post(`${environment.apiUrl}profile/removeBookFromOwned?book_id=${id}`, null)
+  }
+
+  tradeThisBook(id: number, isAvalable) {
+    return this.http.post(`${environment.apiUrl}profile/makeBookAvailable?book_id=${id}&available=${!isAvalable}`, null)
+  }
+
+  isOwenedBook(id: number) {
+    return this.http.get(`${environment.apiUrl}profile/owned`)
   }
 }
 

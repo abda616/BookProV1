@@ -10,6 +10,17 @@
   width:70%;
   margin-left: 15%;
 }
+.top-card-ex img{
+  width: 100px;
+}
+
+.top-card-ex{
+  height: 37%;
+  width: 100%;
+  position: sticky;
+  z-index: 124;
+  top: -37%!important;
+}
 
 .shine {
   background: #f6f7f8;

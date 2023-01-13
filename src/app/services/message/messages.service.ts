@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment.prod";
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,10 @@ export class MessagesService {
   sendMessage(id: number, message: string) {
     return this.http.post<any>(`${environment.apiUrl}message/send`,
       {bookExchange_id: id, message: message})
+  }
+
+  aceeptEx(id: number, is: boolean) {
+    return this.http.post<any>(`${environment.apiUrl}exchange/acceptExchange?exchange_id=${id}&accept=${is}`, null)
   }
 
 }
