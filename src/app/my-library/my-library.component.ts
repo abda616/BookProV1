@@ -3,9 +3,10 @@ import {searchDataTransferService} from "../services/Transfer/search-data-transf
 import {environment} from 'src/environments/environment.prod';
 import {SharedServiceService} from '../services/shared-service.service';
 import {Book, ownedBooks} from '../shared/Interfaces/Book';
-import {index} from 'cheerio/lib/api/traversing';
 import {HttpClient} from "@angular/common/http";
-
+import { MessagesService } from '../services/message/messages.service';
+import { ExchangeService } from '../services/Exchange/exchange.service';
+import { BookDataService } from '../services/Transfer/book-data.service';
 @Component({
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
@@ -25,6 +26,9 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   constructor(private search: searchDataTransferService,
               private http: HttpClient,
               private sharedService: SharedServiceService,
+              private messageService:MessagesService,
+              private exchageService:ExchangeService,
+              private bookDataService:BookDataService,
   ) {
   }
 
@@ -40,7 +44,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
 
 
   }
-
+//change the targeted library
   changeTarget(type) {
     this.desiredLibrary = type;
 
@@ -55,7 +59,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     return ''
 
   }
-
+//get the owned books
   getOwnedBooks() {
     this.http.get<ownedBooks[]>(environment.apiUrl + "profile/owned").subscribe(res => {
       this.ownedBooks = res
@@ -64,7 +68,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     })
 
   }
-
+//get favorite books
   getFavoriteBooks() {
     this.http.get<ownedBooks[]>(environment.apiUrl + "profile/favorites").subscribe(res => {
       this.favoriteBooks = res;
@@ -72,36 +76,52 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     })
 
   }
-
-  getTradeList() {
-    if (this.tradeList.length > 0) {
-      this.ownedBooks.forEach(e => {
-        this.tradeList.forEach(ele => {
-          if (e.avaliable && e.id != ele.id) {
-            this.tradeList.push(e)
-          }
-        })
-      })
-    } else {
-      this.ownedBooks.forEach(e => {
-        if (e.avaliable) {
-          this.tradeList.push(e)
-        }
-
-      })
+//get tradeList
+  getTradeList(newBook?) {
+   ///check if the trade array is empty at first to avoide duplication 
+   if(this.tradeList.length==0){
+    this.ownedBooks.forEach(e=>{
+      if(e.avaliable) this.tradeList.push(e)//if its available add it to trade list
+    })
+   }else {
+    //if its not empty check weather the passed book is already in the tradelist 
+if(newBook){
+  let bookFound=false;
+    this.tradeList.forEach(e=>{
+      if(e.id==newBook.id) bookFound=true
+    
+    })
+  //if its not found push it to the trade list 
+    if(!bookFound){
+      this.tradeList.push(newBook)
     }
+}}
+
     return this.tradeList
   }
+  //add the  books to tradeLIST 
+  addToTrade(obj, availablity): void {
+  this.bookDataService.tradeThisBook(obj.id,availablity).subscribe(res=>{
+    console.log(res)
+  })
+  //loop over the array and check if the passed object from the html is the same as the obj in the owned array then make it available
+  this.ownedBooks.forEach(e=>{
+    if(e.id==obj.id){
+      e.avaliable=!e.avaliable;
+    }//if its not available remove it from the trade list 
+    if(!e.avaliable){
+      this.removeItemFromTrade(obj)
+    }
+  })
+this.getTradeList(obj);
 
-//   async getTradeList(owededArr){
+  }
+  //just a simple function to remove the item using the filter method
+  removeItemFromTrade(item){
+this.tradeList=this.tradeList.filter(e=>{return !item})
+  }
 
-// owededArr.forEach(e=>{
-//   if(e.available){
-//     this.tradeList.push(e)
-//   }
-// })
-// await console.log(this.tradeList)
-//   }
+//the final function to get the data and the final results to the html 
   getData(type?) {
     if (type == this.sectionsArr[0]) {
       return this.ownedBooks;
@@ -109,21 +129,10 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
       // console.log(this.favoriteBooks)
       return this.favoriteBooks;
     } else if (type == this.sectionsArr[2]) {
-      return this.tradeList
+      return this.tradeList;
     }
     return ''
   }
 
-  addToTrade(bookId, availablity): void {
-    console.log(bookId, availablity)
 
-    //  console.log(currentBook,bookId)
-    let headers = {
-      book_id: bookId,
-      available: !availablity,
-    }
-    this.http.put(`${environment.apiUrl}profile/makeBookAvailable/book_id=${bookId}&available=${headers.available}`, null).subscribe(res => {
-      console.log(res)
-    })
-  }
 }
