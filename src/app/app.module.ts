@@ -26,6 +26,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {ConversationComponent} from './conversation/conversation.component'
 import {ToastrModule} from 'ngx-toastr';
 import {MainService} from "./services/Main/main.service";
+import {ExchangeService} from "./services/Exchange/exchange.service";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {MainService} from "./services/Main/main.service";
     searchDataTransferService,
     BookDataService,
     MainService,
+    ExchangeService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
 
   ], bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {ExchangeService} from "../services/Exchange/exchange.service";
 
 @Component({
   selector: 'app-trade-now',
@@ -8,7 +9,7 @@ import {searchDataTransferService} from "../services/Transfer/search-data-transf
 })
 export class TradeNowComponent implements OnInit,AfterViewInit {
 
-  constructor(private search:searchDataTransferService) {
+  constructor(private search:searchDataTransferService,private Ex:ExchangeService) {
   }
   ngAfterViewInit(): void {
     setTimeout(()=>{
