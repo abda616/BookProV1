@@ -84,7 +84,7 @@ body {
 }
 .container-fluid .right-cont .book-desc .genres p {
   min-width: 80px;
-  width: max-content;
+  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   border-bottom: 2px solid #2a324b;
@@ -101,6 +101,7 @@ body {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5em;
+  margin-bottom: 20px;
 }
 .container-fluid .right-cont .book-desc .info {
   display: flex;
@@ -148,7 +149,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 300px;
   height: 500px;
   margin: 0 0.5em;
@@ -157,7 +158,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #FFFFF0;
 }
 .card-wrapper-row-card .card-cont img {
   width: 100%;
@@ -179,41 +179,116 @@ body {
 }
 
 .card-wrapper-row-card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  /*justify-content: space-evenly;*/
-  justify-content: center;
-  margin: 2.5vh 6vh;
+  height: 400px;
+  max-height: 400px;
 }
-.card-wrapper-row-card .card {
+.card-wrapper-row-card .flip-card {
+  width: 35%;
+  height: 100%;
+  border: 1px solid transparent;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  /* This container is needed to position the front and back side */
+}
+.card-wrapper-row-card .flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.card-wrapper-row-card .flip-card .card-cont, .card-wrapper-row-card .flip-card .flip-card-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 300px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   margin: 0 0.5em;
+  position: relative;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  box-shadow: 18px 6px 20px -14px rgb(20, 30, 45);
+  border-radius: 20px;
 }
-.card-wrapper-row-card .card .card-body {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-front, .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  border: none;
+  background-color: transparent;
+  border-radius: 20px;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .card-wrapper-row-card .flip-card .card-cont .flip-card-back img, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back img {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 20px;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
+  background-color: #F3EBD9;
+  transform: rotateY(180deg);
+  height: 100%;
+  width: 100%;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  background-color: #FFFFF0;
-}
-.card-wrapper-row-card .card .card-body .plot {
-  max-height: 80px;
-  overflow: hidden;
-}
-.card-wrapper-row-card .card img {
   width: 100%;
-  max-height: 350px;
+  height: 100%;
+  color: #141e2d;
 }
-.card-wrapper-row-card .card .more-btn {
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .title, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .title {
+  line-height: 1.5em;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot {
+  max-height: 100px;
+  overflow: hidden;
+  z-index: 2;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
   width: 60%;
+  z-index: 1;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: #141e2d;
-  color: #f6f6f6;
+  border-radius: 10rem;
+  z-index: -2;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:before, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #e1cc9f;
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover {
+  color: #141e2d;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before {
+  width: 100%;
 }
 
 .carousel-control-prev {
