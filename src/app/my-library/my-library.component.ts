@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {environment} from 'src/environments/environment.prod';
 import {SharedServiceService} from '../services/shared-service.service';
-import {ownedBooks} from '../shared/Interfaces/Book';
-import {BookDataService} from "../services/Transfer/book-data.service";
+import {Book, ownedBooks} from '../shared/Interfaces/Book';
+import {index} from 'cheerio/lib/api/traversing';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-my-library',
@@ -14,10 +16,14 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   sectionsArr = ["My Books", "Favorite Books", "Trade List"]
   desiredLibrary: string = this.sectionsArr[0];
   ownedBooks: ownedBooks[];
+  ownedObj = []
   favoriteBooks = [];
+  favoritesIds = [];
   tradeList = [];
+  isAvailable: boolean = false;
 
-  constructor(private search: searchDataTransferService, private bookDataService: BookDataService,
+  constructor(private search: searchDataTransferService,
+              private http: HttpClient,
               private sharedService: SharedServiceService,
   ) {
   }
@@ -31,6 +37,8 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getOwnedBooks();
     this.getFavoriteBooks();
+
+
   }
 
   changeTarget(type) {
@@ -49,7 +57,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
 
   getOwnedBooks() {
-    this.bookDataService.allOwenedBook().subscribe((res) => {
+    this.http.get<ownedBooks[]>(environment.apiUrl + "profile/owned").subscribe(res => {
       this.ownedBooks = res
       this.ownedBooks = this.sharedService.removeNoImage(this.ownedBooks);
 
@@ -58,10 +66,11 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
 
   getFavoriteBooks() {
-    this.bookDataService.favorites().subscribe((res) => {
+    this.http.get<ownedBooks[]>(environment.apiUrl + "profile/favorites").subscribe(res => {
       this.favoriteBooks = res;
       this.favoriteBooks = this.sharedService.removeNoImage(this.favoriteBooks)
     })
+
   }
 
   getTradeList() {
@@ -106,7 +115,14 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
 
   addToTrade(bookId, availablity): void {
-    this.bookDataService.tradeThisBook(bookId, availablity).subscribe(res => {
+    console.log(bookId, availablity)
+
+    //  console.log(currentBook,bookId)
+    let headers = {
+      book_id: bookId,
+      available: !availablity,
+    }
+    this.http.put(`${environment.apiUrl}profile/makeBookAvailable/book_id=${bookId}&available=${headers.available}`, null).subscribe(res => {
       console.log(res)
     })
   }

@@ -117,7 +117,7 @@
           display: flex;
           justify-content: space-around;
           font-weight: bold;
-          background-image: url('src/assets/picture/wooden.jpg');
+          background-image: url("../../assets/picture/wooden.jpg");
           border-radius: 20px;
           margin-bottom: 0;
 
@@ -134,7 +134,7 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: 0;
-            top: 0px;
+            top: 0;
             color: #Fefefe;
 
             &:after {
@@ -169,15 +169,9 @@
             }
           }
         }
-
-
       }
-
-
     }
   }
-
-
 }
 
 

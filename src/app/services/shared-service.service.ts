@@ -5,7 +5,8 @@ import {Injectable} from '@angular/core';
 })
 export class SharedServiceService {
 
-  constructor() {}
+  constructor() {
+  }
 
   //get the postion of the m letter
   getPosition(string, target, index) {
