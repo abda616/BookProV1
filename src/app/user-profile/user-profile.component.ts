@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit {
       this.profilePic = data['profileImageUrl']?data['profileImageUrl']:"assets/Avatars/men_av_2.png";
       this.userCity=data['city'];
       this.userEmail=data['email'];
-      localStorage.setItem("interests",data['interest']?data['interest']:JSON.stringify(`{'Fiction', 'Non-fiction', 'Poetry','Children', 'Mystery', 'Thriller'}`));
+      localStorage.setItem("interests",data['interest']);
     })
 
     this.sharedData.Citys.subscribe(data =>

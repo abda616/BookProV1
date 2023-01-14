@@ -72,8 +72,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
 
   getBoSU() {
     this.service.basedOnSimUser().subscribe((res) => {
-      this.BoSU = res;
-      this.BoSU = this.sharedService.removeNoImage(this.BoSU);
+      this.BoSU = this.sharedService.removeNoImage(res);
       let BoSUC = [];
       for (let i = 0; i < this.BoSU.length / 3; i++) {
         BoSUC[i] = this.BoSU.slice(i * 3, i * 3 + 3)

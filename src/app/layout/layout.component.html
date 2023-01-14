@@ -69,7 +69,7 @@
         </mat-form-field>
         <!-- <mat-icon>dashboard</mat-icon> -->
         <button [matMenuTriggerFor]="menu" mat-stroked-button>
-          <img class="prof-icon" src="{{profilePic}}" alt="">
+          <img class="prof-icon" [src]="profilePic" alt="">
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="profile">

@@ -30,10 +30,11 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.mode = 'over'
     this.auth.getUserProfile().subscribe(data => {
+
       if (!localStorage.getItem('userData') || !localStorage.getItem("interests")) {
         localStorage.setItem("userData", JSON.stringify(data));
-
         let myObj = JSON.parse(localStorage.getItem("userData"));
+
         myObj.profileImageUrl = myObj.profileImageUrl ? myObj.profileImageUrl : "assets/Avatars/men_av_2.png";
         myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : "{'fiction','children','thriller'}";
         localStorage.setItem("userData", JSON.stringify(myObj));

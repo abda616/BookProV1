@@ -4,6 +4,9 @@ import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
 import {Router} from "@angular/router";
 import {MainService} from "../services/Main/main.service";
+import {AuthService} from "../shared/Auth/auth.service";
+import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
+import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 
 @Component({
   selector: 'app-my-book-info',
@@ -11,16 +14,16 @@ import {MainService} from "../services/Main/main.service";
   styleUrls: ['./book-info.component.css'],
 })
 export class MyBookInfoComponent implements OnInit {
-  avaliable: any;
-
   constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
-              private ref: ChangeDetectorRef,  private moveBook: BookDataService,
-              private search: MainService, private rout: Router) {
+              private ref: ChangeDetectorRef, private moveBook: BookDataService,
+              private search: MainService, private rout: Router,
+              private auth: AuthService, private position: searchDataTransferService) {
   }
 
+  avaliable: any;
   currentBookInfo: any = '';
   generalBookRate = 5;
-  myBookRate = 0;
+  myRateToTheBook = 0;
   GenraBook = '';
   currentAuthor = '';
   similarAuthorBooks = [];
@@ -28,8 +31,19 @@ export class MyBookInfoComponent implements OnInit {
   allGenreName: string[] = [];
   allGenreArr = [];
   isOwened;
+  ownedIdNumber;
+
+  private clear() {
+    this.currentAuthor = ''
+    this.similarAuthorBooks = []
+    this.allGenreName = [];
+    this.allGenreArr = [];
+  }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.position.updatePosition(true);
+    }, 0);
     this.clear();
     this.bookDataService.bookData.subscribe((id: number) => {
       if (id) {
@@ -41,6 +55,7 @@ export class MyBookInfoComponent implements OnInit {
           this.currentBookInfo = id
         } else this.rout.navigate(['']).then()
       }
+
       this.bookDataService.getBook(id).subscribe((bookdata) => {
         bookdata["coverPage"] = this.sharedService.getLargeImg(bookdata["coverPage"], this.sharedService.getPosition(bookdata["coverPage"], "m/", 2))
         this.currentBookInfo = bookdata;
@@ -57,34 +72,65 @@ export class MyBookInfoComponent implements OnInit {
           if (id == dataKey['book']['id']) {
             this.isOwened = true;
             this.avaliable = dataKey['avaliable']
+            this.ownedIdNumber = dataKey['id']
           }
         }
       });
       this.bookDataService.getRate(id).subscribe(rate => {
-        this.myBookRate = +rate['rating'];
+        this.myRateToTheBook = +rate['rating'];
       });
     });
   }
-
-
   tradeBookUOwened(id, av) {
-    this.bookDataService.tradeThisBook(id, av).subscribe((v) => {
-      console.log(v);
-    });
-    this.avaliable = !this.avaliable;
+    this.bookDataService.tradeThisBook(id, av).subscribe(
+      (next) => {
+        this.avaliable = !this.avaliable;
+        this.auth.toast.success(next['message'], "success")
+      },
+      error => {
+        this.auth.toast.error(error.error['message'], "error")
+      }
+    );
+
 
   }
-
   setRate(rate: number, id: number) {
-    this.myBookRate = rate;
-    this.bookDataService.setRate(rate, id).subscribe((v) => {
-      console.log(v)
-    });
+    this.bookDataService.setRate(rate, id).subscribe(
+      (next) => {
+        this.myRateToTheBook = rate;
+        this.auth.toast.success(next['message'], "success")
+      },
+      error => {
+        this.auth.toast.error(error.error['message'], "error")
+      }
+    );
+  }
+  addBookToOwened(id: number) {
+    this.isOwened = !this.isOwened;
+    this.bookDataService.addBookToOwn(id).subscribe(
+      (next) => {
+        this.auth.toast.success(next['message'], "success")
+      },
+      error => {
+        this.auth.toast.error(error.error['message'], "error")
+      }
+    );
+  }
+  removeFromOwened(id) {
+    this.isOwened = !this.isOwened;
+    this.bookDataService.removeBookFromOwn(id).subscribe(
+      (next) => {
+        this.auth.toast.success(next['message'], "success")
+      },
+      error => {
+        this.auth.toast.error(error.error['message'], "error")
+      }
+    );
   }
 
   getRate() {
-    if (this.myBookRate > 0) {
-      return this.myBookRate;
+    if (this.myRateToTheBook > 0) {
+      return this.myRateToTheBook;
     } else return 0;
   }
 
@@ -120,7 +166,6 @@ export class MyBookInfoComponent implements OnInit {
             C[i] = arr.slice(i * x, i * x + x)
           }
           arr = C;
-
           this.allGenreName.push(i);
           this.allGenreArr.push(arr);
         });
@@ -140,24 +185,6 @@ export class MyBookInfoComponent implements OnInit {
     this.rout.navigate(['app/trade']).then()
   }
 
-  private clear() {
-    this.currentAuthor = ''
-    this.similarAuthorBooks = []
-    this.allGenreName = [];
-    this.allGenreArr = [];
-  }
 
-  addBookToOwened(id: number) {
-    this.isOwened = !this.isOwened;
-    this.bookDataService.addBookToOwn(id).subscribe((v) => {
-      console.log(v)
-    });
-  }
 
-  removeFromOwened(id) {
-    this.isOwened = !this.isOwened;
-    this.bookDataService.removeBookFromOwn(id).subscribe((v) => {
-      console.log(v)
-    });
-  }
 }

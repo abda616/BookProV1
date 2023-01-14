@@ -3,6 +3,7 @@ import {MessagesService} from "../services/message/messages.service";
 import {Router} from "@angular/router";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
+import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 
 @Component({
   selector: 'app-conversation',
@@ -12,7 +13,8 @@ import {SharedServiceService} from "../services/shared-service.service";
 export class ConversationComponent implements OnInit,AfterViewInit {
 
   constructor(private message: MessagesService, private router: Router,
-              private bookSer: BookDataService, private shared: SharedServiceService) {
+              private bookSer: BookDataService, private shared: SharedServiceService,
+              private postion: searchDataTransferService) {
   }
 
   conver;
@@ -24,6 +26,9 @@ export class ConversationComponent implements OnInit,AfterViewInit {
   newMessageText;
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.postion.updatePosition(true);
+    }, 0);
     this.message.dataID.subscribe(data => {
       if (data) this.conversationSation = data;
       else {

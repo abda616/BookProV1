@@ -90,6 +90,7 @@
 
   <div class="all-interest" *ngFor="let x of allGenreName;let y = index">
     <h1 class="text-center mt-5">{{x}}</h1>
+
     <div [attr.id]="'carouselControls'+y+3" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
       <div class="carousel-inner" *ngFor="let _3dArr of allGenreArr[y]; let i = index;">
         <div class="carousel-item {{i==0?'active':''}} ">

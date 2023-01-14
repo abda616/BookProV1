@@ -4,18 +4,15 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment.prod";
 import {ownedBooks} from 'src/app/shared/Interfaces/Book';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class BookDataService {
-  private myData$ = null;
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient  ) {}
 
   private book = new BehaviorSubject<number>(null);
   bookData = this.book.asObservable();
-
   transBook(data: number) {
     if (data !== null) {
       this.book.next(data);

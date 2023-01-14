@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { searchDataTransferService } from '../services/Transfer/search-data-transfer.service';
-import { environment } from 'src/environments/environment.prod';
 import { SharedServiceService } from '../services/shared-service.service';
 import { Book, ownedBooks } from '../shared/Interfaces/Book';
-import { HttpClient } from '@angular/common/http';
 import { MessagesService } from '../services/message/messages.service';
 import { ExchangeService } from '../services/Exchange/exchange.service';
 import { BookDataService } from '../services/Transfer/book-data.service';
+import {AuthService} from "../shared/Auth/auth.service";
 @Component({
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
@@ -18,17 +17,18 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   ownedBooks: ownedBooks[];
   ownedObj = [];
   favoriteBooks = [];
-  favoritesIds = [];
   tradeList = [];
-  isAvailable: boolean = false;
+  userPic = this.auth.getUserPic();
+  userName=this.auth.getUserName();
 
   constructor(
     private search: searchDataTransferService,
-    private http: HttpClient,
+    private auth: AuthService,
     private sharedService: SharedServiceService,
     private messageService: MessagesService,
     private exchageService: ExchangeService,
-    private bookDataService: BookDataService
+    private bookDataService: BookDataService,
+
   ) {}
 
   ngAfterViewInit(): void {
@@ -57,18 +57,14 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
   //get the owned books
   getOwnedBooks() {
-    this.http
-      .get<ownedBooks[]>(environment.apiUrl + 'profile/owned')
-      .subscribe((res) => {
+    this.bookDataService.allOwenedBook().subscribe((res) => {
         this.ownedBooks = res;
         this.ownedBooks = this.sharedService.removeNoImage(this.ownedBooks);
       });
   }
   //get favorite books
   getFavoriteBooks() {
-    this.http
-      .get<ownedBooks[]>(environment.apiUrl + 'profile/favorites')
-      .subscribe((res) => {
+    this.bookDataService.favorites().subscribe((res) => {
         this.favoriteBooks = res;
         this.favoriteBooks = this.sharedService.removeNoImage(
           this.favoriteBooks
@@ -100,9 +96,11 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
   //add the  books to tradeLIST
   addToTrade(obj, availablity): void {
-    this.bookDataService.tradeThisBook(obj.id, availablity).subscribe((res) => {
-      console.log(res);
-    });
+    this.bookDataService.tradeThisBook(obj.id, availablity).subscribe(
+      (next) => {
+        this.auth.toast.success(next['message'],"success")},
+      error => {this.auth.toast.error(error.error['message'],"error")}
+    );
     //loop over the array and check if the passed object from the html is the same as the obj in the owned array then make it available
     this.ownedBooks.forEach((e) => {
       if (e.id == obj.id) {
@@ -132,5 +130,18 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
       return this.tradeList;
     }
     return '';
+  }
+
+  goToBook(book: number) {
+    this.bookDataService.transBook(book);
+    this.auth.router.navigate(['app/book']).then();
+  }
+
+  addToOwn(id) {
+    this.bookDataService.addBookToOwn(id).subscribe(
+      (next) => {
+        this.auth.toast.success(next['message'],"success")},
+      error => {this.auth.toast.error(error.error['message'],"error")}
+    );
   }
 }

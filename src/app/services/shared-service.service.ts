@@ -33,7 +33,7 @@ export class SharedServiceService {
           newArr.push(e);
         }
       }
-    })
+    });
     return newArr;
   }
 }
