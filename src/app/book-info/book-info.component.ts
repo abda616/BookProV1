@@ -5,7 +5,6 @@ import {Book} from "../shared/Interfaces/Book";
 import {Router} from "@angular/router";
 import {MainService} from "../services/Main/main.service";
 import {AuthService} from "../shared/Auth/auth.service";
-import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 
 @Component({
@@ -32,6 +31,7 @@ export class MyBookInfoComponent implements OnInit {
   allGenreArr = [];
   isOwened;
   ownedIdNumber;
+  bookId ;
 
   private clear() {
     this.currentAuthor = ''
@@ -41,9 +41,7 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.position.updatePosition(true);
-    }, 0);
+    setTimeout(() => {this.position.updatePosition(true);}, 0);
     this.clear();
     this.bookDataService.bookData.subscribe((id: number) => {
       if (id) {
@@ -61,26 +59,34 @@ export class MyBookInfoComponent implements OnInit {
         this.currentBookInfo = bookdata;
         this.generalBookRate = bookdata['rating']['average_rating'];
         this.currentAuthor = bookdata['author'];
+        this.bookId = bookdata['id'];
         this.GenraBook = bookdata['genres'];
+
         this.similarAuthorService(this.currentAuthor);
         this.getGenreArr();
+
       });
-      this.bookDataService.isOwenedBook(id).subscribe((resp) => {
-        let data: any;
-        data = resp;
-        for (let dataKey of data) {
-          if (id == dataKey['book']['id']) {
-            this.isOwened = true;
-            this.avaliable = dataKey['avaliable']
-            this.ownedIdNumber = dataKey['id']
-          }
-        }
-      });
+      this.isOwnedBook(id);
       this.bookDataService.getRate(id).subscribe(rate => {
         this.myRateToTheBook = +rate['rating'];
       });
     });
   }
+
+  private isOwnedBook(id: number) {
+    this.bookDataService.isOwenedBook(id).subscribe((resp) => {
+      let data: any;
+      data = resp;
+      for (let dataKey of data) {
+        if (id == dataKey['book']['id']) {
+          this.isOwened = true;
+          this.avaliable = dataKey['avaliable']
+          this.ownedIdNumber = dataKey['id']
+        }
+      }
+    });
+  }
+
   tradeBookUOwened(id, av) {
     this.bookDataService.tradeThisBook(id, av).subscribe(
       (next) => {
@@ -110,6 +116,7 @@ export class MyBookInfoComponent implements OnInit {
     this.bookDataService.addBookToOwn(id).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], "success")
+        this.isOwnedBook(id);
       },
       error => {
         this.auth.toast.error(error.error['message'], "error")
@@ -180,11 +187,7 @@ export class MyBookInfoComponent implements OnInit {
     this.moveBook.transBook(book);
     this.rout.navigate(['app/book']).then();
   }
-
   goToTrade() {
     this.rout.navigate(['app/trade']).then()
   }
-
-
-
 }

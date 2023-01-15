@@ -5,8 +5,6 @@ import {delay, map, of} from "rxjs";
 import {avatarPicture, City, userSignIn, userSignUp} from "../shared/Interfaces/userSignup";
 import {AuthService} from "../shared/Auth/auth.service";
 import {SharedDataModule} from "../shared/shared-data.module";
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,6 +21,7 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
     if (this.myAuth.isLoggedIn) {
       this.router.navigate(["app"]).then();
     }
+
     this.sharedData.Citys.subscribe(data => this.citys = data);
     this.sharedData.Avatars.subscribe(data => this.avatars = data);
     this.sharedData.Interests.subscribe(data => this.Interests = data);
@@ -30,6 +29,7 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
 
     this.mLoginForm();
     this.mSignUpForm();
+
     this.disabledControl.valueChanges.pipe().subscribe((val) => {
       if (val) this.UInterests.disable(); else this.UInterests.enable();
     });
@@ -124,14 +124,6 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
     return !(this.signUpForm.valid && this.getLength() >= 3);
   }
 
-  getErrorMessage() {
-    if (!this.loginForm.get('loginEmail').valid) {
-      return 'You must enter an Email';
-    } else if (!this.loginForm.get('loginPassword').valid) {
-      return 'You must enter a Password';
-    }
-    return this.loginForm.hasError('loginEmail') ? 'Not a valid email or Password' : '';
-  }
 
   openSignup() {
     this.signUpState = !this.signUpState;
@@ -164,8 +156,15 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   image: string;
   interest: string;
   city: string;
+  getErrorMessage() {
+    if (!this.loginForm.get('loginEmail').valid) {
+      return 'You must enter an Email';
+    } else if (!this.loginForm.get('loginPassword').valid) {
+      return 'You must enter a Password';
+    }
+    return this.loginForm.hasError('loginEmail') ? 'Not a valid email or Password' : '';
+  }
 }
-
 function customAsyncValidator(): AsyncValidatorFn {
   return (group: FormGroup) => {
     const A = group.get('A').value;

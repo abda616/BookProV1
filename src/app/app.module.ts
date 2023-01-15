@@ -20,9 +20,6 @@ import {BookDataService} from "./services/Transfer/book-data.service";
 import {SearchPageComponent} from './search-page/search-page.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {SpinnerComponent} from './spinner/spinner.component';
-import {MatToolbarModule} from '@angular/material/toolbar'
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
-import {MatButtonModule} from '@angular/material/button';
 import {ConversationComponent} from './conversation/conversation.component'
 import {ToastrModule} from 'ngx-toastr';
 import {MainService} from "./services/Main/main.service";
@@ -51,11 +48,8 @@ import {ExchangeService} from "./services/Exchange/exchange.service";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatToolbarModule,
     ToastrModule.forRoot({
-      maxOpened: 1,
+      maxOpened: 2,
       progressBar: true,
       progressAnimation: 'decreasing',
       positionClass: 'toast-bottom-right',

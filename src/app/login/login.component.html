@@ -18,7 +18,7 @@
         <div class=" justify-content-center">
           <mat-form-field appearance="legacy">
             <mat-label>Password</mat-label>
-            <input matInput matNativeControl id="passwordEmail" formControlName="loginPassword"
+            <input matInput matNativeControl id="passwordEmail" formControlName="loginPassword" autocomplete="on"
                    [type]="hidePass ? 'password' : 'text'" required>
             <mat-error>Most Contain special charter, Number, Char And More Than 8 Character</mat-error>
             <button mat-icon-button matSuffix (click)="hidePass = !hidePass">
@@ -34,18 +34,20 @@
               (click)="openSignup()">{{!signUpState ? "SignUp" : "signIn"}}</button>
     </div>
     <div *ngIf="signUpState" class="signup-form">
-
       <h2 class="text-center" style="margin-top:40% !important;">Welcome To Jo Book</h2>
       <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" class="just-flex flex-column justify-content-center ">
 
         <div class="just-flex justify-content-center  align-items-center mx-auto my-1">
+
           <img src="{{this.signUpForm.get('UAvatar').value}}" class="w-25" alt="avatar">
           <mat-form-field appearance="legacy">
+
             <mat-select formControlName="UAvatar">
               <mat-option *ngFor="let pic of avatars" [value]="pic.picValue">
                 {{pic.viewValue}}
               </mat-option>
             </mat-select>
+
           </mat-form-field>
         </div>
 
@@ -97,12 +99,11 @@
         </div>
 
 
-        <div class="city-div just-flex  justify-content-center align-content-center">
+        <div class="city-div just-flex  justify-content-center align-items-baseline">
           <h3>You Live In</h3>
           <div class="small-spacer"></div>
           <mat-form-field appearance="legacy">
             <mat-label>Live In</mat-label>
-
             <mat-select formControlName="UAddress">
               <mat-option *ngFor="let city of citys" [value]="city.value">
                 {{city.viewValue}}

@@ -43,7 +43,6 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     this.getBoUI();
     this.getTopN();
     this.getBoSU();
-    this.getGenreArr();
   }
 
   getBoUI() {
