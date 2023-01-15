@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
 import {ExchangeService} from "../services/Exchange/exchange.service";
-import {ownedBooks} from '../shared/Interfaces/Book';
 import {Router} from "@angular/router";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from '../services/shared-service.service';
@@ -14,7 +13,7 @@ import {SharedServiceService} from '../services/shared-service.service';
 export class TradeNowComponent implements OnInit, AfterViewInit {
   headsInTop: string[] = ["Your Trade List", "Discover Books"];
   yourTradeList = [];
-  OtherBooks = [];
+  OtherBooks: any = [];
 
 
   constructor(private search: searchDataTransferService,
@@ -29,27 +28,22 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.search.updatePosition(true);
     }, 0);
-
-    this.Ex.booksForExchange().subscribe(v => {
-      // console.log('1')
-      // console.log(v)
-    })
-    this.Ex.exchangesFromMe().subscribe(v => {
+    /*this.Ex.exchangesFromMe().subscribe(v => {
       // console.log('2')
       // console.log(v)
     })
     this.Ex.exchangesFromPeople().subscribe(v => {
       // console.log('3')
       // console.log(v)
-    })
+    })*/
   }
 
   ngOnInit(): void {
-    this.getTradeList()
-
+    this.getYouTradeList()
+    this.getOtherData()
   }
 
-  getTradeList() {
+  getYouTradeList() {
     this.moveBook.allOwenedBook().subscribe(res => {
       let ownedBooks = this.sharedService.removeNoImage(res)
       let ownedBooksC = [];
@@ -57,9 +51,6 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
         if (e.avaliable == true)
           ownedBooksC.push(e);
       })
-      
-      
- 
       this.yourTradeList = ownedBooksC;
       console.log(this.yourTradeList)
     })
@@ -67,9 +58,12 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   }
 
 
-  getBookTitle(s: any) {
-    let arr = s.split(/[{,:(]/gi)
-    return arr[0];
+  getBookTitle(book: number) :string {
+    /*this.moveBook.getBook(book).subscribe((data)=>{
+      title = data['title'];
+      return title;
+    })*/
+    return '';
   }
 
   goToBookPage(book: number) {
@@ -80,10 +74,19 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   goToDataPage(bookElement: any) {
 
   }
-  onEchangeUi(elementId){
+  onExchangeUi(elementId){
     console.log(elementId)
   }
   getData(){
     return this.yourTradeList
+  }
+
+  private getOtherData() {
+    this.Ex.booksForExchange().subscribe(v => {
+      console.log(v)
+      this.OtherBooks= v;
+      console.log(this.OtherBooks)
+    })
+
   }
 }
