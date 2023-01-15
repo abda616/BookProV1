@@ -13,8 +13,9 @@ import {SharedServiceService} from '../services/shared-service.service';
 })
 export class TradeNowComponent implements OnInit, AfterViewInit {
   headsInTop: string[] = ["Your Trade List", "Discover Books"];
-  yourTradeList2D = [];
+  yourTradeList = [];
   OtherBooks = [];
+
 
   constructor(private search: searchDataTransferService,
               private Ex: ExchangeService,
@@ -30,16 +31,16 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
     }, 0);
 
     this.Ex.booksForExchange().subscribe(v => {
-      console.log('1')
-      console.log(v)
+      // console.log('1')
+      // console.log(v)
     })
     this.Ex.exchangesFromMe().subscribe(v => {
-      console.log('2')
-      console.log(v)
+      // console.log('2')
+      // console.log(v)
     })
     this.Ex.exchangesFromPeople().subscribe(v => {
-      console.log('3')
-      console.log(v)
+      // console.log('3')
+      // console.log(v)
     })
   }
 
@@ -56,21 +57,15 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
         if (e.avaliable == true)
           ownedBooksC.push(e);
       })
-      ownedBooks = ownedBooksC;
-      ownedBooksC = [];
-      let x = 2;
-      for (let i = 0; i < ownedBooks.length / x; i++) {
-        ownedBooksC[i] = ownedBooks.slice(i * x, i * x + x)
-      }
-      this.yourTradeList2D = ownedBooksC;
-      console.log(this.yourTradeList2D)
+      
+      
+ 
+      this.yourTradeList = ownedBooksC;
+      console.log(this.yourTradeList)
     })
+    return this.yourTradeList;
   }
 
-  getGenres(s: string) {
-    let arr = s.replace(/[{}']/gi, "").split(',')
-    return arr.slice(0, 3)
-  }
 
   getBookTitle(s: any) {
     let arr = s.split(/[{,:(]/gi)
@@ -84,5 +79,11 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
 
   goToDataPage(bookElement: any) {
 
+  }
+  onEchangeUi(elementId){
+    console.log(elementId)
+  }
+  getData(){
+    return this.yourTradeList
   }
 }
