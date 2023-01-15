@@ -1,5 +1,4 @@
 
-
 .convirsation-hight {
   height: 92%;
 }
@@ -9,15 +8,10 @@
   flex-direction: row;
   width:70%;
   margin-left: 15%;
-}
-.top-card-ex img{
-  width: 100px;
+  border: #2a3248 solid 3px;
+  border-radius: 10px;
 }
 
-.top-card-ex{
-  height: 37%;
-  width: 100%;
-  position: sticky;
-  z-index: 124;
-  top: -37%!important;
+.conv-img img{
+  max-width: 275px;
 }

@@ -18,26 +18,32 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   conver;
+  newMessageText;
+  insedeViwe = false;
+
   hisBookPic;
   myBookPic;
+
   conversationSation;
   sationID = JSON.parse(localStorage.getItem('conversation_ex_id'))['exchange_id'];
   firstUser = JSON.parse(localStorage.getItem('userData'))['userName'];
-  newMessageText;
-  insedeViwe = false;
+  initiator = JSON.parse(localStorage.getItem('initiator') );
 
   ngOnInit(): void {
     setTimeout(() => {
       this.postion.updatePosition(true);
     }, 0);
-
     this.insedeViwe = true;
 
     this.message.dataID.subscribe(data => {
-      if (data) this.conversationSation = data;
+      if (data)
+        this.conversationSation = data;
       else {
         let x = localStorage.getItem('conversation_ex_id')
-        if (!x) this.router.navigate(['']).then();
+        if (!x)
+          this.router.navigate(['']).then();
+        this.conversationSation = x;
+
         data = JSON.parse(x);
       }
       this.getMessages(data, this.insedeViwe)
@@ -72,16 +78,17 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   sendMessage(id: number) {
-    if (this.newMessageText.length > 0)
-      this.message.sendMessage(id, this.newMessageText).subscribe(() => {
-        this.newMessageText = '';
+    if (this.newMessageText.length > 0) {
+      let mess = this.newMessageText;
+      this.newMessageText = '';
+      this.message.sendMessage(id, mess).subscribe(() => {
         this.getMessages(JSON.parse(localStorage.getItem('conversation_ex_id')), this.insedeViwe)
         document.querySelector("#span-messaging").scrollIntoView();
         setTimeout(() => {
           document.querySelector("#span-messaging").scrollIntoView();
         }, 3000)
-
       });
+    }
   }
 
   accept(sationID: any, accToF: boolean) {
@@ -101,8 +108,5 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.insedeViwe = false;
     this.getMessages(JSON.parse(localStorage.getItem('conversation_ex_id')), this.insedeViwe)
-
   }
-
-
 }
