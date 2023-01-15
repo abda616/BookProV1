@@ -77,7 +77,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   UpdateEmail() {
-    console.log(this.email)
     this.auth.setUserData1({email: this.email}).subscribe(value => {
       this.auth.toast.success(value['message'])
       this.auth.toast.info('U Will Be Loged Out To Update Data', "Saved... Log-Out 5 Sec")

@@ -96,7 +96,6 @@ export class LayoutComponent implements OnInit {
     this.router.navigate(['app/search']).then();
   }
   goToC(x) {
-    console.log(x['exchange_id'])
     this.message.setMessageID(x);
     this.myDrawer.toggle().then();
     //this.mode = "side"

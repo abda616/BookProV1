@@ -124,7 +124,6 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     if (type == this.sectionsArr[0]) {
       return this.ownedBooks;
     } else if (type == this.sectionsArr[1]) {
-      // console.log(this.favoriteBooks)
       return this.favoriteBooks;
     } else if (type == this.sectionsArr[2]) {
       return this.tradeList;

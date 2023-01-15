@@ -64,7 +64,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
       this.message.getConversation(messageData.exchange_id).subscribe(value => {
         this.conver = value
       }, error => {
-        console.log(error)
         if (error.error['message'] == 'error' || error.error['message'] == "You don't have access to this conversation.") {
           localStorage.removeItem('conversation_ex_id')
           this.router.navigate(['app']).then()
@@ -73,8 +72,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   sendMessage(id: number) {
-    console.log(id);
-
     if (this.newMessageText.length > 0)
       this.message.sendMessage(id, this.newMessageText).subscribe(() => {
         this.newMessageText = '';
@@ -89,7 +86,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   accept(sationID: any, accToF: boolean) {
     this.message.aceeptEx(sationID, accToF).subscribe(value => {
-      console.log(value)
       if (value['message'] == 'error' || value['message'] == "You don't have access to this conversation.") {
         localStorage.removeItem('conversation_ex_id')
       }
@@ -97,7 +93,6 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.insedeViwe);
     setInterval(() => {
       this.getMessages(JSON.parse(localStorage.getItem('conversation_ex_id')), this.insedeViwe)
     }, 5000);
@@ -106,7 +101,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.insedeViwe = false;
     this.getMessages(JSON.parse(localStorage.getItem('conversation_ex_id')), this.insedeViwe)
-    console.log(this.insedeViwe)
+
   }
 
 

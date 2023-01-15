@@ -58,13 +58,10 @@ export class AuthService {
   }
 
   setUserData1(x) {
-    console.log(x)
     return this.http.put(`${this.endpoint}profile/editUser`, JSON.stringify(x), {headers: this.headers})
   }
 
   setUserData2UserName(x, y) {
-    console.log(x)
-    console.log(y)
     return this.http.put(`${this.endpoint}profile/editUser`, JSON.stringify({
       firstName: x,
       lastName: y
@@ -72,8 +69,6 @@ export class AuthService {
   }
 
   setUserData2Password(x, y) {
-    console.log(x)
-    console.log(y)
     return this.http.put(`${this.endpoint}profile/editUser`, JSON.stringify({
       password: x,
       matchingPassword: y
