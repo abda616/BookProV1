@@ -207,6 +207,7 @@
               overflow: hidden;
               width: 60%;
               z-index: 1;
+              min-height: 50px;
 
               &:after {
                 content: '';

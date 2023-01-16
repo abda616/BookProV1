@@ -68,6 +68,7 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   }
 
   getData() {
+    console.log(this.yourTradeList)
     return this.yourTradeList;
   }
 
