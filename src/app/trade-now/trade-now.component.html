@@ -1,50 +1,126 @@
 <div class="container-fluid">
+  <a href="" name="top" id="top" #scrollTop></a>
   <div class="container">
-<div class="trade-List-cont">
-  <div class="row w-100 d-flex justify-content-around m-auto">
-    <h1 class="mt-5 mb-3">Your Trade List</h1>
-    <div class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 "*ngFor="let data of yourTradeList">
-      <div class="card-wrapper-row-card">
-        <div class="card-wrapper-row-card row flip-card" >
-          <div class="flip-card-inner card-cont">
-            <div class="flip-card-front">
-              <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
+    <div >
+      <div class="trade-List-cont" #tradeListCont>
+        <div class="row w-100 d-flex justify-content-around m-auto">
+          <h1 class="mt-5 mb-3">Your Trade List</h1>
+          <div class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 "*ngFor="let data of yourTradeList">
+            <div class="card-wrapper-row-card">
+              <div class="card-wrapper-row-card row flip-card" >
+                <div class="flip-card-inner card-cont">
+                  <div class="flip-card-front">
+                    <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
+                  </div>
+                  <div class="flip-card-back">
+                    <div class="card-body mt-4 p-2">
+                      <h5 class="title fs-3">{{data.book.title}}</h5>
+                      <a (click)="onExchangeUi(data.id)" class="btn-more btn ">Exchange</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="flip-card-back">
-              <div class="card-body mt-4 p-2">
-                <h5 class="title fs-3">{{data.book.title}}</h5>
-                <a (click)="onExchangeUi(data.id)" class="btn-more btn ">Exchange</a>
+          </div>
+        </div>
+      
+      </div>
+      <button class="show-more-btn btn" (click)="toggleTrade(tradeListCont)" *ngIf="getData().length>6">{{tradeToggleBtn}}</button>
+
+    </div>
+<div>
+  <div class="exchangable-cont" #exchangeCont>
+    <div class="row w-100 d-flex justify-content-around m-auto">
+      <h1 class="mt-5 mb-3">Discorver In Your City</h1>
+      <div id="{{data.id}}" class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 "*ngFor="let data of yourTradeList">
+        <div class="card-wrapper-row-card">
+          <div class="card-wrapper-row-card row flip-card" >
+            <div class="flip-card-inner card-cont">
+              <div class="flip-card-front">
+                <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
+              </div>
+              <div class="flip-card-back">
+                <div class="card-body mt-4 p-2">
+                  <h5 class="title fs-3">{{data.book.title}}</h5>
+                  <a (click)="onExchangeUi(data['id'])" class="btn-more btn ">Exchange</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  
   </div>
-  <button *ngIf="getData().length>6">Show More</button>
-</div>
-<div class="exchangable-cont">
-  <div class="row w-100 d-flex justify-content-around m-auto">
-    <h1 class="mt-5 mb-3">Discorver In Your City</h1>
-    <div class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 "*ngFor="let data of yourTradeList">
-      <div class="card-wrapper-row-card">
-        <div class="card-wrapper-row-card row flip-card" >
-          <div class="flip-card-inner card-cont">
-            <div class="flip-card-front">
-              <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
-            </div>
-            <div class="flip-card-back">
-              <div class="card-body mt-4 p-2">
-                <h5 class="title fs-3">{{data.book.title}}</h5>
-                <a (click)="goToBookPage(book['id'])" class="btn-more btn ">Exchange</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <button class="show-more-btn btn" (click)="toggleTrade(exchangeCont)" *ngIf="getData().length>6">{{exchangeToggleBtn}}</button>
 
 </div>
+
+<div class="exchange-offers">
+  <div class="whole-container">
+   
+    <div class="left-cont ">
+      <h1>Your Book</h1>  
+<div class="image"*ngIf="initExchange">
+<img src="{{currentBookObj.book.coverPage}}" alt="">
+</div>
+<div class="user-info">
+  <img src="" alt="">
+  <h6>Name</h6>
+</div>
+<div class="user-info">
+  <img src="" alt="">
+  <h6>Name</h6>
+</div>
+    </div>
+    <div class="right-cont">
+      <h1>Pick A Book</h1>
+   <div class="exchange-slider">
+     <div class="other-two-cards" >
+       
+       <div [attr.id]="'carouselControls'" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
+   
+         <div class="carousel-inner" >
+           <div class="carousel-item {{i==0?'active':''}}" *ngFor="let data of yourTradeList;let i = index">
+             <div class="card-wrapper-row-card">
+               <div class="card-wrapper-row-card row flip-card" >
+                 <div class="flip-card-inner card-cont">
+                   <div class="flip-card-front">
+                     <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
+                   </div>
+                   <div class="flip-card-back">
+                     <div class="card-body mt-4 p-2">
+                       <h5 class="title fs-3">{{data.book.title}}</h5>
+                       <a (click)="onExchangeUi(data.id)" class="btn-more btn ">Exchange</a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'"
+                 data-bs-slide="prev">
+           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+           <span class="visually-hidden">Previous</span>
+         </button>
+         <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselControls'"
+                 data-bs-slide="next">
+           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+           <span class="visually-hidden">Next</span>
+         </button>
+       </div>
+     </div>
+   </div>
+    </div>
+   
+  </div>
+
+  </div>
+
+ 
+ 
+</div>
+
 </div>
 <app-spinner></app-spinner>
