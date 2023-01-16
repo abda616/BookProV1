@@ -3,7 +3,7 @@
 
   <div class="container">
     <div>
-      <div class="trade-List-cont" #tradeListCont>
+      <div class="trade-List-cont" [ngClass]="!tradeToggleBtn?'':'show-more-trade'" #tradeListCont>
 
         <div class="row w-100 d-flex justify-content-around m-auto">
 
@@ -29,12 +29,12 @@
 
       </div>
 
-      <button class="show-more-btn btn" (click)="toggleTrade(tradeListCont)"
-              *ngIf="getData().length>6">{{tradeToggleBtn}}</button>
+      <button class="show-more-btn btn" (click)="tradeToggleBtn=!tradeToggleBtn"
+              *ngIf="getData().length>6">{{!tradeToggleBtn?'Show More':'Show Less'}}</button>
     </div>
 
     <div>
-      <div class="exchangable-cont" #exchangeCont>
+      <div class="exchangable-cont" [ngClass]="!exchangeToggleBtn?'':'show-more-exchange'" #exchangeCont>
         <div class="row w-100 d-flex justify-content-around m-auto">
           <h1 class="mt-5 mb-3">Discorver In Your City</h1>
           <div id="{{data.id}}" class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 "
@@ -60,8 +60,8 @@
 
       </div>
 
-      <button class="show-more-btn btn" (click)="toggleTrade(exchangeCont)"
-              *ngIf="getData().length>6">{{exchangeToggleBtn}}</button>
+      <button class="show-more-btn btn" (click)="exchangeToggleBtn=!exchangeToggleBtn" [ngClass]="!exchangeToggleBtn?'show-more-exchange':'show-more-exchange'"
+              *ngIf="getData().length>6">{{!exchangeToggleBtn?"Show More":"Show Less"}}</button>
     </div>
 
     <div class="exchange-offers">
@@ -84,7 +84,6 @@
           <h1>Pick A Book</h1>
           <div class="exchange-slider">
             <div class="other-two-cards">
-
               <div [attr.id]="'carouselControls'" class="carousel carousel-dark w-100 my-5" data-ride="carousel">
 
                 <div class="carousel-inner">

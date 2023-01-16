@@ -16,8 +16,10 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   headsInTop: string[] = ['Your Trade List', 'Discover Books'];
   yourTradeList = [];
   OtherBooks: any = [];
-  tradeToggleBtn = 'Show More';
-  exchangeToggleBtn = 'Show More';
+
+  tradeToggleBtn =  false;
+  exchangeToggleBtn = false
+
   currentExchangeBook;
   currentBookObj;
   initExchange: boolean = false;
@@ -61,28 +63,6 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   goToBookPage(book: number) {
     this.auth.bookService.transBook(book);
     this.auth.router.navigate(['app/book']).then();
-  }
-
-  toggleTrade(contType) {
-    if (contType.classList.contains('trade-List-cont')) {
-      let tradeListCont = document.querySelector('.trade-List-cont');
-      tradeListCont.classList.toggle('show-more-trade');
-      if (tradeListCont.classList.contains('show-more-trade')) {
-        this.tradeToggleBtn = 'Show Less';
-      } else this.tradeToggleBtn = 'Show More';
-
-      console.log(tradeListCont);
-      return this.tradeToggleBtn;
-    } else if (contType.classList.contains('exchangable-cont')) {
-      let exchangeCont = document.querySelector('.exchangable-cont');
-      exchangeCont.classList.toggle('show-more-exchange');
-      if (exchangeCont.classList.contains('show-more-exchange')) {
-        this.exchangeToggleBtn = 'Show Less';
-      } else this.exchangeToggleBtn = 'Show More';
-      console.log(exchangeCont);
-      return this.exchangeToggleBtn;
-    }
-    return '';
   }
 
   onExchangeUi(elementId?) {
