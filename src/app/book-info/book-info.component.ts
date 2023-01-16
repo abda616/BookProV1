@@ -62,7 +62,7 @@ export class MyBookInfoComponent implements OnInit {
       this.bookDataService.getBook(id).subscribe((bookdata) => {
         bookdata["coverPage"] = this.sharedService.getLargeImg(bookdata["coverPage"], this.sharedService.getPosition(bookdata["coverPage"], "m/", 2))
         this.currentBookInfo = bookdata;
-        this.generalBookRate = bookdata['rating']['average_rating'].las;
+        this.generalBookRate = bookdata['rating']['average_rating'];
         this.currentAuthor = bookdata['author'];
         this.bookId = bookdata['id'];
         this.GenraBook = bookdata['genres'];

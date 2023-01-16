@@ -1,11 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  ViewChild,
-  OnInit,
-} from '@angular/core';
-import { AuthService } from '../shared/Auth/auth.service';
+import {AfterViewInit, Component, OnInit,} from '@angular/core';
+import {AuthService} from '../shared/Auth/auth.service';
 
 @Component({
   selector: 'app-trade-now',
@@ -13,10 +7,9 @@ import { AuthService } from '../shared/Auth/auth.service';
   styleUrls: ['./trade-now.component.scss'],
 })
 export class TradeNowComponent implements OnInit, AfterViewInit {
-  headsInTop: string[] = ['Your Trade List', 'Discover Books'];
   yourTradeList = [];
   otherBooksArr: any = [];
-  tradeToggleBtn =  false;
+  tradeToggleBtn = false;
   exchangeToggleBtn = false
   currentBookObj;
   otherBookObj:any;
@@ -27,6 +20,14 @@ hisUserName=''
   longTrade=false;
   longExchange=false;
   constructor(private auth: AuthService) {}
+  otherBookObj: any;
+  hisUserName = ''
+  firstName = JSON.parse(localStorage.getItem("userData"))['userName']
+
+  //@ViewChild('scrollTop') scrollTop: ElementRef;
+
+  constructor(private auth: AuthService) {
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -55,10 +56,10 @@ hisUserName=''
   }
 
   getOtherData() {
-    this.auth.exchange.booksForExchange().subscribe((v:any) => {
-      v.forEach(e=>{
-e['his_book_cover_image']=this.auth.shared.getLargeImg(e["his_book_cover_image"], this.auth.shared.getPosition(e["his_book_cover_image"], "m/", 2))
-       })
+    this.auth.exchange.booksForExchange().subscribe((v: any) => {
+      v.forEach(e => {
+        e['his_book_cover_image'] = this.auth.shared.getLargeImg(e["his_book_cover_image"], this.auth.shared.getPosition(e["his_book_cover_image"], "m/", 2))
+      })
       this.otherBooksArr = v;
       console.log(this.otherBooksArr);
       if(this.otherBooksArr.length>6)this.longExchange=true
@@ -69,13 +70,15 @@ e['his_book_cover_image']=this.auth.shared.getLargeImg(e["his_book_cover_image"]
     this.auth.bookService.transBook(book);
     this.auth.router.navigate(['app/book']).then();
   }
-setCurrentBook(book){
-this.currentBookObj=book;
-}
-setOtherBook(book){
-  this.otherBookObj=book;
-  this.hisUserName=this.otherBookObj.his_username
-}
+
+  setCurrentBook(book) {
+    this.currentBookObj = book;
+  }
+
+  setOtherBook(book) {
+    this.otherBookObj = book;
+    this.hisUserName = this.otherBookObj.his_username
+  }
 
   getData() {
     console.log(this.yourTradeList)
@@ -86,6 +89,20 @@ setOtherBook(book){
     this.auth.exchange.initializeExchange(myBook, hisBook).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], 'success');
+
+        this.auth.exchange.exchangesFromMe().subscribe((x: any) => {
+          let exId = null;
+          x.forEach(e => {
+            console.log(e.myBook.id);
+            console.log(e.hisBook.id);
+            /*if () {
+              exId = e['id']
+              console.log(exId)
+              this.auth.message.setMessageID(exId, this.firstName);
+              this.auth.router.navigate(['app/message']).then();
+            }*/
+          })
+        })
       },
       (error) => {
         this.auth.toast.error(error.error['message'], 'error');

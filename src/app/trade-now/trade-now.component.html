@@ -1,29 +1,31 @@
 <div class="container-fluid">
   <a href="" name="top" id="top" #scrollTop></a>
-
   <div class="container">
-<div class="exchange-offers d-flex justify-content-around align-items-center"  >
-<div class="owned-book">
-  <div class="image"*ngIf="currentBookObj">
-    <img class="image img-thumbnail" src="{{currentBookObj.book.coverPage}}" alt="">
-  </div>
-  <div class="user-info">
-    <img  src="" alt="">
-    <h5>{{firstName}}</h5>
-  </div>
-</div>
-<button (click)="initializeExchange(currentBookObj.id,otherBookObj.his_book_id)" class="btn" > Confirm Exhcange</button>
-<div class="other-book">
-  <div class="image" *ngIf="otherBookObj">
-    <img class="image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
-  </div>
-  <div class="user-info">
-    <img src="" alt="">
-    <h5 >{{hisUserName}}</h5>
-  </div>
-</div>
+    <div class="exchange-offers d-flex justify-content-around align-items-center">
 
-</div>
+      <div class="owned-book">
+        <div class="image" *ngIf="currentBookObj">
+          <img class="image img-thumbnail" src="{{currentBookObj.book.coverPage}}" alt="">
+        </div>
+        <div class="user-info">
+          <img src="" alt="">
+          <h5>{{firstName}}</h5>
+        </div>
+      </div>
+      <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn"> Confirm
+        Exhcange
+      </button>
+      <div class="other-book">
+        <div class="image" *ngIf="otherBookObj">
+          <img class="image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
+        </div>
+        <div class="user-info">
+          <img src="" alt="">
+          <h5>{{hisUserName}}</h5>
+        </div>
+      </div>
+
+    </div>
     <div>
       <div class="trade-List-cont" [ngClass]="!tradeToggleBtn?'':'show-more-trade'" #tradeListCont>
 
@@ -50,6 +52,8 @@
           </div>
         </div>
 
+        <button class="show-more-btn btn" (click)="tradeToggleBtn=!tradeToggleBtn"
+                *ngIf="this.yourTradeList.length>6">{{!tradeToggleBtn ? 'Show More' : 'Show Less'}}</button>
       </div>
     </div>
     <button class="show-more-btn btn" (click)="tradeToggleBtn=!tradeToggleBtn"
@@ -80,14 +84,14 @@
 
         </div>
 
+        <button class="show-more-btn btn" (click)="exchangeToggleBtn=!exchangeToggleBtn"
+                [ngClass]="!exchangeToggleBtn?'show-more-exchange':'show-more-exchange'"
+                *ngIf="otherBooksArr.length>6">{{!exchangeToggleBtn ? "Show More" : "Show Less"}}</button>
       </div>
 
       <button class="show-more-btn btn" (click)="exchangeToggleBtn=!exchangeToggleBtn" [ngClass]="!exchangeToggleBtn?'show-more-exchange':'show-more-exchange'"
       *ngIf="longExchange">{{!exchangeToggleBtn?"Show More":"Show Less"}}</button>
     </div>
-
- 
-
   </div>
 </div>
 <app-spinner></app-spinner>
