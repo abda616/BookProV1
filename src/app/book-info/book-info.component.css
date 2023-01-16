@@ -84,7 +84,7 @@ body {
 }
 .container-fluid .right-cont .book-desc .genres p {
   min-width: 80px;
-  width: max-content;
+  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   border-bottom: 2px solid #2a324b;

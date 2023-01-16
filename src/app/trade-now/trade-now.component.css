@@ -2,182 +2,20 @@ body {
   width: 100%;
 }
 
-.container .exchange-offers {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 80%;
-  background-color: #F3EBD9;
-  border-radius: 35px;
-  z-index: 2;
+.container .exhange-offers {
+  height: 400px;
 }
-.container .exchange-offers .whole-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-.container .exchange-offers .whole-container .left-cont, .container .exchange-offers .whole-container .right-cont {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 40%;
-  max-width: 40%;
-  height: 95%;
-  max-height: 95%;
-}
-.container .exchange-offers .whole-container .left-container .image {
+.container .exhange-offers .image img {
   width: 350px;
-  height: 450px;
-}
-.container .exchange-offers .whole-container .left-container .image img {
-  width: 100%;
-  height: 100%;
-}
-.container .exchange-offers .whole-container .right-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.container .exchange-offers .whole-container .right-container .exchange-slider {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-}
-.container .exchange-offers .whole-container .right-container .exchange-slider .other-two-cards {
-  width: 100%;
-  height: 100%;
-}
-.container .exchange-offers .whole-container .right-container .flip-card {
-  width: 60%;
-  height: 60%;
-  border: 1px solid transparent;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
-.container .exchange-offers .whole-container .right-container .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  /* This container is needed to position the front and back side */
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  margin: 0 0.5em;
-  position: relative;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  box-shadow: 18px 6px 20px -14px rgb(20, 30, 45);
-  border-radius: 20px;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-front, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-front, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
-  backface-visibility: hidden;
-  border: none;
-  background-color: transparent;
-  border-radius: 20px;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-front .card-img-top, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-img-top, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-front .card-img-top, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-img-top {
-  width: 100%;
-  height: 100%;
-  max-height: 100%;
-  max-width: 100%;
-  border-radius: 20px;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back {
-  background-color: #F3EBD9;
-  transform: rotateY(180deg);
-  height: 100%;
-  width: 100%;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-body, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 90%;
-  color: #141e2d;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-body .title, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-body .title {
-  width: 90%;
-  line-height: 1.5em;
-  max-height: 120px;
-  overflow: hidden;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-body .btn-more, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-body .btn-more {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-  width: 90%;
-  z-index: 1;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-body .btn-more:after, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #141e2d;
-  border-radius: 10rem;
-  z-index: -2;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-body .btn-more:before, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-body .btn-more:before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: #e1cc9f;
-  transition: all 0.3s;
-  border-radius: 10rem;
-  z-index: -1;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-body .btn-more:hover, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-body .btn-more:hover {
-  color: #141e2d;
-}
-.container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .container .exchange-offers .whole-container .right-container .flip-card .card-wrapper-row-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before {
-  width: 100%;
-}
-.container .show-more-trade {
-  max-height: 100% !important;
-  transition: all 0.5s ease-in-out;
+  height: 400px;
 }
 .container .show-more-exchange {
-  max-height: 100% !important;
-  transition: all 0.5s ease-in-out;
+  height: auto;
+  max-height: 100%;
 }
-.container .show-exchange-offers {
-  display: block;
-  transform: translateX(0px);
-  transition: all 1s ease-in-out;
+.container .show-more-trade {
+  height: auto;
+  max-height: 100%;
 }
 .container .show-more-btn {
   display: inline-block;

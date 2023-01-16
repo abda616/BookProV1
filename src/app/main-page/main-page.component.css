@@ -198,6 +198,7 @@
   overflow: hidden;
   width: 60%;
   z-index: 1;
+  min-height: 50px;
 }
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
   content: "";

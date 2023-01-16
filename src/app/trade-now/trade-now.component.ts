@@ -18,19 +18,14 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   otherBooksArr: any = [];
   tradeToggleBtn =  false;
   exchangeToggleBtn = false
-  currentExchangeBook;
   currentBookObj;
   otherBookObj:any;
 hisUserName=''
   firstName=JSON.parse(localStorage.getItem("userData"))['userName']
-  
-
   initExchange: boolean = false;
   onExchange: boolean = false;
-  selectedFromTrade: boolean = false;
-  selectedFromOffers: boolean = false;
-  
-  @ViewChild('scrollTop') scrollTop: ElementRef;
+  longTrade=false;
+  longExchange=false;
   constructor(private auth: AuthService) {}
 
   ngAfterViewInit(): void {
@@ -52,8 +47,11 @@ hisUserName=''
         if (e.avaliable == true) ownedBooksC.push(e);
       });
       this.yourTradeList = ownedBooksC;
+      console.log(this.yourTradeList,"tradelist")
+      if(this.yourTradeList.length>6) this.longTrade=true
     });
-    return this.yourTradeList;
+ 
+    
   }
 
   getOtherData() {
@@ -62,8 +60,8 @@ hisUserName=''
 e['his_book_cover_image']=this.auth.shared.getLargeImg(e["his_book_cover_image"], this.auth.shared.getPosition(e["his_book_cover_image"], "m/", 2))
        })
       this.otherBooksArr = v;
-     
       console.log(this.otherBooksArr);
+      if(this.otherBooksArr.length>6)this.longExchange=true
     });
   }
 
@@ -81,7 +79,7 @@ setOtherBook(book){
 
   getData() {
     console.log(this.yourTradeList)
-    return this.yourTradeList;
+    return this.getYouTradeList();
   }
 
   initializeExchange(myBook, hisBook) {

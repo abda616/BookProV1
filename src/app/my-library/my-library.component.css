@@ -6,8 +6,8 @@
   justify-content: flex-start;
 }
 .container-fluid .dashboard {
-  /*position: relative;*/
-  width: 25%;
+  position: relative;
+  width: 20%;
   height: 100vh;
   background-color: #FEFCFD;
 }
@@ -24,13 +24,13 @@
 .container-fluid .dashboard .left-sticky .image {
   position: relative;
   width: 100%;
-  /*height: 40%;*/
+  height: 30%;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 .container-fluid .dashboard .left-sticky .image .name {
-  /*margin-top: 10px;*/
+  margin-top: 10px;
 }
 .container-fluid .dashboard .left-sticky .image img {
   width: 150px;
@@ -61,7 +61,7 @@
   width: 100%;
   height: 100%;
   min-height: 100%;
-  /*margin-left: 50px;*/
+  margin-left: 50px;
 }
 .container-fluid .right-cont h2 {
   width: 100%;
@@ -70,13 +70,14 @@
   margin-top: 30px;
 }
 .container-fluid .right-cont .stand-cont {
-  width: 350px;
+  width: 250px;
   height: 400px;
 }
 .container-fluid .right-cont .stand-cont .upper-stand {
   width: 100%;
   height: 80%;
-  background-color: #FEFCFD;
+  border: 5px solid #532f1d;
+  border-bottom: none;
 }
 .container-fluid .right-cont .stand-cont .upper-stand .image {
   display: flex;
@@ -87,10 +88,8 @@
 }
 .container-fluid .right-cont .stand-cont .upper-stand .image img {
   display: inline-block;
-  width: 60%;
+  width: 100%;
   height: 100%;
-  margin-right: 10px;
-  border-radius: 25px;
 }
 .container-fluid .right-cont .stand-cont .lower-stand {
   width: 100%;
@@ -103,14 +102,20 @@
   justify-content: space-around;
   font-weight: bold;
   background-image: url("../../assets/picture/wooden.jpg");
-  border-radius: 20px;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   margin-bottom: 0;
 }
 .container-fluid .right-cont .stand-cont .lower-stand .top .add-list-btn {
   display: block;
   width: 190%;
   height: 100%;
-  border-radius: 20px;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
@@ -144,7 +149,7 @@
   z-index: -1;
 }
 .container-fluid .right-cont .stand-cont .lower-stand .top .add-list-btn:hover {
-  color: #141e2d;
+  color: #532f1d;
 }
 .container-fluid .right-cont .stand-cont .lower-stand .top .add-list-btn:hover:before {
   width: 100%;
