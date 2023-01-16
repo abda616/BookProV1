@@ -34,7 +34,7 @@
           <h6 class="fs-4 font-weight-bold">Genres</h6>
           <div class="row w-30 d-flex ms-4 justify-content-evenly fs-6">
             <div *ngFor="let genre of getGenres(GenraBook)|slice:0:4" class="col-lg-3 col-md-4 col-sm-6">
-              <p><a href="">{{genre}}</a></p>
+              <p><a href="#{{genre}}">{{genre}}</a></p>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@
     </div>
 
     <div>
-      <h1 class="text-center mt-5">From The Same Author</h1>
+      <h1 class="text-center mt-5" id="sameAuth">From The Same Author</h1>
       <hr/>
       <div [attr.id]="'carouselControls'" class="carousel carousel-dark carousel- w-100 my-5" data-ride="carousel">
         <div class="carousel-inner" *ngFor="let _2dArr of similarAuthorBooks;let i=index;">
@@ -129,7 +129,7 @@
     </div>
 
     <div *ngFor="let headsAre of allGenreName ; let i = index">
-      <h1 class="text-center mt-5">{{headsAre}}</h1>
+      <h1 class="text-center mt-5" id="{{headsAre}}">{{headsAre}}</h1>
       <hr/>
       <div [attr.id]="'carouselControls'+i" class="carousel carousel-dark carousel- w-100 my-5" data-ride="carousel">
         <div class="carousel-inner" *ngFor="let _2dArr of allGenreArr[i];let i=index;">

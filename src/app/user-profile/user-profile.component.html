@@ -5,62 +5,162 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="{{profilePic}}" alt="avatar"
-                 class="rounded-circle img-fluid" style="width: 150px;">
-            <h4 class="my-3">{{userName}}</h4>
-            <p class="text-muted mb-4">{{userCity}}</p>
+            <img src="{{profilePic}}" style="width: 150px;" class="rounded-circle img-fluid" alt="avatar">
+            <div class="row">
+              <mat-form-field appearance="legacy">
+                <mat-select [(value)]="profilePic">
+                  <mat-option *ngFor="let pic of avatars" [value]="pic.picValue">
+                    {{pic.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-button color="primary" (click)="EditUserPic()">Save</button>
+            </div>
+            <h4 class="my-3">{{firstName + ' ' + lastName}}</h4>
+            <p class="text-muted mb-4">{{UCity}}</p>
           </div>
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body p-0 mx-0 px-3">
-            <app-chip-multi-select [options]="Interests" [formControl]="UInterests"
-                                   formControlName="UInterests"></app-chip-multi-select>
+            <app-chip-multi-select [options]="Interests" [formControl]="UInterests"></app-chip-multi-select>
+          </div>
+          <div class="mx-auto my-0">
+            <button mat-button color="primary" (click)="UpdateInterst()" [disabled]="InterstLenght()<3">Save</button>
           </div>
         </div>
       </div>
       <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-body">
+
             <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Full Name</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{userName}}</p>
-              </div>
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Full Name
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      {{firstName + ' ' + lastName}}
+                    </mat-panel-description>
+                    <i class="fa-solid fa-pen"></i>
+                  </mat-expansion-panel-header>
+                  <div class="w-100 just-flex flex-row justify-content-evenly">
+                    <mat-form-field class="w-50 px-5" appearance="legacy">
+                      <mat-label>First Name</mat-label>
+                      <input [(ngModel)]="firstName" matInput required>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-50" appearance="legacy">
+                      <mat-label>Last Name</mat-label>
+                      <input [(ngModel)]="lastName" matInput required>
+                    </mat-form-field>
+                  </div>
+                  <mat-action-row>
+                    <button mat-button color="primary" (click)="UpdateUserName()">Save</button>
+                  </mat-action-row>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Email
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      {{userEmail.value}}
+                    </mat-panel-description>
+                    <i class="fa-solid fa-pen"></i>
+                  </mat-expansion-panel-header>
+                  <div class="w-100 just-flex flex-row">
+                    <mat-form-field class="w-50 px-5" appearance="legacy">
+                      <mat-label>Email</mat-label>
+                      <input matInput placeholder="pat@example.com" [formControl]="userEmail" [(ngModel)]="email"
+                             required>
+                      <mat-error *ngIf="userEmail.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <mat-action-row>
+                    <button mat-button color="primary" [disabled]="!userEmail.valid" (click)="UpdateEmail()">Save
+                    </button>
+                  </mat-action-row>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Password
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Edit Your Password
+                    </mat-panel-description>
+                    <i class="fa-solid fa-pen"></i>
+                  </mat-expansion-panel-header>
+                  <div class="w-100 just-flex flex-row justify-content-evenly" [formGroup]="UPassword">
+
+                    <mat-form-field class="w-50 px-5" appearance="legacy">
+                      <mat-label>Password</mat-label>
+                      <input matInput formControlName="A" placeholder="Password" required>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-50 px-5" appearance="legacy">
+                      <mat-label>Confearm Password</mat-label>
+                      <input matInput formControlName="B" placeholder="Password" required>
+                    </mat-form-field>
+                  </div>
+
+                  <mat-action-row>
+                    <button mat-button color="primary" [disabled]="checkPasswordValidation()"
+                            (click)="UpdatePassword()">Save
+                    </button>
+                  </mat-action-row>
+
+                </mat-expansion-panel>
+              </mat-accordion>
             </div>
-            <hr>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
             <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Email</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{userEmail}}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Address</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{userCity}}</p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Interest</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">{{userInterests.toString()}}</p>
+              <div class="just-flex w-75 align-items-baseline justify-content-evenly">
+                <h3>You Live In</h3>
+                <mat-form-field appearance="legacy">
+                  <mat-label>Live In</mat-label>
+                  <mat-select [(value)]="UCity">
+                    <mat-option *ngFor="let city of Citys" [value]="city.value">
+                      {{city.viewValue}}
+                    </mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+                <button mat-button color="primary" (click)="UpdateCity()">Save</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
 
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row row-cols-2">
+              <div class="col just-flex flex-column bg-light p-2 m-0" *ngFor="let exch of userExchanges">
+                <div class="just-flex flex-row justify-content-evenly align-items-center">
+                  <img [src]="exch.hisBook.book.coverPage" alt="his">
+                  <i class="fa-solid fa-right-left"></i>
+                  <img [src]="exch.myBook.book.coverPage" alt="my">
+                </div>
+                <div class="just-flex flex-row justify-content-evenly align-items-center">
+                  <p>his Book</p>
+                  <i></i>
+                  <p>Your Book</p>
+                </div>
+                <div class="w-100 text-center"></div>
+                <p class="w-100 text-center">state : {{exch.status}}</p>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>

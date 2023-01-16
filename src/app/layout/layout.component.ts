@@ -7,6 +7,7 @@ import {filter} from "rxjs";
 import {MessagesService} from "../services/message/messages.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
+import {LoginComponent} from "../login/login.component";
 
 @Component({
   selector: 'app-layout',
@@ -19,7 +20,7 @@ export class LayoutComponent implements OnInit {
   positionInSearch = true;
   profilePic = "";
   conver = [];
-  mode;
+
 
   constructor(private auth: AuthService, private search: searchDataTransferService,
               private router: Router, private message: MessagesService,
@@ -28,18 +29,28 @@ export class LayoutComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.mode = 'over'
-    this.auth.getUserProfile().subscribe(data => {
 
+    this.auth.getUserProfile().subscribe(data => {
       if (!localStorage.getItem('userData') || !localStorage.getItem("interests")) {
         localStorage.setItem("userData", JSON.stringify(data));
         let myObj = JSON.parse(localStorage.getItem("userData"));
 
-        myObj.profileImageUrl = myObj.profileImageUrl ? myObj.profileImageUrl : "assets/Avatars/men_av_2.png";
-        myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : "{'fiction','children','thriller'}";
-        localStorage.setItem("userData", JSON.stringify(myObj));
-        localStorage.setItem("interests", (myObj.interest));
+        if (!myObj.interest) {
+          let intr=[];
+          this.auth.main.basedInYourInterst().subscribe(data => {
+            data.forEach(e => {
+              let x = e['genres'].toString().replace(/[{}']/gi, "").split(',')
+              x.forEach(ele => {
+                intr.push(ele)
+              })
+              intr = [...new Set(intr)];
+            })
+            myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : intr;
+            localStorage.setItem("interests", (myObj.interest));
+          })
+        }else localStorage.setItem("interests", (myObj.interest));
 
+        localStorage.setItem("userData", JSON.stringify(myObj));
         this.profilePic = JSON.parse(localStorage.getItem("userData")).profileImageUrl;
       }
       this.profilePic = JSON.parse(localStorage.getItem("userData")).profileImageUrl
@@ -84,9 +95,7 @@ export class LayoutComponent implements OnInit {
     this.searchValue = '';
     this.router.navigate(['app/search']).then();
   }
-
   goToC(x) {
-    console.log(x['exchange_id'])
     this.message.setMessageID(x);
     this.myDrawer.toggle().then();
     //this.mode = "side"

@@ -6,6 +6,12 @@ import {Router} from '@angular/router';
 import {userSignIn, userSignUp} from "../Interfaces/userSignup";
 import {environment} from "../../../environments/environment.prod";
 import {ToastrService} from "ngx-toastr";
+import {searchDataTransferService} from "../../services/Transfer/search-data-transfer.service";
+import {MessagesService} from "../../services/message/messages.service";
+import {BookDataService} from "../../services/Transfer/book-data.service";
+import {SharedServiceService} from "../../services/shared-service.service";
+import {MainService} from "../../services/Main/main.service";
+import {ExchangeService} from "../../services/Exchange/exchange.service";
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +19,16 @@ import {ToastrService} from "ngx-toastr";
 export class AuthService {
   endpoint: string = environment.apiUrl;
 
-  constructor(private http: HttpClient, public router: Router, public toast: ToastrService) {
+  constructor(private http: HttpClient, public router: Router, public toast: ToastrService,
+              public message: MessagesService, public main: MainService, public exchange: ExchangeService,
+              public search: searchDataTransferService, public bookService: BookDataService,
+              public shared: SharedServiceService) {
   }
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
-  //User profile
+//User profile
   getUserProfile(): Observable<any> {
     return this.http.get(`${this.endpoint}profile/user`)
       .pipe(
@@ -35,10 +44,6 @@ export class AuthService {
     return this.http.get(`${this.endpoint}profile/user`)
   }
 
-  setUserData(x) {
-    return this.http.post(`${this.endpoint}profile/editUser`, JSON.stringify(x))
-  }
-
   getUserPic() {
     let x = JSON.parse(localStorage.getItem("userData")).profileImageUrl;
     if (x)
@@ -52,21 +57,32 @@ export class AuthService {
     return `${JSON.parse(localStorage.getItem("userData")).firstName} ${JSON.parse(localStorage.getItem("userData")).lastName}`;
   }
 
-  setUserPic(x) {
-    return this.http.post(`${this.endpoint}profile/editUser`, JSON.stringify(x))
+  setUserData1(x) {
+    return this.http.put(`${this.endpoint}profile/editUser`, JSON.stringify(x), {headers: this.headers})
   }
 
-  setUserInterest(x) {
-    return this.http.post(`${this.endpoint}profile/editUser`, JSON.stringify(x))
+  setUserData2UserName(x, y) {
+    return this.http.put(`${this.endpoint}profile/editUser`, JSON.stringify({
+      firstName: x,
+      lastName: y
+    }), {headers: this.headers})
+  }
+
+  setUserData2Password(x, y) {
+    return this.http.put(`${this.endpoint}profile/editUser`, JSON.stringify({
+      password: x,
+      matchingPassword: y
+    }), {headers: this.headers})
   }
 
 
-  // Sign-up
-  signUp(user: userSignUp): Observable<any> {
+// Sign-up
+  signUp(user: userSignUp):
+    Observable<any> {
     return this.http.post<any>(`${this.endpoint}register`, JSON.stringify(user), {headers: this.headers})
   }
 
-  // Sign-in
+// Sign-in
   signIn(user: userSignIn) {
     return this.http.post<any>(`${this.endpoint}api/v1/auth`, JSON.stringify(user), {headers: this.headers})
   }
@@ -75,7 +91,9 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
-  get isLoggedIn(): boolean {
+  get isLoggedIn()
+    :
+    boolean {
     return localStorage.getItem('access_token') !== null;
   }
 
@@ -99,8 +117,9 @@ export class AuthService {
     })
   }*/
 
-  // Error
-  handleError(error: HttpErrorResponse) {
+// Error
+  handleError(error: HttpErrorResponse
+  ) {
     let msg: string;
     this.toast.error(error.error.message)
     if (error.status != 200) {

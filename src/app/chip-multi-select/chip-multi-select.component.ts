@@ -50,20 +50,22 @@ export class ChipMultiSelectComponent implements OnInit, AfterViewInit, ControlV
   }
 
   ngOnInit() {
+    setTimeout(()=>{
+      this.selectChips(this.value);
+      this.chipList.chipSelectionChanges
+        .pipe(map((event) => event.source))
+        .subscribe((chip) => {
+          if (chip.selected) {
+            this.value = [...this.value, chip.value];
+          } else {
+            this.value = this.value.filter((o) => o !== chip.value);
+          }
+          this.propagateChange(this.value);
+        });
+    },0)
   }
 
   ngAfterViewInit() {
-    this.selectChips(this.value);
-    this.chipList.chipSelectionChanges
-      .pipe(map((event) => event.source))
-      .subscribe((chip) => {
-        if (chip.selected) {
-          this.value = [...this.value, chip.value];
-        } else {
-          this.value = this.value.filter((o) => o !== chip.value);
-        }
-        this.propagateChange(this.value);
-      });
 
   }
 
@@ -72,13 +74,12 @@ export class ChipMultiSelectComponent implements OnInit, AfterViewInit, ControlV
       this.onChange(value);
     }
   }
+
   selectChips(value: string[]) {
     this.chipList.chips.forEach((chip) => chip.deselect());
-
     const chipsToSelect = this.chipList.chips.filter((c) =>
       value.includes(c.value)
     );
-
     chipsToSelect.forEach((chip) => chip.select());
   }
 

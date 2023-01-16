@@ -88,6 +88,9 @@ import {AppRoutingModule} from "../app-routing.module";
     OverlayModule,
     PortalModule,
     AppRoutingModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
   ],
   exports: [
     CommonModule,
@@ -131,6 +134,9 @@ import {AppRoutingModule} from "../app-routing.module";
     OverlayModule,
     PortalModule,
     AppRoutingModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
   ],
 })
 export class SharedModule {

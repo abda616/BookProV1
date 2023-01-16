@@ -1,0 +1,24 @@
+{
+  "birthDate": null,
+  "city": "amman",
+  "email": "moutaz_jamous@asd.com",
+  "firstName": "moutaz",
+  "gender": null,
+  "id": 429035,
+  "interest": "{fiction,romance,fantasy,history,mystery,crime}",
+  "joinDate": "2023-01-13",
+  "lastLoginDate": "2023-01-13",
+  "lastName": "jamous",
+  "ownedBookSet": null,
+  "password": null,
+  "profileImageUrl": "assets/Avatars/men_av_3.png",
+  "roles": [
+    {
+      "id": 1,
+      "role": "ROLE_USER"
+    }
+  ],
+  "streetAddress": null,
+  "telephone": null,
+  "userName": "mjamous"
+}

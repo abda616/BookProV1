@@ -17,18 +17,18 @@ export class SharedDataModule {
   private patternValidator = new BehaviorSubject<string>("(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>\"'\\;:{\\}\\[\\]\\|\\+\\-\\=\\_\\)\\(\\)\\`\\/\\\\\\]])[A-Za-z0-9d$@].{7,}");
   Pattern = this.patternValidator.asObservable();
   private cityArray = new BehaviorSubject<City[]>([
-    {value: 'amman', viewValue: 'Amman'},
-    {value: 'zarqa', viewValue: 'Zarqa'},
+    {value: 'Amman', viewValue: 'Amman'},
+    {value: 'Zarqa', viewValue: 'Zarqa'},
     {value: 'Salt', viewValue: 'As-Salt'},
-    {value: 'irbid', viewValue: 'Irbid'},
-    {value: 'jerash', viewValue: 'Jerash'},
-    {value: 'ajloun', viewValue: 'Ajloun'},
-    {value: 'madaba', viewValue: 'Madaba'},
-    {value: 'mafraq', viewValue: 'Al-Mafraq'},
-    {value: 'maan', viewValue: 'Maan'},
-    {value: 'tafilah', viewValue: 'At-Tafilah'},
-    {value: 'madaba', viewValue: 'Madaba'},
-    {value: 'aqaba', viewValue: 'Aqaba'},
+    {value: 'Irbid', viewValue: 'Irbid'},
+    {value: 'Jerash', viewValue: 'Jerash'},
+    {value: 'Ajloun', viewValue: 'Ajloun'},
+    {value: 'Madaba', viewValue: 'Madaba'},
+    {value: 'Mafraq', viewValue: 'Al-Mafraq'},
+    {value: 'Maan', viewValue: 'Maan'},
+    {value: 'Tafilah', viewValue: 'At-Tafilah'},
+    {value: 'Madaba', viewValue: 'Madaba'},
+    {value: 'Aqaba', viewValue: 'Aqaba'},
   ]);
   Citys = this.cityArray.asObservable();
 
@@ -44,9 +44,9 @@ export class SharedDataModule {
       {picValue:"assets/Avatars/men_av_1.png",viewValue:'men 1'},
       {picValue:"assets/Avatars/men_av_2.png",viewValue:'men 2'},
       {picValue:"assets/Avatars/men_av_3.png",viewValue:'men 3'},
-      {picValue:"assets/Avatars/women_av_1.png",viewValue:'women 1'},
-      {picValue:"assets/Avatars/women_av_2.png",viewValue:'women 2'},
-      {picValue:"assets/Avatars/women_av_3.png",viewValue:'women 3'},
+      {picValue:"assets/Avatars/female_av_1.png",viewValue:'women 1'},
+      {picValue:"assets/Avatars/female_av_2.png",viewValue:'women 2'},
+      {picValue:"assets/Avatars/female_av_3.png",viewValue:'women 3'},
     ]);
   Avatars = this.avatars.asObservable();
 

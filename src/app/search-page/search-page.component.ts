@@ -38,7 +38,6 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   onSearch(event) {
     if (event.target !== undefined) {
       this.searchType = event.target.value
-      console.log(this.searchType)
     }
     if (this.searchInput != '') {
       this.searchService.searchBy(this.searchInput, this.searchType).subscribe(
@@ -66,7 +65,6 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearchBy(event) {
-    console.log(this.searchResult)
     this.searchType = event.target.value.toLowerCase()
     this.onSearch(this.searchInput)
   }
