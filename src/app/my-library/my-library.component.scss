@@ -10,18 +10,15 @@
     width: 20%;
     height: 100vh;
     background-color: #FEFCFD;
-
-
     .left-sticky {
       position: fixed;
-      
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
       top: 100px;
       height: 100%;
-      width: 15%;
+      width: 20%;
      
 
       .image {
@@ -86,13 +83,14 @@
 
     .stand-cont {
   
-      width: 350px;
+      width: 250px;
       height: 400px;
 
       .upper-stand {
         width: 100%;
         height: 80%;
-        background-color: #FEFCFD;
+      border: 5px solid #532f1d;
+      border-bottom: none;
 
         .image {
           display: flex;
@@ -103,10 +101,8 @@
 
           img {
             display: inline-block;
-            width: 60%;
-            height: 100%;
-            margin-right: 10px;
-            border-radius: 25px;
+            width: 100%;
+            height: 100%;          
           }
 
         }
@@ -123,14 +119,20 @@
           justify-content: space-around;
           font-weight: bold;
           background-image: url("../../assets/picture/wooden.jpg");
-          border-radius: 20px;
+        border-top-left-radius: none;
+        border-top-right-radius: none;
+       border-bottom-left-radius: 30px;
+       border-bottom-right-radius: 30px;
           margin-bottom: 0;
 
           .add-list-btn {
             display: block;
             width: 190%;
             height: 100%;
-            border-radius: 20px;
+            border-top-left-radius: none;
+        border-top-right-radius: none;
+       border-bottom-left-radius: 30px;
+       border-bottom-right-radius: 30px;
             transition: all .3s;
             position: relative;
             overflow: hidden;
@@ -166,7 +168,7 @@
             }
 
             &:hover {
-              color: #141e2d;
+              color: #532f1d;
 
               &:before {
                 width: 100%;

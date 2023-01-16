@@ -82,7 +82,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
 
   getGenres(s: string) {
     let arr = s.replace(/[{}']/gi, "").split(',')
-    return arr.slice(0, 3)
+    return arr.slice(0, 1)
   }
 
   getBookTitle(s: any) {

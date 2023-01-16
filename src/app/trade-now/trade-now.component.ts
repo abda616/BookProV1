@@ -80,6 +80,7 @@ setOtherBook(book){
 }
 
   getData() {
+    console.log(this.yourTradeList)
     return this.yourTradeList;
   }
 

@@ -19,7 +19,7 @@
     <h2>{{desiredLibrary}}</h2>
 
     <ng-container *ngIf="getData(desiredLibrary) === ownedBooks; ">
-      <div class="stand-cont" *ngFor="let data of getData(desiredLibrary)">
+      <div class="stand-cont " *ngFor="let data of getData(desiredLibrary)">
         <div class="upper-stand">
           <div class="col-lg-4 col-md-6 col-sm-12 image">
             <img src="{{ data.book.coverPage }}" (click)="goToBook(data.book.id)" alt=""/>
@@ -36,7 +36,7 @@
     </ng-container>
 
     <ng-container *ngIf="getData(desiredLibrary)==favoriteBooks">
-      <div class="stand-cont row mb-5" *ngFor="let data of getData(desiredLibrary)">
+      <div class="stand-cont  " *ngFor="let data of getData(desiredLibrary)">
         <div class="upper-stand">
           <div class="col-lg-4 col-md-6 col-sm-12 image">
             <img src="{{ data.coverPage }}" (click)="goToBook(data.id)" alt=""/>

@@ -11,7 +11,7 @@ import {MainService} from "../services/Main/main.service";
   styleUrls: ['./search-page.component.css'],
 })
 export class SearchPageComponent implements OnInit, AfterViewInit {
-  searchOptions = ['All', 'Title', 'Author', 'Genre', 'Description'];
+  searchOptions = ['All', 'Title', 'Author', 'Description'];
   searchResult = [];
   searchInput: string = '';
   searchType: string = "all";

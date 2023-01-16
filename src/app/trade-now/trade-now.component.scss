@@ -6,6 +6,7 @@ body {
 
 .container {
 .exhange-offers{
+  height: 400px;
   
   .image{
     img{
@@ -15,7 +16,9 @@ body {
   }
 }
 
-
+.show-more-trade{
+  max-height: 100%;
+}
   .show-more-btn {
     display: inline-block;
     border-radius: 5rem;
