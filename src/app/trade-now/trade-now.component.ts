@@ -1,9 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import {ExchangeService} from "../services/Exchange/exchange.service";
-import {Router} from "@angular/router";
-import {BookDataService} from "../services/Transfer/book-data.service";
-import {SharedServiceService} from '../services/shared-service.service';
+import {AuthService} from "../shared/Auth/auth.service";
 
 @Component({
   selector: 'app-trade-now',
@@ -16,26 +12,13 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   OtherBooks: any = [];
 
 
-  constructor(private search: searchDataTransferService,
-              private Ex: ExchangeService,
-              private moveBook: BookDataService, private router: Router,
-              private sharedService: SharedServiceService,
-  ) {
+  constructor(private auth: AuthService) {
   }
 
   ngAfterViewInit(): void {
-
     setTimeout(() => {
-      this.search.updatePosition(true);
+      this.auth.search.updatePosition(true);
     }, 0);
-    /*this.Ex.exchangesFromMe().subscribe(v => {
-      // console.log('2')
-      // console.log(v)
-    })
-    this.Ex.exchangesFromPeople().subscribe(v => {
-      // console.log('3')
-      // console.log(v)
-    })*/
   }
 
   ngOnInit(): void {
@@ -44,8 +27,8 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   }
 
   getYouTradeList() {
-    this.moveBook.allOwenedBook().subscribe(res => {
-      let ownedBooks = this.sharedService.removeNoImage(res)
+    this.auth.bookService.allOwenedBook().subscribe(res => {
+      let ownedBooks = this.auth.shared.removeNoImage(res)
       let ownedBooksC = [];
       ownedBooks.forEach(e => {
         if (e.avaliable == true)
@@ -57,36 +40,34 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
     return this.yourTradeList;
   }
 
-
-  getBookTitle(book: number) :string {
-    /*this.moveBook.getBook(book).subscribe((data)=>{
-      title = data['title'];
-      return title;
-    })*/
-    return '';
+  getOtherData() {
+    this.auth.exchange.booksForExchange().subscribe(v => {
+      console.log(v)
+      this.OtherBooks = v;
+      console.log(this.OtherBooks)
+    })
   }
 
   goToBookPage(book: number) {
-    this.moveBook.transBook(book);
-    this.router.navigate(['app/book']).then();
+    this.auth.bookService.transBook(book);
+    this.auth.router.navigate(['app/book']).then();
   }
 
-  goToDataPage(bookElement: any) {
-
-  }
-  onExchangeUi(elementId){
+  onExchangeUi(elementId) {
     console.log(elementId)
   }
-  getData(){
+
+  getData() {
     return this.yourTradeList
   }
-
-  private getOtherData() {
-    this.Ex.booksForExchange().subscribe(v => {
-      console.log(v)
-      this.OtherBooks= v;
-      console.log(this.OtherBooks)
-    })
-
+  initializeExchange(myBook, hisBook) {
+    this.auth.exchange.initializeExchange(myBook, hisBook).subscribe(
+      (next) => {
+        this.auth.toast.success(next['message'], "success")
+      },
+      error => {
+        this.auth.toast.error(error.error['message'], "error")
+      }
+    );
   }
 }

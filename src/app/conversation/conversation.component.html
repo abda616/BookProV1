@@ -3,8 +3,8 @@
   <div class="bg-light px-4 py-5 chat-box bg-white w-100 h-100 overflow-scroll">
 
     <div class="just-flex flex-column">
-      <h2 class="mx-auto">After Exchange The Books </h2>
-      <h3 class="mx-auto">The Book Will Apper In Your Library</h3>
+      <h1 class="mx-auto">After Accept Exchange</h1>
+      <h2 class="mx-auto">The Book Will Apper In Your Library</h2>
       <div class="just-flex flex-row justify-content-center" *ngIf="initiator!=this.firstUser">
         <span (click)="accept(sationID,false)" style="font-size: 24px; color: Tomato;">
           <i class="fa-solid fa-circle-xmark"></i>
@@ -17,18 +17,26 @@
       </div>
     </div>
     <div class="mx-1 h-25 sticky-top just-flex flex-column mb-5">
-      <div class="just-flex flex-row justify-content-between conv-img">
-        <img class="img-thumbnail" [src]="myBookPic" alt="book1">
-        <img class="img-thumbnail" [src]="hisBookPic" alt="book2">
+      <div class="just-flex flex-row justify-content-between ">
+
+        <div class="conv-img just-flex flex-column">
+          <span class="text-center">Your Book</span>
+          <img class="img-thumbnail" [src]="myBookPic" alt="book1">
+        </div>
+
+        <div class="conv-img just-flex flex-column">
+          <span class="text-center">His/Her Book</span>
+          <img class="img-thumbnail" [src]="hisBookPic" alt="book2">
+        </div>
       </div>
     </div>
 
-    <div class="media w-50 mx-auto mb-3 " *ngFor="let ms of conver">
-
-      <div class="media-body">
-        <div class="rounded py-2 px-3 mb-2" [ngClass]="ms['userName']==this.firstUser?'bg-primary':'bg-light'">
+    <div class="media w-50 mx-auto mb-3">
+      <div class="media-body text-message-block" [ngClass]="ms['userName']==this.firstUser?'':'ms-auto'"
+           *ngFor="let ms of conver">
+        <div class="rounded py-2 px-3 mb-2 " [ngClass]="ms['userName']==this.firstUser?'bg-primary':'bg-light'">
           <p class="text-small mb-0"
-             [ngClass]="ms['userName']==this.firstUser?'text-white':'text-muted'">{{ms.message}}</p>
+             [ngClass]="ms['userName']==this.firstUser?'text-white':'text-muted text-end'">{{ms.message}}</p>
         </div>
         <p class="small text-muted">{{ms.time | date:'short'}}</p>
       </div>

@@ -6,12 +6,21 @@
 .type-message-area {
   display: flex;
   flex-direction: row;
-  width:70%;
-  margin-left: 15%;
+  width:50%;
+  margin-left: 25%;
   border: #2a3248 solid 3px;
   border-radius: 10px;
 }
 
-.conv-img img{
+.conv-img  img{
   max-width: 275px;
+  max-height: 400px;
+  min-width: 275px;
+  min-height: 400px;
+}
+
+.text-message-block{
+  display: block;
+  width: fit-content;
+  max-width: 50%;
 }
