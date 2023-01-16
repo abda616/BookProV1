@@ -141,9 +141,11 @@
         </div>
 
         <div class="card mb-4">
+
           <div class="card-body">
+            <h3>Current Exchanges</h3>
             <div class="row row-cols-2">
-              <div class="col just-flex flex-column bg-light p-2 m-0" *ngFor="let exch of userExchanges">
+              <div class="col just-flex flex-column bg-light p-2 m-0 overflow-scroll" *ngFor="let exch of userExchanges">
                 <div class="just-flex flex-row justify-content-evenly align-items-center">
                   <img [src]="exch.hisBook.book.coverPage" alt="his">
                   <i class="fa-solid fa-right-left"></i>
