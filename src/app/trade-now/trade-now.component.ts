@@ -15,17 +15,21 @@ import { AuthService } from '../shared/Auth/auth.service';
 export class TradeNowComponent implements OnInit, AfterViewInit {
   headsInTop: string[] = ['Your Trade List', 'Discover Books'];
   yourTradeList = [];
-  OtherBooks: any = [];
-
+  otherBooksArr: any = [];
   tradeToggleBtn =  false;
   exchangeToggleBtn = false
-
   currentExchangeBook;
   currentBookObj;
+  otherBookObj:any;
+hisUserName=''
+  firstName=JSON.parse(localStorage.getItem("userData"))['userName']
+  
+
   initExchange: boolean = false;
   onExchange: boolean = false;
   selectedFromTrade: boolean = false;
   selectedFromOffers: boolean = false;
+  
   @ViewChild('scrollTop') scrollTop: ElementRef;
   constructor(private auth: AuthService) {}
 
@@ -53,10 +57,13 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   }
 
   getOtherData() {
-    this.auth.exchange.booksForExchange().subscribe((v) => {
-      console.log(v);
-      this.OtherBooks = v;
-      console.log(this.OtherBooks);
+    this.auth.exchange.booksForExchange().subscribe((v:any) => {
+      v.forEach(e=>{
+e['his_book_cover_image']=this.auth.shared.getLargeImg(e["his_book_cover_image"], this.auth.shared.getPosition(e["his_book_cover_image"], "m/", 2))
+       })
+      this.otherBooksArr = v;
+     
+      console.log(this.otherBooksArr);
     });
   }
 
@@ -64,28 +71,13 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
     this.auth.bookService.transBook(book);
     this.auth.router.navigate(['app/book']).then();
   }
-
-  onExchangeUi(elementId?) {
-    let exchangeOffers = document.querySelector('.exchange-offers');
-    if (elementId != 'null') {
-      let booksArr = document.querySelectorAll('.book');
-      booksArr.forEach((e) => {
-        if (e.id == elementId) {
-          this.currentExchangeBook = e;
-        }
-      });
-      this.yourTradeList.forEach((e) => {
-        if (e.id == elementId) {
-          this.currentBookObj = e;
-        }
-      });
-      this.currentExchangeBook.classList.toggle('onExchange');
-      this.onExchange = !this.onExchange;
-      exchangeOffers.classList.toggle('show-exchange-offers');
-      if (exchangeOffers.classList.contains('show-exchange-offers'))
-        this.initExchange = true;
-    }
-  }
+setCurrentBook(book){
+this.currentBookObj=book;
+}
+setOtherBook(book){
+  this.otherBookObj=book;
+  this.hisUserName=this.otherBookObj.his_username
+}
 
   getData() {
     return this.yourTradeList;
