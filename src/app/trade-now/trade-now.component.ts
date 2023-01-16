@@ -20,14 +20,6 @@ hisUserName=''
   longTrade=false;
   longExchange=false;
   constructor(private auth: AuthService) {}
-  otherBookObj: any;
-  hisUserName = ''
-  firstName = JSON.parse(localStorage.getItem("userData"))['userName']
-
-  //@ViewChild('scrollTop') scrollTop: ElementRef;
-
-  constructor(private auth: AuthService) {
-  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
