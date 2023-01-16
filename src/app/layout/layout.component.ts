@@ -7,7 +7,6 @@ import {filter} from "rxjs";
 import {MessagesService} from "../services/message/messages.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
-import {LoginComponent} from "../login/login.component";
 
 @Component({
   selector: 'app-layout',

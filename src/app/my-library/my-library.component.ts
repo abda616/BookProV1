@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { searchDataTransferService } from '../services/Transfer/search-data-transfer.service';
-import { SharedServiceService } from '../services/shared-service.service';
-import { Book, ownedBooks } from '../shared/Interfaces/Book';
-import { MessagesService } from '../services/message/messages.service';
-import { ExchangeService } from '../services/Exchange/exchange.service';
-import { BookDataService } from '../services/Transfer/book-data.service';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {searchDataTransferService} from '../services/Transfer/search-data-transfer.service';
+import {SharedServiceService} from '../services/shared-service.service';
+import {ownedBooks} from '../shared/Interfaces/Book';
+import {MessagesService} from '../services/message/messages.service';
+import {ExchangeService} from '../services/Exchange/exchange.service';
+import {BookDataService} from '../services/Transfer/book-data.service';
 import {AuthService} from "../shared/Auth/auth.service";
+
 @Component({
   selector: 'app-my-library',
   templateUrl: './my-library.component.html',
@@ -19,7 +20,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   favoriteBooks = [];
   tradeList = [];
   userPic = this.auth.getUserPic();
-  userName=this.auth.getUserName();
+  userName = this.auth.getUserName();
 
   constructor(
     private search: searchDataTransferService,
@@ -28,8 +29,8 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     private messageService: MessagesService,
     private exchageService: ExchangeService,
     private bookDataService: BookDataService,
-
-  ) {}
+  ) {
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -41,6 +42,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     this.getOwnedBooks();
     this.getFavoriteBooks();
   }
+
   //change the targeted library
   changeTarget(type) {
     this.desiredLibrary = type;
@@ -50,27 +52,29 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     } else if (type == this.sectionsArr[1]) {
       this.getFavoriteBooks();
     } else if (type == this.sectionsArr[2]) {
-      2;
       return this.getTradeList();
     }
     return '';
   }
+
   //get the owned books
   getOwnedBooks() {
     this.bookDataService.allOwenedBook().subscribe((res) => {
-        this.ownedBooks = res;
-        this.ownedBooks = this.sharedService.removeNoImage(this.ownedBooks);
-      });
+      this.ownedBooks = res;
+      this.ownedBooks = this.sharedService.removeNoImage(this.ownedBooks);
+    });
   }
+
   //get favorite books
   getFavoriteBooks() {
     this.bookDataService.favorites().subscribe((res) => {
-        this.favoriteBooks = res;
-        this.favoriteBooks = this.sharedService.removeNoImage(
-          this.favoriteBooks
-        );
-      });
+      this.favoriteBooks = res;
+      this.favoriteBooks = this.sharedService.removeNoImage(
+        this.favoriteBooks
+      );
+    });
   }
+
   //get tradeList
   getTradeList(newBook?) {
     ///check if the trade array is empty at first to avoide duplication
@@ -85,7 +89,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
         this.tradeList.forEach((e) => {
           if (e.id == newBook.id) bookFound = true;
         });
-        //if its not found push it to the trade list
+        //if it is not found push it to the trade list
         if (!bookFound) {
           this.tradeList.push(newBook);
         }
@@ -94,12 +98,16 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
 
     return this.tradeList;
   }
+
   //add the  books to tradeLIST
   addToTrade(obj, availablity): void {
     this.bookDataService.tradeThisBook(obj.id, availablity).subscribe(
       (next) => {
-        this.auth.toast.success(next['message'],"success")},
-      error => {this.auth.toast.error(error.error['message'],"error")}
+        this.auth.toast.success(next['message'], "success")
+      },
+      error => {
+        this.auth.toast.error(error.error['message'], "error")
+      }
     );
     //loop over the array and check if the passed object from the html is the same as the obj in the owned array then make it available
     this.ownedBooks.forEach((e) => {
@@ -112,6 +120,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     });
     this.getTradeList(obj);
   }
+
   //just a simple function to remove the item using the filter method
   removeItemFromTrade(item) {
     this.tradeList = this.tradeList.filter((e) => {
@@ -139,8 +148,11 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   addToOwn(id) {
     this.bookDataService.addBookToOwn(id).subscribe(
       (next) => {
-        this.auth.toast.success(next['message'],"success")},
-      error => {this.auth.toast.error(error.error['message'],"error")}
+        this.auth.toast.success(next['message'], "success")
+      },
+      error => {
+        this.auth.toast.error(error.error['message'], "error")
+      }
     );
   }
 }

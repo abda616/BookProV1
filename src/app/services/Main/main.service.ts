@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Book} from "../../shared/Interfaces/Book";
 import {environment} from "../../../environments/environment.prod";
 import {IGenure} from "../../shared/Interfaces/IGenure";
-import {asyncScheduler, share, shareReplay} from "rxjs";
+import {asyncScheduler, shareReplay} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
