@@ -2,7 +2,7 @@
 
   <div class="just-flex flex-column justify-content-center w-50 h-100">
     <div *ngIf="!signUpState" class="border-padding">
-      <h2 class="text-center">Jo-Book</h2>
+      <h2 class="text-center">Book Exchange</h2>
       <h4 class="text-center">Welcome</h4>
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="just-flex flex-column align-items-center">
         <div class="justify-content-center">
@@ -34,7 +34,7 @@
               (click)="openSignup()">{{!signUpState ? "SignUp" : "signIn"}}</button>
     </div>
     <div *ngIf="signUpState" class="signup-form">
-      <h2 class="text-center" style="margin-top:40% !important;">Welcome To Jo Book</h2>
+      <h2 class="text-center" style="margin-top:40% !important;">Welcome</h2>
       <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" class="just-flex flex-column justify-content-center ">
 
         <div class="just-flex justify-content-center  align-items-center mx-auto my-1">

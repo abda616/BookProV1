@@ -1,9 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {MessagesService} from "../services/message/messages.service";
-import {Router} from "@angular/router";
-import {BookDataService} from "../services/Transfer/book-data.service";
-import {SharedServiceService} from "../services/shared-service.service";
-import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {AuthService} from "../shared/Auth/auth.service";
 
 @Component({
   selector: 'app-conversation',
@@ -12,10 +8,7 @@ import {searchDataTransferService} from "../services/Transfer/search-data-transf
 })
 export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  constructor(private message: MessagesService, private router: Router,
-              private bookSer: BookDataService, private shared: SharedServiceService,
-              private postion: searchDataTransferService) {
-  }
+  constructor(private auth: AuthService) {}
 
   conver;
   newMessageText;
@@ -31,17 +24,17 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.postion.updatePosition(true);
+      this.auth.search.updatePosition(true);
     }, 0);
     this.insedeViwe = true;
 
-    this.message.dataID.subscribe(data => {
+    this.auth.message.dataID.subscribe(data => {
       if (data)
         this.conversationSation = data;
       else {
         let x = localStorage.getItem('conversation_ex_id')
         if (!x)
-          this.router.navigate(['']).then();
+          this.auth.router.navigate(['']).then();
         this.conversationSation = x;
 
         data = JSON.parse(x);
@@ -49,14 +42,14 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
       this.getMessages(data, this.insedeViwe)
     });
 
-    this.bookSer.getBook(+JSON.parse(localStorage.getItem('conversation_ex_id'))['his_book_id'])
+    this.auth.bookService.getBook(+JSON.parse(localStorage.getItem('conversation_ex_id'))['his_book_id'])
       .subscribe((book) => {
-        book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
+        book["coverPage"] = this.auth.shared.getLargeImg(book["coverPage"], this.auth.shared.getPosition(book["coverPage"], "m/", 2))
         this.hisBookPic = book["coverPage"]
       });
-    this.bookSer.getBook(+JSON.parse(localStorage.getItem('conversation_ex_id'))['my_book_id'])
+    this.auth.bookService.getBook(+JSON.parse(localStorage.getItem('conversation_ex_id'))['my_book_id'])
       .subscribe((book) => {
-        book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
+        book["coverPage"] = this.auth.shared.getLargeImg(book["coverPage"], this.auth.shared.getPosition(book["coverPage"], "m/", 2))
         this.myBookPic = book["coverPage"]
       });
 
@@ -67,12 +60,12 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getMessages(messageData, inView) {
     if (inView)
-      this.message.getConversation(messageData.exchange_id).subscribe(value => {
+      this.auth.message.getConversation(messageData.exchange_id).subscribe(value => {
         this.conver = value
       }, error => {
         if (error.error['message'] == 'error' || error.error['message'] == "You don't have access to this conversation.") {
           localStorage.removeItem('conversation_ex_id')
-          this.router.navigate(['app']).then()
+          this.auth.router.navigate(['app']).then()
         }
       });
   }
@@ -81,7 +74,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.newMessageText.length > 0) {
       let mess = this.newMessageText;
       this.newMessageText = '';
-      this.message.sendMessage(id, mess).subscribe(() => {
+      this.auth.message.sendMessage(id, mess).subscribe(() => {
         this.getMessages(JSON.parse(localStorage.getItem('conversation_ex_id')), this.insedeViwe)
         document.querySelector("#span-messaging").scrollIntoView();
         setTimeout(() => {
@@ -92,7 +85,7 @@ export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   accept(sationID: any, accToF: boolean) {
-    this.message.aceeptEx(sationID, accToF).subscribe(value => {
+    this.auth.message.aceeptEx(sationID, accToF).subscribe(value => {
       if (value['message'] == 'error' || value['message'] == "You don't have access to this conversation.") {
         localStorage.removeItem('conversation_ex_id')
       }

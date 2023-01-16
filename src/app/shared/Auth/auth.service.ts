@@ -12,6 +12,7 @@ import {BookDataService} from "../../services/Transfer/book-data.service";
 import {SharedServiceService} from "../../services/shared-service.service";
 import {MainService} from "../../services/Main/main.service";
 import {ExchangeService} from "../../services/Exchange/exchange.service";
+import {SharedDataModule} from "../shared-data.module";
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class AuthService {
   constructor(private http: HttpClient, public router: Router, public toast: ToastrService,
               public message: MessagesService, public main: MainService, public exchange: ExchangeService,
               public search: searchDataTransferService, public bookService: BookDataService,
-              public shared: SharedServiceService) {
+              public shared: SharedServiceService, public sharedModel:SharedDataModule) {
   }
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
