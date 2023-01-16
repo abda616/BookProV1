@@ -15,9 +15,10 @@ export class MessagesService {
 
   dataID = this.messageId.asObservable();
 
-  setMessageID(x) {
+  setMessageID(x,y) {
     this.messageId.next(x);
     localStorage.setItem('conversation_ex_id', JSON.stringify(x));
+    localStorage.setItem('initiator',JSON.stringify(y))
   }
 
   getAllConversation(): Observable<any> {

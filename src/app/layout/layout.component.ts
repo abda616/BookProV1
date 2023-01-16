@@ -7,7 +7,6 @@ import {filter} from "rxjs";
 import {MessagesService} from "../services/message/messages.service";
 import {BookDataService} from "../services/Transfer/book-data.service";
 import {SharedServiceService} from "../services/shared-service.service";
-import {LoginComponent} from "../login/login.component";
 
 @Component({
   selector: 'app-layout',
@@ -73,7 +72,6 @@ export class LayoutComponent implements OnInit {
       this.message.getAllConversation().subscribe(data => {
         data.forEach(x => {
             /*get img for the book*/
-            x.image = x.image ? x.image : 'assets/Avatars/men_av_2.png';
             this.dataService.getBook(+x['his_book_id']).subscribe((book) => {
               book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
               x.imgUrl = book["coverPage"]
@@ -95,10 +93,9 @@ export class LayoutComponent implements OnInit {
     this.searchValue = '';
     this.router.navigate(['app/search']).then();
   }
-  goToC(x) {
-    this.message.setMessageID(x);
+  goToC(x,y) {
+    this.message.setMessageID(x,y);
     this.myDrawer.toggle().then();
-    //this.mode = "side"
     this.router.navigate(['app/message']).then()
   }
 }

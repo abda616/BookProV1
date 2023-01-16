@@ -6,8 +6,8 @@
   justify-content: flex-start;
 }
 .container-fluid .dashboard {
-  position: relative;
-  width: 20%;
+  /*position: relative;*/
+  width: 25%;
   height: 100vh;
   background-color: #FEFCFD;
 }
@@ -19,18 +19,18 @@
   justify-content: flex-start;
   top: 100px;
   height: 100%;
-  width: 15%;
+  width: 20%;
 }
 .container-fluid .dashboard .left-sticky .image {
   position: relative;
   width: 100%;
-  height: 30%;
+  /*height: 40%;*/
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 .container-fluid .dashboard .left-sticky .image .name {
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 .container-fluid .dashboard .left-sticky .image img {
   width: 150px;
@@ -61,7 +61,7 @@
   width: 100%;
   height: 100%;
   min-height: 100%;
-  margin-left: 50px;
+  /*margin-left: 50px;*/
 }
 .container-fluid .right-cont h2 {
   width: 100%;

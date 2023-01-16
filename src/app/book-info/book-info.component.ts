@@ -10,9 +10,11 @@ import {searchDataTransferService} from "../services/Transfer/search-data-transf
 @Component({
   selector: 'app-my-book-info',
   templateUrl: './book-Info.component.html',
-  styleUrls: ['./book-info.component.css'],
+  styleUrls: ['./book-info.component.scss'],
 })
 export class MyBookInfoComponent implements OnInit {
+  recBySB: any[];
+
   constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
               private ref: ChangeDetectorRef, private moveBook: BookDataService,
               private search: MainService, private rout: Router,
@@ -31,17 +33,20 @@ export class MyBookInfoComponent implements OnInit {
   allGenreArr = [];
   isOwened;
   ownedIdNumber;
-  bookId ;
+  bookId;
 
   private clear() {
     this.currentAuthor = ''
     this.similarAuthorBooks = []
     this.allGenreName = [];
     this.allGenreArr = [];
+    this.recBySB = [];
   }
 
   ngOnInit(): void {
-    setTimeout(() => {this.position.updatePosition(true);}, 0);
+    setTimeout(() => {
+      this.position.updatePosition(true);
+    }, 0);
     this.clear();
     this.bookDataService.bookData.subscribe((id: number) => {
       if (id) {
@@ -57,14 +62,14 @@ export class MyBookInfoComponent implements OnInit {
       this.bookDataService.getBook(id).subscribe((bookdata) => {
         bookdata["coverPage"] = this.sharedService.getLargeImg(bookdata["coverPage"], this.sharedService.getPosition(bookdata["coverPage"], "m/", 2))
         this.currentBookInfo = bookdata;
-        this.generalBookRate = bookdata['rating']['average_rating'];
+        this.generalBookRate = bookdata['rating']['average_rating'].las;
         this.currentAuthor = bookdata['author'];
         this.bookId = bookdata['id'];
         this.GenraBook = bookdata['genres'];
 
         this.similarAuthorService(this.currentAuthor);
         this.getGenreArr();
-
+        this.getRecommendBySimilarBook(this.bookId);
       });
       this.isOwnedBook(id);
       this.bookDataService.getRate(id).subscribe(rate => {
@@ -100,6 +105,7 @@ export class MyBookInfoComponent implements OnInit {
 
 
   }
+
   setRate(rate: number, id: number) {
     this.bookDataService.setRate(rate, id).subscribe(
       (next) => {
@@ -111,6 +117,7 @@ export class MyBookInfoComponent implements OnInit {
       }
     );
   }
+
   addBookToOwened(id: number) {
     this.isOwened = !this.isOwened;
     this.bookDataService.addBookToOwn(id).subscribe(
@@ -123,6 +130,7 @@ export class MyBookInfoComponent implements OnInit {
       }
     );
   }
+
   removeFromOwened(id) {
     this.isOwened = !this.isOwened;
     this.bookDataService.removeBookFromOwn(id).subscribe(
@@ -179,15 +187,31 @@ export class MyBookInfoComponent implements OnInit {
     })
   }
 
-  scrollToAuth() {
-    document.querySelector('#sameAuth').scrollIntoView({behavior: "smooth"})
+  scrollToAuth(ele:string) {
+    document.querySelector(`#${ele}`).scrollIntoView({behavior: "smooth"})
   }
 
   goToBookPage(book: number) {
     this.moveBook.transBook(book);
     this.rout.navigate(['app/book']).then();
   }
+
   goToTrade() {
     this.rout.navigate(['app/trade']).then()
+  }
+
+  getRecommendBySimilarBook(bookId) {
+    this.auth.bookService.recommendBySimilarBook(bookId).subscribe((res) => {
+      res = this.sharedService.removeNoImage(res);
+      let C = [];
+      let x = 2;
+      let len = res.length % 2 == 0 ? res.length : res.length + 1;
+      for (let i = 0; i < len / x; i++) {
+        C[i] = res.slice(i * x, i * x + x)
+      }
+      this.recBySB = C
+      console.log(C);
+    })
+
   }
 }

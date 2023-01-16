@@ -55,5 +55,8 @@ export class BookDataService {
   favorites() {
     return this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/favorites`)
   }
+  recommendBySimilarBook(id:number){
+    return this.http.get<ownedBooks[]>(`${environment.apiUrl}home/recommendBySimilarBook?book_id=${id}`)
+  }
 }
 

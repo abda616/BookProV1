@@ -1,5 +1,4 @@
 
-
 .convirsation-hight {
   height: 92%;
 }
@@ -7,17 +6,21 @@
 .type-message-area {
   display: flex;
   flex-direction: row;
-  width:70%;
-  margin-left: 15%;
-}
-.top-card-ex img{
-  width: 100px;
+  width:50%;
+  margin-left: 25%;
+  border: #2a3248 solid 3px;
+  border-radius: 10px;
 }
 
-.top-card-ex{
-  height: 37%;
-  width: 100%;
-  position: sticky;
-  z-index: 124;
-  top: -37%!important;
+.conv-img  img{
+  max-width: 275px;
+  max-height: 400px;
+  min-width: 275px;
+  min-height: 400px;
+}
+
+.text-message-block{
+  display: block;
+  width: fit-content;
+  max-width: 50%;
 }
