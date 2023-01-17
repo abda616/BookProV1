@@ -8,7 +8,7 @@ export class SharedServiceService {
   constructor() {
   }
 
-  //get the postion of the m letter
+  //get the position of the m letter
   getPosition(string, target, index) {
     return string.split(target, index).join(target).length;
   }

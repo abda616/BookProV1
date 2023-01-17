@@ -33,14 +33,13 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   }
 
   getYouTradeList() {
-    this.auth.bookService.allOwenedBook().subscribe((res) => {
+    this.auth.bookService.allOwnedBook().subscribe((res) => {
       let ownedBooks = this.auth.shared.removeNoImage(res);
       let ownedBooksC = [];
       ownedBooks.forEach((e) => {
         if (e.avaliable == true) ownedBooksC.push(e);
       });
       this.yourTradeList = ownedBooksC;
-      console.log(this.yourTradeList, "tradelist")
       if (this.yourTradeList.length > 6) this.longTrade = true
     });
 
@@ -90,19 +89,19 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
           let exId = null;
           let i = 0;
           x.forEach(e => {
-            console.log("Itiration " + i++);
+
 
             console.log(+JSON.parse(e.myBook.id).toString());
             console.log(e.hisBook.id);
 
             console.log("------")
-            let myid = +JSON.parse(e.myBook.id).toString();
-            let hisid = +JSON.parse(e.hisBook.id).toString();
+            let myId = +JSON.parse(e.myBook.id).toString();
+            let hisId = +JSON.parse(e.hisBook.id).toString();
             console.log("------")
-            console.log(myid)
-            console.log(hisid)
+            console.log(myId)
+            console.log(hisId)
 
-            if (myid == myBook && hisid == hisBook) {
+            if (myId == myBook && hisId == hisBook) {
               exId = e['id']
               console.log(exId);
               this.auth.message.setMessageID(exId, this.firstName);

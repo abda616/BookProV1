@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="right-cont pt-5 pl-5 m-0 col-lg-9 col-md-12">
-    <div class="row book-desc d-flex justify-content-aroundh-70 flex-column">
+    <div class="row book-desc d-flex justify-content-around h-70 flex-column">
       <div class="col-lg-9 col-md-12">
         <h1 class="fs-1 font-weight-bold text-dark pb-3">{{currentBookInfo['title']}}</h1>
         <h6 class="author fs-4 font-weight-bold">By
@@ -33,7 +33,7 @@
         <div class="genres mb-3">
           <h6 class="fs-4 font-weight-bold">Genres</h6>
           <div class="row w-30 d-flex ms-4 justify-content-evenly fs-6">
-            <div *ngFor="let genre of getGenres(GenraBook)|slice:0:4" class="col-lg-3 col-md-4 col-sm-6">
+            <div *ngFor="let genre of getGenres(GeneraBook)|slice:0:4" class="col-lg-3 col-md-4 col-sm-6">
               <p>
                 <a (click)="scrollToAuth(genre)">{{genre}}</a></p>
             </div>
@@ -73,17 +73,17 @@
               <button class="btn info-btn text-white" (click)="goToTrade()">See Trade Options</button>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2" [hidden]="!isOwened">
-              <button class="btn info-btn text-white" (click)="tradeBookUOwened( ownedIdNumber , avaliable)">
-                {{avaliable ? "remove From Trade" : "Trade This Book"}}</button>
+            <div class="col-lg-4 col-md-6 col-12 info-col col mt-2" [hidden]="!isOwned">
+              <button class="btn info-btn text-white" (click)="tradeBookUOwned( ownedIdNumber , available)">
+                {{available ? "remove From Trade" : "Trade This Book"}}</button>
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 info-col col mt-2">
-              <button class="btn info-btn text-white" *ngIf="!isOwened"
-                      (click)="addBookToOwened(currentBookInfo.id)">Add To My Library
+              <button class="btn info-btn text-white" *ngIf="!isOwned"
+                      (click)="addBookToOwned(currentBookInfo.id)">Add To My Library
               </button>
-              <button class="btn info-btn text-white" *ngIf="isOwened"
-                      (click)="removeFromOwened(currentBookInfo.id)">You Owened This Book
+              <button class="btn info-btn text-white" *ngIf="isOwned"
+                      (click)="removeFromOwned(currentBookInfo.id)">You Owned This Book
               </button>
 
             </div>

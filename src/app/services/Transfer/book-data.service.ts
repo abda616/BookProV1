@@ -40,15 +40,15 @@ export class BookDataService {
     return this.http.post(`${environment.apiUrl}profile/removeBookFromOwned?book_id=${id}`, null)
   }
 
-  tradeThisBook(id: number, isAvalable) {
-    return this.http.post(`${environment.apiUrl}profile/makeBookAvailable?book_id=${id}&available=${!isAvalable}`, null)
+  tradeThisBook(id: number, isAvailable) {
+    return this.http.post(`${environment.apiUrl}profile/makeBookAvailable?book_id=${id}&available=${!isAvailable}`, null)
   }
 
-  isOwenedBook(id: number) {
+  isOwnedBook(id: number) {
     return this.http.get(`${environment.apiUrl}profile/owned`)
   }
 
-  allOwenedBook() {
+  allOwnedBook() {
     return this.http.get<ownedBooks[]>(`${environment.apiUrl}profile/owned`)
   }
 

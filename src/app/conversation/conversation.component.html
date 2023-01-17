@@ -4,14 +4,14 @@
 
     <div class="just-flex flex-column">
       <h1 class="mx-auto">After Accept Exchange</h1>
-      <h2 class="mx-auto">The Book Will Apper In Your Library</h2>
+      <h2 class="mx-auto">The Book Will Appear In Your Library</h2>
       <div class="just-flex flex-row justify-content-center" *ngIf="initiator!=this.firstUser">
-        <span (click)="accept(sationID,false)" style="font-size: 24px; color: Tomato;">
+        <span (click)="accept(sessionID,false)" style="font-size: 24px; color: Tomato;">
           <i class="fa-solid fa-circle-xmark"></i>
         </span>
         <i class="fa-solid fa-right-left mx-5">
         </i>
-        <span (click)="accept(sationID,true)" style="font-size: 24px; color: Dodgerblue;">
+        <span (click)="accept(sessionID,true)" style="font-size: 24px; color: Dodgerblue;">
           <i class="fa-solid fa-check"></i>
         </span>
       </div>
@@ -33,7 +33,7 @@
 
     <div class="media w-50 mx-auto mb-3">
       <div class="media-body text-message-block" [ngClass]="ms['userName']==this.firstUser?'':'ms-auto'"
-           *ngFor="let ms of conver">
+           *ngFor="let ms of converse">
         <div class="rounded py-2 px-3 mb-2 " [ngClass]="ms['userName']==this.firstUser?'bg-primary':'bg-light'">
           <p class="text-small mb-0"
              [ngClass]="ms['userName']==this.firstUser?'text-white':'text-muted text-end'">{{ms.message}}</p>
@@ -50,10 +50,10 @@
     <div class="input-group sticky-bottom">
 
       <input type="text" placeholder="Type a message" aria-describedby="button-addon2" [(ngModel)]="newMessageText"
-             (keyup.enter)="sendMessage(sationID)"
+             (keyup.enter)="sendMessage(sessionID)"
              class="form-control rounded-6 border-0 py-4">
       <div class="input-group-append just-flex">
-        <button id="button-addon2" (click)="sendMessage(sationID)" type="submit" class="btn btn-link">
+        <button id="button-addon2" (click)="sendMessage(sessionID)" type="submit" class="btn btn-link">
           <i class="fa fa-paper-plane fa-xl"></i>
         </button>
       </div>

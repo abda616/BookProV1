@@ -51,7 +51,7 @@ export class UserProfileComponent implements OnInit{
   EditUserPic() {
     this.auth.setUserData1({image: this.profilePic}).subscribe(value => {
       this.auth.toast.success(value['message'])
-      this.auth.toast.info('U Will Be Loged Out To Update Data', "Saved... Log-Out 5 Sec")
+      this.auth.toast.info('U Will Be Logged Out To Update Data', "Saved... Log-Out 5 Sec")
       setTimeout(() => {
         this.auth.doLogout();
       }, 5000)
@@ -63,7 +63,7 @@ export class UserProfileComponent implements OnInit{
   UpdateUserName() {
     this.auth.setUserData2UserName(this.firstName, this.lastName).subscribe(value => {
       this.auth.toast.success(value['message'])
-      this.auth.toast.info('U Will Be Loged Out To Update Data', "Saved... Log-Out 5 Sec")
+      this.auth.toast.info('U Will Be Logged Out To Update Data', "Saved... Log-Out 5 Sec")
       setTimeout(() => {
         this.auth.doLogout();
       }, 5000)
@@ -75,7 +75,7 @@ export class UserProfileComponent implements OnInit{
   UpdateEmail() {
     this.auth.setUserData1({email: this.email}).subscribe(value => {
       this.auth.toast.success(value['message'])
-      this.auth.toast.info('U Will Be Loged Out To Update Data', "Saved... Log-Out 5 Sec")
+      this.auth.toast.info('U Will Be Logged Out To Update Data', "Saved... Log-Out 5 Sec")
       setTimeout(() => {
         this.auth.doLogout();
       }, 5000)
@@ -88,7 +88,7 @@ export class UserProfileComponent implements OnInit{
   UpdatePassword() {
     this.auth.setUserData2Password(this.UPassword.get('A').value, this.UPassword.get('B').value).subscribe(value => {
       this.auth.toast.success(value['message'])
-      this.auth.toast.info('U Will Be Loged Out To Update Data', "Saved... Log-Out 5 Sec")
+      this.auth.toast.info('U Will Be Logged Out To Update Data', "Saved... Log-Out 5 Sec")
       setTimeout(() => {
         this.auth.doLogout();
       }, 5000)
@@ -100,7 +100,7 @@ export class UserProfileComponent implements OnInit{
   UpdateCity() {
     this.auth.setUserData1({city: this.UCity}).subscribe(value => {
       this.auth.toast.success(value['message'])
-      this.auth.toast.info('U Will Be Loged Out To Update Data', "Saved... Log-Out 5 Sec")
+      this.auth.toast.info('U Will Be Logged Out To Update Data', "Saved... Log-Out 5 Sec")
       setTimeout(() => {
         this.auth.doLogout();
       }, 5000)
@@ -110,10 +110,10 @@ export class UserProfileComponent implements OnInit{
   }
 
 
-  UpdateInterst() {
+  UpdateInterest() {
     this.auth.setUserData1({interest: `{${this.UInterests.value.slice(1, this.UInterests.length)}}`}).subscribe(value => {
       this.auth.toast.success(value['message'])
-      this.auth.toast.info('U Will Be Loged Out To Update Data', "Saved... Log-Out 5 Sec")
+      this.auth.toast.info('U Will Be Logged Out To Update Data', "Saved... Log-Out 5 Sec")
       setTimeout(() => {
         this.auth.doLogout();
       }, 5000)
@@ -126,7 +126,7 @@ export class UserProfileComponent implements OnInit{
     return this.UPassword.invalid;
   }
 
-  InterstLenght() {
+  InterestLength() {
     return this.UInterests.value.toString().split(',').length;
   }
 

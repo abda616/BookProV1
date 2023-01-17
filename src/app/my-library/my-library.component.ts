@@ -46,7 +46,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
 
   //get the owned books
   getOwnedBooks() {
-    this.auth.bookService.allOwenedBook().subscribe((res) => {
+    this.auth.bookService.allOwnedBook().subscribe((res) => {
       this.ownedBooks = res;
       this.ownedBooks = this.auth.shared.removeNoImage(this.ownedBooks);
     });
@@ -64,13 +64,13 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
 
   //get tradeList
   getTradeList(newBook?) {
-    ///check if the trade array is empty at first to avoide duplication
+    ///check if the trade array is empty at first to avoid duplication
     if (this.tradeList.length == 0) {
       this.ownedBooks.forEach((e) => {
-        if (e.avaliable) this.tradeList.push(e); //if its available add it to trade list
+        if (e.available) this.tradeList.push(e); //if its available add it to trade list
       });
     } else {
-      //if its not empty check weather the passed book is already in the tradelist
+      //if its not empty check weather the passed book is already in the tradeList
       if (newBook) {
         let bookFound = false;
         this.tradeList.forEach((e) => {
@@ -87,8 +87,8 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
 
   //add the  books to tradeLIST
-  addToTrade(obj, availablity): void {
-    this.auth.bookService.tradeThisBook(obj.id, availablity).subscribe(
+  addToTrade(obj, availability): void {
+    this.auth.bookService.tradeThisBook(obj.id, availability).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], "success")
       },
@@ -99,9 +99,9 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
     //loop over the array and check if the passed object from the html is the same as the obj in the owned array then make it available
     this.ownedBooks.forEach((e) => {
       if (e.id == obj.id) {
-        e.avaliable = !e.avaliable;
+        e.available = !e.available;
       } //if its not available remove it from the trade list
-      if (!e.avaliable) {
+      if (!e.available) {
         this.removeItemFromTrade(obj);
       }
     });

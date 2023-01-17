@@ -34,7 +34,7 @@ export class MessagesService {
       {bookExchange_id: id, message: message})
   }
 
-  aceeptEx(id: number, is: boolean) {
+  acceptEx(id: number, is: boolean) {
     return this.http.post<any>(`${environment.apiUrl}exchange/acceptExchange?exchange_id=${id}&accept=${is}`, null)
   }
 

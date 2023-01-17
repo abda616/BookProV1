@@ -102,20 +102,14 @@
   justify-content: space-around;
   font-weight: bold;
   background-image: url("../../assets/picture/wooden.jpg");
-  border-top-left-radius: none;
-  border-top-right-radius: none;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-radius: 0 0 30px 30px;
   margin-bottom: 0;
 }
 .container-fluid .right-cont .stand-cont .lower-stand .top .add-list-btn {
   display: block;
   width: 190%;
   height: 100%;
-  border-top-left-radius: none;
-  border-top-right-radius: none;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-radius: 0 0 30px 30px;
   transition: all 0.3s;
   position: relative;
   overflow: hidden;

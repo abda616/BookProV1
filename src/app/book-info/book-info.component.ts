@@ -14,17 +14,17 @@ export class MyBookInfoComponent implements OnInit {
   constructor(private ref: ChangeDetectorRef, private auth: AuthService,) {
   }
 
-  avaliable: any;
+  available: any;
   currentBookInfo: any = '';
   generalBookRate = 5;
   myRateToTheBook = 0;
-  GenraBook = '';
+  GeneraBook = '';
   currentAuthor = '';
   similarAuthorBooks = [];
   right = true;
   allGenreName: string[] = [];
   allGenreArr = [];
-  isOwened;
+  isOwned;
   ownedIdNumber;
   bookId;
 
@@ -34,7 +34,7 @@ export class MyBookInfoComponent implements OnInit {
     this.allGenreName = [];
     this.allGenreArr = [];
     this.recBySB = [];
-    this.isOwened = null;
+    this.isOwned = null;
     this.ownedIdNumber = null;
   }
 
@@ -55,13 +55,13 @@ export class MyBookInfoComponent implements OnInit {
         } else this.auth.router.navigate(['']).then(window.location.reload)
       }
 
-      this.auth.bookService.getBook(id).subscribe((bookdata) => {
-        bookdata["coverPage"] = this.auth.shared.getLargeImg(bookdata["coverPage"], this.auth.shared.getPosition(bookdata["coverPage"], "m/", 2))
-        this.currentBookInfo = bookdata;
-        this.generalBookRate = bookdata['rating']['average_rating'];
-        this.currentAuthor = bookdata['author'];
-        this.bookId = bookdata['id'];
-        this.GenraBook = bookdata['genres'];
+      this.auth.bookService.getBook(id).subscribe((bookData) => {
+        bookData["coverPage"] = this.auth.shared.getLargeImg(bookData["coverPage"], this.auth.shared.getPosition(bookData["coverPage"], "m/", 2))
+        this.currentBookInfo = bookData;
+        this.generalBookRate = bookData['rating']['average_rating'];
+        this.currentAuthor = bookData['author'];
+        this.bookId = bookData['id'];
+        this.GeneraBook = bookData['genres'];
 
         this.similarAuthorService(this.currentAuthor);
         this.getGenreArr();
@@ -75,23 +75,23 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   private isOwnedBook(id: number) {
-    this.auth.bookService.isOwenedBook(id).subscribe((resp) => {
+    this.auth.bookService.isOwnedBook(id).subscribe((resp) => {
       let data: any;
       data = resp;
       for (let dataKey of data) {
         if (id == dataKey['book']['id']) {
-          this.isOwened = true;
-          this.avaliable = dataKey['avaliable']
+          this.isOwned = true;
+          this.available = dataKey['available']
           this.ownedIdNumber = dataKey['id']
         }
       }
     });
   }
 
-  tradeBookUOwened(id, av) {
+  tradeBookUOwned(id, av) {
     this.auth.bookService.tradeThisBook(id, av).subscribe(
       (next) => {
-        this.avaliable = !this.avaliable;
+        this.available = !this.available;
         this.auth.toast.success(next['message'], "success")
       },
       error => {
@@ -114,11 +114,11 @@ export class MyBookInfoComponent implements OnInit {
     );
   }
 
-  addBookToOwened(id: number) {
+  addBookToOwned(id: number) {
 
     this.auth.bookService.addBookToOwn(id).subscribe(
       (next) => {
-        this.isOwened = !this.isOwened;
+        this.isOwned = !this.isOwned;
         this.auth.toast.success(next['message'], "success")
 
         this.isOwnedBook(id);
@@ -129,11 +129,11 @@ export class MyBookInfoComponent implements OnInit {
     );
   }
 
-  removeFromOwened(id) {
+  removeFromOwned(id) {
 
     this.auth.bookService.removeBookFromOwn(id).subscribe(
       (next) => {
-        this.isOwened = !this.isOwened;
+        this.isOwned = !this.isOwned;
         this.auth.toast.success(next['message'], "success")
       },
       error => {
@@ -168,7 +168,7 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   getGenreArr() {
-    let allInt = this.getGenres(this.GenraBook);
+    let allInt = this.getGenres(this.GeneraBook);
     allInt.forEach(i => {
       let arr = [];
       this.auth.main.searchBy(i, 'genre')

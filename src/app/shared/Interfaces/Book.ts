@@ -28,6 +28,6 @@ export class Book {
 
 export class ownedBooks {
   id: number;
-  avaliable: boolean;
+  available: boolean;
   book: Book;
 }

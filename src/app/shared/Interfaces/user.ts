@@ -4,7 +4,7 @@ export class User {
   email!: String;
   password!: String;
 }
-export class CurentUser{
+export class CurrentUser {
   birthDate: null;
   city: null;
   email: null;

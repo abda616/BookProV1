@@ -23,7 +23,7 @@ export class MainService {
     return this.myData1;
   }
 
-  basedInYourInterst() {
+  basedInYourInterest() {
     if (!this.myData2)
       return this.myData2 = this.http.get<Book[]>(`${environment.apiUrl}home/basedOnYourInterests`)
         .pipe(shareReplay(1));

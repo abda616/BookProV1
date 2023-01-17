@@ -25,7 +25,7 @@ export class ExchangeService {
   exchangesFromPeople() {
     return this.http.get(`${environment.apiUrl}exchange/exchangesFromPeople`)
   }
-  aceeptExchange(id: number, is: boolean) {
+  acceptExchange(id: number, is: boolean) {
     return this.http.post<any>(`${environment.apiUrl}exchange/acceptExchange?exchange_id=${id}&accept=${is}`, null)
   }
 }

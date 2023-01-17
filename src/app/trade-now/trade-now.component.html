@@ -11,7 +11,7 @@
           <h5>{{firstName}}</h5>
         </div>
       </div>
-      <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn">Confirm Exhcange</button>
+      <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn">Confirm Exchange</button>
       <div class="other-book">
         <div class="image" *ngIf="otherBookObj">
           <img class="image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
@@ -57,7 +57,7 @@
     <div>
       <div class="exchangable-cont" [ngClass]="!exchangeToggleBtn?'':'show-more-exchange'">
         <div class="row w-100 d-flex justify-content-around m-auto">
-          <h1 class="mt-5 mb-3">Discorver In Your City</h1>
+          <h1 class="mt-5 mb-3">Discover In Your City</h1>
           <div id="{{data.id}}" class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 "
                *ngFor="let data of  otherBooksArr">
             <div class="card-wrapper-row-card">

@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
   searchValue: string = '';
   positionInSearch = true;
   profilePic = "";
-  conver = [];
+  conversation = [];
 
 
   constructor(private auth: AuthService) {
@@ -30,16 +30,16 @@ export class LayoutComponent implements OnInit {
         let myObj = JSON.parse(localStorage.getItem("userData"));
 
         if (!myObj.interest) {
-          let intr=[];
-          this.auth.main.basedInYourInterst().subscribe(data => {
+          let into=[];
+          this.auth.main.basedInYourInterest().subscribe(data => {
             data.forEach(e => {
               let x = e['genres'].toString().replace(/[{}']/gi, "").split(',')
               x.forEach(ele => {
-                intr.push(ele)
+                into.push(ele)
               })
-              intr = [...new Set(intr)];
+              into = [...new Set(into)];
             })
-            myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : intr;
+            myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : into;
             localStorage.setItem("interests", (myObj.interest));
           })
         }else localStorage.setItem("interests", (myObj.interest));
@@ -74,7 +74,7 @@ export class LayoutComponent implements OnInit {
           }
         );
         if (data != []) {
-          this.conver = data;
+          this.conversation = data;
         }
       });
   }

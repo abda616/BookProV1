@@ -39,7 +39,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getBoUI() {
-    this.auth.main.basedInYourInterst().subscribe((res) => {
+    this.auth.main.basedInYourInterest().subscribe((res) => {
       this.YInterests = res;
       this.YInterests = this.auth.shared.removeNoImage(this.YInterests);
       let MostRatedC = [];

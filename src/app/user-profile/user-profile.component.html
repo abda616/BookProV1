@@ -25,7 +25,7 @@
             <app-chip-multi-select [options]="Interests" [formControl]="UInterests"></app-chip-multi-select>
           </div>
           <div class="mx-auto my-0">
-            <button mat-button color="primary" (click)="UpdateInterst()" [disabled]="InterstLenght()<3">Save</button>
+            <button mat-button color="primary" (click)="UpdateInterest()" [disabled]="InterestLength()<3">Save</button>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
                     </mat-form-field>
 
                     <mat-form-field class="w-50 px-5" appearance="legacy">
-                      <mat-label>Confearm Password</mat-label>
+                      <mat-label>Confirm Password</mat-label>
                       <input matInput formControlName="B" placeholder="Password" required>
                     </mat-form-field>
                   </div>
@@ -145,11 +145,11 @@
           <div class="card-body">
             <h3>Current Exchanges</h3>
             <div class="row row-cols-2">
-              <div class="col just-flex flex-column bg-light p-2 m-0 overflow-scroll" *ngFor="let exch of userExchanges">
+              <div class="col just-flex flex-column bg-light p-2 m-0 overflow-scroll" *ngFor="let exchange of userExchanges">
                 <div class="just-flex flex-row justify-content-evenly align-items-center">
-                  <img [src]="exch.hisBook.book.coverPage" alt="his">
+                  <img [src]="exchange.hisBook.book.coverPage" alt="his">
                   <i class="fa-solid fa-right-left"></i>
-                  <img [src]="exch.myBook.book.coverPage" alt="my">
+                  <img [src]="exchange.myBook.book.coverPage" alt="my">
                 </div>
                 <div class="just-flex flex-row justify-content-evenly align-items-center">
                   <p>his Book</p>
@@ -157,7 +157,7 @@
                   <p>Your Book</p>
                 </div>
                 <div class="w-100 text-center"></div>
-                <p class="w-100 text-center">state : {{exch.status}}</p>
+                <p class="w-100 text-center">state : {{exchange.status}}</p>
               </div>
             </div>
           </div>
