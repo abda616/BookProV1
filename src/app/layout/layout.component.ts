@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
-import {Router, NavigationEnd} from '@angular/router';
-import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+import {NavigationEnd} from '@angular/router';
+
 import {filter} from "rxjs";
-import {MessagesService} from "../services/message/messages.service";
-import {BookDataService} from "../services/Transfer/book-data.service";
-import {SharedServiceService} from "../services/shared-service.service";
+
 
 @Component({
   selector: 'app-layout',
@@ -21,14 +19,11 @@ export class LayoutComponent implements OnInit {
   conver = [];
 
 
-  constructor(private auth: AuthService, private search: searchDataTransferService,
-              private router: Router, private message: MessagesService,
-              private dataService: BookDataService, private shared: SharedServiceService) {
+  constructor(private auth: AuthService) {
   }
 
 
   ngOnInit(): void {
-
     this.auth.getUserProfile().subscribe(data => {
       if (!localStorage.getItem('userData') || !localStorage.getItem("interests")) {
         localStorage.setItem("userData", JSON.stringify(data));
@@ -55,9 +50,9 @@ export class LayoutComponent implements OnInit {
       this.profilePic = JSON.parse(localStorage.getItem("userData")).profileImageUrl
     });
 
-    this.search.updatePosition(true);
-    this.search.currentPosition.subscribe(x => this.positionInSearch = x);
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
+    this.auth.search.updatePosition(true);
+    this.auth.search.currentPosition.subscribe(x => this.positionInSearch = x);
+    this.auth.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
       (event: NavigationEnd) => {
         document.querySelector("#mat-drawer-content").scroll({top: 0, left: 0})
       });
@@ -69,11 +64,11 @@ export class LayoutComponent implements OnInit {
     this.myDrawer = ref;
     ref.toggle().then();
     if (ref.opened)
-      this.message.getAllConversation().subscribe(data => {
+      this.auth.message.getAllConversation().subscribe(data => {
         data.forEach(x => {
             /*get img for the book*/
-            this.dataService.getBook(+x['his_book_id']).subscribe((book) => {
-              book["coverPage"] = this.shared.getLargeImg(book["coverPage"], this.shared.getPosition(book["coverPage"], "m/", 2))
+            this.auth.bookService.getBook(+x['his_book_id']).subscribe((book) => {
+              book["coverPage"] = this.auth.shared.getLargeImg(book["coverPage"], this.auth.shared.getPosition(book["coverPage"], "m/", 2))
               x.imgUrl = book["coverPage"]
             });
           }
@@ -89,14 +84,14 @@ export class LayoutComponent implements OnInit {
   }
 
   onEnter() {
-    this.search.updateData(this.searchValue);
+    this.auth.search.updateData(this.searchValue);
     this.searchValue = '';
-    this.router.navigate(['app/search']).then();
+    this.auth.router.navigate(['app/search']).then();
   }
   goToC(x,y) {
-    this.message.setMessageID(x,y);
+    this.auth.message.setMessageID(x,y);
     this.myDrawer.toggle().then();
-    this.router.navigate(['app/message']).then( ()=>
+    this.auth.router.navigate(['app/message']).then( ()=>
       window.location.reload()
     )
   }

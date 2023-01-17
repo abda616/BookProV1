@@ -1,9 +1,5 @@
 import {AfterViewInit, Component, OnInit,} from '@angular/core';
-import {SharedServiceService} from '../services/shared-service.service';
-import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
-import {BookDataService} from "../services/Transfer/book-data.service";
-import {Router} from "@angular/router";
-import {MainService} from "../services/Main/main.service";
+import {AuthService} from "../shared/Auth/auth.service";
 
 @Component({
   selector: 'app-main-page',
@@ -12,14 +8,11 @@ import {MainService} from "../services/Main/main.service";
 
 })
 export class MainPageComponent implements OnInit, AfterViewInit {
-  constructor(private service: MainService, private sharedService: SharedServiceService,
-              private search: searchDataTransferService,
-              private moveBook: BookDataService, private router: Router) {
-  }
+  constructor(private auth:AuthService) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.search.updatePosition(true);
+      this.auth.search.updatePosition(true);
     }, 0);
 
     if (localStorage.getItem('interests')) {
@@ -46,9 +39,9 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getBoUI() {
-    this.service.basedInYourInterst().subscribe((res) => {
+    this.auth.main.basedInYourInterst().subscribe((res) => {
       this.YInterests = res;
-      this.YInterests = this.sharedService.removeNoImage(this.YInterests);
+      this.YInterests = this.auth.shared.removeNoImage(this.YInterests);
       let MostRatedC = [];
       for (let i = 0; i < this.YInterests.length / 3; i++) {
         MostRatedC[i] = this.YInterests.slice(i * 3, i * 3 + 3)
@@ -58,9 +51,9 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getTopN() {
-    this.service.topBook().subscribe((res) => {
+    this.auth.main.topBook().subscribe((res) => {
       this.topArr = res;
-      this.topArr = this.sharedService.removeNoImage(this.topArr);
+      this.topArr = this.auth.shared.removeNoImage(this.topArr);
       let topNArrC = [];
       for (let i = 0; i < this.topArr.length / 2; i++) {
         topNArrC[i] = this.topArr.slice(i * 2, i * 2 + 2)
@@ -70,8 +63,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   getBoSU() {
-    this.service.basedOnSimUser().subscribe((res) => {
-      this.BoSU = this.sharedService.removeNoImage(res);
+    this.auth.main.basedOnSimUser().subscribe((res) => {
+      this.BoSU = this.auth.shared.removeNoImage(res);
       let BoSUC = [];
       for (let i = 0; i < this.BoSU.length / 3; i++) {
         BoSUC[i] = this.BoSU.slice(i * 3, i * 3 + 3)
@@ -91,8 +84,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   goToBookPage(book: number) {
-    this.moveBook.transBook(book);
-    this.router.navigate(['app/book']).then();
+    this.auth.bookService.transBook(book);
+    this.auth.router.navigate(['app/book']).then();
   }
 
   getGenreArr() {
@@ -101,8 +94,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     let arrOfGen = [];
     allInt.forEach(i => {
       let arr = [];
-      this.service.searchBy(i,'genre').subscribe((res) => {
-        arr = this.sharedService.removeNoImage(res);
+      this.auth.main.searchBy(i,'genre').subscribe((res) => {
+        arr = this.auth.shared.removeNoImage(res);
         let C = [];
         let x = 3
         for (let i = 0; i < 5 * x / x; i++) {

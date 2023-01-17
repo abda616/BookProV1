@@ -1,9 +1,5 @@
 import {Component, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
-import {SharedServiceService} from '../services/shared-service.service';
-import {searchDataTransferService} from '../services/Transfer/search-data-transfer.service';
-import {BookDataService} from "../services/Transfer/book-data.service";
-import {Router} from "@angular/router";
-import {MainService} from "../services/Main/main.service";
+import {AuthService} from "../shared/Auth/auth.service";
 
 @Component({
   selector: 'app-search-page',
@@ -17,19 +13,17 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   searchType: string = "all";
   @Output() changedSearchText: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private searchService: MainService, private search: searchDataTransferService,
-              private sharedService: SharedServiceService,
-              private moveBook: BookDataService, private router: Router) {
+  constructor(private auth:AuthService) {
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.search.updatePosition(false);
+      this.auth.search.updatePosition(false);
     }, 0);
   }
 
   ngOnInit(): void {
-    this.search.searchData.subscribe((data) => {
+    this.auth.search.searchData.subscribe((data) => {
       this.searchInput = data;
       this.onSearch(this.searchType);
     });
@@ -40,10 +34,10 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
       this.searchType = event.target.value
     }
     if (this.searchInput != '') {
-      this.searchService.searchBy(this.searchInput, this.searchType).subscribe(
+      this.auth.main.searchBy(this.searchInput, this.searchType).subscribe(
         (res) => {
           this.searchResult = res;
-          this.searchResult = this.sharedService.removeNoImage(this.searchResult);
+          this.searchResult = this.auth.shared.removeNoImage(this.searchResult);
           // calling the shared service to change the url to get the large img
         });
     }
@@ -55,13 +49,13 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearchChange(val) {
-    this.search.updateData(val);
+    this.auth.search.updateData(val);
     this.onSearch(this.searchType);
   }
 
   goToBookPage(book: any) {
-    this.moveBook.transBook(book);
-    this.router.navigate(['app/book']).then();
+    this.auth.bookService.transBook(book);
+    this.auth.router.navigate(['app/book']).then();
   }
 
   onSearchBy(event) {

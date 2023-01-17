@@ -1,10 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {searchDataTransferService} from '../services/Transfer/search-data-transfer.service';
-import {SharedServiceService} from '../services/shared-service.service';
 import {ownedBooks} from '../shared/Interfaces/Book';
-import {MessagesService} from '../services/message/messages.service';
-import {ExchangeService} from '../services/Exchange/exchange.service';
-import {BookDataService} from '../services/Transfer/book-data.service';
 import {AuthService} from "../shared/Auth/auth.service";
 
 @Component({
@@ -22,19 +17,11 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   userPic = this.auth.getUserPic();
   userName = this.auth.getUserName();
 
-  constructor(
-    private search: searchDataTransferService,
-    private auth: AuthService,
-    private sharedService: SharedServiceService,
-    private messageService: MessagesService,
-    private exchageService: ExchangeService,
-    private bookDataService: BookDataService,
-  ) {
-  }
+  constructor(private auth: AuthService) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.search.updatePosition(true);
+      this.auth.search.updatePosition(true);
     }, 0);
   }
 
@@ -59,17 +46,17 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
 
   //get the owned books
   getOwnedBooks() {
-    this.bookDataService.allOwenedBook().subscribe((res) => {
+    this.auth.bookService.allOwenedBook().subscribe((res) => {
       this.ownedBooks = res;
-      this.ownedBooks = this.sharedService.removeNoImage(this.ownedBooks);
+      this.ownedBooks = this.auth.shared.removeNoImage(this.ownedBooks);
     });
   }
 
   //get favorite books
   getFavoriteBooks() {
-    this.bookDataService.favorites().subscribe((res) => {
+    this.auth.bookService.favorites().subscribe((res) => {
       this.favoriteBooks = res;
-      this.favoriteBooks = this.sharedService.removeNoImage(
+      this.favoriteBooks = this.auth.shared.removeNoImage(
         this.favoriteBooks
       );
     });
@@ -101,7 +88,7 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
 
   //add the  books to tradeLIST
   addToTrade(obj, availablity): void {
-    this.bookDataService.tradeThisBook(obj.id, availablity).subscribe(
+    this.auth.bookService.tradeThisBook(obj.id, availablity).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], "success")
       },
@@ -141,12 +128,12 @@ export class MyLibraryComponent implements OnInit, AfterViewInit {
   }
 
   goToBook(book: number) {
-    this.bookDataService.transBook(book);
+    this.auth.bookService.transBook(book);
     this.auth.router.navigate(['app/book']).then();
   }
 
   addToOwn(id) {
-    this.bookDataService.addBookToOwn(id).subscribe(
+    this.auth.bookService.addBookToOwn(id).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], "success")
       },

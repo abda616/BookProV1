@@ -1,6 +1,6 @@
 import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {AsyncValidatorFn, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+
 import {delay, map, of} from "rxjs";
 import {avatarPicture, City, userSignIn, userSignUp} from "../shared/Interfaces/userSignup";
 import {AuthService} from "../shared/Auth/auth.service";
@@ -12,20 +12,17 @@ import {SharedDataModule} from "../shared/shared-data.module";
   providers: [AuthService, SharedDataModule]
 })
 export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
-  constructor(private formBuilder: FormBuilder, private router: Router,
-              private myAuth: AuthService, private sharedData: SharedDataModule,
-  ) {
-  }
+  constructor(private formBuilder: FormBuilder, private myAuth: AuthService) {}
 
   ngOnInit(): void {
     if (this.myAuth.isLoggedIn) {
-      this.router.navigate(["app"]).then();
+      this.myAuth.router.navigate(["app"]).then();
     }
 
-    this.sharedData.Citys.subscribe(data => this.citys = data);
-    this.sharedData.Avatars.subscribe(data => this.avatars = data);
-    this.sharedData.Interests.subscribe(data => this.Interests = data);
-    this.sharedData.Pattern.subscribe(data => this.patternValidator = data);
+    this.myAuth.sharedModel.Citys.subscribe(data => this.citys = data);
+    this.myAuth.sharedModel.Avatars.subscribe(data => this.avatars = data);
+    this.myAuth.sharedModel.Interests.subscribe(data => this.Interests = data);
+    this.myAuth.sharedModel.Pattern.subscribe(data => this.patternValidator = data);
 
     this.mLoginForm();
     this.mSignUpForm();
@@ -92,7 +89,7 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
         localStorage.setItem('access_token', next['access_token']);
         localStorage.setItem('refresh_token', next['refresh_token']);
         this.myAuth.toast.success("Logged in Successfully", "Welcome")
-        this.router.navigate(['app']).then()
+        this.myAuth.router.navigate(['app']).then()
       }, error => {
         this.myAuth.toast.error(error.error.message, "Error")
       });

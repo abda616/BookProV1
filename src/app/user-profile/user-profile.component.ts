@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {SharedDataModule} from "../shared/shared-data.module";
 import {City} from "../shared/Interfaces/userSignup";
 import {AsyncValidatorFn, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../shared/Auth/auth.service";
@@ -10,11 +9,9 @@ import {delay, map, of} from "rxjs";
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit{
 
-  constructor(private sharedData: SharedDataModule, private auth: AuthService) {
-  }
-
+  constructor(private auth: AuthService) {}
   ngOnInit(): void {
     this.auth.getUserProfile().subscribe(data => {
       this.userEmail.setValue(data['email']);
@@ -28,10 +25,10 @@ export class UserProfileComponent implements OnInit {
     this.auth.exchange.exchangesFromMe().subscribe(value => {
       this.userExchanges = value
     })
-    this.sharedData.Citys.subscribe(data => this.Citys = data);
-    this.sharedData.Interests.subscribe(data => this.Interests = data);
-    this.sharedData.Pattern.subscribe(data => this.patternValidator = data);
-    this.sharedData.Avatars.subscribe(data => this.avatars = data);
+    this.auth.sharedModel.Citys.subscribe(data => this.Citys = data);
+    this.auth.sharedModel.Interests.subscribe(data => this.Interests = data);
+    this.auth.sharedModel.Pattern.subscribe(data => this.patternValidator = data);
+    this.auth.sharedModel.Avatars.subscribe(data => this.avatars = data);
   }
 
   firstName;

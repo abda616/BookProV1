@@ -1,11 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {BookDataService} from "../services/Transfer/book-data.service";
-import {SharedServiceService} from "../services/shared-service.service";
 import {Book} from "../shared/Interfaces/Book";
-import {Router} from "@angular/router";
-import {MainService} from "../services/Main/main.service";
 import {AuthService} from "../shared/Auth/auth.service";
-import {searchDataTransferService} from "../services/Transfer/search-data-transfer.service";
+
 
 @Component({
   selector: 'app-my-book-info',
@@ -15,10 +11,7 @@ import {searchDataTransferService} from "../services/Transfer/search-data-transf
 export class MyBookInfoComponent implements OnInit {
   recBySB: any[];
 
-  constructor(private bookDataService: BookDataService, private sharedService: SharedServiceService,
-              private ref: ChangeDetectorRef, private moveBook: BookDataService,
-              private search: MainService, private rout: Router,
-              private auth: AuthService, private position: searchDataTransferService) {
+  constructor(private ref: ChangeDetectorRef, private auth: AuthService,) {
   }
 
   avaliable: any;
@@ -41,17 +34,17 @@ export class MyBookInfoComponent implements OnInit {
     this.allGenreName = [];
     this.allGenreArr = [];
     this.recBySB = [];
-    this.isOwened=null;
-    this.ownedIdNumber=null;
+    this.isOwened = null;
+    this.ownedIdNumber = null;
   }
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.position.updatePosition(true);
+      this.auth.search.updatePosition(true);
     }, 0);
 
     this.clear();
-    this.bookDataService.bookData.subscribe((id: number) => {
+    this.auth.bookService.bookData.subscribe((id: number) => {
       if (id) {
         this.currentBookInfo = id
       } else {
@@ -59,11 +52,11 @@ export class MyBookInfoComponent implements OnInit {
         if (x) {
           id = +(x);
           this.currentBookInfo = id
-        } else this.rout.navigate(['']).then()
+        } else this.auth.router.navigate(['']).then(window.location.reload)
       }
 
-      this.bookDataService.getBook(id).subscribe((bookdata) => {
-        bookdata["coverPage"] = this.sharedService.getLargeImg(bookdata["coverPage"], this.sharedService.getPosition(bookdata["coverPage"], "m/", 2))
+      this.auth.bookService.getBook(id).subscribe((bookdata) => {
+        bookdata["coverPage"] = this.auth.shared.getLargeImg(bookdata["coverPage"], this.auth.shared.getPosition(bookdata["coverPage"], "m/", 2))
         this.currentBookInfo = bookdata;
         this.generalBookRate = bookdata['rating']['average_rating'];
         this.currentAuthor = bookdata['author'];
@@ -75,14 +68,14 @@ export class MyBookInfoComponent implements OnInit {
         this.getRecommendBySimilarBook(this.bookId);
       });
       this.isOwnedBook(id);
-      this.bookDataService.getRate(id).subscribe(rate => {
+      this.auth.bookService.getRate(id).subscribe(rate => {
         this.myRateToTheBook = +rate['rating'];
       });
     });
   }
 
   private isOwnedBook(id: number) {
-    this.bookDataService.isOwenedBook(id).subscribe((resp) => {
+    this.auth.bookService.isOwenedBook(id).subscribe((resp) => {
       let data: any;
       data = resp;
       for (let dataKey of data) {
@@ -96,7 +89,7 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   tradeBookUOwened(id, av) {
-    this.bookDataService.tradeThisBook(id, av).subscribe(
+    this.auth.bookService.tradeThisBook(id, av).subscribe(
       (next) => {
         this.avaliable = !this.avaliable;
         this.auth.toast.success(next['message'], "success")
@@ -110,7 +103,7 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   setRate(rate: number, id: number) {
-    this.bookDataService.setRate(rate, id).subscribe(
+    this.auth.bookService.setRate(rate, id).subscribe(
       (next) => {
         this.myRateToTheBook = rate;
         this.auth.toast.success(next['message'], "success")
@@ -123,7 +116,7 @@ export class MyBookInfoComponent implements OnInit {
 
   addBookToOwened(id: number) {
 
-    this.bookDataService.addBookToOwn(id).subscribe(
+    this.auth.bookService.addBookToOwn(id).subscribe(
       (next) => {
         this.isOwened = !this.isOwened;
         this.auth.toast.success(next['message'], "success")
@@ -138,7 +131,7 @@ export class MyBookInfoComponent implements OnInit {
 
   removeFromOwened(id) {
 
-    this.bookDataService.removeBookFromOwn(id).subscribe(
+    this.auth.bookService.removeBookFromOwn(id).subscribe(
       (next) => {
         this.isOwened = !this.isOwened;
         this.auth.toast.success(next['message'], "success")
@@ -162,8 +155,8 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   similarAuthorService(s: string) {
-    this.search.searchBy(s, 'author').subscribe(data => {
-      data = this.sharedService.removeNoImage(data);
+    this.auth.main.searchBy(s, 'author').subscribe(data => {
+      data = this.auth.shared.removeNoImage(data);
       let C = [];
       let x = 2;
       let len = data.length % 2 == 0 ? data.length : data.length + 1;
@@ -178,10 +171,10 @@ export class MyBookInfoComponent implements OnInit {
     let allInt = this.getGenres(this.GenraBook);
     allInt.forEach(i => {
       let arr = [];
-      this.search.searchBy(i, 'genre')
+      this.auth.main.searchBy(i, 'genre')
         .subscribe((res) => {
           arr = res;
-          arr = this.sharedService.removeNoImage(arr);
+          arr = this.auth.shared.removeNoImage(arr);
           let C = [];
           let x = 2
           for (let i = 0; i < 5 * x / x; i++) {
@@ -194,22 +187,22 @@ export class MyBookInfoComponent implements OnInit {
     })
   }
 
-  scrollToAuth(ele:string) {
+  scrollToAuth(ele: string) {
     document.querySelector(`#${ele}`).scrollIntoView({behavior: "smooth"})
   }
 
   goToBookPage(book: number) {
-    this.moveBook.transBook(book);
-    this.rout.navigate(['app/book']).then(()=>window.location.reload());
+    this.auth.bookService.transBook(book);
+    this.auth.router.navigate(['app/book']).then(() => window.location.reload());
   }
 
   goToTrade() {
-    this.rout.navigate(['app/trade']).then()
+    this.auth.router.navigate(['app/trade']).then()
   }
 
   getRecommendBySimilarBook(bookId) {
     this.auth.bookService.recommendBySimilarBook(bookId).subscribe((res) => {
-      res = this.sharedService.removeNoImage(res);
+      res = this.auth.shared.removeNoImage(res);
       let C = [];
       let x = 2;
       let len = res.length % 2 == 0 ? res.length : res.length + 1;
