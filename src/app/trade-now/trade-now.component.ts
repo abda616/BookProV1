@@ -80,14 +80,11 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
 
   initializeExchange(myBook, hisBook) {
 
-    console.log("my book " + myBook)
-    console.log("his book " + hisBook)
-
     this.auth.exchange.initializeExchange(myBook, hisBook).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], 'success');
 
-        this.auth.exchange.exchangesFromMe().subscribe((x: any) => {
+        /*this.auth.exchange.exchangesFromMe().subscribe((x: any) => {
           let exId = null;
           let i = 0;
           x.forEach(e => {
@@ -110,7 +107,7 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
               this.auth.router.navigate(['app/message']).then(() => window.location.reload());
             }
           })
-        })
+        })*/
       },
       (error) => {
         this.auth.toast.error(error.error['message'], 'error');

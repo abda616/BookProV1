@@ -15,7 +15,7 @@
             <!---->
             <a class="list-group-item list-group-item-action rounded-0 mb-2"
                (click)="goToC(my,my['initiator'])"
-               *ngFor="let my of conversation;let i = index;">
+               *ngFor="let my of conver;let i = index;">
               <div class="media just-flex flex-row justify-content-between">
                 <img src="{{my.image}}" alt="user"
                      width="50" class="rounded-circle">
@@ -40,7 +40,7 @@
       <span class="small-spacer"></span>
       <a routerLink="app">
         <mat-icon class="main-icon">
-          <img alt="Jo-Book" src="/assets/icons/Jobook.svg">
+          <img alt="Jo-Book" src="assets/icons/hello.svg">
         </mat-icon>
       </a>
 
@@ -86,7 +86,7 @@
 
     </mat-toolbar>
     <a (click)="toggleDrawer(drawer)" class="float" style="{{drawer.opened?'left:27%;':'left:35px;'}}" [hidden]="false">
-      <mat-icon class="my-float">{{drawer.opened ? 'close' : 'message'}} </mat-icon>
+      <mat-icon class="my-float" [matBadgeHidden]="hidden" [matBadge]="matBadge" matBadgeColor="warn">{{drawer.opened ? 'close' : 'message'}} </mat-icon>
     </a>
     <router-outlet class=""></router-outlet>
   </mat-drawer-content>
