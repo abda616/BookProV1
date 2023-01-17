@@ -5,7 +5,7 @@ import {AuthService} from "../shared/Auth/auth.service";
 
 @Component({
   selector: 'app-my-book-info',
-  templateUrl: './book-Info.component.html',
+  templateUrl: './book-info.component.html',
   styleUrls: ['./book-info.component.scss'],
 })
 export class MyBookInfoComponent implements OnInit {

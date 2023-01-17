@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit,} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/Auth/auth.service';
 
 @Component({
@@ -19,7 +19,9 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   onExchange: boolean = false;
   longTrade = false;
   longExchange = false;
-  constructor(private auth: AuthService) {}
+
+  constructor(private auth: AuthService) {
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -37,7 +39,7 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
       let ownedBooks = this.auth.shared.removeNoImage(res);
       let ownedBooksC = [];
       ownedBooks.forEach((e) => {
-        if (e.avaliable == true) ownedBooksC.push(e);
+        if (e.available == true) ownedBooksC.push(e);
       });
       this.yourTradeList = ownedBooksC;
       if (this.yourTradeList.length > 6) this.longTrade = true
@@ -105,7 +107,7 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
               exId = e['id']
               console.log(exId);
               this.auth.message.setMessageID(exId, this.firstName);
-              this.auth.router.navigate(['app/message']).then(()=>window.location.reload());
+              this.auth.router.navigate(['app/message']).then(() => window.location.reload());
             }
           })
         })

@@ -18,7 +18,6 @@ export class UserProfileComponent implements OnInit{
       this.lastName = data["lastName"];
       this.profilePic = data['profileImageUrl'] ? data['profileImageUrl'] : "assets/Avatars/men_av_2.png";
       this.UCity = data['city'];
-
       localStorage.setItem("interests", data['interest']);
     })
     this.auth.exchange.exchangesFromMe().subscribe(value => {

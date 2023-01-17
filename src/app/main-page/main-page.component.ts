@@ -8,7 +8,7 @@ import {AuthService} from "../shared/Auth/auth.service";
 
 })
 export class MainPageComponent implements OnInit, AfterViewInit {
-  constructor(private auth:AuthService) {}
+  constructor(private auth: AuthService) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -92,20 +92,21 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     let allInt = localStorage.getItem('interests').replace(/[{}']/gi, "").split(',')
     let names = [];
     let arrOfGen = [];
-    allInt.forEach(i => {
-      let arr = [];
-      this.auth.main.searchBy(i,'genre').subscribe((res) => {
-        arr = this.auth.shared.removeNoImage(res);
-        let C = [];
-        let x = 3
-        for (let i = 0; i < 5 * x / x; i++) {
-          C[i] = arr.slice(i * x, i * x + x)
-        }
-        arr = C;
-        names.push(i);
-        arrOfGen.push(arr);
-      });
-    })
+    if (allInt.length > 1)
+      allInt.forEach(i => {
+        let arr = [];
+        this.auth.main.searchBy(i, 'genre').subscribe((res) => {
+          arr = this.auth.shared.removeNoImage(res);
+          let C = [];
+          let x = 3
+          for (let i = 0; i < 5 * x / x; i++) {
+            C[i] = arr.slice(i * x, i * x + x)
+          }
+          arr = C;
+          names.push(i);
+          arrOfGen.push(arr);
+        });
+      })
     this.allGenreName = names;
     this.allGenreArr = arrOfGen;
   }

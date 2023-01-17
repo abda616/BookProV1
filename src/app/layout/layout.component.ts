@@ -39,7 +39,7 @@ export class LayoutComponent implements OnInit {
               })
               into = [...new Set(into)];
             })
-            myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : into;
+            myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : into.slice(0,3);
             localStorage.setItem("interests", (myObj.interest));
           })
         }else localStorage.setItem("interests", (myObj.interest));
@@ -73,7 +73,7 @@ export class LayoutComponent implements OnInit {
             });
           }
         );
-        if (data != []) {
+        if (!data) {
           this.conversation = data;
         }
       });
