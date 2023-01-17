@@ -41,12 +41,15 @@ export class MyBookInfoComponent implements OnInit {
     this.allGenreName = [];
     this.allGenreArr = [];
     this.recBySB = [];
+    this.isOwened=null;
+    this.ownedIdNumber=null;
   }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.position.updatePosition(true);
     }, 0);
+
     this.clear();
     this.bookDataService.bookData.subscribe((id: number) => {
       if (id) {
@@ -119,10 +122,12 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   addBookToOwened(id: number) {
-    this.isOwened = !this.isOwened;
+
     this.bookDataService.addBookToOwn(id).subscribe(
       (next) => {
+        this.isOwened = !this.isOwened;
         this.auth.toast.success(next['message'], "success")
+
         this.isOwnedBook(id);
       },
       error => {
@@ -132,12 +137,14 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   removeFromOwened(id) {
-    this.isOwened = !this.isOwened;
+
     this.bookDataService.removeBookFromOwn(id).subscribe(
       (next) => {
+        this.isOwened = !this.isOwened;
         this.auth.toast.success(next['message'], "success")
       },
       error => {
+
         this.auth.toast.error(error.error['message'], "error")
       }
     );
@@ -193,7 +200,7 @@ export class MyBookInfoComponent implements OnInit {
 
   goToBookPage(book: number) {
     this.moveBook.transBook(book);
-    this.rout.navigate(['app/book']).then();
+    this.rout.navigate(['app/book']).then(()=>window.location.reload());
   }
 
   goToTrade() {

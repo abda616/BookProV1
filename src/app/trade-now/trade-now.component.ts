@@ -12,13 +12,13 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   tradeToggleBtn = false;
   exchangeToggleBtn = false
   currentBookObj;
-  otherBookObj:any;
-hisUserName=''
-  firstName=JSON.parse(localStorage.getItem("userData"))['userName']
+  otherBookObj: any;
+  hisUserName = ''
+  firstName = JSON.parse(localStorage.getItem("userData"))['userName']
   initExchange: boolean = false;
   onExchange: boolean = false;
-  longTrade=false;
-  longExchange=false;
+  longTrade = false;
+  longExchange = false;
   constructor(private auth: AuthService) {}
 
   ngAfterViewInit(): void {
@@ -40,11 +40,11 @@ hisUserName=''
         if (e.avaliable == true) ownedBooksC.push(e);
       });
       this.yourTradeList = ownedBooksC;
-      console.log(this.yourTradeList,"tradelist")
-      if(this.yourTradeList.length>6) this.longTrade=true
+      console.log(this.yourTradeList, "tradelist")
+      if (this.yourTradeList.length > 6) this.longTrade = true
     });
- 
-    
+
+
   }
 
   getOtherData() {
@@ -54,7 +54,7 @@ hisUserName=''
       })
       this.otherBooksArr = v;
       console.log(this.otherBooksArr);
-      if(this.otherBooksArr.length>6)this.longExchange=true
+      if (this.otherBooksArr.length > 6) this.longExchange = true
     });
   }
 
@@ -78,21 +78,36 @@ hisUserName=''
   }
 
   initializeExchange(myBook, hisBook) {
+
+    console.log("my book " + myBook)
+    console.log("his book " + hisBook)
+
     this.auth.exchange.initializeExchange(myBook, hisBook).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], 'success');
 
         this.auth.exchange.exchangesFromMe().subscribe((x: any) => {
           let exId = null;
+          let i = 0;
           x.forEach(e => {
-            console.log(e.myBook.id);
+            console.log("Itiration " + i++);
+
+            console.log(+JSON.parse(e.myBook.id).toString());
             console.log(e.hisBook.id);
-            /*if () {
+
+            console.log("------")
+            let myid = +JSON.parse(e.myBook.id).toString();
+            let hisid = +JSON.parse(e.hisBook.id).toString();
+            console.log("------")
+            console.log(myid)
+            console.log(hisid)
+
+            if (myid == myBook && hisid == hisBook) {
               exId = e['id']
-              console.log(exId)
+              console.log(exId);
               this.auth.message.setMessageID(exId, this.firstName);
-              this.auth.router.navigate(['app/message']).then();
-            }*/
+              this.auth.router.navigate(['app/message']).then(()=>window.location.reload());
+            }
           })
         })
       },

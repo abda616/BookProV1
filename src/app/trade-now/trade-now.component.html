@@ -2,7 +2,6 @@
   <a href="" name="top" id="top" #scrollTop></a>
   <div class="container">
     <div class="exchange-offers d-flex justify-content-around align-items-center">
-
       <div class="owned-book">
         <div class="image" *ngIf="currentBookObj">
           <img class="image img-thumbnail" src="{{currentBookObj.book.coverPage}}" alt="">
@@ -12,9 +11,7 @@
           <h5>{{firstName}}</h5>
         </div>
       </div>
-      <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn"> Confirm
-        Exhcange
-      </button>
+      <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn">Confirm Exhcange</button>
       <div class="other-book">
         <div class="image" *ngIf="otherBookObj">
           <img class="image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
@@ -24,8 +21,8 @@
           <h5>{{hisUserName}}</h5>
         </div>
       </div>
-
     </div>
+
     <div>
       <div class="trade-List-cont" [ngClass]="!tradeToggleBtn?'':'show-more-trade'" #tradeListCont>
 
@@ -35,15 +32,17 @@
           <div class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 " *ngFor="let data of yourTradeList">
             <div class="card-wrapper-row-card">
               <div class="card-wrapper-row-card row flip-card">
-              <div class="card-wrapper-row-card   row flip-card">
-                <div class="flip-card-inner card-cont">
-                  <div class="flip-card-front">
-                    <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
-                  </div>
-                  <div class="flip-card-back">
-                    <div class="card-body mt-4 p-2">
-                      <h5 class="title fs-3">{{data.book.title}}</h5>
-                      <a (click)="setCurrentBook(data)" class="btn-more btn col-lg-12 col-md-12 fs-md-xxs ">Exchange</a>
+                <div class="card-wrapper-row-card   row flip-card">
+                  <div class="flip-card-inner card-cont">
+                    <div class="flip-card-front">
+                      <img src="{{data.book['coverPage']}}" alt="Avatar" class="card-img-top">
+                    </div>
+                    <div class="flip-card-back">
+                      <div class="card-body mt-4 p-2">
+                        <h5 class="title fs-3">{{data.book.title}}</h5>
+                        <a (click)="setCurrentBook(data)"
+                           class="btn-more btn col-lg-12 col-md-12 fs-md-xxs ">Exchange</a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -51,16 +50,12 @@
             </div>
           </div>
         </div>
-
-        <button class="show-more-btn btn" (click)="tradeToggleBtn=!tradeToggleBtn"
-                *ngIf="this.yourTradeList.length>6">{{!tradeToggleBtn ? 'Show More' : 'Show Less'}}</button>
       </div>
+      <button class="show-more-btn btn" (click)="tradeToggleBtn=!tradeToggleBtn"
+              *ngIf="longTrade">{{!tradeToggleBtn ? 'Show More' : 'Show Less'}}</button>
     </div>
-    <button class="show-more-btn btn" (click)="tradeToggleBtn=!tradeToggleBtn"
-    *ngIf="longTrade"  >{{!tradeToggleBtn?'Show More':'Show Less'}}</button>
-</div>
     <div>
-      <div class="exchangable-cont"  [ngClass]="!exchangeToggleBtn?'':'show-more-exchange'"  #exchangeCont>
+      <div class="exchangable-cont" [ngClass]="!exchangeToggleBtn?'':'show-more-exchange'">
         <div class="row w-100 d-flex justify-content-around m-auto">
           <h1 class="mt-5 mb-3">Discorver In Your City</h1>
           <div id="{{data.id}}" class="book col-lg-2 col-md-4 col-sm-12 mb-md-3 mb-sm-5 "
@@ -83,14 +78,11 @@
           </div>
 
         </div>
-
-        <button class="show-more-btn btn" (click)="exchangeToggleBtn=!exchangeToggleBtn"
-                [ngClass]="!exchangeToggleBtn?'show-more-exchange':'show-more-exchange'"
-                *ngIf="otherBooksArr.length>6">{{!exchangeToggleBtn ? "Show More" : "Show Less"}}</button>
       </div>
 
-      <button class="show-more-btn btn" (click)="exchangeToggleBtn=!exchangeToggleBtn" [ngClass]="!exchangeToggleBtn?'show-more-exchange':'show-more-exchange'"
-      *ngIf="longExchange">{{!exchangeToggleBtn?"Show More":"Show Less"}}</button>
+      <button class="show-more-btn btn" (click)="exchangeToggleBtn=!exchangeToggleBtn"
+              [ngClass]="!exchangeToggleBtn?'show-more-exchange':'show-more-exchange'"
+              *ngIf="longExchange">{{!exchangeToggleBtn ? "Show More" : "Show Less"}}</button>
     </div>
   </div>
 </div>

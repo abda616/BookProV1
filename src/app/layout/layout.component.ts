@@ -96,6 +96,8 @@ export class LayoutComponent implements OnInit {
   goToC(x,y) {
     this.message.setMessageID(x,y);
     this.myDrawer.toggle().then();
-    this.router.navigate(['app/message']).then()
+    this.router.navigate(['app/message']).then( ()=>
+      window.location.reload()
+    )
   }
 }
