@@ -6,8 +6,7 @@ import {delay, map, of} from "rxjs";
 
 @Component({
   selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  templateUrl: './user-profile.component.html'
 })
 export class UserProfileComponent implements OnInit{
 
@@ -24,7 +23,7 @@ export class UserProfileComponent implements OnInit{
     })
     this.auth.exchange.exchangesFromMe().subscribe(value => {
       this.userExchanges = value
-    })
+    });
     this.auth.sharedModel.Citys.subscribe(data => this.Citys = data);
     this.auth.sharedModel.Interests.subscribe(data => this.Interests = data);
     this.auth.sharedModel.Pattern.subscribe(data => this.patternValidator = data);

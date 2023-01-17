@@ -7,9 +7,10 @@
 
   .dashboard {
     position: relative;
-    width: 20%;
-    height: 100vh;
+    width: 30%;
+
     background-color: #FEFCFD;
+
     .left-sticky {
       position: fixed;
       display: flex;
@@ -17,9 +18,8 @@
       align-items: flex-start;
       justify-content: flex-start;
       top: 100px;
-      height: 100%;
-      width: 20%;
-     
+      height: 90%;
+      width: 22%;
 
       .image {
         position: relative;
@@ -71,8 +71,7 @@
     border: 10px solid #532f1d;
     width: 100%;
     height: 100%;
-    min-height: 100%;
-    margin-left: 50px;
+    min-height: 92.3vh;
 
     h2 {
       width: 100%;
@@ -82,15 +81,15 @@
     }
 
     .stand-cont {
-  
+
       width: 250px;
       height: 400px;
 
       .upper-stand {
         width: 100%;
         height: 80%;
-      border: 5px solid #532f1d;
-      border-bottom: none;
+        border: 5px solid #532f1d;
+        border-bottom: none;
 
         .image {
           display: flex;
@@ -102,7 +101,7 @@
           img {
             display: inline-block;
             width: 100%;
-            height: 100%;          
+            height: 100%;
           }
 
         }
@@ -119,20 +118,14 @@
           justify-content: space-around;
           font-weight: bold;
           background-image: url("../../assets/picture/wooden.jpg");
-        border-top-left-radius: none;
-        border-top-right-radius: none;
-       border-bottom-left-radius: 30px;
-       border-bottom-right-radius: 30px;
+          border-radius: 0 0 30px 30px;
           margin-bottom: 0;
 
           .add-list-btn {
             display: block;
             width: 190%;
             height: 100%;
-            border-top-left-radius: none;
-        border-top-right-radius: none;
-       border-bottom-left-radius: 30px;
-       border-bottom-right-radius: 30px;
+            border-radius: 0 0 30px 30px;
             transition: all .3s;
             position: relative;
             overflow: hidden;
