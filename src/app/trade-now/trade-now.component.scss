@@ -1,10 +1,39 @@
 body {
   width: 100%;
-
-
+}
+.my-image{
+  max-width: 275px;
+  max-height: 400px;
+  min-width: 275px;
+  min-height: 400px;
 }
 
 .container {
+  .exchange-offers {
+    height: auto;
+    transform: translateY(-200%);
+    transition: all .5s ease-in-out;
+
+    .owned-book, .other-book {
+      display: flex;
+      height: 100%;
+      width: 40%;
+      flex-direction: column;
+      align-items: center;
+
+      image {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        img {
+          min-height: 60%;
+          min-width: 70%;
+          width: 70%;
+          height: 60%;
+          border-radius: 20px;
+
+        }
 .exchange-offers{
  width: 60%;
  margin: auto;
@@ -34,7 +63,28 @@ transition: all .5s ease-in-out;
   border-radius: 20px;
   align-self: center;
       }
+
+
     }
+
+    .user-info {
+      width: 100%;
+      height: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+      }
+
+      h5 {
+        font-size: 1.5em;
+      }
+
 
     
     
@@ -59,58 +109,66 @@ transition: all .5s ease-in-out;
   
   }
     }
-    .confirm-btn{
-      width: 30%;
-      display: inline-block;
-      border-radius: 5rem;
-      color: #fff;
-      text-transform: uppercase;
-      font-size: .9rem;
-      letter-spacing: .15rem;
-      transition: all .3s;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      height: 30px;
-      font-weight: 500;
-      transition-delay: .1s;
-      align-self: flex-end;
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #141e2d;
-        border-radius: 10rem;
-        z-index: -2;
-        font-size: 1.1em;
-      }
-      
-      &:before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background-color: darken(#F3EBD9, 15%);
-        transition: all .3s;
-        border-radius: 10rem;
-        z-index: -1;
-      }
-      
-      &:hover {
-        color: #141e2d;
-      
-        &:before {
-          width: 100%;
-        }
-      }
-        }
-  
+  }
 
+  .confirm-btn {
+    width: 30%;
+    display: inline-block;
+    border-radius: 5rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: .9rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    height: 30px;
+    font-weight: 500;
+    transition-delay: .1s;
+    align-self: flex-end;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #141e2d;
+      border-radius: 10rem;
+      z-index: -2;
+      font-size: 1.1em;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: darken(#F3EBD9, 15%);
+      transition: all .3s;
+      border-radius: 10rem;
+      z-index: -1;
+    }
+
+    &:hover {
+      color: #141e2d;
+
+      &:before {
+        width: 100%;
+      }
+    }
+  }
+
+
+  .show-offers {
+    height: auto;
+    width: 90%;
+    transition: all .5s ease-in-out;
+    transform: translateY(0%);
 .show-offers{
   height:500px;
   width: 90%;
@@ -118,15 +176,18 @@ transition: all .5s ease-in-out;
   transform: translateY(0%);
   margin-top: 30px;
 
-}
-.show-more-exchange{
-  height: auto;
-  max-height: 100%;
-}
-.show-more-trade{
-  height: auto;
-  max-height: 100%;
-}
+  }
+
+  .show-more-exchange {
+    height: auto;
+    max-height: 100%;
+  }
+
+  .show-more-trade {
+    height: auto;
+    max-height: 100%;
+  }
+
   .show-more-btn {
     display: inline-block;
     border-radius: 5rem;
@@ -143,6 +204,7 @@ transition: all .5s ease-in-out;
     height: 30px;
     font-weight: 500;
     transition-delay: 1s;
+
     &:after {
       content: '';
       position: absolute;
@@ -211,7 +273,8 @@ transition: all .5s ease-in-out;
   }
 
   .book {
-min-width: 250px;
+    min-width: 250px;
+
     .card-wrapper-row-card {
       height: 300px;
       max-height: 300px;
