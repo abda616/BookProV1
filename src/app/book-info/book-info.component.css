@@ -243,9 +243,17 @@ body {
   line-height: 1.5em;
 }
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot {
-  max-height: 100px;
+  position: relative;
+  max-height: 90px;
   overflow: hidden;
   z-index: 2;
+}
+.card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot::before, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot::before {
+  content: "";
+  position: absolute;
+  height: 3%;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, #F3EBD9);
 }
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more {
   display: inline-block;
@@ -259,6 +267,7 @@ body {
   position: relative;
   overflow: hidden;
   width: 60%;
+  height: 50px;
   z-index: 1;
 }
 .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
