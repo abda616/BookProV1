@@ -1,4 +1,4 @@
-<section style="background-color: #eee; height:100vh" class="overflow-hidden">
+<section style="background-color: #eee; height:100vh" class="overflow-auto">
   <div class="container py-5">
 
     <div class="row">
@@ -141,10 +141,9 @@
         </div>
 
         <div class="card mb-4">
-
           <div class="card-body">
             <h3>Current Exchanges</h3>
-            <div class="row row-cols-2">
+            <div class="row row-cols-2 h-100">
               <div class="col just-flex flex-column bg-light p-2 m-0 overflow-scroll" *ngFor="let exchange of userExchanges">
                 <div class="just-flex flex-row justify-content-evenly align-items-center">
                   <img [src]="exchange.hisBook.book.coverPage" alt="his">

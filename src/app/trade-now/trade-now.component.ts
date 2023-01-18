@@ -79,7 +79,6 @@ console.log(e['his_book_cover_image'])
   }
 
   getData() {
-    console.log(this.yourTradeList)
     return this.getYouTradeList();
   }
 
@@ -87,32 +86,9 @@ console.log(e['his_book_cover_image'])
 
     this.auth.exchange.initializeExchange(myBook, hisBook).subscribe(
       (next) => {
-        this.auth.toast.success(next['message'], 'success');
-
-        /*this.auth.exchange.exchangesFromMe().subscribe((x: any) => {
-          let exId = null;
-          let i = 0;
-          x.forEach(e => {
-
-
-            console.log(+JSON.parse(e.myBook.id).toString());
-            console.log(e.hisBook.id);
-
-            console.log("------")
-            let myId = +JSON.parse(e.myBook.id).toString();
-            let hisId = +JSON.parse(e.hisBook.id).toString();
-            console.log("------")
-            console.log(myId)
-            console.log(hisId)
-
-            if (myId == myBook && hisId == hisBook) {
-              exId = e['id']
-              console.log(exId);
-              this.auth.message.setMessageID(exId, this.firstName);
-              this.auth.router.navigate(['app/message']).then(() => window.location.reload());
-            }
-          })
-        })*/
+        this.auth.toast.success("Your Request Has Been sent", 'success');
+        this.auth.message.setMessageID(next, this.firstName);
+        this.auth.router.navigate(['app/message']).then();
       },
       (error) => {
         this.auth.toast.error(error.error['message'], 'error');
