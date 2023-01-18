@@ -3,7 +3,8 @@ body {
 }
 
 .container .exchange-offers {
-  height: auto;
+  width: 60%;
+  margin: auto;
   transform: translateY(-200%);
   transition: all 0.5s ease-in-out;
 }
@@ -13,25 +14,31 @@ body {
   width: 40%;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
 }
-.container .exchange-offers .owned-book image, .container .exchange-offers .other-book image {
+.container .exchange-offers .owned-book .image, .container .exchange-offers .other-book .image {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   width: 100%;
+  height: 350px;
+  max-height: 350px;
 }
-.container .exchange-offers .owned-book image img, .container .exchange-offers .other-book image img {
-  min-height: 60%;
-  min-width: 70%;
-  width: 70%;
-  height: 60%;
+.container .exchange-offers .owned-book .image img, .container .exchange-offers .other-book .image img {
+  min-height: 350px;
+  height: 350px;
+  max-width: 300px;
+  max-height: 350px;
+  width: 100%;
   border-radius: 20px;
+  align-self: center;
 }
 .container .exchange-offers .user-info {
   width: 100%;
-  height: 30%;
+  height: 130px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 .container .exchange-offers .user-info img {
@@ -90,10 +97,11 @@ body {
   width: 100%;
 }
 .container .show-offers {
-  height: auto;
+  height: 500px;
   width: 90%;
   transition: all 0.5s ease-in-out;
   transform: translateY(0%);
+  margin-top: 30px;
 }
 .container .show-more-exchange {
   height: auto;

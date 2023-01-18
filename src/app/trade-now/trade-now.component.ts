@@ -53,6 +53,7 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
     this.auth.exchange.booksForExchange().subscribe((v: any) => {
       v.forEach(e => {
         e['his_book_cover_image'] = this.auth.shared.getLargeImg(e["his_book_cover_image"], this.auth.shared.getPosition(e["his_book_cover_image"], "m/", 2))
+console.log(e['his_book_cover_image'])
       })
       this.otherBooksArr = v;
       console.log(this.otherBooksArr);
