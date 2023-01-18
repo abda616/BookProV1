@@ -74,6 +74,7 @@ border-radius: 20px;
         background-color: #141e2d;
         border-radius: 10rem;
         z-index: -2;
+        font-size: 1.1em;
       }
       
       &:before {
@@ -119,7 +120,8 @@ border-radius: 20px;
     border-radius: 5rem;
     color: #fff;
     text-transform: uppercase;
-    font-size: .9rem;
+    font-size: 1.1em;
+
     letter-spacing: .15rem;
     transition: all .3s;
     position: relative;
@@ -197,7 +199,7 @@ border-radius: 20px;
   }
 
   .book {
-
+min-width: 250px;
     .card-wrapper-row-card {
       height: 300px;
       max-height: 300px;
@@ -290,8 +292,8 @@ border-radius: 20px;
                 position: relative;
                 overflow: hidden;
                 width: 90%;
-
                 z-index: 1;
+
 
                 &:after {
                   content: '';
