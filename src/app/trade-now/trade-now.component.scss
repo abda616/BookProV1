@@ -12,20 +12,23 @@ transition: all .5s ease-in-out;
   .owned-book,.other-book{
     display: flex;
     height: 100%;
-    width: 35%;
-    display: flex;
+    width: 40%;
     flex-direction: column;
     align-items: center;
     image{
       display: flex; 
       align-items:center;
       width: 100%;
+      img{
+        min-height: 60%;
+        min-width: 70%  ;
+  width: 70%;
+  height: 60%;
+  border-radius: 20px;
+  
+      }
     }
-    img{
-width: 70%;
-height: 60%;
-border-radius: 20px;
-    }
+
     
     
   }
