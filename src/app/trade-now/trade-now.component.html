@@ -1,20 +1,20 @@
 <div class="container-fluid">
   <a href="" name="top" id="top" #scrollTop></a>
-  <div class="container">
-    <div [ngClass]="initExchange?'show-offers':''" class="exchange-offers d-flex justify-content-around align-items-center">
+  <div class="container ">
+    <div [ngClass]="initExchange?'show-offers':''" class="exchange-offers d-flex w-100 mx-auto justify-content-around align-items-center">
       <div class="owned-book">
         <div class="image" *ngIf="currentBookObj">
-          <img class="" src="{{currentBookObj.book.coverPage}}" alt="">
+          <img class="image my-image img-thumbnail" src="{{currentBookObj.book.coverPage}}" alt="">
         </div>
         <div class="user-info">
-          <img *ngIf="initExchange" src="" alt="">
+          <img  [src]="ProfileUser" alt="">
           <h5>{{firstName}}</h5>
         </div>
       </div>
         <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn confirm-btn">Confirm Exchange</button>
       <div class="other-book">
         <div class="image" *ngIf="otherBookObj">
-          <img class="image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
+          <img class="image my-image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
         </div>
         <div class="user-info">
           <img *ngIf="initExchange" src="{{otherBookObj.his_profile_image_url}}" alt="">
@@ -22,7 +22,6 @@
         </div>
       </div>
     </div>
-
     <div>
       <div class="trade-List-cont" [ngClass]="!tradeToggleBtn?'':'show-more-trade'" #tradeListCont>
 
@@ -79,7 +78,6 @@
 
         </div>
       </div>
-
       <button class="show-more-btn btn" (click)="exchangeToggleBtn=!exchangeToggleBtn"
               [ngClass]="!exchangeToggleBtn?'show-more-exchange':'show-more-exchange'"
               *ngIf="longExchange">{{!exchangeToggleBtn ? "Show More" : "Show Less"}}</button>

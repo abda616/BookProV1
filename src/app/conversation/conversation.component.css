@@ -12,12 +12,7 @@
   border-radius: 10px;
 }
 
-.conv-img  img{
-  max-width: 275px;
-  max-height: 400px;
-  min-width: 275px;
-  min-height: 400px;
-}
+
 
 .text-message-block{
   display: block;
