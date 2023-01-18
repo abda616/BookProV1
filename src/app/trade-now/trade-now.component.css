@@ -33,7 +33,38 @@ body {
   height: 60%;
   border-radius: 20px;
 }
-.container .exchange-offers .user-info {
+.container .exchange-offers {
+  width: 60%;
+  margin: auto;
+  transform: translateY(-200%);
+  transition: all 0.5s ease-in-out;
+}
+.container .exchange-offers .owned-book, .container .exchange-offers .other-book {
+  display: flex;
+  height: 100%;
+  width: 40%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.container .exchange-offers .owned-book .image, .container .exchange-offers .other-book .image {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 350px;
+  max-height: 350px;
+}
+.container .exchange-offers .owned-book .image img, .container .exchange-offers .other-book .image img {
+  min-height: 350px;
+  height: 350px;
+  max-width: 300px;
+  max-height: 350px;
+  width: 100%;
+  border-radius: 20px;
+  align-self: center;
+}
+.container .exchange-offers .owned-book .user-info, .container .exchange-offers .other-book .user-info {
   width: 100%;
   height: 30%;
   display: flex;
@@ -41,12 +72,28 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.container .exchange-offers .user-info img {
+.container .exchange-offers .owned-book .user-info img, .container .exchange-offers .other-book .user-info img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
-.container .exchange-offers .user-info h5 {
+.container .exchange-offers .owned-book .user-info h5, .container .exchange-offers .other-book .user-info h5 {
+  font-size: 1.5em;
+}
+.container .exchange-offers .owned-book .user-info, .container .exchange-offers .other-book .user-info {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.container .exchange-offers .owned-book .user-info img, .container .exchange-offers .other-book .user-info img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.container .exchange-offers .owned-book .user-info h5, .container .exchange-offers .other-book .user-info h5 {
   font-size: 1.5em;
 }
 .container .confirm-btn {
@@ -102,15 +149,22 @@ body {
   transition: all 0.5s ease-in-out;
   transform: translateY(0%);
 }
-.container .show-more-exchange {
+.container .show-offers .show-offers {
+  height: 500px;
+  width: 90%;
+  transition: all 0.5s ease-in-out;
+  transform: translateY(0%);
+  margin-top: 30px;
+}
+.container .show-offers .show-more-exchange {
   height: auto;
   max-height: 100%;
 }
-.container .show-more-trade {
+.container .show-offers .show-more-trade {
   height: auto;
   max-height: 100%;
 }
-.container .show-more-btn {
+.container .show-offers .show-more-btn {
   display: inline-block;
   border-radius: 5rem;
   color: #fff;
@@ -126,7 +180,7 @@ body {
   font-weight: 500;
   transition-delay: 1s;
 }
-.container .show-more-btn:after {
+.container .show-offers .show-more-btn:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -137,7 +191,7 @@ body {
   border-radius: 10rem;
   z-index: -2;
 }
-.container .show-more-btn:before {
+.container .show-offers .show-more-btn:before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -149,30 +203,26 @@ body {
   border-radius: 10rem;
   z-index: -1;
 }
-.container .show-more-btn:hover {
+.container .show-offers .show-more-btn:hover {
   color: #141e2d;
 }
-.container .show-more-btn:hover:before {
+.container .show-offers .show-more-btn:hover:before {
   width: 100%;
 }
-
-.idk {
+.container .idk {
   height: 400px;
   max-height: 400px;
   transition: all 0.5s ease-in-out;
 }
-
-.trade-List-cont {
+.container .trade-List-cont {
   height: 100%;
   max-height: 400px;
 }
-
-.exchangable-cont {
+.container .exchangable-cont {
   height: 100%;
   max-height: 400px;
 }
-
-.trade-List-cont, .exchangable-cont {
+.container .trade-List-cont, .container .exchangable-cont {
   width: 95%;
   display: flex;
   flex-direction: column;
@@ -181,30 +231,30 @@ body {
   overflow: hidden;
   transition: all 0.5s ease-in-out;
 }
-.trade-List-cont h1, .exchangable-cont h1 {
+.container .trade-List-cont h1, .container .exchangable-cont h1 {
   text-align: left;
   font-size: 30px;
   font-weight: 500;
   color: #141e2d;
 }
-.trade-List-cont .book, .exchangable-cont .book {
+.container .trade-List-cont .book, .container .exchangable-cont .book {
   min-width: 250px;
 }
-.trade-List-cont .book .card-wrapper-row-card, .exchangable-cont .book .card-wrapper-row-card {
+.container .trade-List-cont .book .card-wrapper-row-card, .container .exchangable-cont .book .card-wrapper-row-card {
   height: 300px;
   max-height: 300px;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card, .exchangable-cont .book .card-wrapper-row-card .flip-card {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card, .container .exchangable-cont .book .card-wrapper-row-card .flip-card {
   width: 100%;
   height: 100%;
   border: 1px solid transparent;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   /* This container is needed to position the front and back side */
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card:hover .flip-card-inner, .exchangable-cont .book .card-wrapper-row-card .flip-card:hover .flip-card-inner {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card:hover .flip-card-inner, .container .exchangable-cont .book .card-wrapper-row-card .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,7 +269,7 @@ body {
   box-shadow: 18px 6px 20px -14px rgb(20, 30, 45);
   border-radius: 20px;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front, .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -229,20 +279,20 @@ body {
   background-color: transparent;
   border-radius: 20px;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back img, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back img, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back img, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back img {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back img, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back img, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-front img, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back img, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-front img, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back img {
   width: 100%;
   height: 100%;
   max-height: 100%;
   max-width: 100%;
   border-radius: 20px;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back {
   background-color: #F3EBD9;
   transform: rotateY(180deg);
   height: 100%;
   width: 100%;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -251,18 +301,18 @@ body {
   height: 90%;
   color: #141e2d;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .title, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .title, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .title, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .title {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .title, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .title, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .title, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .title {
   width: 90%;
   line-height: 1.5em;
   max-height: 120px;
   overflow: hidden;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .plot, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .plot {
   max-height: 100px;
   overflow: hidden;
   z-index: 2;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more {
   display: inline-block;
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
@@ -276,7 +326,7 @@ body {
   width: 90%;
   z-index: 1;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:after, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -287,7 +337,7 @@ body {
   border-radius: 10rem;
   z-index: -2;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:before, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:before, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:before, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:before {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:before, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:before, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:before, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -299,9 +349,9 @@ body {
   border-radius: 10rem;
   z-index: -1;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover {
   color: #141e2d;
 }
-.trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before, .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before {
+.container .trade-List-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .container .trade-List-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .card-cont .flip-card-back .card-body .btn-more:hover:before, .container .exchangable-cont .book .card-wrapper-row-card .flip-card .flip-card-inner .flip-card-back .card-body .btn-more:hover:before {
   width: 100%;
 }/*# sourceMappingURL=trade-now.component.css.map */

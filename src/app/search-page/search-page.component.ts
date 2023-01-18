@@ -11,6 +11,8 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   searchResult = [];
   searchInput: string = '';
   searchType: string = "title";
+  prevSearch:string=''
+  prevSearchType:string;
   @Output() changedSearchText: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private auth:AuthService) {
@@ -30,10 +32,12 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearch(event) {
+  
     if (event.target !== undefined) {
       this.searchType = event.target.value
     }
-    if (this.searchInput != '') {
+    
+    if (this.searchInput != ''&&this.prevSearch!=this.searchInput&&this.searchInput.trim()!=this.prevSearch.trim()) {
       this.auth.main.searchBy(this.searchInput, this.searchType).subscribe(
         (res) => {
           this.searchResult = res;
@@ -41,6 +45,8 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
           // calling the shared service to change the url to get the large img
         });
     }
+    this.prevSearch=this.searchInput;
+
     return this.searchResult;
   }
 

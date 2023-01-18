@@ -16,9 +16,9 @@
                *ngFor="let options of searchOptions;let i=index">
             <label>{{options}}</label>
             <label class="custom-radio">
-              <input type="radio" name="options" value={{options}} *ngIf="i==0" checked
+              <input type="radio" name="options" value={{options}} *ngIf="i==1"  checked
                      (change)="onSearchBy($event)">
-              <input type="radio" name="options" value={{options}} *ngIf="i>0"
+              <input type="radio" name="options" value={{options}} *ngIf="i>=0&&i!=1" 
                      (change)="onSearchBy($event)">
               <span class="checkMark"></span>
             </label>
