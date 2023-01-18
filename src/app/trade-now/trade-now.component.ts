@@ -15,6 +15,7 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   otherBookObj: any;
   hisUserName = ''
   firstName = JSON.parse(localStorage.getItem("userData"))['userName']
+  ProfileUser = JSON.parse(localStorage.getItem("userData"))['profileImageUrl']
   initExchange: boolean = false;
   onExchange: boolean = false;
   longTrade = false;

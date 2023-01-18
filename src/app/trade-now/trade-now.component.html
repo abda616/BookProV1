@@ -7,7 +7,7 @@
           <img class="" src="{{currentBookObj.book.coverPage}}" alt="">
         </div>
         <div class="user-info">
-          <img *ngIf="initExchange" src="" alt="">
+          <img *ngIf="initExchange" [src]="ProfileUser" alt="">
           <h5>{{firstName}}</h5>
         </div>
       </div>
