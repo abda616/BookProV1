@@ -1,6 +1,6 @@
 <mat-drawer-container [hasBackdrop]="false" class="height-full">
 
-  <mat-drawer #drawer class="height-full" mode="over" position="start">
+  <mat-drawer #drawer class="height-full" mode="over" position="end">
 
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
       <mat-card-header>
@@ -27,13 +27,13 @@
                 <img [src]="my.imgUrl" alt="user"
                      width="50px" height="73.5">
               </div>
-              
+
             </a>
             <!---->
           </div>
         </div>
       </div>
-     
+
     </mat-card>
   </mat-drawer>
 
@@ -87,7 +87,7 @@
       </div>
 
     </mat-toolbar>
-    <a (click)="toggleDrawer(drawer)" class="float" style="{{drawer.opened?'left:27%;':'left:35px;'}}" [hidden]="false">
+    <a (click)="toggleDrawer(drawer)" class="float" style="{{drawer.opened?'right:27%;':'right:35px;'}}" [hidden]="false">
       <mat-icon class="my-float" [matBadgeHidden]="hidden" [matBadge]="matBadge" matBadgeColor="warn">{{drawer.opened ? 'close' : 'message'}} </mat-icon>
     </a>
     <router-outlet class=""></router-outlet>

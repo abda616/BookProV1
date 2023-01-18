@@ -120,7 +120,6 @@ export class MyBookInfoComponent implements OnInit {
       (next) => {
         this.isOwned = !this.isOwned;
         this.auth.toast.success(next['message'], "success")
-
         this.isOwnedBook(id);
       },
       error => {
@@ -135,9 +134,9 @@ export class MyBookInfoComponent implements OnInit {
       (next) => {
         this.isOwned = !this.isOwned;
         this.auth.toast.success(next['message'], "success")
+        this.isOwnedBook(id);
       },
       error => {
-
         this.auth.toast.error(error.error['message'], "error")
       }
     );
