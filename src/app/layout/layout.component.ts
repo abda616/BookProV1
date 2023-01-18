@@ -2,10 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "../shared/Auth/auth.service";
 import {NavigationEnd} from '@angular/router';
-
 import {filter} from "rxjs";
-
-
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -16,7 +13,9 @@ export class LayoutComponent implements OnInit {
   searchValue: string = '';
   positionInSearch = true;
   profilePic = "";
-  conversation = [];
+  conver = [];
+  matBadge= this.conver.length;
+  hidden = false;
 
 
   constructor(private auth: AuthService) {
@@ -39,7 +38,7 @@ export class LayoutComponent implements OnInit {
               })
               into = [...new Set(into)];
             })
-            myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : into;
+            myObj.interest = myObj.interest ? myObj.interest.toLowerCase() : into.slice(0,3);
             localStorage.setItem("interests", (myObj.interest));
           })
         }else localStorage.setItem("interests", (myObj.interest));
@@ -52,10 +51,28 @@ export class LayoutComponent implements OnInit {
 
     this.auth.search.updatePosition(true);
     this.auth.search.currentPosition.subscribe(x => this.positionInSearch = x);
+    this.getMessage()
     this.auth.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
       (event: NavigationEnd) => {
         document.querySelector("#mat-drawer-content").scroll({top: 0, left: 0})
       });
+  }
+
+  private getMessage() {
+    this.auth.message.getAllConversation().subscribe(data => {
+      this.matBadge= data.length;
+      data.forEach(x => {
+          /*get img for the book*/
+          this.auth.bookService.getBook(+x['his_book_id']).subscribe((book) => {
+            book["coverPage"] = this.auth.shared.getLargeImg(book["coverPage"], this.auth.shared.getPosition(book["coverPage"], "m/", 2))
+            x.imgUrl = book["coverPage"]
+          });
+        }
+      );
+      if (data != []) {
+        this.conver = data;
+      }
+    });
   }
 
   myDrawer: MatDrawer;
@@ -63,20 +80,9 @@ export class LayoutComponent implements OnInit {
   toggleDrawer(ref: MatDrawer) {
     this.myDrawer = ref;
     ref.toggle().then();
-    if (ref.opened)
-      this.auth.message.getAllConversation().subscribe(data => {
-        data.forEach(x => {
-            /*get img for the book*/
-            this.auth.bookService.getBook(+x['his_book_id']).subscribe((book) => {
-              book["coverPage"] = this.auth.shared.getLargeImg(book["coverPage"], this.auth.shared.getPosition(book["coverPage"], "m/", 2))
-              x.imgUrl = book["coverPage"]
-            });
-          }
-        );
-        if (data != []) {
-          this.conversation = data;
-        }
-      });
+    this.hidden =!this.hidden
+    if (ref.opened) this.getMessage();
+
   }
 
   LogOut() {

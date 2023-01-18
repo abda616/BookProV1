@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit,} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/Auth/auth.service';
 
 @Component({
@@ -19,7 +19,9 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
   onExchange: boolean = false;
   longTrade = false;
   longExchange = false;
-  constructor(private auth: AuthService) {}
+
+  constructor(private auth: AuthService) {
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -37,7 +39,7 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
       let ownedBooks = this.auth.shared.removeNoImage(res);
       let ownedBooksC = [];
       ownedBooks.forEach((e) => {
-        if (e.avaliable == true) ownedBooksC.push(e);
+        if (e.available == true) ownedBooksC.push(e);
       });
       this.yourTradeList = ownedBooksC;
       if (this.yourTradeList.length > 6) this.longTrade = true
@@ -81,14 +83,11 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
 
   initializeExchange(myBook, hisBook) {
 
-    console.log("my book " + myBook)
-    console.log("his book " + hisBook)
-
     this.auth.exchange.initializeExchange(myBook, hisBook).subscribe(
       (next) => {
         this.auth.toast.success(next['message'], 'success');
 
-        this.auth.exchange.exchangesFromMe().subscribe((x: any) => {
+        /*this.auth.exchange.exchangesFromMe().subscribe((x: any) => {
           let exId = null;
           let i = 0;
           x.forEach(e => {
@@ -108,10 +107,10 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
               exId = e['id']
               console.log(exId);
               this.auth.message.setMessageID(exId, this.firstName);
-              this.auth.router.navigate(['app/message']).then(()=>window.location.reload());
+              this.auth.router.navigate(['app/message']).then(() => window.location.reload());
             }
           })
-        })
+        })*/
       },
       (error) => {
         this.auth.toast.error(error.error['message'], 'error');

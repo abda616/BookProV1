@@ -33,6 +33,7 @@ mat-drawer {
 .messages-box, .chat-box {
   overflow-y: auto;
   overflow-x: auto;
+  overflow-x: scroll;
 }
 
 .rounded-lg {
@@ -58,7 +59,7 @@ mat-drawer {
 .main-icon {
   margin-left: 30px;
   width: 100px;
-  height: 40px;
+  height: 43px;
 }
 
 .prof-icon {

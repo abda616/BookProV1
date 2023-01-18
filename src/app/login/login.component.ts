@@ -155,11 +155,11 @@ export class LoginComponent implements OnInit, AfterViewChecked, userSignUp {
   city: string;
   getErrorMessage() {
     if (!this.loginForm.get('loginEmail').valid) {
-      return 'You must enter an Email';
+      return 'You must enter valid user name';
     } else if (!this.loginForm.get('loginPassword').valid) {
-      return 'You must enter a Password';
+      return 'You must enter Password';
     }
-    return this.loginForm.hasError('loginEmail') ? 'Not a valid email or Password' : '';
+    return this.loginForm.hasError('loginEmail') ? 'Not a valid user name or Password' : '';
   }
 }
 function customAsyncValidator(): AsyncValidatorFn {

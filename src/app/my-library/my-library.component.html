@@ -27,7 +27,7 @@
         </div>
         <div class="lower-stand col-lg-4">
           <div class="top">
-            <button class="btn bottom add-list-btn" *ngIf="!data.avaliable" (click)="addToTrade(data,data.avaliable)">
+            <button class="btn bottom add-list-btn" *ngIf="!data.available" (click)="addToTrade(data,data.available)">
               Offer For Trade
             </button>
           </div>
@@ -55,7 +55,7 @@
     </ng-container>
     <ng-container *ngIf="getData(desiredLibrary)==tradeList">
       <div class="stand-cont" *ngFor="let data of getData(desiredLibrary)">
-        <ng-container *ngIf="data.avaliable">
+        <ng-container *ngIf="data.available">
           <div class="upper-stand">
 
             <div class="col-lg-4 col-md-6 col-sm-12 image">
@@ -64,8 +64,8 @@
           </div>
           <div class="lower-stand col-lg-4">
             <div class="top">
-              <button class="btn bottom add-list-btn" *ngIf="data.avaliable"
-                      (click)="addToTrade(data,data.avaliable)">
+              <button class="btn bottom add-list-btn" *ngIf="data.available"
+                      (click)="addToTrade(data,data.available)">
                 Remove From Trade List
               </button>
             </div>
