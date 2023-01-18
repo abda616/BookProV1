@@ -2,12 +2,96 @@ body {
   width: 100%;
 }
 
-.container .exhange-offers {
-  height: 400px;
+.container .exchange-offers {
+  height: auto;
+  transform: translateY(-200%);
+  transition: all 0.5s ease-in-out;
 }
-.container .exhange-offers .image img {
-  width: 350px;
-  height: 400px;
+.container .exchange-offers .owned-book, .container .exchange-offers .other-book {
+  display: flex;
+  height: 100%;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .exchange-offers .owned-book image, .container .exchange-offers .other-book image {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.container .exchange-offers .owned-book img, .container .exchange-offers .other-book img {
+  width: 70%;
+  height: 60%;
+  border-radius: 20px;
+}
+.container .exchange-offers .user-info {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .exchange-offers .user-info img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.container .exchange-offers .user-info h5 {
+  font-size: 1.5em;
+}
+.container .confirm-btn {
+  width: 30%;
+  display: inline-block;
+  border-radius: 5rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  height: 30px;
+  font-weight: 500;
+  transition-delay: 0.1s;
+  align-self: flex-end;
+}
+.container .confirm-btn:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #141e2d;
+  border-radius: 10rem;
+  z-index: -2;
+}
+.container .confirm-btn:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #e1cc9f;
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+.container .confirm-btn:hover {
+  color: #141e2d;
+}
+.container .confirm-btn:hover:before {
+  width: 100%;
+}
+.container .show-offers {
+  height: auto;
+  width: 90%;
+  transition: all 0.5s ease-in-out;
+  transform: translateY(0%);
 }
 .container .show-more-exchange {
   height: auto;

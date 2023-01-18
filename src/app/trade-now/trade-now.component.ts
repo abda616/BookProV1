@@ -64,11 +64,14 @@ export class TradeNowComponent implements OnInit, AfterViewInit {
 
   setCurrentBook(book) {
     this.currentBookObj = book;
+    this.initExchange=true
   }
 
   setOtherBook(book) {
     this.otherBookObj = book;
     this.hisUserName = this.otherBookObj.his_username
+    this.initExchange=true
+
   }
 
   getData() {

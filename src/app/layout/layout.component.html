@@ -5,7 +5,7 @@
     <mat-card class="card-background height-full card border-dark p-auto overflow-auto">
       <mat-card-header>
         <div class="py-2 ">
-          <p class="h5 mb-0 py-1">Recent :</p>
+          <p class="h4 mb-0 py-1">Recent Conversations:</p>
         </div>
       </mat-card-header>
 
@@ -13,25 +13,27 @@
         <div class="messages-box">
           <div class="list-group rounded-0">
             <!---->
-            <a class="list-group-item list-group-item-action rounded-0 mb-2"
+            <a class="list-group-item list-group-item-action rounded-1 mb-2"
                (click)="goToC(my,my['initiator'])"
                *ngFor="let my of conversation;let i = index;">
               <div class="media just-flex flex-row justify-content-between">
                 <img src="{{my.image}}" alt="user"
                      width="50" class="rounded-circle">
                 <div class="media-body ml-4">
-                  <div class="align-items-center justify-content-between mt-3">
-                    <h6 class="mb-0">{{my.username}}</h6>
+                  <div class="h-100 align-items-center justify-content-center mt-3 ">
+                    <h6 class="mb-0 fs-5 align-self-center">{{my.username}}</h6>
                   </div>
                 </div>
                 <img [src]="my.imgUrl" alt="user"
                      width="50px" height="73.5">
               </div>
+              
             </a>
             <!---->
           </div>
         </div>
       </div>
+     
     </mat-card>
   </mat-drawer>
 

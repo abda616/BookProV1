@@ -1,23 +1,23 @@
 <div class="container-fluid">
   <a href="" name="top" id="top" #scrollTop></a>
   <div class="container">
-    <div class="exchange-offers d-flex justify-content-around align-items-center">
+    <div [ngClass]="initExchange?'show-offers':''" class="exchange-offers d-flex justify-content-around align-items-center">
       <div class="owned-book">
         <div class="image" *ngIf="currentBookObj">
-          <img class="image img-thumbnail" src="{{currentBookObj.book.coverPage}}" alt="">
+          <img class="" src="{{currentBookObj.book.coverPage}}" alt="">
         </div>
         <div class="user-info">
-          <img src="" alt="">
+          <img *ngIf="initExchange" src="" alt="">
           <h5>{{firstName}}</h5>
         </div>
       </div>
-      <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn">Confirm Exchange</button>
+        <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn confirm-btn">Confirm Exchange</button>
       <div class="other-book">
         <div class="image" *ngIf="otherBookObj">
           <img class="image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
         </div>
         <div class="user-info">
-          <img src="" alt="">
+          <img *ngIf="initExchange" src="{{otherBookObj.his_profile_image_url}}" alt="">
           <h5>{{hisUserName}}</h5>
         </div>
       </div>
