@@ -10,7 +10,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   searchOptions = ['All', 'Title', 'Author', 'Description'];
   searchResult = [];
   searchInput: string = '';
-  searchType: string = "all";
+  searchType: string = "title";
   @Output() changedSearchText: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private auth:AuthService) {

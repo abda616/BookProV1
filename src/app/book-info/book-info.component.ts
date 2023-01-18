@@ -199,7 +199,7 @@ export class MyBookInfoComponent implements OnInit {
     this.auth.router.navigate(['app/trade']).then()
   }
 
-  getRecommendBySimilarBook(bookId) {
+  getRecommendBySimilarBook(bookId) {  
     this.auth.bookService.recommendBySimilarBook(bookId).subscribe((res) => {
       res = this.auth.shared.removeNoImage(res);
       let C = [];
