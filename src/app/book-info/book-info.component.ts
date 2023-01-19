@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Book} from "../shared/Interfaces/Book";
 import {AuthService} from "../shared/Auth/auth.service";
 
@@ -8,11 +8,11 @@ import {AuthService} from "../shared/Auth/auth.service";
   templateUrl: './book-info.component.html',
   styleUrls: ['./book-info.component.scss'],
 })
-export class MyBookInfoComponent implements OnInit {
+export class MyBookInfoComponent implements OnInit,AfterViewInit {
   recBySB: any[];
 
-  constructor(private ref: ChangeDetectorRef, private auth: AuthService,) {
-  }
+  constructor(private ref: ChangeDetectorRef, private auth: AuthService,) {}
+
 
   available: any;
   currentBookInfo: any = '';
@@ -62,9 +62,7 @@ export class MyBookInfoComponent implements OnInit {
         this.currentAuthor = bookData['author'];
         this.bookId = bookData['id'];
         this.GeneraBook = bookData['genres'];
-
         this.similarAuthorService(this.currentAuthor);
-        this.getGenreArr();
         this.getRecommendBySimilarBook(this.bookId);
       });
       this.isOwnedBook(id);
@@ -73,6 +71,7 @@ export class MyBookInfoComponent implements OnInit {
       });
     });
   }
+
 
   private isOwnedBook(id: number) {
     this.auth.bookService.isOwnedBook(id).subscribe((resp) => {
@@ -167,7 +166,7 @@ export class MyBookInfoComponent implements OnInit {
   }
 
   getGenreArr() {
-    let allInt = this.getGenres(this.GeneraBook);
+    let allInt = this.getGenres(this.GeneraBook).slice(0,2);
     allInt.forEach(i => {
       let arr = [];
       this.auth.main.searchBy(i, 'genre')
@@ -199,7 +198,7 @@ export class MyBookInfoComponent implements OnInit {
     this.auth.router.navigate(['app/trade']).then()
   }
 
-  getRecommendBySimilarBook(bookId) {  
+  getRecommendBySimilarBook(bookId) {
     this.auth.bookService.recommendBySimilarBook(bookId).subscribe((res) => {
       res = this.auth.shared.removeNoImage(res);
       let C = [];
@@ -211,6 +210,13 @@ export class MyBookInfoComponent implements OnInit {
       this.recBySB = C
       console.log(C);
     })
+
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(()=>{
+      this.getGenreArr();
+    },5000)
 
   }
 }

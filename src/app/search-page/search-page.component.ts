@@ -1,6 +1,5 @@
 import {Component, OnInit, EventEmitter, Output, AfterViewInit} from '@angular/core';
 import {AuthService} from "../shared/Auth/auth.service";
-
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -32,11 +31,11 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onSearch(event) {
-  
+
     if (event.target !== undefined) {
       this.searchType = event.target.value
     }
-    
+
     if (this.searchInput != ''&&this.prevSearch!=this.searchInput&&this.searchInput.trim()!=this.prevSearch.trim()) {
       this.auth.main.searchBy(this.searchInput, this.searchType).subscribe(
         (res) => {
@@ -51,7 +50,7 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
   }
 
   onGetData() {
-     return this.searchResult;
+    return this.searchResult;
   }
 
   onSearchChange(val) {
@@ -68,5 +67,4 @@ export class SearchPageComponent implements OnInit, AfterViewInit {
     this.searchType = event.target.value.toLowerCase()
     this.onSearch(this.searchInput)
   }
-
 }

@@ -2,8 +2,6 @@
   <a href="" name="top" id="top" #scrollTop></a>
   <div class="container ">
     <div [ngClass]="initExchange?'show-offers':''" class="exchange-offers d-flex w-100 mx-auto justify-content-around align-items-center">
-  <div class="container">
-    <div [ngClass]="initExchange?'show-offers':''" class="exchange-offers d-flex justify-content-around align-items-center ">
       <div class="owned-book">
         <div class="image" *ngIf="currentBookObj">
           <img class="image my-image img-thumbnail" src="{{currentBookObj.book.coverPage}}" alt="">
@@ -13,14 +11,12 @@
           <h5>{{firstName}}</h5>
         </div>
       </div>
-        <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn confirm-btn">Confirm Exchange</button>
+      <button (click)="initializeExchange(currentBookObj.id,otherBookObj['his_owned_book_id'])" class="btn confirm-btn">Confirm Exchange</button>
       <div class="other-book">
         <div class="image" *ngIf="otherBookObj">
           <img class="image my-image img-thumbnail" src="{{otherBookObj.his_book_cover_image}}" alt="">
-        <div class="image" *ngIf="otherBookObj" >
-          <img class="" src="{{otherBookObj.his_book_cover_image}}" alt="">
         </div>
-        <div class="user-info" *ngIf="otherBookObj">
+        <div class="user-info">
           <img *ngIf="initExchange" src="{{otherBookObj.his_profile_image_url}}" alt="">
           <h5>{{hisUserName}}</h5>
         </div>
@@ -73,10 +69,12 @@
                     <div class="card-body mt-4 p-2">
                       <h5 class="title fs-3">{{data['his_book_title']}}</h5>
                       <a (click)="setOtherBook(data)" class="btn-more btn ">Exchange</a>
+                      <a (click)="goToBookPage(data['his_book_id'])" class="btn-more btn ">More</a>
                     </div>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
 

@@ -51,7 +51,7 @@ export class LayoutComponent implements OnInit {
 
     this.auth.search.updatePosition(true);
     this.auth.search.currentPosition.subscribe(x => this.positionInSearch = x);
-    this.getMessage()
+    this.getMessage();
     this.auth.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(
       (event: NavigationEnd) => {
         document.querySelector("#mat-drawer-content").scroll({top: 0, left: 0})

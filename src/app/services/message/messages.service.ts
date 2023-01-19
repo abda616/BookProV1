@@ -17,6 +17,13 @@ export class MessagesService {
 
   setMessageID(x,y) {
     this.messageId.next(x);
+    console.log(x)
+    localStorage.setItem('conversation_ex_id', JSON.stringify(x));
+    localStorage.setItem('initiator',JSON.stringify(y))
+  }
+  setMessageFromEx(x,y) {
+    this.messageId.next(x);
+    console.log(x)
     localStorage.setItem('conversation_ex_id', JSON.stringify(x));
     localStorage.setItem('initiator',JSON.stringify(y))
   }

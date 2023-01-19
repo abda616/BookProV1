@@ -9,11 +9,9 @@ import {AuthService} from "../shared/Auth/auth.service";
 export class ConversationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private auth: AuthService) {}
-
   converse;
   newMessageText;
   insideView = false;
-
   hisBookPic;
   myBookPic;
 
